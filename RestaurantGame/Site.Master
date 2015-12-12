@@ -5,12 +5,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <style type="text/css">      
-        
-        h1, h2
+    <style type="text/css">
+        #content {
+            width: 700px;
+            height: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: auto;
+            margin-top: auto;
+        }
+
+        /*h1, h2
         {
             text-align: center;
-        }
+        }*/
 
         /*
         #interviews
@@ -24,18 +32,15 @@
             float: left;
         }*/
 
-        #outer 
-        {
+        #outer {
           width: 100%;
           height: 100%;
+          text-align: center;
         }
 
-        #inner 
-        {
-          display: inline-block;
+        #inner {
+            display: inline-block;
         }
-
-
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -44,31 +49,31 @@
     function Init() {
         if (document.hasFocus)
             setInterval("CheckFocus ()", 500);
-        
+
     }
 
-    
+
     function disableBackButton() {
         window.history.forward()
     }
     disableBackButton();
     window.onload = disableBackButton();
     window.onpageshow = function (evt) { if (evt.persisted) disableBackButton() }
-    window.onunload = function () { void (0) }  
+    window.onunload = function () { void (0) }
 </script>
-<body onload="Init();" onresize="sizeFunction()" >
-    
+<body onload="Init();" onresize="sizeFunction()">
+
     <form id="form1" runat="server">
 
         <div id="outer">
             <div id="inner">
-                <div style="margin-top:1px;">&nbsp;</div>
+                <div style="margin-top: 1px;">&nbsp;</div>
                 <h1>The Restaurant Game </h1>
-                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
-                        
-            </div>        
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+
+            </div>
         </div>
-        
+
     </form>
 </body>
 </html>
