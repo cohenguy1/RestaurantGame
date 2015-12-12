@@ -10,5 +10,7 @@ namespace RestaurantGame
         public CandidateState CandidateState;
 
         public int CandidateRank;
+
+        public int CandidateNumber;
     }
 }

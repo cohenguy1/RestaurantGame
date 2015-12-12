@@ -9,22 +9,31 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        public const int PositionCandidatesNumber = 20;
+        public const int PositionCandidatesNumber = DecisionMaker.PositionCandidatesNumber;
+
+        public const string StickManImageList = "StickManImageList";
 
         public const string PositionCandidiatesStr = "PositionCandidates";
         public const string CurrentCandidateNumberStr = "CurrentCandidateNumber";
+
+        public const string CandidatesByNowStr = "CandidatesByNow";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 Timer1.Enabled = false;
+
                 GenerateCandidatesForPosition();
+                GenerateCandidatesByNow();
+
+                CreateStickManImageList();
 
                 Session[CurrentCandidateNumberStr] = 0;
 
                 Timer1.Enabled = true;
             }
+
         }
 
         private void GenerateCandidatesForPosition()
@@ -35,7 +44,8 @@ namespace RestaurantGame
             {
                 var newCandidate = new Candidate()
                 {
-                    CandidateState = CandidateState.New
+                    CandidateState = CandidateState.New,
+                    CandidateNumber = candidateIndex
                 };
 
                 positionCandidates.Add(newCandidate);
@@ -63,6 +73,40 @@ namespace RestaurantGame
             Session[PositionCandidiatesStr] = positionCandidates;
         }
 
+        private void GenerateCandidatesByNow()
+        {
+            var candidatesByNow = new List<Candidate>();
+            Session[CandidatesByNowStr] = candidatesByNow;
+        }
+
+        private void CreateStickManImageList()
+        {
+            var stickManImageList = new List<Image>();
+
+            stickManImageList.Add(StickMan1);
+            stickManImageList.Add(StickMan2);
+            stickManImageList.Add(StickMan3);
+            stickManImageList.Add(StickMan4);
+            stickManImageList.Add(StickMan5);
+            stickManImageList.Add(StickMan6);
+            stickManImageList.Add(StickMan7);
+            stickManImageList.Add(StickMan8);
+            stickManImageList.Add(StickMan9);
+            stickManImageList.Add(StickMan10);
+            stickManImageList.Add(StickMan11);
+            stickManImageList.Add(StickMan12);
+            stickManImageList.Add(StickMan13);
+            stickManImageList.Add(StickMan14);
+            stickManImageList.Add(StickMan15);
+            stickManImageList.Add(StickMan16);
+            stickManImageList.Add(StickMan17);
+            stickManImageList.Add(StickMan18);
+            stickManImageList.Add(StickMan19);
+            stickManImageList.Add(StickMan20);
+
+            Session[StickManImageList] = stickManImageList;
+        }
+
         protected void Timer1_Tick(object sender, EventArgs e)
         {         
             if (NewCandidateAwaits())
@@ -75,6 +119,10 @@ namespace RestaurantGame
                 {
                     EnterNewCandidate();
                 }
+            }
+            else
+            {
+                Timer1.Enabled = false;
             }
         }
 
@@ -100,6 +148,7 @@ namespace RestaurantGame
             if (currentCandidate.CandidateState == CandidateState.Interview)
             {
                 UpdateImages(currentCandidate.CandidateState);
+                DetermineCandidateRank(currentCandidate);
 
                 currentCandidate.CandidateState = CandidateState.InterviewEnded;
             }
@@ -138,6 +187,110 @@ namespace RestaurantGame
             ImageManForward.Visible = (candidateState == CandidateState.New);
             ImageManBack.Visible = (candidateState == CandidateState.InterviewEnded);
             ImageInterview.Visible = (candidateState == CandidateState.Interview);
+        }
+
+        private void DetermineCandidateRank(Candidate newCandidate)
+        {
+            var candidatesByNow = (List<Candidate>)Session[CandidatesByNowStr];
+
+            int newCandidateIndex = 0;
+            foreach (var candidate in candidatesByNow)
+            {
+                if (candidate.CandidateRank > newCandidate.CandidateRank)
+                {
+                    break;
+                }
+
+                newCandidateIndex++;
+            }
+
+            var dm = new DecisionMaker();
+            var accepted = dm.Decide(candidatesByNow, newCandidate);
+
+            candidatesByNow.Insert(newCandidateIndex, newCandidate);
+            DrawCandidatesByNow(candidatesByNow, newCandidateIndex);
+        }
+
+        private void DrawCandidatesByNow(List<Candidate> candidatesByNow, int newCandidateIndex)
+        {
+            for (var candidateIndex = 0; candidateIndex < candidatesByNow.Count; candidateIndex++)
+            {
+                var stickManImage = GetStickManImage(candidateIndex + 1);
+
+                var oldStickManImage = stickManImage.ImageUrl;
+                string newStickManImage;
+
+                if (candidateIndex == newCandidateIndex)
+                {
+                    newStickManImage = "~/Images/StickMan" + (newCandidateIndex + 1) + "Red.png";
+                }
+                else
+                {
+                    if ((candidateIndex == 0) || (candidateIndex == candidatesByNow.Count - 1))
+                    {
+                        newStickManImage = "~/Images/StickMan" + (candidateIndex + 1) + ".png";
+                    }
+                    else
+                    {
+                        newStickManImage = "~/Images/StickMan.png";
+                    }
+                }
+
+                if (newStickManImage != oldStickManImage)
+                {
+                    stickManImage.ImageUrl = newStickManImage;
+                    stickManImage.Visible = true;
+                }
+            }
+        }
+
+        private Image GetStickManImage(int imageNum)
+        {
+            switch (imageNum)
+            {
+                case 1:
+                    return StickMan1;
+                case 2:
+                    return StickMan2;
+                case 3:
+                    return StickMan3;
+                case 4:
+                    return StickMan4;
+                case 5:
+                    return StickMan5;
+                case 6:
+                    return StickMan6;
+                case 7:
+                    return StickMan7;
+                case 8:
+                    return StickMan8;
+                case 9:
+                    return StickMan9;
+                case 10:
+                    return StickMan10;
+                case 11:
+                    return StickMan11;
+                case 12:
+                    return StickMan12;
+                case 13:
+                    return StickMan13;
+                case 14:
+                    return StickMan14;
+                case 15:
+                    return StickMan15;
+                case 16:
+                    return StickMan16;
+                case 17:
+                    return StickMan17;
+                case 18:
+                    return StickMan18;
+                case 19:
+                    return StickMan19;
+                case 20:
+                    return StickMan20;
+                default:
+                    return StickMan1;
+            }
         }
     }
 
