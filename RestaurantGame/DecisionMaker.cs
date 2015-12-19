@@ -11,9 +11,14 @@ namespace RestaurantGame
 
         public bool Decide(List<Candidate> candidatesByNow, Candidate newCandidate)
         {
-            if (candidatesByNow.Count <= Math.Sqrt(PositionCandidatesNumber))
+            if (candidatesByNow.Count <= (int)Math.Sqrt(PositionCandidatesNumber))
             {
                 return false;
+            }
+
+            if (candidatesByNow.Count == PositionCandidatesNumber - 1)
+            {
+                return true;
             }
 
             var firstSqrtCandidates = candidatesByNow.Where(candidate => candidate.CandidateNumber < Math.Sqrt(PositionCandidatesNumber));

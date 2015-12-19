@@ -12,5 +12,7 @@ namespace RestaurantGame
         public int CandidateRank;
 
         public int CandidateNumber;
+
+        public bool CandidateAccepted;
     }
 }

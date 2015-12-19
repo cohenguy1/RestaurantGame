@@ -7,7 +7,6 @@
     <title></title>
     <style type="text/css">
         #content {
-            width: 700px;
             height: 700px;
             margin-left: auto;
             margin-right: auto;
@@ -15,10 +14,15 @@
             margin-top: auto;
         }
 
-        /*h1, h2
-        {
+        h1 {
             text-align: center;
-        }*/
+        }
+
+        table {
+            margin-left: 0;
+            margin-right: auto;
+            text-align: center;
+        }
 
         /*
         #interviews
@@ -33,9 +37,8 @@
         }*/
 
         #outer {
-          width: 100%;
           height: 100%;
-          text-align: center;
+         text-align: center;
         }
 
         #inner {

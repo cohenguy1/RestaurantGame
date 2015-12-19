@@ -7,9 +7,21 @@ using System.Web.UI.WebControls;
 
 namespace RestaurantGame
 {
+    // TODO: Divide to classes
+    // TODO: Style webpage
+    // TODO: Add uniform
+    // TODO: Database
+    // TODO: Chow's algorithm
+    // TODO: Ask for ratings
+    // TODO: rules
+    // TODO: random position - you are the uniform picker
+
     public partial class Default : System.Web.UI.Page
     {
         public const int PositionCandidatesNumber = DecisionMaker.PositionCandidatesNumber;
+
+        public const string PositionsStr = "Positions";
+        public const string PositionToFillStr = "PositionToFill";
 
         public const string StickManImageList = "StickManImageList";
 
@@ -24,16 +36,32 @@ namespace RestaurantGame
             {
                 Timer1.Enabled = false;
 
-                GenerateCandidatesForPosition();
-                GenerateCandidatesByNow();
-
+                GeneratePositions();
+                
                 CreateStickManImageList();
 
                 Session[CurrentCandidateNumberStr] = 0;
 
-                Timer1.Enabled = true;
+                StartInterviewsForPosition(0);
             }
+        }
 
+        private void GeneratePositions()
+        {
+            var positions = new List<Position>();
+
+            positions.Add(new Position(RestaurantPosition.Manager));
+            positions.Add(new Position(RestaurantPosition.HeadChef));
+            positions.Add(new Position(RestaurantPosition.Cook));
+            positions.Add(new Position(RestaurantPosition.Baker));
+            positions.Add(new Position(RestaurantPosition.Dishwasher));
+            positions.Add(new Position(RestaurantPosition.Waiter1));
+            positions.Add(new Position(RestaurantPosition.Waiter2));
+            positions.Add(new Position(RestaurantPosition.Waiter3));
+            positions.Add(new Position(RestaurantPosition.Host));
+            positions.Add(new Position(RestaurantPosition.Bartender));
+
+            Session[PositionsStr] = positions;
         }
 
         private void GenerateCandidatesForPosition()
@@ -45,7 +73,8 @@ namespace RestaurantGame
                 var newCandidate = new Candidate()
                 {
                     CandidateState = CandidateState.New,
-                    CandidateNumber = candidateIndex
+                    CandidateNumber = candidateIndex,
+                    CandidateAccepted = false
                 };
 
                 positionCandidates.Add(newCandidate);
@@ -107,6 +136,31 @@ namespace RestaurantGame
             Session[StickManImageList] = stickManImageList;
         }
 
+        private void StartInterviewsForPosition(int position)
+        {
+            Timer1.Enabled = false;
+
+            Session[PositionToFillStr] = position;
+
+            SetTitle();
+
+            GenerateCandidatesForPosition();
+            GenerateCandidatesByNow();
+
+            Session[CurrentCandidateNumberStr] = 0;
+
+            Timer1.Enabled = true;
+        }
+
+        private void SetTitle()
+        {
+            var positionToFill = (int)Session[PositionToFillStr];
+
+            var positions = (List<Position>)Session[PositionsStr];
+
+            PositionHeader.Text = "Position: " + positions[positionToFill].GetJobTitle();
+        }
+
         protected void Timer1_Tick(object sender, EventArgs e)
         {         
             if (NewCandidateAwaits())
@@ -122,7 +176,26 @@ namespace RestaurantGame
             }
             else
             {
-                Timer1.Enabled = false;
+                FillNextPosition();
+            }
+        }
+
+        private void FillNextPosition()
+        {
+            Timer1.Enabled = false;
+
+            var positionToFill = (int)Session[PositionToFillStr];
+
+            positionToFill++;
+
+            Session[PositionToFillStr] = positionToFill;
+
+            ClearCandidateImages();
+            ClearInterviewImages();
+
+            if (positionToFill < 10)
+            {
+                StartInterviewsForPosition(positionToFill);
             }
         }
 
@@ -134,10 +207,7 @@ namespace RestaurantGame
 
             Session["Position"] = currentCandidate;
 
-            ImageManForward.Visible = true;
-            ImageManBack.Visible = false;
-            ImageInterview.Visible = false;
-
+            UpdateImages(CandidateState.New);
             currentCandidate.CandidateState = CandidateState.Interview;
         }
 
@@ -158,6 +228,13 @@ namespace RestaurantGame
 
                 currentCandidate.CandidateState = CandidateState.Completed;
                 Session[CurrentCandidateNumberStr] = (int)Session[CurrentCandidateNumberStr] + 1;
+
+                if (currentCandidate.CandidateAccepted)
+                {
+                    UpdatePositionToAcceptedCandidate(currentCandidate);
+
+                    FillNextPosition();
+                }
             }
         }
 
@@ -182,11 +259,20 @@ namespace RestaurantGame
             return (currentCandidateNumber < PositionCandidatesNumber);
         }
 
+        private void ClearInterviewImages()
+        {
+            ImageManForward.Visible = false;
+            ImageManBack.Visible = false;
+            ImageInterview.Visible = false;
+            ImageHired.Visible = true;
+        }
+
         private void UpdateImages(CandidateState candidateState)
         {
             ImageManForward.Visible = (candidateState == CandidateState.New);
             ImageManBack.Visible = (candidateState == CandidateState.InterviewEnded);
             ImageInterview.Visible = (candidateState == CandidateState.Interview);
+            ImageHired.Visible = false;
         }
 
         private void DetermineCandidateRank(Candidate newCandidate)
@@ -206,6 +292,8 @@ namespace RestaurantGame
 
             var dm = new DecisionMaker();
             var accepted = dm.Decide(candidatesByNow, newCandidate);
+
+            newCandidate.CandidateAccepted = accepted;
 
             candidatesByNow.Insert(newCandidateIndex, newCandidate);
             DrawCandidatesByNow(candidatesByNow, newCandidateIndex);
@@ -242,6 +330,61 @@ namespace RestaurantGame
                     stickManImage.Visible = true;
                 }
             }
+        }
+
+        private void ClearCandidateImages()
+        {
+            for (var candidateIndex = 0; candidateIndex < PositionCandidatesNumber; candidateIndex++)
+            {
+                var stickManImage = GetStickManImage(candidateIndex + 1);
+                stickManImage.ImageUrl = null;
+                stickManImage.Visible = false;
+            }
+        }
+
+        private void UpdatePositionToAcceptedCandidate(Candidate candidate)
+        {
+            var positionToFill = (int)Session[PositionToFillStr];
+            var positions = (List<Position>)Session[PositionsStr];
+            
+            var currentPosition = positions[positionToFill];
+
+            currentPosition.ChosenCandidate = candidate;
+            var positionCell = GetPositionCell(currentPosition);
+
+            positionCell.Text = " " + currentPosition.GetJobTitle() + ": " + currentPosition.ChosenCandidate.CandidateRank;
+            positionCell.ForeColor = System.Drawing.Color.Blue;
+            positionCell.Font.Italic = true;
+        }
+
+        private TableCell GetPositionCell(Position position)
+        {
+            switch (position.JobTitle)
+            {
+                case RestaurantPosition.Manager:
+                    return ManagerCell;
+                case RestaurantPosition.HeadChef:
+                    return HeadChefCell;
+                case RestaurantPosition.Cook:
+                    return CookCell;
+                case RestaurantPosition.Baker:
+                    return BakerCell;
+                case RestaurantPosition.Waiter1:
+                    return Waiter1Cell;
+                case RestaurantPosition.Waiter2:
+                    return Waiter2Cell;
+                case RestaurantPosition.Waiter3:
+                    return Waiter3Cell;
+                case RestaurantPosition.Host:
+                    return HostCell;
+                case RestaurantPosition.Bartender:
+                    return BartenderCell;
+                case RestaurantPosition.Dishwasher:
+                    return DishwasherCell;
+                default:
+                    return null;
+            }
+
         }
 
         private Image GetStickManImage(int imageNum)
