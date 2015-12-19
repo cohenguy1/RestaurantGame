@@ -18,6 +18,10 @@ namespace RestaurantGame
 
     public partial class Default : System.Web.UI.Page
     {
+        public const int MinTimerInterval = 500;
+        public int StartTimerInterval = 1500;
+        public const int MaxTimerInterval = 4500;
+
         public const int PositionCandidatesNumber = DecisionMaker.PositionCandidatesNumber;
 
         public const string PositionsStr = "Positions";
@@ -34,7 +38,20 @@ namespace RestaurantGame
         {
             if (!IsPostBack)
             {
+                String val = null;
+                
+                // friend assigment
+                val = Request.QueryString["assignmentId"];
+                if (val == null)
+                {
+                    Session["user_id"] = "friend";
+                    Session["turkAss"] = "turkAss";
+                    Session["hitId"] = "hit id friend";
+                    btnNext0.Enabled = true;
+                }
+
                 Timer1.Enabled = false;
+                Timer1.Interval = StartTimerInterval;
 
                 GeneratePositions();
                 
@@ -434,6 +451,46 @@ namespace RestaurantGame
                 default:
                     return StickMan1;
             }
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            String user = (String)Session["user_id"];
+            if (user.Equals("friend"))
+            {
+                MultiView1.ActiveViewIndex = 1;
+            }
+
+        }
+
+        protected void btnNext2_Click(object sender, EventArgs e)
+        {
+            if (rbl1.SelectedIndex == 1 && rbl2.SelectedIndex == 1)
+            {
+                MultiView1.ActiveViewIndex = 2;
+            }
+            else
+            {
+                Alert.Show("wrong answer, please try again");
+            }
+        }
+
+        protected void btnFB_Click(object sender, EventArgs e)
+        {
+            int newTimerInterval = Timer1.Interval * 2;
+            Timer1.Interval = newTimerInterval;
+
+            FB.Enabled = (newTimerInterval != MaxTimerInterval);
+            FF.Enabled = (newTimerInterval != MinTimerInterval);
+        }
+
+        protected void btnFF_Click(object sender, EventArgs e)
+        {
+            int newTimerInterval = Timer1.Interval / 2;
+            Timer1.Interval = newTimerInterval;
+
+            FB.Enabled = (newTimerInterval != MaxTimerInterval);
+            FF.Enabled = (newTimerInterval != MinTimerInterval);
         }
     }
 
