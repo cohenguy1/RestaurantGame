@@ -13,7 +13,57 @@
     </style>
 
     <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
-        <asp:View ID="View1" runat="server">
+         <asp:View ID="view0" runat="server">
+            
+            <h2 class="style3">You will recieve 5 cents for this Game and it will take 15 minutes of your time. </h2>
+            <h2 class="style3">
+                Please do not expect to recieve additional payment!</h2>
+            <h2>Game Background</h2>
+            <table style="text-align:center; width:640px;" align="center">
+                <tr><td>You have decided to open up a restaurant.</td></tr>
+                <tr><td>In this game you and other player will interview people for 10 positions for the restaurant.</td></tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr><td>One of you will interview the candidates and decide about who fill each position,<br /> and the other player will choose the uniform for each position</td></tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr><td>For Each position you have 20 candidates, ranked from 1 to 20. Your interest is to pick the best candidate for each position.</td></tr>
+                <tr><td><strong>In the game, you will rank how good is your teammate, and he will rank you.<br /> This is not a competition, just choose how well you think your teammate performs.</strong></td></tr> 
+         
+                <tr><td><asp:Button ID="btnNext0" runat="server" Text="Next" onclick="btnNext_Click" Enabled="false"/></td></tr>
+            </table>
+        </asp:View>
+         <asp:View ID="view1" runat="server">
+            <h2>Quiz</h2>
+            <div style="text-align:center; width:640px; margin:0 auto;">
+                <table style="text-align:left; width:640px;" border="1">
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblQuiz1" style="color:Red;" runat="server" Text="Please answer the questions"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr><td>How much money will you get by just letting the picking the first candidate?
+                        <asp:RadioButtonList ID="rbl1" runat="server">
+                            <asp:ListItem>0 cents</asp:ListItem>
+                            <asp:ListItem>5 cents</asp:ListItem>
+                            <asp:ListItem>10 cents</asp:ListItem>
+                        </asp:RadioButtonList>
+                        <asp:RequiredFieldValidator ID="rfv1" Style="color:Red;" ControlToValidate="rbl1" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
+                    
+                    </td></tr>
+                    <tr><td>Will you get extra money if you pick the best candidate for each position?
+                        <asp:RadioButtonList ID="rbl2" runat="server">
+                            <asp:ListItem>Yes</asp:ListItem>
+                            <asp:ListItem>No</asp:ListItem>
+                        </asp:RadioButtonList>
+                        <asp:RequiredFieldValidator ID="rfv2" Style="color:Red;" ControlToValidate="rbl2" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
+                      </td>
+                    </tr>
+                </table>
+            </div>
+            <asp:Button ID="btnNext2" runat="server" Text="Next" onclick="btnNext2_Click" />
+                       
+        </asp:View>
+
+        <asp:View ID="View2" runat="server">
 
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
