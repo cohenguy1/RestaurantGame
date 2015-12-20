@@ -36,6 +36,8 @@ namespace RestaurantGame
 
         public const string AskForRating = "AskForRatingStr";
 
+        public const string TimerInterval = "TimerInterval";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -54,6 +56,8 @@ namespace RestaurantGame
 
                 Timer1.Enabled = false;
                 Timer1.Interval = StartTimerInterval;
+
+                Session[TimerInterval] = StartTimerInterval;
 
                 GeneratePositions();
 
@@ -492,20 +496,28 @@ namespace RestaurantGame
 
         protected void btnFB_Click(object sender, EventArgs e)
         {
-            int newTimerInterval = Timer1.Interval * 2;
+            int newTimerInterval = Math.Min((int)Session[TimerInterval] + 500, MaxTimerInterval);
+            Session[TimerInterval] = newTimerInterval;
+
             Timer1.Interval = newTimerInterval;
 
             FB.Enabled = (newTimerInterval != MaxTimerInterval);
             FF.Enabled = (newTimerInterval != MinTimerInterval);
+
+            string speedRate = (newTimerInterval / 1500.0).ToString("0.0");
+            LabelSpeed.Text = string.Format(" Speed: x" + speedRate);
         }
 
         protected void btnFF_Click(object sender, EventArgs e)
         {
-            int newTimerInterval = Timer1.Interval / 2;
-            Timer1.Interval = 500;
+            int newTimerInterval = Math.Max((int)Session[TimerInterval] / 2, MinTimerInterval);
+            Session[TimerInterval] = newTimerInterval;
 
             FB.Enabled = (newTimerInterval != MaxTimerInterval);
             FF.Enabled = (newTimerInterval != MinTimerInterval);
+
+            string speedRate = (newTimerInterval / 1500.0).ToString("0.0");
+            LabelSpeed.Text = string.Format(" Speed: x" + speedRate);
         }
 
         protected void RateAdviser()

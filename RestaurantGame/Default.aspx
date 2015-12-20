@@ -169,7 +169,8 @@
                             <br />
                             <asp:Button ID="FB" runat="server" Text="<<" OnClick="btnFB_Click" Enabled="true" />
                             <asp:Button ID="FF" runat="server" Text=">>" OnClick="btnFF_Click" Enabled="true" />
-
+                            <br />
+                            <asp:Label ID="LabelSpeed" runat="server" Font-Size="Medium" Text="&nbsp;Speed: x1.0"></asp:Label>
                         </asp:Panel>
                     </asp:Panel>
                 </asp:View>
