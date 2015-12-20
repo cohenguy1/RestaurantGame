@@ -34,12 +34,14 @@ namespace RestaurantGame
 
         public const string CandidatesByNowStr = "CandidatesByNow";
 
+        public const string AskForRating = "AskForRatingStr";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 String val = null;
-                
+
                 // friend assigment
                 val = Request.QueryString["assignmentId"];
                 if (val == null)
@@ -54,12 +56,12 @@ namespace RestaurantGame
                 Timer1.Interval = StartTimerInterval;
 
                 GeneratePositions();
-                
+
                 CreateStickManImageList();
 
                 Session[CurrentCandidateNumberStr] = 0;
 
-                StartInterviewsForPosition(0);
+                Session[AskForRating] = false;
             }
         }
 
@@ -157,6 +159,7 @@ namespace RestaurantGame
         {
             Timer1.Enabled = false;
 
+            Session["Position"] = null;
             Session[PositionToFillStr] = position;
 
             SetTitle();
@@ -179,17 +182,20 @@ namespace RestaurantGame
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)
-        {         
+        {
+            bool askForRating = (bool)Session[AskForRating];
+            if (askForRating)
+            {
+                RateAdviser();
+
+                Session[AskForRating] = false;
+
+                return;
+            }
+
             if (NewCandidateAwaits())
             {
-                if (CandidateInProcess())
-                {
-                    ProcessCandidate();
-                }
-                else
-                {
-                    EnterNewCandidate();
-                }
+                ProcessCandidate();
             }
             else
             {
@@ -232,25 +238,34 @@ namespace RestaurantGame
         {
             var currentCandidate = (Candidate)Session["Position"];
 
-            if (currentCandidate.CandidateState == CandidateState.Interview)
+            if (currentCandidate == null)
+            {
+                EnterNewCandidate();
+            }
+            else if (currentCandidate.CandidateState == CandidateState.Interview)
             {
                 UpdateImages(currentCandidate.CandidateState);
                 DetermineCandidateRank(currentCandidate);
 
-                currentCandidate.CandidateState = CandidateState.InterviewEnded;
-            }
-            else if (currentCandidate.CandidateState == CandidateState.InterviewEnded)
-            {
-                UpdateImages(currentCandidate.CandidateState);
-
                 currentCandidate.CandidateState = CandidateState.Completed;
-                Session[CurrentCandidateNumberStr] = (int)Session[CurrentCandidateNumberStr] + 1;
-
+            }
+            else if (currentCandidate.CandidateState == CandidateState.Completed)
+            {
                 if (currentCandidate.CandidateAccepted)
                 {
                     UpdatePositionToAcceptedCandidate(currentCandidate);
 
                     FillNextPosition();
+
+                    Session[AskForRating] = true;
+
+                    return;
+                }
+                else
+                {
+                    Session[CurrentCandidateNumberStr] = (int)Session[CurrentCandidateNumberStr] + 1;
+
+                    EnterNewCandidate();
                 }
             }
         }
@@ -265,7 +280,7 @@ namespace RestaurantGame
             }
 
             var candidateInProcess = (currentCandidate.CandidateState == CandidateState.Interview) ||
-                                     (currentCandidate.CandidateState == CandidateState.InterviewEnded);
+                (currentCandidate.CandidateState == CandidateState.Completed);
 
             return candidateInProcess;
         }
@@ -279,7 +294,6 @@ namespace RestaurantGame
         private void ClearInterviewImages()
         {
             ImageManForward.Visible = false;
-            ImageManBack.Visible = false;
             ImageInterview.Visible = false;
             ImageHired.Visible = true;
         }
@@ -287,7 +301,6 @@ namespace RestaurantGame
         private void UpdateImages(CandidateState candidateState)
         {
             ImageManForward.Visible = (candidateState == CandidateState.New);
-            ImageManBack.Visible = (candidateState == CandidateState.InterviewEnded);
             ImageInterview.Visible = (candidateState == CandidateState.Interview);
             ImageHired.Visible = false;
         }
@@ -363,7 +376,7 @@ namespace RestaurantGame
         {
             var positionToFill = (int)Session[PositionToFillStr];
             var positions = (List<Position>)Session[PositionsStr];
-            
+
             var currentPosition = positions[positionToFill];
 
             currentPosition.ChosenCandidate = candidate;
@@ -468,6 +481,8 @@ namespace RestaurantGame
             if (rbl1.SelectedIndex == 1 && rbl2.SelectedIndex == 1)
             {
                 MultiView1.ActiveViewIndex = 2;
+
+                StartInterviewsForPosition(0);
             }
             else
             {
@@ -487,10 +502,26 @@ namespace RestaurantGame
         protected void btnFF_Click(object sender, EventArgs e)
         {
             int newTimerInterval = Timer1.Interval / 2;
-            Timer1.Interval = newTimerInterval;
+            Timer1.Interval = 500;
 
             FB.Enabled = (newTimerInterval != MaxTimerInterval);
             FF.Enabled = (newTimerInterval != MinTimerInterval);
+        }
+
+        protected void RateAdviser()
+        {
+            Timer1.Enabled = false;
+
+            MultiView2.ActiveViewIndex = 1;
+        }
+
+        protected void btnRate_Click(object sender, EventArgs e)
+        {
+            MultiView2.ActiveViewIndex = 0;
+
+            int agentRating = RatingRbL.SelectedIndex + 1;
+
+            Timer1.Enabled = true;
         }
     }
 

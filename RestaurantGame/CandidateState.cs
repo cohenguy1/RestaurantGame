@@ -9,7 +9,6 @@ namespace RestaurantGame
     {
         New,
         Interview,
-        InterviewEnded,
         Completed
     }
 }
