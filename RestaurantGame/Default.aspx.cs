@@ -38,6 +38,7 @@ namespace RestaurantGame
         public const string AcceptedCandidates = "AcceptedCandidates";
 
         public const string TimerInterval = "TimerInterval";
+        public const string TimerEnabled = "TimerEnabled";
 
         public const string AlreadyAskedForRating = "AlreadyAskedForRating";
 
@@ -45,6 +46,8 @@ namespace RestaurantGame
         {
             if (!IsPostBack)
             {
+                var t = new DecisionMaker();
+
                 String val = null;
 
                 // friend assigment
@@ -338,46 +341,14 @@ namespace RestaurantGame
                 newCandidateIndex++;
             }
 
+            candidatesByNow.Insert(newCandidateIndex, newCandidate);
+
             var dm = new DecisionMaker();
-            var accepted = dm.Decide(candidatesByNow, newCandidate);
+            var accepted = dm.Decide(candidatesByNow, newCandidateIndex);
 
             newCandidate.CandidateAccepted = accepted;
 
-            candidatesByNow.Insert(newCandidateIndex, newCandidate);
-            DrawCandidatesByNow(candidatesByNow, newCandidateIndex);
-        }
-
-        private void DrawCandidatesByNow(List<Candidate> candidatesByNow, int newCandidateIndex)
-        {
-            for (var candidateIndex = 0; candidateIndex < candidatesByNow.Count; candidateIndex++)
-            {
-                var stickManImage = GetStickManImage(candidateIndex + 1);
-
-                var oldStickManImage = stickManImage.ImageUrl;
-                string newStickManImage;
-
-                if (candidateIndex == newCandidateIndex)
-                {
-                    newStickManImage = "~/Images/StickMan" + (newCandidateIndex + 1) + "Red.png";
-                }
-                else
-                {
-                    if ((candidateIndex == 0) || (candidateIndex == candidatesByNow.Count - 1))
-                    {
-                        newStickManImage = "~/Images/StickMan" + (candidateIndex + 1) + ".png";
-                    }
-                    else
-                    {
-                        newStickManImage = "~/Images/StickMan.png";
-                    }
-                }
-
-                if (newStickManImage != oldStickManImage)
-                {
-                    stickManImage.ImageUrl = newStickManImage;
-                    stickManImage.Visible = true;
-                }
-            }
+            ImageHandler.DrawCandidatesByNow(candidatesByNow, newCandidateIndex, this);
         }
 
         private void ClearCandidateImages()
@@ -439,7 +410,7 @@ namespace RestaurantGame
 
         }
 
-        private Image GetStickManImage(int imageNum)
+        public Image GetStickManImage(int imageNum)
         {
             switch (imageNum)
             {
@@ -495,8 +466,7 @@ namespace RestaurantGame
             if (!user.Equals("friend"))
             {
                 String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-                using (SqlConnection sqlConnection1 =
-                        new SqlConnection(connectionString))
+                using (SqlConnection sqlConnection1 = new SqlConnection(connectionString))
                 {
                     SqlCommand cmd = new SqlCommand("Select Assignment_Id from [User] Where UserId='" + Session["user_id"] + "'");
                     cmd.CommandType = CommandType.Text;
@@ -513,8 +483,6 @@ namespace RestaurantGame
                         cmd.CommandType = CommandType.Text;
                         cmd.Connection = sqlConnection1;
                         cmd.ExecuteNonQuery();
-
-
                     }
                     else
                     {
@@ -571,9 +539,9 @@ namespace RestaurantGame
             StartInterviewsForPosition(0);
         }
 
-
         protected void btnFB_Click(object sender, EventArgs e)
         {
+            Session[TimerEnabled] = Timer1.Enabled;
             Timer1.Enabled = false;
 
             int newTimerInterval = Math.Min((int)Session[TimerInterval] + 500, MaxTimerInterval);
@@ -581,11 +549,12 @@ namespace RestaurantGame
 
             UpdateFastPlaySpeed(newTimerInterval);
 
-            Timer1.Enabled = true;
+            Timer1.Enabled = (bool)Session[TimerEnabled];
         }
 
         protected void btnFF_Click(object sender, EventArgs e)
         {
+            Session[TimerEnabled] = Timer1.Enabled;
             Timer1.Enabled = false;
 
             int newTimerInterval = Math.Max((int)Session[TimerInterval] - 500, MinTimerInterval);
@@ -593,7 +562,7 @@ namespace RestaurantGame
 
             UpdateFastPlaySpeed(newTimerInterval);
 
-            Timer1.Enabled = true;
+            Timer1.Enabled = (bool)Session[TimerEnabled];
         }
 
         private void UpdateFastPlaySpeed(int newTimerInterval)
