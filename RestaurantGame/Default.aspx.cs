@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -8,13 +10,10 @@ using System.Web.UI.WebControls;
 namespace RestaurantGame
 {
     // TODO: Divide to classes
-    // TODO: Style webpage
     // TODO: Add uniform
-    // TODO: Database
     // TODO: Chow's algorithm
-    // TODO: Ask for ratings
-    // TODO: rules
     // TODO: random position - you are the uniform picker
+    // TODO: Thanks for participating
 
     public partial class Default : System.Web.UI.Page
     {
@@ -36,7 +35,11 @@ namespace RestaurantGame
 
         public const string AskForRating = "AskForRatingStr";
 
+        public const string AcceptedCandidates = "AcceptedCandidates";
+
         public const string TimerInterval = "TimerInterval";
+
+        public const string AlreadyAskedForRating = "AlreadyAskedForRating";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -56,6 +59,8 @@ namespace RestaurantGame
 
                 Timer1.Enabled = false;
                 Timer1.Interval = StartTimerInterval;
+
+                Session[AlreadyAskedForRating] = false;
 
                 Session[TimerInterval] = StartTimerInterval;
 
@@ -85,6 +90,9 @@ namespace RestaurantGame
             positions.Add(new Position(RestaurantPosition.Bartender));
 
             Session[PositionsStr] = positions;
+
+            var acceptedCandidates = new int[positions.Count];
+            Session[AcceptedCandidates] = acceptedCandidates;
         }
 
         private void GenerateCandidatesForPosition()
@@ -187,6 +195,8 @@ namespace RestaurantGame
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
+            Timer1.Interval = (int)Session[TimerInterval];
+
             bool askForRating = (bool)Session[AskForRating];
             if (askForRating)
             {
@@ -261,9 +271,13 @@ namespace RestaurantGame
 
                     FillNextPosition();
 
-                    Session[AskForRating] = true;
+                    if ((bool)Session[AlreadyAskedForRating] == false)
+                    {
+                        Session[AskForRating] = true;
+                        Session[AlreadyAskedForRating] = true;
+                    }
 
-                    return;
+                    Timer1.Interval = 3000;
                 }
                 else
                 {
@@ -386,6 +400,10 @@ namespace RestaurantGame
             currentPosition.ChosenCandidate = candidate;
             var positionCell = GetPositionCell(currentPosition);
 
+            var acceptedCandidates = (int[])Session[AcceptedCandidates];
+            acceptedCandidates[positionToFill] = currentPosition.ChosenCandidate.CandidateRank;
+            Session[AcceptedCandidates] = acceptedCandidates;
+
             positionCell.Text = " " + currentPosition.GetJobTitle() + ": " + currentPosition.ChosenCandidate.CandidateRank;
             positionCell.ForeColor = System.Drawing.Color.Blue;
             positionCell.Font.Italic = true;
@@ -473,11 +491,40 @@ namespace RestaurantGame
         protected void btnNext_Click(object sender, EventArgs e)
         {
             String user = (String)Session["user_id"];
-            if (user.Equals("friend"))
+
+            if (!user.Equals("friend"))
             {
-                MultiView1.ActiveViewIndex = 1;
+                String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+                using (SqlConnection sqlConnection1 =
+                        new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("Select Assignment_Id from [User] Where UserId='" + Session["user_id"] + "'");
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    sqlConnection1.Open();
+
+                    string UserId = (string)cmd.ExecuteScalar();
+
+                    if (UserId == null)
+                    {
+                        //new user -insert to DB
+                        DateTime curentT = DateTime.UtcNow;
+                        cmd = new SqlCommand("insert into [User] (UserId, Assignment_Id,time) VALUES ('" + Session["user_id"] + "','" + Session["turkAss"] + "','" + curentT.ToString() + "')");
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection = sqlConnection1;
+                        cmd.ExecuteNonQuery();
+
+
+                    }
+                    else
+                    {
+                        Alert.Show("You already participated in this game. Please return the HIT");
+                        return;
+                    }
+                }
             }
 
+            MultiView1.ActiveViewIndex = 1;
         }
 
         protected void btnNext2_Click(object sender, EventArgs e)
@@ -485,8 +532,6 @@ namespace RestaurantGame
             if (rbl1.SelectedIndex == 1 && rbl2.SelectedIndex == 1)
             {
                 MultiView1.ActiveViewIndex = 2;
-
-                StartInterviewsForPosition(0);
             }
             else
             {
@@ -494,30 +539,72 @@ namespace RestaurantGame
             }
         }
 
+        protected void btnNext3_Click(object sender, EventArgs e)
+        {
+            // Save user info to DB
+            String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+            String user = (String)Session["user_id"];
+            string mobile = "not_mobile";
+            if (Request.Browser.IsMobileDevice)
+            {
+                mobile = "mobile_user";
+            }
+            using (SqlConnection sqlConnection1 =
+                    new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, Mobile ) VALUES (@UserId, @Gender, @Age, @Education,@Nationality,@Reason,@Mobile)");
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = sqlConnection1;
+                cmd.Parameters.AddWithValue("@UserId", user);
+                cmd.Parameters.AddWithValue("@Gender", DropDownList1.Text);
+                cmd.Parameters.AddWithValue("@Age", DropDownList2.Text);
+                cmd.Parameters.AddWithValue("@Education", DropDownList3.Text);
+                cmd.Parameters.AddWithValue("@Nationality", DropDownList4.Text);
+                cmd.Parameters.AddWithValue("@Reason", DropDownList5.Text);
+                cmd.Parameters.AddWithValue("@Mobile", mobile);
+                sqlConnection1.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            MultiView1.ActiveViewIndex = 3;
+
+            StartInterviewsForPosition(0);
+        }
+
+
         protected void btnFB_Click(object sender, EventArgs e)
         {
+            Timer1.Enabled = false;
+
             int newTimerInterval = Math.Min((int)Session[TimerInterval] + 500, MaxTimerInterval);
             Session[TimerInterval] = newTimerInterval;
 
+            UpdateFastPlaySpeed(newTimerInterval);
+
+            Timer1.Enabled = true;
+        }
+
+        protected void btnFF_Click(object sender, EventArgs e)
+        {
+            Timer1.Enabled = false;
+
+            int newTimerInterval = Math.Max((int)Session[TimerInterval] - 500, MinTimerInterval);
+            Session[TimerInterval] = newTimerInterval;
+
+            UpdateFastPlaySpeed(newTimerInterval);
+
+            Timer1.Enabled = true;
+        }
+
+        private void UpdateFastPlaySpeed(int newTimerInterval)
+        {
             Timer1.Interval = newTimerInterval;
 
             FB.Enabled = (newTimerInterval != MaxTimerInterval);
             FF.Enabled = (newTimerInterval != MinTimerInterval);
 
-            string speedRate = (newTimerInterval / 1500.0).ToString("0.0");
-            LabelSpeed.Text = string.Format(" Speed: x" + speedRate);
-        }
-
-        protected void btnFF_Click(object sender, EventArgs e)
-        {
-            int newTimerInterval = Math.Max((int)Session[TimerInterval] / 2, MinTimerInterval);
-            Session[TimerInterval] = newTimerInterval;
-
-            FB.Enabled = (newTimerInterval != MaxTimerInterval);
-            FF.Enabled = (newTimerInterval != MinTimerInterval);
-
-            string speedRate = (newTimerInterval / 1500.0).ToString("0.0");
-            LabelSpeed.Text = string.Format(" Speed: x" + speedRate);
+            string speedRate = (1500.0 / newTimerInterval).ToString("0.0");
+            LabelSpeed.Text = " Speed: x" + speedRate;
         }
 
         protected void RateAdviser()
@@ -529,12 +616,55 @@ namespace RestaurantGame
 
         protected void btnRate_Click(object sender, EventArgs e)
         {
-            MultiView2.ActiveViewIndex = 0;
-
             int agentRating = RatingRbL.SelectedIndex + 1;
+
+            SaveRatingToDB(agentRating);
+
+            MultiView2.ActiveViewIndex = 0;
 
             Timer1.Enabled = true;
         }
+
+        private void SaveRatingToDB(int agentRating)
+        {
+            var positionToFill = (int)Session[PositionToFillStr];
+
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+            string user = (string)Session["user_id"];
+
+            using (SqlConnection sqlConnection1 = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
+                    "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank ) " + 
+                    " VALUES (@UserId, @AdviserRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
+                    "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank)");
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = sqlConnection1;
+                cmd.Parameters.AddWithValue("@UserId", user);
+                cmd.Parameters.AddWithValue("@AdviserRating", agentRating.ToString());
+                cmd.Parameters.AddWithValue("@RatingPosition", positionToFill.ToString());
+                cmd.Parameters.AddWithValue("@Position1Rank", GetChosenPositionToInsertToDb(1));
+                cmd.Parameters.AddWithValue("@Position2Rank", GetChosenPositionToInsertToDb(2));
+                cmd.Parameters.AddWithValue("@Position3Rank", GetChosenPositionToInsertToDb(3));
+                cmd.Parameters.AddWithValue("@Position4Rank", GetChosenPositionToInsertToDb(4));
+                cmd.Parameters.AddWithValue("@Position5Rank", GetChosenPositionToInsertToDb(5));
+                cmd.Parameters.AddWithValue("@Position6Rank", GetChosenPositionToInsertToDb(6));
+                cmd.Parameters.AddWithValue("@Position7Rank", GetChosenPositionToInsertToDb(7));
+                cmd.Parameters.AddWithValue("@Position8Rank", GetChosenPositionToInsertToDb(8));
+                cmd.Parameters.AddWithValue("@Position9Rank", GetChosenPositionToInsertToDb(9));
+                cmd.Parameters.AddWithValue("@Position10Rank", GetChosenPositionToInsertToDb(10));
+                sqlConnection1.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private string GetChosenPositionToInsertToDb(int position)
+        {
+            var positions = (List<Position>)Session[PositionsStr];
+
+            return positions[position - 1].ChosenCandidate == null ? "NULL" : positions[position - 1].ChosenCandidate.CandidateRank.ToString();
+        }
+
     }
 
 
