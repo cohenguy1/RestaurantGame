@@ -9,7 +9,7 @@ namespace RestaurantGame
     {
         public const int PositionCandidatesNumber = 20;
 
-        public static double[] c = new double[PositionCandidatesNumber + 1];
+        private static double[] c = new double[PositionCandidatesNumber + 1];
 
         public static int[] StoppingRule = new int[PositionCandidatesNumber + 1];
 

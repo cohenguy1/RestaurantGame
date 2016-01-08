@@ -49,6 +49,15 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.View view0;
         
         /// <summary>
+        /// label44 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label label44;
+        
+        /// <summary>
         /// btnNext0 control.
         /// </summary>
         /// <remarks>
@@ -337,22 +346,31 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Label PositionHeader;
         
         /// <summary>
-        /// Panel4 control.
+        /// PanelInterviewSpeedBasket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel4;
+        protected global::System.Web.UI.WebControls.Panel PanelInterviewSpeedBasket;
         
         /// <summary>
-        /// Page1ViewPanel control.
+        /// PanelInterviewBasket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Page1ViewPanel;
+        protected global::System.Web.UI.WebControls.Panel PanelInterviewBasket;
+        
+        /// <summary>
+        /// PanelInterview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelInterview;
         
         /// <summary>
         /// StickMan1 control.
@@ -535,13 +553,220 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Image StickMan20;
         
         /// <summary>
-        /// Panel1 control.
+        /// PanelBasket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.WebControls.Panel PanelBasket;
+        
+        /// <summary>
+        /// CandidatesRemainingLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CandidatesRemainingLbl;
+        
+        /// <summary>
+        /// table1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table table1;
+        
+        /// <summary>
+        /// remainImage1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage1;
+        
+        /// <summary>
+        /// remainImage2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage2;
+        
+        /// <summary>
+        /// remainImage3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage3;
+        
+        /// <summary>
+        /// remainImage4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage4;
+        
+        /// <summary>
+        /// remainImage5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage5;
+        
+        /// <summary>
+        /// remainImage6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage6;
+        
+        /// <summary>
+        /// remainImage7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage7;
+        
+        /// <summary>
+        /// remainImage8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage8;
+        
+        /// <summary>
+        /// remainImage9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage9;
+        
+        /// <summary>
+        /// remainImage10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage10;
+        
+        /// <summary>
+        /// remainImage11 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage11;
+        
+        /// <summary>
+        /// remainImage12 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage12;
+        
+        /// <summary>
+        /// remainImage13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage13;
+        
+        /// <summary>
+        /// remainImage14 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage14;
+        
+        /// <summary>
+        /// remainImage15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage15;
+        
+        /// <summary>
+        /// remainImage16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage16;
+        
+        /// <summary>
+        /// remainImage17 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage17;
+        
+        /// <summary>
+        /// remainImage18 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage18;
+        
+        /// <summary>
+        /// remainImage19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage19;
+        
+        /// <summary>
+        /// remainImage20 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image remainImage20;
+        
+        /// <summary>
+        /// PanelSpeed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelSpeed;
         
         /// <summary>
         /// ImageManForward control.
@@ -571,22 +796,49 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Image ImageHired;
         
         /// <summary>
-        /// FB control.
+        /// MovingToNextPositionLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button FB;
+        protected global::System.Web.UI.WebControls.Label MovingToNextPositionLabel;
         
         /// <summary>
-        /// FF control.
+        /// MovingJobTitleLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button FF;
+        protected global::System.Web.UI.WebControls.Label MovingJobTitleLabel;
+        
+        /// <summary>
+        /// btnFastBackwards control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnFastBackwards;
+        
+        /// <summary>
+        /// btnPausePlay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnPausePlay;
+        
+        /// <summary>
+        /// btnFastForward control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnFastForward;
         
         /// <summary>
         /// LabelSpeed control.
@@ -625,15 +877,6 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Panel Panel3;
         
         /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-        
-        /// <summary>
         /// RatingRbL control.
         /// </summary>
         /// <remarks>
@@ -661,13 +904,13 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Button btnRate;
         
         /// <summary>
-        /// Panel2 control.
+        /// PanelPositions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel2;
+        protected global::System.Web.UI.WebControls.Panel PanelPositions;
         
         /// <summary>
         /// Positions control.
@@ -776,5 +1019,14 @@ namespace RestaurantGame {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableCell BartenderCell;
+        
+        /// <summary>
+        /// AvgRankCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell AvgRankCell;
     }
 }
