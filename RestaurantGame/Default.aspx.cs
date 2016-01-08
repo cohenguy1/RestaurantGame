@@ -11,7 +11,6 @@ namespace RestaurantGame
 {
     // TODO: Divide to classes
     // TODO: Add uniform
-    // TODO: Chow's algorithm
     // TODO: random position - you are the uniform picker
     // TODO: Thanks for participating
 
@@ -517,8 +516,7 @@ namespace RestaurantGame
             {
                 mobile = "mobile_user";
             }
-            using (SqlConnection sqlConnection1 =
-                    new SqlConnection(connectionString))
+            using (SqlConnection sqlConnection1 = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, Mobile ) VALUES (@UserId, @Gender, @Age, @Education,@Nationality,@Reason,@Mobile)");
                 cmd.CommandType = CommandType.Text;
@@ -628,7 +626,7 @@ namespace RestaurantGame
         }
 
         private string GetChosenPositionToInsertToDb(int position)
-        {
+        { 
             var positions = (List<Position>)Session[PositionsStr];
 
             return positions[position - 1].ChosenCandidate == null ? "NULL" : positions[position - 1].ChosenCandidate.CandidateRank.ToString();

@@ -49,11 +49,6 @@
                         <br />
                     </td>
                 </tr>
-                <tr>
-                    <td><strong>In the game, you will rank how good is your teammate, and he will rank you.<br />
-                        This is not a competition, just choose how well you think your teammate performs.<br />
-                        &nbsp;</strong></td>
-                </tr>
 
                 <tr>
                     <td>
@@ -517,9 +512,21 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>On a scale of 1 to 10, 10 being the best, How would you rate your adviser?
+                                    <td>Hi!
+                                        <br />
+                                        We stopped for a moment so you can rate your adviser.
+                                        <br />
+                                        Your rating should be based on how good you think your adviser is.
+                                        <br /><br />
+                                        
+                                        <asp:Label runat="server" Font-Italic="true" Font-Bold="true">
+                                        The rating you give will not affect the game or the bonus you get.
+                                        </asp:Label>
+                                        <br /><br />
+                                        Rate the adviser from 1 to 10, 10 being the best:
+                                        <br /><br />
                         <asp:RadioButtonList ID="RatingRbL" runat="server">
-                            <asp:ListItem>1</asp:ListItem>
+                            <asp:ListItem>1 - The worst adviser ever!</asp:ListItem>
                             <asp:ListItem>2</asp:ListItem>
                             <asp:ListItem>3</asp:ListItem>
                             <asp:ListItem>4</asp:ListItem>
@@ -528,7 +535,7 @@
                             <asp:ListItem>7</asp:ListItem>
                             <asp:ListItem>8</asp:ListItem>
                             <asp:ListItem>9</asp:ListItem>
-                            <asp:ListItem>10</asp:ListItem>
+                            <asp:ListItem>10 - I'm loving it!</asp:ListItem>
                         </asp:RadioButtonList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Style="color: Red;" ControlToValidate="RatingRbL" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                                     </td>
