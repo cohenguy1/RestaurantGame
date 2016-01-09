@@ -8,6 +8,10 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
+        public int StartTimerInterval = 2000;
+        public const int MinTimerInterval = 1000;
+        public const int MaxTimerInterval = 3000;
+
         protected void btnFastBackwards_Click(object sender, EventArgs e)
         {
             Session[TimerEnabled] = Timer1.Enabled;
@@ -18,7 +22,7 @@ namespace RestaurantGame
 
             UpdateFastPlaySpeed(newTimerInterval);
 
-            Timer1.Enabled = (bool)Session[TimerEnabled];
+            EnableDisableTimer(true);
         }
 
         protected void btnFastForward_Click(object sender, EventArgs e)
@@ -31,7 +35,7 @@ namespace RestaurantGame
 
             UpdateFastPlaySpeed(newTimerInterval);
 
-            Timer1.Enabled = (bool)Session[TimerEnabled];
+            EnableDisableTimer(true);
         }
 
         private void UpdateFastPlaySpeed(int newTimerInterval)

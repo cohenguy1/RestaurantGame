@@ -434,11 +434,85 @@
 
         </asp:View>
 
+        <asp:View ID="view7" runat="server">
+            <asp:MultiView ID="MultiviewInstructions" runat="server" ActiveViewIndex="0">
+                <asp:View ID="view8" runat="server">
+                    <asp:Image ID="InstructionImage" ImageUrl="~/Images/Instructions0.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view9" runat="server">
+                    <asp:Image ID="Image1" ImageUrl="~/Images/Instructions1.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view10" runat="server">
+                    <asp:Image ID="Image2" ImageUrl="~/Images/Instructions2.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view11" runat="server">
+                    <asp:Image ID="Image3" ImageUrl="~/Images/Instructions3.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view12" runat="server">
+                    <asp:Image ID="Image4" ImageUrl="~/Images/Instructions4.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view13" runat="server">
+                    <asp:Image ID="Image5" ImageUrl="~/Images/Instructions5.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view14" runat="server">
+                    <asp:Image ID="Image6" ImageUrl="~/Images/Instructions6.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view15" runat="server">
+                    <asp:Image ID="Image7" ImageUrl="~/Images/Instructions7.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view16" runat="server">
+                    <asp:Image ID="Image8" ImageUrl="~/Images/Instructions8.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view17" runat="server">
+                    <asp:Image ID="Image9" ImageUrl="~/Images/Instructions9.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view18" runat="server">
+                    <asp:Image ID="Image10" ImageUrl="~/Images/Instructions10.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view19" runat="server">
+                    <asp:Image ID="Image11" ImageUrl="~/Images/Instructions11.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view20" runat="server">
+                    <asp:Image ID="Image12" ImageUrl="~/Images/Instructions12.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view21" runat="server">
+                    <asp:Image ID="Image13" ImageUrl="~/Images/Instructions13.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view22" runat="server">
+                    <asp:Image ID="Image14" ImageUrl="~/Images/Instructions14.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view23" runat="server">
+                    <asp:Image ID="Image15" ImageUrl="~/Images/Instructions15.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view24" runat="server">
+                    <asp:Image ID="Image16" ImageUrl="~/Images/Instructions16.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view25" runat="server">
+                    <asp:Image ID="Image17" ImageUrl="~/Images/Instructions17.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view26" runat="server">
+                    <asp:Image ID="Image18" ImageUrl="~/Images/Instructions18.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view27" runat="server">
+                    <asp:Image ID="Image19" ImageUrl="~/Images/Instructions19.png" Width="700px" runat="server" />
+                </asp:View>
+                <asp:View ID="view28" runat="server">
+                    <asp:Image ID="Image20" ImageUrl="~/Images/Instructions20.png" Width="700px" runat="server" />
+                </asp:View>
+            </asp:MultiView>
+            <br />
+            <br />
+            <asp:Button ID="btnPrevInstruction" runat="server" Text="Prev" OnClick="btnPrevInstruction_Click" Enabled="false"/>
+            <asp:Button ID="btnNextInstruction" runat="server" Text="Next" OnClick="btnNextInstruction_Click" />
+        </asp:View>
+
         <asp:View ID="View2" runat="server">
 
             <asp:MultiView ID="MultiView2" runat="server" ActiveViewIndex="0">
                 <asp:View ID="view3" runat="server">
                     <asp:Label ID="PositionHeader" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;"></asp:Label>
+
+                    <asp:Label ID="PositionExplanationLbl" runat="server" Font-Size="Larger" Visible="false" Style="color: lightseagreen"></asp:Label>
                     <br />
                     <asp:Panel ID="PanelInterviewSpeedBasket" runat="server" Width="600px" Style="margin-left: 0px; float: right">
                         <asp:Panel ID="PanelInterviewBasket" runat="server" Style="margin-left: 0px">
@@ -506,58 +580,78 @@
                                 <br />
                                 <br />
                                 <div class="Basket">
-                                    <asp:table id="table1" runat="server">
+                                    <asp:Table ID="table1" runat="server">
                                         <asp:TableRow>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage1" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage1" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage2" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage2" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage3" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage3" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage4" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage4" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage5" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage5" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage6" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage6" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage7" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage7" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage8" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage8" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage9" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage9" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage10" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage10" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage11" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage11" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage12" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage12" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage13" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage13" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage14" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage14" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage15" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage15" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage16" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage16" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage17" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage17" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage18" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage18" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage19" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage19" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Image ID="remainImage20" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image></asp:TableCell>
+                                                <asp:Image ID="remainImage20" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
+                                            </asp:TableCell>
 
                                         </asp:TableRow>
 
-                                    </asp:table>
+                                    </asp:Table>
 
                                 </div>
 
@@ -573,6 +667,8 @@
                             <asp:Label ID="MovingToNextPositionLabel" runat="server" Font-Size="Larger" Visible="false"></asp:Label>
                             <asp:Label ID="MovingJobTitleLabel" runat="server" Style="margin-top: 20px;" Font-Bold="true" Font-Size="X-Large" Visible="false" ForeColor="Green"></asp:Label>
                             <br />
+                            <asp:ImageButton ID="btnThumbsDown" runat="server" ImageUrl="~/Images/thumbsDownButton.jpg" Height="48px" Width="48px" OnClick="btnThumbsDown_Click" />
+                            <asp:ImageButton ID="btnThumbsUp" runat="server" ImageUrl="~/Images/thumbsUpButton.jpg" Height="48px" Width="48px" OnClick="btnThumbsUp_Click" />
                             <br />
                             <asp:ImageButton ID="btnFastBackwards" runat="server" ImageUrl="~/Images/fbButton.png" OnClick="btnFastBackwards_Click" Enabled="true" />
                             <asp:ImageButton ID="btnPausePlay" runat="server" ImageUrl="~/Images/pauseButton.png" OnClick="btnPausePlay_Click" Enabled="true" />
@@ -629,6 +725,37 @@
                         </div>
                         <br />
                         <asp:Button ID="btnRate" runat="server" Text="Rate!" OnClick="btnRate_Click" />
+                    </asp:Panel>
+                </asp:View>
+                <asp:View ID="view6" runat="server">
+
+                    <asp:Label ID="Label1" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;">Pick Uniform</asp:Label>
+                    <br />
+                    <asp:Panel ID="Panel1" runat="server" Style="margin-left: 20px; float: right">
+                        <br />
+
+                        <br />
+                        <br />
+                        <div style="text-align: center; width: 600px; margin: 0 auto;">
+                            <table style="text-align: left; width: 600px;" border="1">
+                                <tr>
+                                    <td>
+                                        <asp:Label ID="Label8" runat="server" Font-Size="Medium" Text="&nbsp;It's your turn now." Style="margin-left: 20px; align-content: center;"></asp:Label>
+                                        <br />
+                                        <br />
+                                        <asp:Label ID="UniformPickForPosition" runat="server" Font-Size="Medium" Style="margin-left: 20px; align-content: center;"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <br />
+                                        <asp:ImageButton ID="Uniform1" runat="server" Visible="true" Width="140px" Style="margin-left: 20px" OnClick="btnPickUniform_Click" />
+                                        <asp:ImageButton ID="Uniform2" runat="server" Visible="true" Width="140px" Style="margin-left: 60px" OnClick="btnPickUniform_Click" />
+                                        <asp:ImageButton ID="Uniform3" runat="server" Visible="true" Width="140px" Style="margin-left: 60px" OnClick="btnPickUniform_Click" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </asp:Panel>
                 </asp:View>
             </asp:MultiView>
