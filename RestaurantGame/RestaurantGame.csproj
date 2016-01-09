@@ -126,7 +126,6 @@
     <Compile Include="SpeedControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="TrainingStep.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

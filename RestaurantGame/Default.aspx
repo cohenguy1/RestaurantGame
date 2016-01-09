@@ -509,7 +509,7 @@
         <asp:View ID="View2" runat="server">
 
             <asp:MultiView ID="MultiView2" runat="server" ActiveViewIndex="0">
-                <asp:View ID="view3" runat="server">
+                <asp:View ID="ViewGame" runat="server">
                     <asp:Label ID="PositionHeader" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;"></asp:Label>
 
                     <asp:Label ID="PositionExplanationLbl" runat="server" Font-Size="Larger" Visible="false" Style="color: lightseagreen"></asp:Label>
@@ -680,7 +680,7 @@
 
                     </asp:Panel>
                 </asp:View>
-                <asp:View ID="view4" runat="server">
+                <asp:View ID="ViewRating" runat="server">
 
                     <asp:Label ID="Label2" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;">Adviser Rating</asp:Label>
                     <br />
@@ -727,7 +727,35 @@
                         <asp:Button ID="btnRate" runat="server" Text="Rate!" OnClick="btnRate_Click" />
                     </asp:Panel>
                 </asp:View>
-                <asp:View ID="view6" runat="server">
+
+                <asp:View ID="ViewTrainingAsk" runat="server">
+
+                    <asp:Label ID="Label9" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;">Adviser Rating</asp:Label>
+                    <br />
+                    <asp:Panel ID="Panel2" runat="server" Style="margin-left: 20px; float: right">
+                        <br />
+                        <div style="text-align: center; width: 600px; margin: 0 auto;">
+                            <table style="text-align: left; width: 600px;" border="1">
+                                <tr>
+                                    <td>&nbsp;Would you like to continue the training or end it and continue to the game?
+                                        <br />
+                                        <br />
+                                        <asp:RadioButtonList ID="trainingRBL" runat="server">
+                                            <asp:ListItem>Continue Training</asp:ListItem>
+                                            <asp:ListItem>Start Game</asp:ListItem>
+                                        </asp:RadioButtonList>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Style="color: Red;" ControlToValidate="trainingRBL" runat="server" ErrorMessage="Please choose one of the options above"></asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <asp:Button ID="btnTrainingSend" runat="server" Text="Send" OnClick="btnTrainingSend_Click" />
+                    </asp:Panel>
+                </asp:View>
+
+
+                <asp:View ID="ViewUniformPicker" runat="server">
 
                     <asp:Label ID="Label1" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;">Pick Uniform</asp:Label>
                     <br />

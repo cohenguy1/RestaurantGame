@@ -16,11 +16,31 @@ namespace RestaurantGame
         private void UpdatePositionsTable(Position currentPosition, double avgRank)
         {
             var positionCell = GetPositionCell(currentPosition);
-            positionCell.Text = " " + currentPosition.GetJobTitle() + ": " + currentPosition.ChosenCandidate.CandidateRank;
+            positionCell.Text = "&nbsp;" + currentPosition.GetJobTitle() + ": " + currentPosition.ChosenCandidate.CandidateRank;
             positionCell.ForeColor = System.Drawing.Color.Blue;
             positionCell.Font.Italic = true;
 
-            AvgRankCell.Text = " Average Rank: " + avgRank.ToString("0.00");
+            AvgRankCell.Text = "&nbsp;Average Rank: " + avgRank.ToString("0.00");
+        }
+
+        private void ClearPositionsTable()
+        {
+            var positions = (List<Position>)Session[PositionsStr];
+
+            for (int positionIndex = 0; positionIndex < 10; positionIndex++)
+            {
+                var currentPosition = positions[positionIndex];
+
+                currentPosition.ChosenCandidate = null;
+
+                var positionCell = GetPositionCell(currentPosition);
+
+                positionCell.Text = "&nbsp;" + currentPosition.GetJobTitle() + ": " ;
+                positionCell.ForeColor = System.Drawing.Color.Black;
+                positionCell.Font.Italic = false;
+            }
+
+            AvgRankCell.Text = "&nbsp;Average Rank: ";
         }
 
         private TableCell GetPositionCell(Position position)

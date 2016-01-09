@@ -36,6 +36,8 @@ namespace RestaurantGame
 
         public const string CandidateCompletedStepStr = "CandidateCompletedStep";
 
+        public const string TrainingPassed = "TrainingPassed";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -117,7 +119,8 @@ namespace RestaurantGame
             {
                 MultiView1.ActiveViewIndex++;
 
-                Session[GameModeStr] = GameMode.Adviser;
+                Session[GameModeStr] = GameMode.Training;
+                Session[TrainingPassed] = 0;
 
                 StartInterviewsForPosition(0);
 
@@ -133,6 +136,30 @@ namespace RestaurantGame
             }
         }
 
+        protected void btnTrainingSend_Click(object sender, EventArgs e)
+        {
+            if (trainingRBL.SelectedIndex == 0)
+            {
+                MultiView2.ActiveViewIndex = 3;
+                ShowUniforms();
+            }
+            else
+            {
+                Session[GameModeStr] = GameMode.Adviser;
+
+                MultiView2.ActiveViewIndex = 0;
+
+                ClearCandidateImages();
+                ClearInterviewImages();
+
+                Session[PositionToFillStr] = 0;
+
+                ClearPositionsTable();
+
+                StartInterviewsForPosition(0);
+            }
+        }
+        
         private void SetTitle()
         {
             var positionToFill = (int)Session[PositionToFillStr];
@@ -163,12 +190,6 @@ namespace RestaurantGame
         {
             Timer1.Interval = (int)Session[TimerInterval];
 
-            /*if ((TrainingStep)Session[TrainingStepStr] == TrainingStep.PositionToFill)
-            {
-                UpdateTrainingExplanation((TrainingStep)Session[TrainingStepStr]);
-                return;
-            }*/
-
             bool askForRating = (bool)Session[AskForRating];
             if (askForRating)
             {
@@ -186,15 +207,6 @@ namespace RestaurantGame
             else
             {
                 FillNextPosition();
-            }
-        }
-
-        private void UpdateTrainingExplanation(TrainingStep trainingStep)
-        {
-            if (trainingStep == TrainingStep.PositionToFill)
-            {
-                PositionExplanationLbl.Text = "<br />" + "^" + "<br />" + "|" + "<br />" + "Here you can see the position " + "<br />" + " you currently interviewing candidates for";
-                PositionExplanationLbl.Visible = true;
             }
         }
 
@@ -275,15 +287,24 @@ namespace RestaurantGame
                     {
                         case CandidateCompletedStep.ShowCandidatesMap:
                             UpdatePositionToAcceptedCandidate(currentCandidate);
-                            Timer1.Interval = 9000;
+                            Timer1.Interval = 6000;
                             Session[CandidateCompletedStepStr] = CandidateCompletedStep.PickUniform;
                             break;
                         case CandidateCompletedStep.PickUniform:
-                            MultiView2.ActiveViewIndex = 2;
+
                             Timer1.Enabled = false;
+                            Session[TrainingPassed] = (int)Session[TrainingPassed] + 1;
 
-                            ShowUniforms();
-
+                            if ((GameMode)Session[GameModeStr] == GameMode.Training && (int)Session[TrainingPassed] >= 3)
+                            {
+                                MultiView2.ActiveViewIndex = 2;
+                            }
+                            else
+                            {
+                                MultiView2.ActiveViewIndex = 3;
+                                ShowUniforms();
+                            }
+                            
                             Session[CandidateCompletedStepStr] = CandidateCompletedStep.FillNextPosition;
                             break;
                         case CandidateCompletedStep.FillNextPosition:

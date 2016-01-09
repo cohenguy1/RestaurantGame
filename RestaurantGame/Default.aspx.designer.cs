@@ -742,13 +742,13 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.MultiView MultiView2;
         
         /// <summary>
-        /// view3 control.
+        /// ViewGame control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View view3;
+        protected global::System.Web.UI.WebControls.View ViewGame;
         
         /// <summary>
         /// PositionHeader control.
@@ -1291,13 +1291,13 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Label LabelSpeed;
         
         /// <summary>
-        /// view4 control.
+        /// ViewRating control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View view4;
+        protected global::System.Web.UI.WebControls.View ViewRating;
         
         /// <summary>
         /// Label2 control.
@@ -1345,13 +1345,67 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Button btnRate;
         
         /// <summary>
-        /// view6 control.
+        /// ViewTrainingAsk control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View view6;
+        protected global::System.Web.UI.WebControls.View ViewTrainingAsk;
+        
+        /// <summary>
+        /// Label9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label9;
+        
+        /// <summary>
+        /// Panel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel2;
+        
+        /// <summary>
+        /// trainingRBL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList trainingRBL;
+        
+        /// <summary>
+        /// RequiredFieldValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        
+        /// <summary>
+        /// btnTrainingSend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTrainingSend;
+        
+        /// <summary>
+        /// ViewUniformPicker control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View ViewUniformPicker;
         
         /// <summary>
         /// Label1 control.

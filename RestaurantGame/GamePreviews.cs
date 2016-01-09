@@ -85,9 +85,6 @@ namespace RestaurantGame
 
             MultiView1.ActiveViewIndex = 3;
             MultiviewInstructions.ActiveViewIndex = 0;
-
-            Session[GameModeStr] = GameMode.Training;
         }
-
     }
 }
