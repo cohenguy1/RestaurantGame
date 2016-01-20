@@ -21,7 +21,7 @@
     <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
         <asp:View ID="view0" runat="server">
 
-            <h2 class="style3">You will recieve 5 cents for this Game and it will take 30 minutes of your time. </h2>
+            <h2 class="style3">You will recieve [X] cents for this Game and it will take 30 minutes of your time. </h2>
 
             <p class="style3">
                 &nbsp;
@@ -32,20 +32,25 @@
                     <td>You have decided to open up a restaurant.</td>
                 </tr>
                 <tr>
-                    <td>In this game you and other player will interview people for 10 positions for the restaurant.</td>
+                    <td>[Fill] In this game you and an HR team  will interview people for 10 positions for the restaurant.</td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>One of you will interview the candidates and decide about who fill each position,<br />
-                        and the other player will choose the uniform for each position</td>
+                    <td>[Fill] The HR team will interview the candidates and decide about who fill each position,<br />
+                        and you will choose the uniform for each position</td>
+                    <br />
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>For Each position you have 20 candidates, ranked from 1 to 20. Your interest is to pick the best candidate for each position.<br />
+                        <br />
+                        When a candidate is interviewed, we must decide whether to hire him or not.
+                        <br />
+                        If the candidate is rejected, he cannot be recalled.
                         <br />
                     </td>
                 </tr>
@@ -69,43 +74,8 @@
                 </tr>
             </table>
         </asp:View>
-        <asp:View ID="view1" runat="server">
-            <h2>Quiz</h2>
-            <div style="text-align: center; width: 640px; margin: 0 auto;">
-                <table style="text-align: left; width: 640px;" border="1">
-                    <tr>
-                        <td>
-                            <asp:Label ID="lblQuiz1" Style="color: Red;" runat="server" Text="Please answer the questions"></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>How much money will you get by just picking the first candidate?
-                        <asp:RadioButtonList ID="rbl1" runat="server">
-                            <asp:ListItem>0 cents</asp:ListItem>
-                            <asp:ListItem>5 cents</asp:ListItem>
-                            <asp:ListItem>10 cents</asp:ListItem>
-                        </asp:RadioButtonList>
-                            <asp:RequiredFieldValidator ID="rfv1" Style="color: Red;" ControlToValidate="rbl1" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Will you get extra money if you pick the best candidate for each position?
-                        <asp:RadioButtonList ID="rbl2" runat="server">
-                            <asp:ListItem>Yes</asp:ListItem>
-                            <asp:ListItem>No</asp:ListItem>
-                        </asp:RadioButtonList>
-                            <asp:RequiredFieldValidator ID="rfv2" Style="color: Red;" ControlToValidate="rbl2" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <br />
-            <asp:Button ID="btnNext2" runat="server" Text="Next" OnClick="btnNext2_Click" />
-
-        </asp:View>
-
-        <asp:View ID="view5" runat="server">
+        <asp:View ID="viewInfo" runat="server">
             <h2 style="color: #0066FF;"><span class="style13"><strong>Some information before we start..</strong></span></h2>
             <asp:Panel ID="panel" runat="server"
                 Style="text-align: left; margin-top: 0px;">
@@ -434,9 +404,10 @@
 
         </asp:View>
 
-        <asp:View ID="view7" runat="server">
+        <asp:View ID="viewInstructions" runat="server">
             <asp:MultiView ID="MultiviewInstructions" runat="server" ActiveViewIndex="0">
                 <asp:View ID="view8" runat="server">
+                    
                     <asp:Image ID="InstructionImage" ImageUrl="~/Images/Instructions0.png" Width="700px" runat="server" />
                 </asp:View>
                 <asp:View ID="view9" runat="server">
@@ -502,8 +473,80 @@
             </asp:MultiView>
             <br />
             <br />
-            <asp:Button ID="btnPrevInstruction" runat="server" Text="Prev" OnClick="btnPrevInstruction_Click" Enabled="false"/>
+            <asp:Button ID="btnPrevInstruction" runat="server" Text="Prev" OnClick="btnPrevInstruction_Click" Enabled="false" />
             <asp:Button ID="btnNextInstruction" runat="server" Text="Next" OnClick="btnNextInstruction_Click" />
+        </asp:View>
+
+        <asp:View ID="viewProceed" runat="server">
+            <h2>Game Instructions</h2>
+            <div style="text-align: center; width: 640px; margin: 0 auto;">
+                <table style="text-align: left; width: 640px;" border="1">
+                    <tr>
+                        <td>
+                            We will now proceed to the game instructions.
+                            <br />
+                            <br />
+                            
+
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <asp:Button ID="btnNext1" runat="server" Text="Next" OnClick="btnNext1_Click" />
+
+        </asp:View>
+
+        <asp:View ID="viewQuiz" runat="server">
+            <h2>Quiz</h2>
+            <div style="text-align: center; width: 640px; margin: 0 auto;">
+                <table style="text-align: left; width: 640px;" border="1">
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblQuiz1" Style="color: Red;" runat="server" Text="Please answer the questions"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>What is the relative rank of the first candidate in a position?
+                        <asp:RadioButtonList ID="rbl1" runat="server">
+                            <asp:ListItem>1</asp:ListItem>
+                            <asp:ListItem>10</asp:ListItem>
+                            <asp:ListItem>20</asp:ListItem>
+                            <asp:ListItem>Can be every rank in range 1-20</asp:ListItem>
+                        </asp:RadioButtonList>
+                            <asp:RequiredFieldValidator ID="rfv1" Style="color: Red;" ControlToValidate="rbl1" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>What is the relative rank of the last candidate in a position?
+                        <asp:RadioButtonList ID="rbl2" runat="server">
+                            <asp:ListItem>1</asp:ListItem>
+                            <asp:ListItem>10</asp:ListItem>
+                            <asp:ListItem>20</asp:ListItem>
+                            <asp:ListItem>Can be every rank in range 1-20</asp:ListItem>
+                        </asp:RadioButtonList>
+                            <asp:RequiredFieldValidator ID="rfv2" Style="color: Red;" ControlToValidate="rbl2" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lets suppose we rejected 10 candidates, and a new candidate arrives with rank 1.
+                            <br />
+                            What can be the absolute rank of the candidate?
+                        <asp:RadioButtonList ID="rbl3" runat="server">
+                            <asp:ListItem>Must be 1</asp:ListItem>
+                            <asp:ListItem>Must be 10</asp:ListItem>
+                            <asp:ListItem>Can be every rank in range 1-10</asp:ListItem>
+                            <asp:ListItem>Can be every rank in range 1-20</asp:ListItem>
+                        </asp:RadioButtonList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" Style="color: Red;" ControlToValidate="rbl2" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <asp:Button ID="btnNext2" runat="server" Text="Next" OnClick="btnNext2_Click" />
+
         </asp:View>
 
         <asp:View ID="View2" runat="server">
@@ -512,13 +555,15 @@
                 <asp:View ID="ViewGame" runat="server">
                     <asp:Label ID="PositionHeader" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;"></asp:Label>
 
-                    <asp:Label ID="PositionExplanationLbl" runat="server" Font-Size="Larger" Visible="false" Style="color: lightseagreen"></asp:Label>
                     <br />
                     <asp:Panel ID="PanelInterviewSpeedBasket" runat="server" Width="600px" Style="margin-left: 0px; float: right">
                         <asp:Panel ID="PanelInterviewBasket" runat="server" Style="margin-left: 0px">
                             <br />
                             <asp:Panel ID="PanelInterview" runat="server" Width="600px" Style="margin-left: 20px; float: left">
                                 <br />
+                                <asp:Panel runat="server" Style="margin-left: 0px; text-align:left">
+                                <asp:Label id="StatusLabel" runat="server"></asp:Label>
+                                </asp:Panel>
                                 <br />
                                 <div class="Interviews">
                                     <table class="tblTop">

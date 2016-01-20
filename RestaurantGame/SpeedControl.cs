@@ -14,32 +14,25 @@ namespace RestaurantGame
 
         protected void btnFastBackwards_Click(object sender, EventArgs e)
         {
-            Session[TimerEnabled] = Timer1.Enabled;
             Timer1.Enabled = false;
 
             int newTimerInterval = Math.Min((int)Session[TimerInterval] + 500, MaxTimerInterval);
-            Session[TimerInterval] = newTimerInterval;
 
             UpdateFastPlaySpeed(newTimerInterval);
-
-            EnableDisableTimer(true);
         }
 
         protected void btnFastForward_Click(object sender, EventArgs e)
         {
-            Session[TimerEnabled] = Timer1.Enabled;
             Timer1.Enabled = false;
 
             int newTimerInterval = Math.Max((int)Session[TimerInterval] - 500, MinTimerInterval);
-            Session[TimerInterval] = newTimerInterval;
 
             UpdateFastPlaySpeed(newTimerInterval);
-
-            EnableDisableTimer(true);
         }
 
         private void UpdateFastPlaySpeed(int newTimerInterval)
         {
+            Session[TimerInterval] = newTimerInterval;
             Timer1.Interval = newTimerInterval;
 
             btnFastBackwards.Enabled = (newTimerInterval != MaxTimerInterval);
@@ -50,23 +43,40 @@ namespace RestaurantGame
 
             string speedRate = ((double)StartTimerInterval / newTimerInterval).ToString("0.0");
             LabelSpeed.Text = " Speed: x" + speedRate;
+
+            SetGameState(GameState.Playing);
+            Session[TimerEnabled] = true;
         }
 
 
         protected void btnPausePlay_Click(object sender, ImageClickEventArgs e)
         {
-            if ((GameState)Session[GameStateStr] == GameState.Playing)
+            if (GetGameState() == GameState.Playing)
             {
-                Session[GameStateStr] = GameState.Paused;
+                SetGameState(GameState.Paused);
+            }
+            else
+            {
+                SetGameState(GameState.Playing);
+            }
+        }
 
-                Timer1.Enabled = false;
+        private GameState GetGameState()
+        {
+            return (GameState)Session[GameStateStr];
+        }
+
+        protected void SetGameState(GameState gameState)
+        {
+            Session[GameStateStr] = gameState;
+            Timer1.Enabled = (gameState == GameState.Playing);
+
+            if (gameState == GameState.Paused)
+            {
                 btnPausePlay.ImageUrl = "~/Images/playButton.png";
             }
-            else if ((GameState)Session[GameStateStr] == GameState.Paused)
+            else
             {
-                Session[GameStateStr] = GameState.Playing;
-
-                Timer1.Enabled = true;
                 btnPausePlay.ImageUrl = "~/Images/pauseButton.png";
             }
         }

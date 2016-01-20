@@ -8,8 +8,48 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        private double CalculateAveragePosition(List<Position> positions)
+        private int GetCurrentPositionNumber()
         {
+            return (int)Session[PositionToFillStr];
+        }
+
+        private void SetCurrentPositionNumber(int positionNumber)
+        {
+            Session[PositionToFillStr] = positionNumber;
+        }
+
+        private void GeneratePositions()
+        {
+            var positions = new List<Position>();
+
+            positions.Add(new Position(RestaurantPosition.Manager));
+            positions.Add(new Position(RestaurantPosition.HeadChef));
+            positions.Add(new Position(RestaurantPosition.Cook));
+            positions.Add(new Position(RestaurantPosition.Baker));
+            positions.Add(new Position(RestaurantPosition.Dishwasher));
+            positions.Add(new Position(RestaurantPosition.Waiter1));
+            positions.Add(new Position(RestaurantPosition.Waiter2));
+            positions.Add(new Position(RestaurantPosition.Waiter3));
+            positions.Add(new Position(RestaurantPosition.Host));
+            positions.Add(new Position(RestaurantPosition.Bartender));
+
+            Session[PositionsStr] = positions;
+
+            var acceptedCandidates = new int[positions.Count];
+            Session[AcceptedCandidates] = acceptedCandidates;
+        }
+
+        private void IncreaseCurrentPosition()
+        {
+            var positionToFill = (int)Session[PositionToFillStr];
+
+            SetCurrentPositionNumber(positionToFill + 1);
+        }
+
+        private double CalculateAveragePosition()
+        {
+            var positions = (List<Position>)Session[PositionsStr];
+
             return positions.Where(position => position.ChosenCandidate != null).Average(pos => pos.ChosenCandidate.CandidateRank);
         }
 
@@ -17,19 +57,15 @@ namespace RestaurantGame
         {
             var positionCell = GetPositionCell(currentPosition);
             positionCell.Text = "&nbsp;" + currentPosition.GetJobTitle() + ": " + currentPosition.ChosenCandidate.CandidateRank;
-            positionCell.ForeColor = System.Drawing.Color.Blue;
-            positionCell.Font.Italic = true;
 
             AvgRankCell.Text = "&nbsp;Average Rank: " + avgRank.ToString("0.00");
         }
 
         private void ClearPositionsTable()
         {
-            var positions = (List<Position>)Session[PositionsStr];
-
             for (int positionIndex = 0; positionIndex < 10; positionIndex++)
             {
-                var currentPosition = positions[positionIndex];
+                var currentPosition = GetPosition(positionIndex);
 
                 currentPosition.ChosenCandidate = null;
 
@@ -38,9 +74,41 @@ namespace RestaurantGame
                 positionCell.Text = "&nbsp;" + currentPosition.GetJobTitle() + ": " ;
                 positionCell.ForeColor = System.Drawing.Color.Black;
                 positionCell.Font.Italic = false;
+                positionCell.Font.Bold = false;
             }
 
             AvgRankCell.Text = "&nbsp;Average Rank: ";
+        }
+
+        private Position GetPosition(int indexPosition)
+        {
+            var positions = (List<Position>)Session[PositionsStr];
+
+            return positions[indexPosition];
+        }
+
+        private Position GetCurrentPosition()
+        {
+            var positionToFill = (int)Session[PositionToFillStr];
+            return GetPosition(positionToFill);
+        }
+
+        private string GetCurrentJobTitle()
+        {
+            var currentPosition = GetCurrentPosition();
+            return currentPosition.GetJobTitle();
+        }
+
+        private TableCell GetPositionCell(int positionIndex)
+        {
+            var position = GetPosition(positionIndex);
+            return GetPositionCell(position);
+        }
+
+        private TableCell GetCurrentPositionCell()
+        {
+            var currentPosition = GetCurrentPosition();
+            return GetPositionCell(currentPosition);
         }
 
         private TableCell GetPositionCell(Position position)

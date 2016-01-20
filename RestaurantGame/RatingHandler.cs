@@ -60,11 +60,11 @@ namespace RestaurantGame
             }
         }
 
-        private string GetChosenPositionToInsertToDb(int position)
+        private string GetChosenPositionToInsertToDb(int positionIndex)
         {
-            var positions = (List<Position>)Session[PositionsStr];
+            var position = GetPosition(positionIndex - 1);
 
-            return positions[position - 1].ChosenCandidate == null ? "NULL" : positions[position - 1].ChosenCandidate.CandidateRank.ToString();
+            return position.ChosenCandidate == null ? "NULL" : position.ChosenCandidate.CandidateRank.ToString();
         }
     }
 }

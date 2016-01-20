@@ -45,11 +45,36 @@ namespace RestaurantGame
             MultiView1.ActiveViewIndex = 1;
         }
 
+        protected void btnNext1_Click(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 5;
+
+            Session[GameModeStr] = GameMode.Training;
+            Session[TrainingPassed] = 0;
+
+            StartInterviewsForPosition(0);
+        }
+
         protected void btnNext2_Click(object sender, EventArgs e)
         {
-            if (rbl1.SelectedIndex == 1 && rbl2.SelectedIndex == 1)
+            if (rbl1.SelectedIndex == 0 && rbl2.SelectedIndex == 3 && rbl3.SelectedIndex == 2)
             {
-                MultiView1.ActiveViewIndex = 2;
+                MultiView1.ActiveViewIndex = 5;
+
+                Session[GameModeStr] = GameMode.Adviser;
+
+                MultiView2.ActiveViewIndex = 0;
+
+                ClearCandidateImages();
+
+                ImageInterview.Visible = false;
+                ImageManForward.Visible = true;
+
+                SetCurrentPositionNumber(0);
+
+                ClearPositionsTable();
+
+                StartInterviewsForPosition(0);
             }
             else
             {
@@ -83,7 +108,7 @@ namespace RestaurantGame
                 cmd.ExecuteNonQuery();
             }
 
-            MultiView1.ActiveViewIndex = 3;
+            MultiView1.ActiveViewIndex = 2;
             MultiviewInstructions.ActiveViewIndex = 0;
         }
     }

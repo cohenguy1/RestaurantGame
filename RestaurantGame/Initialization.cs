@@ -7,27 +7,6 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        private void GeneratePositions()
-        {
-            var positions = new List<Position>();
-
-            positions.Add(new Position(RestaurantPosition.Manager));
-            positions.Add(new Position(RestaurantPosition.HeadChef));
-            positions.Add(new Position(RestaurantPosition.Cook));
-            positions.Add(new Position(RestaurantPosition.Baker));
-            positions.Add(new Position(RestaurantPosition.Dishwasher));
-            positions.Add(new Position(RestaurantPosition.Waiter1));
-            positions.Add(new Position(RestaurantPosition.Waiter2));
-            positions.Add(new Position(RestaurantPosition.Waiter3));
-            positions.Add(new Position(RestaurantPosition.Host));
-            positions.Add(new Position(RestaurantPosition.Bartender));
-
-            Session[PositionsStr] = positions;
-
-            var acceptedCandidates = new int[positions.Count];
-            Session[AcceptedCandidates] = acceptedCandidates;
-        }
-
         private void GenerateCandidatesForPosition()
         {
             var positionCandidates = new List<Candidate>();

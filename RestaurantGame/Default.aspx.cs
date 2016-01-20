@@ -79,7 +79,9 @@ namespace RestaurantGame
             Timer1.Enabled = false;
 
             Session["Position"] = null;
-            Session[PositionToFillStr] = position;
+            SetCurrentPositionNumber(position);
+
+            StatusLabel.Text = "";
 
             SetTitle();
 
@@ -103,87 +105,30 @@ namespace RestaurantGame
             Timer1.Enabled = true;
         }
 
-        protected void btnPrevInstruction_Click(object sender, EventArgs e)
-        {
-            MultiviewInstructions.ActiveViewIndex--;
-
-            if (MultiviewInstructions.ActiveViewIndex == 0)
-            {
-                btnPrevInstruction.Enabled = false;
-            }
-        }
-
-        protected void btnNextInstruction_Click(object sender, EventArgs e)
-        {
-            if (MultiviewInstructions.ActiveViewIndex == 20)
-            {
-                MultiView1.ActiveViewIndex++;
-
-                Session[GameModeStr] = GameMode.Training;
-                Session[TrainingPassed] = 0;
-
-                StartInterviewsForPosition(0);
-
-                return;
-            }
-
-            MultiviewInstructions.ActiveViewIndex++;
-            btnPrevInstruction.Enabled = true;
-
-            if (MultiviewInstructions.ActiveViewIndex == 20)
-            {
-                btnNextInstruction.Text = "Continue to Training";
-            }
-        }
-
-        protected void btnTrainingSend_Click(object sender, EventArgs e)
-        {
-            if (trainingRBL.SelectedIndex == 0)
-            {
-                MultiView2.ActiveViewIndex = 3;
-                ShowUniforms();
-            }
-            else
-            {
-                Session[GameModeStr] = GameMode.Adviser;
-
-                MultiView2.ActiveViewIndex = 0;
-
-                ClearCandidateImages();
-                ClearInterviewImages();
-
-                Session[PositionToFillStr] = 0;
-
-                ClearPositionsTable();
-
-                StartInterviewsForPosition(0);
-            }
-        }
-        
         private void SetTitle()
         {
-            var positionToFill = (int)Session[PositionToFillStr];
             string jobTitle = GetCurrentJobTitle();
-            
+            var currentPositionNumber = GetCurrentPositionNumber();
+
             PositionHeader.Text = "Position: " + jobTitle;
 
-            if (positionToFill > 0)
+            if (currentPositionNumber > 0)
             {
                 MovingToNextPositionLabel.Text = "Moving on to fill the next position:" + "<br />" + "<br />";
                 MovingToNextPositionLabel.Visible = true;
 
                 MovingJobTitleLabel.Text = jobTitle + "<br />" + "<br />" + "<br />";
                 MovingJobTitleLabel.Visible = true;
+
+                var prevPositionCell = GetPositionCell(currentPositionNumber - 1);
+                prevPositionCell.ForeColor = System.Drawing.Color.Blue;
+                prevPositionCell.Font.Bold = false;
+                prevPositionCell.Font.Italic = true;
             }
-        }
 
-        private string GetCurrentJobTitle()
-        {
-            var positionToFill = (int)Session[PositionToFillStr];
-
-            var positions = (List<Position>)Session[PositionsStr];
-
-            return positions[positionToFill].GetJobTitle();
+            var positionCell = GetCurrentPositionCell();
+            positionCell.ForeColor = System.Drawing.Color.Green;
+            positionCell.Font.Bold = true;
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)
@@ -214,18 +159,16 @@ namespace RestaurantGame
         {
             Timer1.Enabled = false;
 
-            var positionToFill = (int)Session[PositionToFillStr];
-
-            positionToFill++;
-
-            Session[PositionToFillStr] = positionToFill;
+            IncreaseCurrentPosition();
 
             ClearCandidateImages();
             ClearInterviewImages();
 
-            if (positionToFill < 10)
+            var currentPositionNumber = GetCurrentPositionNumber();
+
+            if (currentPositionNumber < 10)
             {
-                StartInterviewsForPosition(positionToFill);
+                StartInterviewsForPosition(currentPositionNumber);
             }
             else if ((GameMode)Session[GameModeStr] == GameMode.Training)
             {
@@ -295,7 +238,7 @@ namespace RestaurantGame
                             Timer1.Enabled = false;
                             Session[TrainingPassed] = (int)Session[TrainingPassed] + 1;
 
-                            if ((GameMode)Session[GameModeStr] == GameMode.Training && (int)Session[TrainingPassed] >= 3)
+                            if (gameMode == GameMode.Training && (int)Session[TrainingPassed] >= 3)
                             {
                                 MultiView2.ActiveViewIndex = 2;
                             }
@@ -310,7 +253,7 @@ namespace RestaurantGame
                         case CandidateCompletedStep.FillNextPosition:
                             FillNextPosition();
 
-                            if ((bool)Session[AlreadyAskedForRating] == false)
+                            if ((bool)Session[AlreadyAskedForRating] == false && gameMode == GameMode.Adviser)
                             {
                                 Session[AskForRating] = true;
                                 Session[AlreadyAskedForRating] = true;
@@ -419,15 +362,20 @@ namespace RestaurantGame
                 newCandidate.CandidateAccepted = accepted;
             }
 
+            SetStatusLabel(newCandidateIndex, candidatesByNow.Count);
             DrawCandidatesByNow(candidatesByNow, newCandidateIndex, this);
+        }
+
+        private void SetStatusLabel(int newCandidateIndex, int totalCandidatesByNow)
+        {
+            StatusLabel.Text = "The new candidate has a relative rank of " + (newCandidateIndex + 1) + " out of " + totalCandidatesByNow + ".";
         }
 
         private void UpdatePositionToAcceptedCandidate(Candidate candidate)
         {
             var positionToFill = (int)Session[PositionToFillStr];
-            var positions = (List<Position>)Session[PositionsStr];
 
-            var currentPosition = positions[positionToFill];
+            var currentPosition = GetCurrentPosition();
 
             currentPosition.ChosenCandidate = candidate;
 
@@ -438,9 +386,10 @@ namespace RestaurantGame
             acceptedCandidates[positionToFill] = currentPosition.ChosenCandidate.CandidateRank;
             Session[AcceptedCandidates] = acceptedCandidates;
 
-            double avgRank = CalculateAveragePosition(positions);
+            double avgRank = CalculateAveragePosition();
             UpdatePositionsTable(currentPosition, avgRank);
 
+            StatusLabel.Text = "It's time to reveal the absolute rankings of the candidates:";
             ShowCandidateMap(currentPosition.ChosenCandidate);
         }
 

@@ -101,6 +101,9 @@
     <Compile Include="Initialization.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="InstructionsHandler.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="PausePlayState.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="PositionHandler.cs">
