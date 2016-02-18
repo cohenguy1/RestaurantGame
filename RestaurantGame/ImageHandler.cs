@@ -168,8 +168,8 @@ namespace RestaurantGame
 
         private void ShowCandidateMap(Candidate chosenCandidate)
         {
-            var currentCandidateNumber = (int)Session[CurrentCandidateNumberStr];
-            var positionCandidates = (List<Candidate>)Session[PositionCandidiatesStr];
+            var currentCandidateNumber = CurrentCandidateNumber;
+            var positionCandidates = PositionCandidates;
 
             var sortedInterviewedCandidates = positionCandidates.Where(candidate => candidate.CandidateNumber <= currentCandidateNumber)
                 .OrderBy(viewedCandidate => viewedCandidate.CandidateRank);

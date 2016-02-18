@@ -114,6 +114,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RestaurantPosition.cs" />
+    <Compile Include="SessionMap.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

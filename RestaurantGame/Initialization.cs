@@ -42,13 +42,12 @@ namespace RestaurantGame
                 ranksRemaining--;
             }
 
-            Session[PositionCandidiatesStr] = positionCandidates;
+            PositionCandidates = positionCandidates;
         }
 
         private void GenerateCandidatesByNow()
         {
-            var candidatesByNow = new List<Candidate>();
-            Session[CandidatesByNowStr] = candidatesByNow;
+            CandidatesByNow = new List<Candidate>();
         }
 
     }

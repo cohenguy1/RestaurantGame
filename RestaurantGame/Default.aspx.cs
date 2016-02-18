@@ -13,30 +13,6 @@ namespace RestaurantGame
     {
         public const int PositionCandidatesNumber = DecisionMaker.PositionCandidatesNumber;
 
-        public const string PositionsStr = "Positions";
-        public const string PositionToFillStr = "PositionToFill";
-
-        public const string PositionCandidiatesStr = "PositionCandidates";
-        public const string CurrentCandidateNumberStr = "CurrentCandidateNumber";
-
-        public const string CandidatesByNowStr = "CandidatesByNow";
-
-        public const string AskForRating = "AskForRatingStr";
-
-        public const string AcceptedCandidates = "AcceptedCandidates";
-
-        public const string TimerInterval = "TimerInterval";
-        public const string TimerEnabled = "TimerEnabled";
-
-        public const string AlreadyAskedForRating = "AlreadyAskedForRating";
-
-        public const string GameStateStr = "GameState";
-        public const string GameModeStr = "GameMode";
-        public const string TrainingStepStr = "TrainingStep";
-
-        public const string CandidateCompletedStepStr = "CandidateCompletedStep";
-
-        public const string TrainingPassed = "TrainingPassed";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -50,7 +26,7 @@ namespace RestaurantGame
                 val = Request.QueryString["assignmentId"];
                 if (val == null)
                 {
-                    Session["user_id"] = "friend";
+                    UserId = "friend";
                     Session["turkAss"] = "turkAss";
                     Session["hitId"] = "hit id friend";
                     btnNext0.Enabled = true;
@@ -59,18 +35,18 @@ namespace RestaurantGame
                 Timer1.Enabled = false;
                 Timer1.Interval = StartTimerInterval;
 
-                Session[AlreadyAskedForRating] = false;
+               AlreadyAskedForRating = false;
 
-                Session[TimerInterval] = StartTimerInterval;
-                Session[TimerEnabled] = true;
+                TimerInterval = StartTimerInterval;
+                TimerEnabled = true;
 
-                Session[GameStateStr] = GameState.Playing;
+                GameState = GameState.Playing;
 
                 GeneratePositions();
 
-                Session[CurrentCandidateNumberStr] = 0;
+                CurrentCandidateNumber = 0;
 
-                Session[AskForRating] = false;
+                AskForRating = false;
             }
         }
 
@@ -78,7 +54,7 @@ namespace RestaurantGame
         {
             Timer1.Enabled = false;
 
-            Session["Position"] = null;
+            CurrentCandidate = null;
             SetCurrentPositionNumber(position);
 
             StatusLabel.Text = "";
@@ -88,7 +64,7 @@ namespace RestaurantGame
             ShowAllRemainingCandidatesImages();
             ImageHired.Visible = false;
 
-            if ((GameMode)Session[GameModeStr] == GameMode.Adviser)
+            if (GameMode == GameMode.Advisor)
             {
                 btnThumbsDown.Visible = false;
                 btnThumbsUp.Visible = false;
@@ -97,8 +73,8 @@ namespace RestaurantGame
             GenerateCandidatesForPosition();
             GenerateCandidatesByNow();
 
-            Session[CurrentCandidateNumberStr] = 0;
-            Session[CandidateCompletedStepStr] = CandidateCompletedStep.ShowCandidatesMap;
+            CurrentCandidateNumber = 0;
+            CandidateCompletedStep = CandidateCompletedStep.ShowCandidatesMap;
 
             Timer1.Interval = 4000;
 
@@ -133,14 +109,13 @@ namespace RestaurantGame
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
-            Timer1.Interval = (int)Session[TimerInterval];
+            Timer1.Interval = TimerInterval;
 
-            bool askForRating = (bool)Session[AskForRating];
-            if (askForRating)
+            if (AskForRating)
             {
-                RateAdviser();
+                RateAdvisor();
 
-                Session[AskForRating] = false;
+                AskForRating = false;
 
                 return;
             }
@@ -170,7 +145,7 @@ namespace RestaurantGame
             {
                 StartInterviewsForPosition(currentPositionNumber);
             }
-            else if ((GameMode)Session[GameModeStr] == GameMode.Training)
+            else if (GameMode == GameMode.Training)
             {
                 // wrap around
                 StartInterviewsForPosition(0);
@@ -179,11 +154,9 @@ namespace RestaurantGame
 
         private void EnterNewCandidate()
         {
-            var currentCandidateNumber = (int)Session[CurrentCandidateNumberStr];
-            var positionCandidates = (List<Candidate>)Session[PositionCandidiatesStr];
-            var currentCandidate = positionCandidates[currentCandidateNumber];
+            var currentCandidate = PositionCandidates[CurrentCandidateNumber];
 
-            var lastAvailableCandidate = GetRemainingStickManImage(PositionCandidatesNumber - currentCandidateNumber);
+            var lastAvailableCandidate = GetRemainingStickManImage(PositionCandidatesNumber - CurrentCandidateNumber);
 
             if (lastAvailableCandidate != null)
             {
@@ -191,7 +164,7 @@ namespace RestaurantGame
                 lastAvailableCandidate.Visible = false;
             }
 
-            Session["Position"] = currentCandidate;
+            CurrentCandidate = currentCandidate;
 
             UpdateImages(CandidateState.New);
             currentCandidate.CandidateState = CandidateState.Interview;
@@ -199,8 +172,8 @@ namespace RestaurantGame
 
         private void ProcessCandidate()
         {
-            var gameMode = (GameMode)Session[GameModeStr];
-            var currentCandidate = (Candidate)Session["Position"];
+            var gameMode = GameMode;
+            var currentCandidate = CurrentCandidate;
 
             if (currentCandidate == null)
             {
@@ -211,7 +184,7 @@ namespace RestaurantGame
                 UpdateImages(currentCandidate.CandidateState);
                 DetermineCandidateRank(currentCandidate);
 
-                if (gameMode == GameMode.Adviser)
+                if (gameMode == GameMode.Advisor)
                 {
                     currentCandidate.CandidateState = CandidateState.Completed;
                 }
@@ -224,21 +197,21 @@ namespace RestaurantGame
             {
                 if (currentCandidate.CandidateAccepted)
                 {
-                    var candidateCompletedStep = (CandidateCompletedStep)Session[CandidateCompletedStepStr];
+                    var candidateCompletedStep = CandidateCompletedStep;
 
                     switch (candidateCompletedStep)
                     {
                         case CandidateCompletedStep.ShowCandidatesMap:
                             UpdatePositionToAcceptedCandidate(currentCandidate);
                             Timer1.Interval = 6000;
-                            Session[CandidateCompletedStepStr] = CandidateCompletedStep.PickUniform;
+                            CandidateCompletedStep = CandidateCompletedStep.PickUniform;
                             break;
                         case CandidateCompletedStep.PickUniform:
 
                             Timer1.Enabled = false;
-                            Session[TrainingPassed] = (int)Session[TrainingPassed] + 1;
+                            TrainingPassed++;
 
-                            if (gameMode == GameMode.Training && (int)Session[TrainingPassed] >= 3)
+                            if (gameMode == GameMode.Training && TrainingPassed >= 3)
                             {
                                 MultiView2.ActiveViewIndex = 2;
                             }
@@ -247,23 +220,23 @@ namespace RestaurantGame
                                 MultiView2.ActiveViewIndex = 3;
                                 ShowUniforms();
                             }
-                            
-                            Session[CandidateCompletedStepStr] = CandidateCompletedStep.FillNextPosition;
+
+                            CandidateCompletedStep = CandidateCompletedStep.FillNextPosition;
                             break;
                         case CandidateCompletedStep.FillNextPosition:
                             FillNextPosition();
 
-                            if ((bool)Session[AlreadyAskedForRating] == false && gameMode == GameMode.Adviser)
+                            if (!AlreadyAskedForRating && gameMode == GameMode.Advisor)
                             {
-                                Session[AskForRating] = true;
-                                Session[AlreadyAskedForRating] = true;
+                                AskForRating = true;
+                                AlreadyAskedForRating = true;
                             }
                             break;
                     }
                 }
                 else
                 {
-                    Session[CurrentCandidateNumberStr] = (int)Session[CurrentCandidateNumberStr] + 1;
+                    CurrentCandidateNumber++;
 
                     EnterNewCandidate();
                 }
@@ -295,9 +268,9 @@ namespace RestaurantGame
 
         private void EnableDisableTimer(bool defaultCommand)
         {
-            if (Session[TimerEnabled] != null)
+            if (TimerEnabled)
             {
-                Timer1.Enabled = (bool)Session[TimerEnabled];
+                Timer1.Enabled = TimerEnabled;
             }
             else
             {
@@ -307,7 +280,7 @@ namespace RestaurantGame
 
         private bool CandidateInProcess()
         {
-            var currentCandidate = (Candidate)Session["Position"];
+            var currentCandidate = CurrentCandidate;
 
             if (currentCandidate == null)
             {
@@ -322,8 +295,7 @@ namespace RestaurantGame
 
         private bool NewCandidateAwaits()
         {
-            var currentCandidateNumber = (int)Session[CurrentCandidateNumberStr];
-            return (currentCandidateNumber < PositionCandidatesNumber);
+            return (CurrentCandidateNumber < PositionCandidatesNumber);
         }
 
         private void UpdateImages(CandidateState candidateState)
@@ -336,7 +308,7 @@ namespace RestaurantGame
 
         private void DetermineCandidateRank(Candidate newCandidate)
         {
-            var candidatesByNow = (List<Candidate>)Session[CandidatesByNowStr];
+            var candidatesByNow = CandidatesByNow;
 
             int newCandidateIndex = 0;
             foreach (var candidate in candidatesByNow)
@@ -353,9 +325,7 @@ namespace RestaurantGame
 
             var dm = new DecisionMaker();
 
-            var gameMode = (GameMode)Session[GameModeStr];
-
-            if (gameMode == GameMode.Adviser)
+            if (GameMode == GameMode.Advisor)
             {
                 var accepted = dm.Decide(candidatesByNow, newCandidateIndex);
 
@@ -369,12 +339,11 @@ namespace RestaurantGame
         private void SetStatusLabel(int newCandidateIndex, int totalCandidatesByNow)
         {
             StatusLabel.Text = "The new candidate has a relative rank of " + (newCandidateIndex + 1) + " out of " + totalCandidatesByNow + ".";
+            StatusLabel.Font.Bold = false;
         }
 
         private void UpdatePositionToAcceptedCandidate(Candidate candidate)
         {
-            var positionToFill = (int)Session[PositionToFillStr];
-
             var currentPosition = GetCurrentPosition();
 
             currentPosition.ChosenCandidate = candidate;
@@ -382,14 +351,13 @@ namespace RestaurantGame
             ImageHired.Visible = true;
             ImageInterview.Visible = false;
 
-            var acceptedCandidates = (int[])Session[AcceptedCandidates];
-            acceptedCandidates[positionToFill] = currentPosition.ChosenCandidate.CandidateRank;
-            Session[AcceptedCandidates] = acceptedCandidates;
+            AcceptedCandidates[PositionToFill] = currentPosition.ChosenCandidate.CandidateRank;
 
             double avgRank = CalculateAveragePosition();
             UpdatePositionsTable(currentPosition, avgRank);
 
             StatusLabel.Text = "It's time to reveal the absolute rankings of the candidates:";
+            StatusLabel.Font.Bold = true;
             ShowCandidateMap(currentPosition.ChosenCandidate);
         }
 
@@ -405,7 +373,7 @@ namespace RestaurantGame
 
         private void AcceptCandidateByUser(bool accepted)
         {
-            var currentCandidate = (Candidate)Session["Position"];
+            var currentCandidate = CurrentCandidate;
 
             if (currentCandidate == null)
             {

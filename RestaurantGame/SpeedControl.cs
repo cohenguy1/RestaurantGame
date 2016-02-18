@@ -16,7 +16,7 @@ namespace RestaurantGame
         {
             Timer1.Enabled = false;
 
-            int newTimerInterval = Math.Min((int)Session[TimerInterval] + 500, MaxTimerInterval);
+            int newTimerInterval = Math.Min(TimerInterval + 500, MaxTimerInterval);
 
             UpdateFastPlaySpeed(newTimerInterval);
         }
@@ -25,14 +25,14 @@ namespace RestaurantGame
         {
             Timer1.Enabled = false;
 
-            int newTimerInterval = Math.Max((int)Session[TimerInterval] - 500, MinTimerInterval);
+            int newTimerInterval = Math.Max(TimerInterval - 500, MinTimerInterval);
 
             UpdateFastPlaySpeed(newTimerInterval);
         }
 
         private void UpdateFastPlaySpeed(int newTimerInterval)
         {
-            Session[TimerInterval] = newTimerInterval;
+            TimerInterval = newTimerInterval;
             Timer1.Interval = newTimerInterval;
 
             btnFastBackwards.Enabled = (newTimerInterval != MaxTimerInterval);
@@ -45,13 +45,13 @@ namespace RestaurantGame
             LabelSpeed.Text = " Speed: x" + speedRate;
 
             SetGameState(GameState.Playing);
-            Session[TimerEnabled] = true;
+            TimerEnabled = true;
         }
 
 
         protected void btnPausePlay_Click(object sender, ImageClickEventArgs e)
         {
-            if (GetGameState() == GameState.Playing)
+            if (GameState== GameState.Playing)
             {
                 SetGameState(GameState.Paused);
             }
@@ -61,14 +61,9 @@ namespace RestaurantGame
             }
         }
 
-        private GameState GetGameState()
-        {
-            return (GameState)Session[GameStateStr];
-        }
-
         protected void SetGameState(GameState gameState)
         {
-            Session[GameStateStr] = gameState;
+            GameState = gameState;
             Timer1.Enabled = (gameState == GameState.Playing);
 
             if (gameState == GameState.Paused)

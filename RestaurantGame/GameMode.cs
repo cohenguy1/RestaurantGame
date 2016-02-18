@@ -8,6 +8,6 @@ namespace RestaurantGame
     public enum GameMode
     {
         Training,
-        Adviser
+        Advisor
     }
 }

@@ -21,7 +21,7 @@
     <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
         <asp:View ID="view0" runat="server">
 
-            <h2 class="style3">You will recieve [X] cents for this Game and it will take 30 minutes of your time. </h2>
+            <h2 class="style3">You will recieve &lt;X&gt; cents for this Game and it will take &lt;X&gt; minutes of your time. </h2>
 
             <p class="style3">
                 &nbsp;
@@ -32,13 +32,13 @@
                     <td>You have decided to open up a restaurant.</td>
                 </tr>
                 <tr>
-                    <td>[Fill] In this game you and an HR team  will interview people for 10 positions for the restaurant.</td>
+                    <td>&lt;Dudi will fill here&gt; In this game you and an Human Resource (HR) team  will interview people for 10 positions for the restaurant.</td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>[Fill] The HR team will interview the candidates and decide about who fill each position,<br />
+                    <td>&lt;Dudi will fill here&gt; The HR team will interview the candidates and decide about who fills each position,<br />
                         and you will choose the uniform for each position</td>
                     <br />
                 </tr>
@@ -46,11 +46,12 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>For Each position you have 20 candidates, ranked from 1 to 20. Your interest is to pick the best candidate for each position.<br />
+                    <td>For Each position you have 20 candidates, ranked from 1 to 20. Your (and the HR's) interest is to pick the best candidate for each position.<br />
                         <br />
                         When a candidate is interviewed, we must decide whether to hire him or not.
                         <br />
                         If the candidate is rejected, he cannot be recalled.
+                        <br />
                         <br />
                     </td>
                 </tr>
@@ -59,9 +60,9 @@
                     <td>
                         <asp:Label ID="label44" runat="server" Font-Bold="true"> You will receive a bonus after the game. </asp:Label>
                         <br />
-                        The amount of the bonus will be in accordance with the performance of the adviser.
+                        The amount of the bonus will be in accordance with the performance of the advisor.
                     <br />
-                        The better the adviser is, the higher the bonus you get.
+                        The better the advisor is, the higher the bonus you get.
                     </td>
                 </tr>
                 <tr>
@@ -727,7 +728,7 @@
                 </asp:View>
                 <asp:View ID="ViewRating" runat="server">
 
-                    <asp:Label ID="Label2" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;">Adviser Rating</asp:Label>
+                    <asp:Label ID="Label2" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;">Advisor Rating</asp:Label>
                     <br />
                     <asp:Panel ID="Panel3" runat="server" Style="margin-left: 20px; float: right">
                         <br />
@@ -737,9 +738,9 @@
                                     <td>&nbsp;Hi!
                                         <br />
                                         <br />
-                                        &nbsp;We stopped for a moment so you can rate your adviser.
+                                        &nbsp;We stopped for a moment so you can rate your advisor.
                                         <br />
-                                        &nbsp;Your rating should be based on how good you think your adviser is.
+                                        &nbsp;Your rating should be based on how good you think your advisor is.
                                         <br />
                                         <br />
 
@@ -748,11 +749,11 @@
                                         </asp:Label>
                                         <br />
                                         <br />
-                                        &nbsp;Rate the adviser from 1 to 10, 10 being the best:
+                                        &nbsp;Rate the advisor from 1 to 10, 10 being the best:
                                         <br />
                                         <br />
                                         <asp:RadioButtonList ID="RatingRbL" runat="server">
-                                            <asp:ListItem>1 - The worst adviser ever!</asp:ListItem>
+                                            <asp:ListItem>1 - The worst advisor ever!</asp:ListItem>
                                             <asp:ListItem>2</asp:ListItem>
                                             <asp:ListItem>3</asp:ListItem>
                                             <asp:ListItem>4</asp:ListItem>
@@ -775,7 +776,7 @@
 
                 <asp:View ID="ViewTrainingAsk" runat="server">
 
-                    <asp:Label ID="Label9" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;">Adviser Rating</asp:Label>
+                    <asp:Label ID="Label9" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;">Advisor Rating</asp:Label>
                     <br />
                     <asp:Panel ID="Panel2" runat="server" Style="margin-left: 20px; float: right">
                         <br />
@@ -834,7 +835,7 @@
             </asp:MultiView>
 
             <asp:Panel ID="PanelPositions" runat="server" Style="margin-left: 0px; float: left">
-                <asp:Table ID="Positions"
+                <asp:Table ID="PositionsTable"
                     BorderColor="black"
                     BorderWidth="1"
                     GridLines="Both"

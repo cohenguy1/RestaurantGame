@@ -10,12 +10,12 @@ namespace RestaurantGame
     {
         private int GetCurrentPositionNumber()
         {
-            return (int)Session[PositionToFillStr];
+            return PositionToFill;
         }
 
         private void SetCurrentPositionNumber(int positionNumber)
         {
-            Session[PositionToFillStr] = positionNumber;
+            PositionToFill = positionNumber;
         }
 
         private void GeneratePositions()
@@ -33,24 +33,20 @@ namespace RestaurantGame
             positions.Add(new Position(RestaurantPosition.Host));
             positions.Add(new Position(RestaurantPosition.Bartender));
 
-            Session[PositionsStr] = positions;
+            Positions = positions;
 
             var acceptedCandidates = new int[positions.Count];
-            Session[AcceptedCandidates] = acceptedCandidates;
+            AcceptedCandidates = acceptedCandidates;
         }
 
         private void IncreaseCurrentPosition()
         {
-            var positionToFill = (int)Session[PositionToFillStr];
-
-            SetCurrentPositionNumber(positionToFill + 1);
+            SetCurrentPositionNumber(PositionToFill + 1);
         }
 
         private double CalculateAveragePosition()
         {
-            var positions = (List<Position>)Session[PositionsStr];
-
-            return positions.Where(position => position.ChosenCandidate != null).Average(pos => pos.ChosenCandidate.CandidateRank);
+            return Positions.Where(position => position.ChosenCandidate != null).Average(pos => pos.ChosenCandidate.CandidateRank);
         }
 
         private void UpdatePositionsTable(Position currentPosition, double avgRank)
@@ -82,15 +78,12 @@ namespace RestaurantGame
 
         private Position GetPosition(int indexPosition)
         {
-            var positions = (List<Position>)Session[PositionsStr];
-
-            return positions[indexPosition];
+            return Positions[indexPosition];
         }
 
         private Position GetCurrentPosition()
         {
-            var positionToFill = (int)Session[PositionToFillStr];
-            return GetPosition(positionToFill);
+            return GetPosition(PositionToFill);
         }
 
         private string GetCurrentJobTitle()

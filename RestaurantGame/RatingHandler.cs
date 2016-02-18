@@ -9,7 +9,7 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        protected void RateAdviser()
+        protected void RateAdvisor()
         {
             Timer1.Enabled = false;
 
@@ -29,22 +29,19 @@ namespace RestaurantGame
 
         private void SaveRatingToDB(int agentRating)
         {
-            var positionToFill = (int)Session[PositionToFillStr];
-
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-            string user = (string)Session["user_id"];
 
             using (SqlConnection sqlConnection1 = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
+                SqlCommand cmd = new SqlCommand("INSERT INTO UserRatings (UserId, AdvisorRating, RatingPosition, Position1Rank, Position2Rank, " +
                     "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank ) " +
-                    " VALUES (@UserId, @AdviserRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
+                    " VALUES (@UserId, @AdvisorRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
                     "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank)");
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = sqlConnection1;
-                cmd.Parameters.AddWithValue("@UserId", user);
-                cmd.Parameters.AddWithValue("@AdviserRating", agentRating.ToString());
-                cmd.Parameters.AddWithValue("@RatingPosition", positionToFill.ToString());
+                cmd.Parameters.AddWithValue("@UserId", UserId);
+                cmd.Parameters.AddWithValue("@AdvisorRating", agentRating.ToString());
+                cmd.Parameters.AddWithValue("@RatingPosition", PositionToFill.ToString());
                 cmd.Parameters.AddWithValue("@Position1Rank", GetChosenPositionToInsertToDb(1));
                 cmd.Parameters.AddWithValue("@Position2Rank", GetChosenPositionToInsertToDb(2));
                 cmd.Parameters.AddWithValue("@Position3Rank", GetChosenPositionToInsertToDb(3));
