@@ -223,5 +223,32 @@ namespace RestaurantGame
             thumbsBtn.Height = Unit.Pixel(80);
             thumbsBtn.Width = Unit.Pixel(80);
         }
+
+        private void EnableBtn(ImageButton btn)
+        {
+            EnableDisableBtn(btn, true);
+        }
+
+        private void DisableBtn(ImageButton btn)
+        {
+            EnableDisableBtn(btn, false);
+        }
+
+        private void EnableDisableBtn(ImageButton btn, bool enable)
+        {
+            btn.Enabled = enable;
+
+            if (enable)
+            {
+                btn.Style.Remove(HtmlTextWriterStyle.Cursor);
+                btn.Style.Add(HtmlTextWriterStyle.Cursor, "pointer");
+            }
+            else
+            {
+                btn.Style.Remove(HtmlTextWriterStyle.Cursor);
+                btn.Style.Add(HtmlTextWriterStyle.Cursor, "default");
+            }
+        }
+
     }
 }

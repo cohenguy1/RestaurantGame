@@ -58,13 +58,13 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Label label44;
         
         /// <summary>
-        /// btnNext0 control.
+        /// btnNextToInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNext0;
+        protected global::System.Web.UI.WebControls.Button btnNextToInfo;
         
         /// <summary>
         /// viewInfo control.
@@ -220,13 +220,13 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredReasonValidator;
         
         /// <summary>
-        /// btnNext3 control.
+        /// btnNextToInstructions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNext3;
+        protected global::System.Web.UI.WebControls.Button btnNextToInstructions;
         
         /// <summary>
         /// windowWidth0 control.
@@ -679,22 +679,22 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Button btnNextInstruction;
         
         /// <summary>
-        /// viewProceed control.
+        /// viewProceedToTraining control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View viewProceed;
+        protected global::System.Web.UI.WebControls.View viewProceedToTraining;
         
         /// <summary>
-        /// btnNext1 control.
+        /// btnNextToTraining control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNext1;
+        protected global::System.Web.UI.WebControls.Button btnNextToTraining;
         
         /// <summary>
         /// viewQuiz control.
@@ -787,13 +787,31 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv4;
         
         /// <summary>
-        /// btnNext2 control.
+        /// btnNextToProceedToGame control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNext2;
+        protected global::System.Web.UI.WebControls.Button btnNextToProceedToGame;
+        
+        /// <summary>
+        /// viewProceedToGame control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View viewProceedToGame;
+        
+        /// <summary>
+        /// btnNextToGame control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNextToGame;
         
         /// <summary>
         /// View2 control.
@@ -1462,13 +1480,13 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
-        /// btnTrainingSend control.
+        /// btnNextToQuiz control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTrainingSend;
+        protected global::System.Web.UI.WebControls.Button btnNextToQuiz;
         
         /// <summary>
         /// ViewUniformPicker control.

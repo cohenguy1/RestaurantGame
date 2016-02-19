@@ -49,7 +49,7 @@ namespace RestaurantGame
             return (int)progress;
         }
 
-        protected void btnTrainingSend_Click(object sender, EventArgs e)
+        protected void btnNextToQuiz_Click(object sender, EventArgs e)
         {
             if (trainingRBL.SelectedIndex == 0)
             {

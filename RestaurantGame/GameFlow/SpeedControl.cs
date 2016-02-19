@@ -35,8 +35,8 @@ namespace RestaurantGame
             TimerInterval = newTimerInterval;
             Timer1.Interval = newTimerInterval;
 
-            btnFastBackwards.Enabled = (newTimerInterval != MaxTimerInterval);
-            btnFastForward.Enabled = (newTimerInterval != MinTimerInterval);
+            EnableDisableBtn(btnFastBackwards, newTimerInterval != MaxTimerInterval);
+            EnableDisableBtn(btnFastForward, newTimerInterval != MinTimerInterval);
 
             btnFastBackwards.ImageUrl = btnFastBackwards.Enabled ? "~/Images/fbButton.png" : "~/Images/fbButtonDisabled.png";
             btnFastForward.ImageUrl = btnFastForward.Enabled ? "~/Images/ffButton.png" : "~/Images/ffButtonDisabled.png";

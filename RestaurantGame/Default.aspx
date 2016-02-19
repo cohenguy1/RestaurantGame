@@ -73,7 +73,7 @@
 
                 <tr>
                     <td>
-                        <asp:Button ID="btnNext0" runat="server" Text="Next" OnClick="btnNext_Click" Enabled="false" /></td>
+                        <asp:Button ID="btnNextToInfo" runat="server" Text="Next" OnClick="btnNextToInfo_Click" Enabled="false" /></td>
                 </tr>
             </table>
         </asp:View>
@@ -399,7 +399,7 @@
 
             </asp:Panel>
             <br />
-            <asp:Button ID="btnNext3" runat="server" OnClick="btnNext3_Click" Text="OK"
+            <asp:Button ID="btnNextToInstructions" runat="server" OnClick="btnNextToInstructions_Click" Text="OK"
                 ValidationGroup="selectDropDownList" />
 
             <asp:HiddenField ID="windowWidth0" runat="server" Value="" />
@@ -488,20 +488,26 @@
             <asp:Button ID="btnNextInstruction" runat="server" Text="Next" OnClick="btnNextInstruction_Click" />
         </asp:View>
 
-        <asp:View ID="viewProceed" runat="server">
+        <asp:View ID="viewProceedToTraining" runat="server">
             <h2>Game Instructions</h2>
             <div style="text-align: center; width: 640px; margin: 0 auto;">
                 <table style="text-align: left; width: 640px;" border="1">
                     <tr>
                         <td>
                             <br />
-                            We will now proceed to the play the game.
+                            We will now proceed to the training mode.
                             <br />
                             <br />
-                            In the game, a Human Resource team will choose whether to accept or reject each candidate.
+                            In the training mode, we will play as the Human resource team, and you will choose whether to accept or reject each candidate.
                             <br />
                             <br />
-                            After a candidate is accepted, you will choose the uniform for the position.
+                            After a candidate is accepted, you will also choose the uniform for the position.
+                            <br />
+                            <br />
+                            You need to play the first 3 positions before you can proceed to the real game.
+                            <br />
+                            <br />
+                            The training will not affect your bonus.
                             <br />
                             <br />
                             <br />
@@ -510,7 +516,7 @@
                 </table>
             </div>
             <br />
-            <asp:Button ID="btnNext1" runat="server" Text="Next" OnClick="btnNext1_Click" />
+            <asp:Button ID="btnNextToTraining" runat="server" Text="Next" OnClick="btnNextToTraining_Click" />
 
         </asp:View>
 
@@ -573,7 +579,33 @@
                 </table>
             </div>
             <br />
-            <asp:Button ID="btnNext2" runat="server" Text="Next" OnClick="btnNext2_Click" />
+            <asp:Button ID="btnNextToProceedToGame" runat="server" Text="Next" OnClick="btnNextToProceedToGame_Click" />
+
+        </asp:View>
+
+        <asp:View ID="viewProceedToGame" runat="server">
+            <h2>Game Instructions</h2>
+            <div style="text-align: center; width: 640px; margin: 0 auto;">
+                <table style="text-align: left; width: 640px;" border="1">
+                    <tr>
+                        <td>
+                            <br />
+                            We will now proceed to the play the game.
+                            <br />
+                            <br />
+                            In the game, the Human Resource team will choose whether to accept or reject each candidate.
+                            <br />
+                            <br />
+                            After a candidate is accepted, you will choose the uniform for the position.
+                            <br />
+                            <br />
+                            <br />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <asp:Button ID="btnNextToGame" runat="server" Text="Next" OnClick="btnNextToGame_Click" />
 
         </asp:View>
 
@@ -823,7 +855,7 @@
                             </table>
                         </div>
                         <br />
-                        <asp:Button ID="btnTrainingSend" runat="server" Text="Send" OnClick="btnTrainingSend_Click" />
+                        <asp:Button ID="btnNextToQuiz" runat="server" Text="Send" OnClick="btnNextToQuiz_Click" />
                     </asp:Panel>
                 </asp:View>
 

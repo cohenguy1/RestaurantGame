@@ -11,14 +11,13 @@ namespace RestaurantGame
     // TODO: Thanks for participating
     // TODO GameBackground Stub
     // TODO: Bonus, according to the performance of the advisor
-    // Bonus rephrasing
-    // Candidates Blink
-    // Candidates Second Row
-    // Training Prev., After Training Rephrasing
-    // Accept/Reject of advisor
-    // Text above walking
-    // Bugs
-    // Rank Blinks
+    // TODO Bonus rephrasing
+    // TODO Candidates Blink
+    // TODO Candidates Second Row
+    // TODO Training Prev.
+    // TODO Accept/Reject of advisor
+    // TODO Bugs
+    // TODO Rank Blinks
 
     public partial class Default : System.Web.UI.Page
     {
@@ -40,7 +39,7 @@ namespace RestaurantGame
                     UserId = "friend";
                     Session["turkAss"] = "turkAss";
                     Session["hitId"] = "hit id friend";
-                    btnNext0.Enabled = true;
+                    btnNextToInfo.Enabled = true;
                 }
 
                 Timer1.Enabled = false;
@@ -415,32 +414,6 @@ namespace RestaurantGame
         {
             AcceptCandidateByUser(true);
             IncreaseButtonSize(btnThumbsUp);
-        }
-
-        private void EnableBtn(ImageButton btn)
-        {
-            EnableDisableBtn(btn, true);
-        }
-
-        private void DisableBtn(ImageButton btn)
-        {
-            EnableDisableBtn(btn, false);
-        }
-
-        private void EnableDisableBtn(ImageButton btn, bool enable)
-        {
-            btn.Enabled = enable;
-
-            if (enable)
-            {
-                btn.Style.Remove(HtmlTextWriterStyle.Cursor);
-                btn.Style.Add(HtmlTextWriterStyle.Cursor, "pointer");
-            }
-            else
-            {
-                btn.Style.Remove(HtmlTextWriterStyle.Cursor);
-                btn.Style.Add(HtmlTextWriterStyle.Cursor, "default");
-            }
         }
 
         private void AcceptCandidateByUser(bool accepted)

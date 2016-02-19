@@ -9,7 +9,7 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        protected void btnNext_Click(object sender, EventArgs e)
+        protected void btnNextToInfo_Click(object sender, EventArgs e)
         {
             if (!UserId.Equals("friend"))
             {
@@ -43,9 +43,9 @@ namespace RestaurantGame
             MultiView1.ActiveViewIndex = 1;
         }
 
-        protected void btnNext1_Click(object sender, EventArgs e)
+        protected void btnNextToTraining_Click(object sender, EventArgs e)
         {
-            MultiView1.ActiveViewIndex = 5;
+            MultiView1.ActiveViewIndex = 6;
 
             GameMode = GameMode.Training;
             TrainingPassed = 0;
@@ -53,7 +53,7 @@ namespace RestaurantGame
             StartInterviewsForPosition(0);
         }
 
-        protected void btnNext3_Click(object sender, EventArgs e)
+        protected void btnNextToInstructions_Click(object sender, EventArgs e)
         {
             // Save user info to DB
             String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
@@ -87,11 +87,32 @@ namespace RestaurantGame
                 return;
             }
 
-            
+
 
             MultiView1.ActiveViewIndex = 2;
             MultiviewInstructions.ActiveViewIndex = 0;
             ProgressBar1.Value = 0;
+        }
+
+        protected void btnNextToGame_Click(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 6;
+
+            GameMode = GameMode.Advisor;
+            RestoreButtonSizes(btnThumbsDown, btnThumbsUp);
+
+            MultiView2.ActiveViewIndex = 0;
+
+            ClearCandidateImages();
+
+            ImageInterview.Visible = false;
+            ImageManForward.Visible = true;
+
+            SetCurrentPositionNumber(0);
+
+            ClearPositionsTable();
+
+            StartInterviewsForPosition(0);
         }
     }
 }
