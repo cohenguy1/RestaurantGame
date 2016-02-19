@@ -35,7 +35,7 @@ namespace RestaurantGame
                 Timer1.Enabled = false;
                 Timer1.Interval = StartTimerInterval;
 
-               AlreadyAskedForRating = false;
+                AlreadyAskedForRating = false;
 
                 TimerInterval = StartTimerInterval;
                 TimerEnabled = true;

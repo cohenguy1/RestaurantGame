@@ -35,7 +35,7 @@ namespace RestaurantGame
             {
                 SqlCommand cmd = new SqlCommand("INSERT INTO UserRatings (UserId, AdvisorRating, RatingPosition, Position1Rank, Position2Rank, " +
                     "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank ) " +
-                    " VALUES (@UserId, @AdvisorRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
+                    " VALUES (@UserId, @AdviserRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
                     "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank)");
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = sqlConnection1;
