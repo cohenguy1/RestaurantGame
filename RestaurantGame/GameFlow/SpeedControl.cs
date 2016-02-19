@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace RestaurantGame
 {
@@ -35,11 +36,8 @@ namespace RestaurantGame
             TimerInterval = newTimerInterval;
             Timer1.Interval = newTimerInterval;
 
-            EnableDisableBtn(btnFastBackwards, newTimerInterval != MaxTimerInterval);
-            EnableDisableBtn(btnFastForward, newTimerInterval != MinTimerInterval);
-
-            btnFastBackwards.ImageUrl = btnFastBackwards.Enabled ? "~/Images/fbButton.png" : "~/Images/fbButtonDisabled.png";
-            btnFastForward.ImageUrl = btnFastForward.Enabled ? "~/Images/ffButton.png" : "~/Images/ffButtonDisabled.png";
+            EnableDisableSpeedButton(btnFastBackwards, newTimerInterval != MaxTimerInterval);
+            EnableDisableSpeedButton(btnFastForward, newTimerInterval != MinTimerInterval);
 
             string speedRate = ((double)StartTimerInterval / newTimerInterval).ToString("0.0");
             LabelSpeed.Text = " Speed: x" + speedRate;
@@ -51,14 +49,27 @@ namespace RestaurantGame
 
         protected void btnPausePlay_Click(object sender, ImageClickEventArgs e)
         {
-            if (GameState== GameState.Playing)
+            if (GameState == GameState.Playing)
             {
                 SetGameState(GameState.Paused);
+                EnableDisableBtn(btnFastBackwards, true);
+                EnableDisableBtn(btnFastForward, true);
             }
             else
             {
                 SetGameState(GameState.Playing);
             }
+        }
+
+        private void EnableDisableSpeedButton(ImageButton btn, bool enable)
+        {
+            // TODO Complete this
+            EnableDisableBtn(btn, enable);
+            EnableDisableBtn(btnFastForward, enable);
+
+            btnFastBackwards.ImageUrl = btnFastBackwards.Enabled ? "~/Images/fbButton.png" : "~/Images/fbButtonDisabled.png";
+            btnFastForward.ImageUrl = btnFastForward.Enabled ? "~/Images/ffButton.png" : "~/Images/ffButtonDisabled.png";
+
         }
 
         protected void SetGameState(GameState gameState)

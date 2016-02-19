@@ -62,9 +62,9 @@
                     <td>
                         <asp:Label ID="label44" runat="server" Font-Bold="true"> You will receive a bonus after the game. </asp:Label>
                         <br />
-                        The amount of the bonus will be in accordance with the performance of the advisor.
+                        The amount of the bonus will be in accordance with the people you hire.
                     <br />
-                        The better the advisor is, the higher the bonus you get.
+                        The better the ranking of the people you hire, the higher the bonus you get.
                     </td>
                 </tr>
                 <tr>
@@ -470,9 +470,6 @@
                 <asp:View ID="view27" runat="server">
                     <asp:Image ID="Image19" ImageUrl="~/Images/Instructions19.png" Width="700px" runat="server" />
                 </asp:View>
-                <asp:View ID="view28" runat="server">
-                    <asp:Image ID="Image20" ImageUrl="~/Images/Instructions20.png" Width="700px" runat="server" />
-                </asp:View>
             </asp:MultiView>
             <br />
             <br />
@@ -772,6 +769,7 @@
                             <asp:Label ID="MovingToNextPositionLabel" runat="server" Font-Size="Larger" Visible="false"></asp:Label>
                             <asp:Label ID="MovingJobTitleLabel" runat="server" Style="margin-top: 20px;" Font-Bold="true" Font-Size="X-Large" Visible="false" ForeColor="Green"></asp:Label>
                             <br />
+                            <asp:Image ID="ChooseBaloon" runat="server" ImageUrl="~/Images/Choose.png" Height="55px" Width="94px" Visible="false" Style="margin-left:-94px"/>
                             <asp:ImageButton ID="btnThumbsDown" runat="server" ImageUrl="~/Images/thumbsDownButton.jpg" Height="48px" Width="48px" OnClick="btnThumbsDown_Click" ToolTip="Reject" Enabled="false"/>
                             <asp:ImageButton ID="btnThumbsUp" runat="server" ImageUrl="~/Images/thumbsUpButton.jpg" Height="48px" Width="48px" OnClick="btnThumbsUp_Click" ToolTip="Accept" Enabled="false"/>
                             <br />

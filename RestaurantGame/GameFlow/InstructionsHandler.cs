@@ -8,7 +8,7 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        public const int NumOfInstructions = 21;
+        public const int NumOfInstructions = 20;
 
         protected void btnPrevInstruction_Click(object sender, EventArgs e)
         {
@@ -28,7 +28,7 @@ namespace RestaurantGame
         {
             ProgressBar1.Value = GetTrainingProgress(MultiviewInstructions.ActiveViewIndex + 1);
 
-            if (MultiviewInstructions.ActiveViewIndex == 20)
+            if (MultiviewInstructions.ActiveViewIndex == NumOfInstructions - 1)
             {
                 MultiView1.ActiveViewIndex = 3;
                 return;
@@ -37,7 +37,7 @@ namespace RestaurantGame
             MultiviewInstructions.ActiveViewIndex++;
             btnPrevInstruction.Enabled = true;
 
-            if (MultiviewInstructions.ActiveViewIndex == 20)
+            if (MultiviewInstructions.ActiveViewIndex == NumOfInstructions - 1)
             {
                 btnNextInstruction.Text = "Continue to Training";
             }

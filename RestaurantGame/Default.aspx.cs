@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace RestaurantGame
 {
     // TODO: Finish uniform
     // TODO: Thanks for participating
     // TODO GameBackground Stub
-    // TODO: Bonus, according to the performance of the advisor
     // TODO Bonus rephrasing
     // TODO Candidates Blink
     // TODO Candidates Second Row
-    // TODO Training Prev.
-    // TODO Accept/Reject of advisor
     // TODO Bugs
     // TODO Rank Blinks
 
@@ -171,8 +164,7 @@ namespace RestaurantGame
             RestoreButtonSizes(btnThumbsUp, btnThumbsDown);
 
             // disable the buttons at this point
-            DisableBtn(btnThumbsDown);
-            DisableBtn(btnThumbsUp); 
+            DisableThumbsButtons();
 
             CurrentCandidate = currentCandidate;
 
@@ -205,8 +197,7 @@ namespace RestaurantGame
             }
             else if (currentCandidate.CandidateState == CandidateState.Completed)
             {
-                DisableBtn(btnThumbsDown);
-                DisableBtn(btnThumbsUp);
+                DisableThumbsButtons();
 
                 if (currentCandidate.CandidateAccepted)
                 {
@@ -360,8 +351,7 @@ namespace RestaurantGame
             // allow the user to choose
             if (GameMode == GameMode.Training)
             {
-                EnableBtn(btnThumbsUp);
-                EnableBtn(btnThumbsDown);
+                EnableThumbsButtons();
             }
         }
 

@@ -625,24 +625,6 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Image Image19;
         
         /// <summary>
-        /// view28 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.View view28;
-        
-        /// <summary>
-        /// Image20 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image20;
-        
-        /// <summary>
         /// PanelProgress control.
         /// </summary>
         /// <remarks>
@@ -1325,6 +1307,15 @@ namespace RestaurantGame {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label MovingJobTitleLabel;
+        
+        /// <summary>
+        /// ChooseBaloon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ChooseBaloon;
         
         /// <summary>
         /// btnThumbsDown control.

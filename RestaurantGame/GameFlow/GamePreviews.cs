@@ -48,6 +48,7 @@ namespace RestaurantGame
             MultiView1.ActiveViewIndex = 6;
 
             GameMode = GameMode.Training;
+            DisableThumbsButtons();
             TrainingPassed = 0;
 
             StartInterviewsForPosition(0);

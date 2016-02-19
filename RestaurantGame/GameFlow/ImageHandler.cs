@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace RestaurantGame
@@ -224,14 +225,14 @@ namespace RestaurantGame
             thumbsBtn.Width = Unit.Pixel(80);
         }
 
-        private void EnableBtn(ImageButton btn)
+        private void EnableThumbsButtons()
         {
-            EnableDisableBtn(btn, true);
+            EnableDisableThumbsButtons(true);
         }
 
-        private void DisableBtn(ImageButton btn)
+        private void DisableThumbsButtons()
         {
-            EnableDisableBtn(btn, false);
+            EnableDisableThumbsButtons(false);
         }
 
         private void EnableDisableBtn(ImageButton btn, bool enable)
@@ -248,6 +249,13 @@ namespace RestaurantGame
                 btn.Style.Remove(HtmlTextWriterStyle.Cursor);
                 btn.Style.Add(HtmlTextWriterStyle.Cursor, "default");
             }
+        }
+
+        private void EnableDisableThumbsButtons(bool enable)
+        {
+            EnableDisableBtn(btnThumbsDown, enable);
+            EnableDisableBtn(btnThumbsUp, enable);
+            ChooseBaloon.Visible = enable;
         }
 
     }
