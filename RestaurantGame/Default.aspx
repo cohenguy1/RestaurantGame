@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="RestaurantGame.Default" %>
 
+<%@ Register TagPrefix="eo" Namespace="EO.Web" Assembly="EO.Web" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <script src="Scripts/jquery-1.4.1.js" type="text/javascript"></script>
@@ -474,6 +476,14 @@
             </asp:MultiView>
             <br />
             <br />
+
+            <asp:Panel ID="PanelProgress" runat="server" Style="margin-left:200px">
+                    <eo:ProgressBar ID="ProgressBar1" runat="server" BorderColor="Black" BorderWidth="1px"
+                                Height="20px" IndicatorColor="0x0066ff" ControlSkinID="None" BorderStyle="Solid"
+                                Width="300px" ShowPercentage="true" Font-Bold="true" Font-Size="Small">
+                    </eo:ProgressBar>
+            </asp:Panel>
+            <br />
             <asp:Button ID="btnPrevInstruction" runat="server" Text="Prev" OnClick="btnPrevInstruction_Click" Enabled="false" />
             <asp:Button ID="btnNextInstruction" runat="server" Text="Next" OnClick="btnNextInstruction_Click" />
         </asp:View>
@@ -520,7 +530,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>What is the relative rank of the last candidate in a position?
+                        <td>What is the absolute rank of the first candidate in a position?
                         <asp:RadioButtonList ID="rbl2" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
@@ -531,18 +541,30 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>What is the relative rank of the last candidate in a position?
+                        <asp:RadioButtonList ID="rbl3" runat="server">
+                            <asp:ListItem>1</asp:ListItem>
+                            <asp:ListItem>10</asp:ListItem>
+                            <asp:ListItem>20</asp:ListItem>
+                            <asp:ListItem>Can be every rank in range 1-20</asp:ListItem>
+                        </asp:RadioButtonList>
+                            <asp:RequiredFieldValidator ID="rfv3" Style="color: Red;" ControlToValidate="rbl3" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <!--<tr>
                         <td>Lets suppose we rejected 10 candidates, and a new candidate arrives with rank 1.
                             <br />
                             What can be the absolute rank of the candidate?
-                        <asp:RadioButtonList ID="rbl3" runat="server">
+                        <asp:RadioButtonList ID="rbl4" runat="server">
                             <asp:ListItem>Must be 1</asp:ListItem>
                             <asp:ListItem>Must be 10</asp:ListItem>
                             <asp:ListItem>Can be every rank in range 1-10</asp:ListItem>
                             <asp:ListItem>Can be every rank in range 1-20</asp:ListItem>
                         </asp:RadioButtonList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" Style="color: Red;" ControlToValidate="rbl2" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="rfv4" Style="color: Red;" ControlToValidate="rbl4" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
+                    -->
                 </table>
             </div>
             <br />

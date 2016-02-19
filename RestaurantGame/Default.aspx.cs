@@ -5,9 +5,18 @@ using System.Web.UI.WebControls;
 
 namespace RestaurantGame
 {
-    // TODO: Add uniform
-    // TODO: random position - you are the uniform picker
+    // TODO: Finish uniform
     // TODO: Thanks for participating
+    // TODO GameBackground Stub
+    // TODO: Bonus, according to the performance of the advisor
+    // Bonus rephrasing
+    // Candidates Blink
+    // Candidates Second Row
+    // Training Prev., After Training Rephrasing
+    // Accept/Reject of advisor
+    // Text above walking
+    // Bugs
+    // Rank Blinks
 
     public partial class Default : System.Web.UI.Page
     {

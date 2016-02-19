@@ -53,33 +53,6 @@ namespace RestaurantGame
             StartInterviewsForPosition(0);
         }
 
-        protected void btnNext2_Click(object sender, EventArgs e)
-        {
-            if (rbl1.SelectedIndex == 0 && rbl2.SelectedIndex == 3 && rbl3.SelectedIndex == 2)
-            {
-                MultiView1.ActiveViewIndex = 5;
-
-                GameMode = GameMode.Advisor;
-
-                MultiView2.ActiveViewIndex = 0;
-
-                ClearCandidateImages();
-
-                ImageInterview.Visible = false;
-                ImageManForward.Visible = true;
-
-                SetCurrentPositionNumber(0);
-
-                ClearPositionsTable();
-
-                StartInterviewsForPosition(0);
-            }
-            else
-            {
-                Alert.Show("wrong answer, please try again");
-            }
-        }
-
         protected void btnNext3_Click(object sender, EventArgs e)
         {
             // Save user info to DB
@@ -118,6 +91,7 @@ namespace RestaurantGame
 
             MultiView1.ActiveViewIndex = 2;
             MultiviewInstructions.ActiveViewIndex = 0;
+            ProgressBar1.Value = 0;
         }
     }
 }
