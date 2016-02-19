@@ -16,6 +16,7 @@ namespace RestaurantGame
                 MultiView1.ActiveViewIndex = 5;
 
                 GameMode = GameMode.Advisor;
+                RestoreButtonSizes(btnThumbsDown, btnThumbsUp);
 
                 MultiView2.ActiveViewIndex = 0;
 

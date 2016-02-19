@@ -27,20 +27,20 @@ namespace RestaurantGame
             Timer1.Enabled = true;
         }
 
-        private void SaveRatingToDB(int agentRating)
+        private void SaveRatingToDB(int adviserRating)
         {
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
 
             using (SqlConnection sqlConnection1 = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO UserRatings (UserId, AdvisorRating, RatingPosition, Position1Rank, Position2Rank, " +
+                SqlCommand cmd = new SqlCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
                     "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank ) " +
                     " VALUES (@UserId, @AdviserRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
                     "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank)");
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = sqlConnection1;
                 cmd.Parameters.AddWithValue("@UserId", UserId);
-                cmd.Parameters.AddWithValue("@AdvisorRating", agentRating.ToString());
+                cmd.Parameters.AddWithValue("@AdviserRating", adviserRating.ToString());
                 cmd.Parameters.AddWithValue("@RatingPosition", PositionToFill.ToString());
                 cmd.Parameters.AddWithValue("@Position1Rank", GetChosenPositionToInsertToDb(1));
                 cmd.Parameters.AddWithValue("@Position2Rank", GetChosenPositionToInsertToDb(2));

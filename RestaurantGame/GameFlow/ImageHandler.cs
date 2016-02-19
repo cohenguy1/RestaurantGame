@@ -209,6 +209,19 @@ namespace RestaurantGame
             return "~/Images/StickMan" + candidateRank + imageColor + ".png";
         }
 
+        private void RestoreButtonSizes(ImageButton thumbsBtn1, ImageButton thumbsBtn2)
+        {
+            thumbsBtn1.Height = Unit.Pixel(48);
+            thumbsBtn1.Width = Unit.Pixel(48);
 
+            thumbsBtn2.Height = Unit.Pixel(48);
+            thumbsBtn2.Width = Unit.Pixel(48);
+        }
+
+        private void IncreaseButtonSize(ImageButton thumbsBtn)
+        {
+            thumbsBtn.Height = Unit.Pixel(80);
+            thumbsBtn.Width = Unit.Pixel(80);
+        }
     }
 }

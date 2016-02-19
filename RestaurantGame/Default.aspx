@@ -494,12 +494,17 @@
                 <table style="text-align: left; width: 640px;" border="1">
                     <tr>
                         <td>
-                            We will now proceed to the game instructions.
+                            <br />
+                            We will now proceed to the play the game.
                             <br />
                             <br />
-                            
-
-
+                            In the game, a Human Resource team will choose whether to accept or reject each candidate.
+                            <br />
+                            <br />
+                            After a candidate is accepted, you will choose the uniform for the position.
+                            <br />
+                            <br />
+                            <br />
                         </td>
                     </tr>
                 </table>
@@ -735,8 +740,8 @@
                             <asp:Label ID="MovingToNextPositionLabel" runat="server" Font-Size="Larger" Visible="false"></asp:Label>
                             <asp:Label ID="MovingJobTitleLabel" runat="server" Style="margin-top: 20px;" Font-Bold="true" Font-Size="X-Large" Visible="false" ForeColor="Green"></asp:Label>
                             <br />
-                            <asp:ImageButton ID="btnThumbsDown" runat="server" ImageUrl="~/Images/thumbsDownButton.jpg" Height="48px" Width="48px" OnClick="btnThumbsDown_Click" />
-                            <asp:ImageButton ID="btnThumbsUp" runat="server" ImageUrl="~/Images/thumbsUpButton.jpg" Height="48px" Width="48px" OnClick="btnThumbsUp_Click" />
+                            <asp:ImageButton ID="btnThumbsDown" runat="server" ImageUrl="~/Images/thumbsDownButton.jpg" Height="48px" Width="48px" OnClick="btnThumbsDown_Click" ToolTip="Reject" Enabled="false"/>
+                            <asp:ImageButton ID="btnThumbsUp" runat="server" ImageUrl="~/Images/thumbsUpButton.jpg" Height="48px" Width="48px" OnClick="btnThumbsUp_Click" ToolTip="Accept" Enabled="false"/>
                             <br />
                             <asp:ImageButton ID="btnFastBackwards" runat="server" ImageUrl="~/Images/fbButton.png" OnClick="btnFastBackwards_Click" Enabled="true" />
                             <asp:ImageButton ID="btnPausePlay" runat="server" ImageUrl="~/Images/pauseButton.png" OnClick="btnPausePlay_Click" Enabled="true" />

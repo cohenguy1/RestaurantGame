@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace RestaurantGame
@@ -72,12 +74,6 @@ namespace RestaurantGame
 
             ShowAllRemainingCandidatesImages();
             ImageHired.Visible = false;
-
-            if (GameMode == GameMode.Advisor)
-            {
-                btnThumbsDown.Visible = false;
-                btnThumbsUp.Visible = false;
-            }
 
             GenerateCandidatesForPosition();
             GenerateCandidatesByNow();
@@ -173,6 +169,12 @@ namespace RestaurantGame
                 lastAvailableCandidate.Visible = false;
             }
 
+            RestoreButtonSizes(btnThumbsUp, btnThumbsDown);
+
+            // disable the buttons at this point
+            DisableBtn(btnThumbsDown);
+            DisableBtn(btnThumbsUp); 
+
             CurrentCandidate = currentCandidate;
 
             UpdateImages(CandidateState.New);
@@ -204,6 +206,9 @@ namespace RestaurantGame
             }
             else if (currentCandidate.CandidateState == CandidateState.Completed)
             {
+                DisableBtn(btnThumbsDown);
+                DisableBtn(btnThumbsUp);
+
                 if (currentCandidate.CandidateAccepted)
                 {
                     var candidateCompletedStep = CandidateCompletedStep;
@@ -339,15 +344,45 @@ namespace RestaurantGame
                 var accepted = dm.Decide(candidatesByNow, newCandidateIndex);
 
                 newCandidate.CandidateAccepted = accepted;
+
+                if (accepted)
+                {
+                    IncreaseButtonSize(btnThumbsUp);
+                }
+                else
+                {
+                    IncreaseButtonSize(btnThumbsDown);
+                }
             }
 
             SetStatusLabel(newCandidateIndex, candidatesByNow.Count);
             DrawCandidatesByNow(candidatesByNow, newCandidateIndex, this);
+
+            // allow the user to choose
+            if (GameMode == GameMode.Training)
+            {
+                EnableBtn(btnThumbsUp);
+                EnableBtn(btnThumbsDown);
+            }
         }
 
         private void SetStatusLabel(int newCandidateIndex, int totalCandidatesByNow)
         {
-            StatusLabel.Text = "The new candidate has a relative rank of " + (newCandidateIndex + 1) + " out of " + totalCandidatesByNow + ".";
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("The new candidate has a relative rank of ");
+            sb.Append(newCandidateIndex + 1);
+            sb.Append(" out of ");
+            sb.Append(totalCandidatesByNow);
+            sb.Append(".");
+
+            if (GameMode == GameMode.Training)
+            {
+                sb.Append("<br />");
+                sb.Append("Choose to Accept or Reject the candidate, using the thumbs buttons.");
+            }
+
+            StatusLabel.Text = sb.ToString();
             StatusLabel.Font.Bold = false;
         }
 
@@ -373,11 +408,39 @@ namespace RestaurantGame
         protected void btnThumbsDown_Click(object sender, EventArgs e)
         {
             AcceptCandidateByUser(false);
+            IncreaseButtonSize(btnThumbsDown);
         }
 
         protected void btnThumbsUp_Click(object sender, EventArgs e)
         {
             AcceptCandidateByUser(true);
+            IncreaseButtonSize(btnThumbsUp);
+        }
+
+        private void EnableBtn(ImageButton btn)
+        {
+            EnableDisableBtn(btn, true);
+        }
+
+        private void DisableBtn(ImageButton btn)
+        {
+            EnableDisableBtn(btn, false);
+        }
+
+        private void EnableDisableBtn(ImageButton btn, bool enable)
+        {
+            btn.Enabled = enable;
+
+            if (enable)
+            {
+                btn.Style.Remove(HtmlTextWriterStyle.Cursor);
+                btn.Style.Add(HtmlTextWriterStyle.Cursor, "pointer");
+            }
+            else
+            {
+                btn.Style.Remove(HtmlTextWriterStyle.Cursor);
+                btn.Style.Add(HtmlTextWriterStyle.Cursor, "default");
+            }
         }
 
         private void AcceptCandidateByUser(bool accepted)

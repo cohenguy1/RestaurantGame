@@ -31,7 +31,6 @@ namespace RestaurantGame
             if (MultiviewInstructions.ActiveViewIndex == 20)
             {
                 MultiView1.ActiveViewIndex = 3;
-
                 return;
             }
 
