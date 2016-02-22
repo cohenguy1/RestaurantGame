@@ -7,15 +7,15 @@ namespace RestaurantGame
 {
     public class DecisionMaker
     {
-        public const int PositionCandidatesNumber = 20;
+        public const int NumberOfCandidates = 20;
 
-        private static double[] c = new double[PositionCandidatesNumber + 1];
+        private static double[] c = new double[NumberOfCandidates + 1];
 
-        public static int[] StoppingRule = new int[PositionCandidatesNumber + 1];
+        public static int[] StoppingRule = new int[NumberOfCandidates + 1];
 
         public DecisionMaker()
         {
-            int n = PositionCandidatesNumber;
+            int n = NumberOfCandidates;
 
             c[n - 1] = (n + 1) / 2.0;
 
@@ -36,17 +36,17 @@ namespace RestaurantGame
 
         public bool Decide2(List<Candidate> candidatesByNow, Candidate newCandidate)
         {
-            if (candidatesByNow.Count <= (int)Math.Sqrt(PositionCandidatesNumber))
+            if (candidatesByNow.Count <= (int)Math.Sqrt(NumberOfCandidates))
             {
                 return false;
             }
 
-            if (candidatesByNow.Count == PositionCandidatesNumber - 1)
+            if (candidatesByNow.Count == NumberOfCandidates - 1)
             {
                 return true;
             }
 
-            var firstSqrtCandidates = candidatesByNow.Where(candidate => candidate.CandidateNumber < Math.Sqrt(PositionCandidatesNumber));
+            var firstSqrtCandidates = candidatesByNow.Where(candidate => candidate.CandidateNumber < Math.Sqrt(NumberOfCandidates));
 
             var minRank = firstSqrtCandidates.Min(candidate => candidate.CandidateRank);
 

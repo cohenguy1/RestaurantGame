@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace RestaurantGame
+namespace RestaurantGame.Enums
 {
-    public enum CandidateState
+    public enum SessionState
     {
-        New,
-        Interview,
-        Completed,
+        Running,
         WaitingForUserDecision
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantGame.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -33,6 +34,8 @@ namespace RestaurantGame
         public const string CandidateCompletedStepStr = "CandidateCompletedStep";
 
         public const string TrainingPassedStr = "TrainingPassed";
+
+        public const string SessionStateStr = "SessionState";
 
         public GameState GameState
         {
@@ -128,6 +131,12 @@ namespace RestaurantGame
         {
             get { return (int)Session[TrainingPassedStr]; }
             set { Session[TrainingPassedStr] = value; }
+        }
+
+        public SessionState SessionState
+        {
+            get { return (SessionState)Session[SessionStateStr]; }
+            set { Session[SessionStateStr] = value; }
         }
     }
 }

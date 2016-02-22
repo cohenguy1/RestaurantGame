@@ -36,14 +36,18 @@ namespace RestaurantGame
             TimerInterval = newTimerInterval;
             Timer1.Interval = newTimerInterval;
 
-            EnableDisableSpeedButton(btnFastBackwards, newTimerInterval != MaxTimerInterval);
-            EnableDisableSpeedButton(btnFastForward, newTimerInterval != MinTimerInterval);
+            EnableDisableFBSpeedButton(newTimerInterval != MaxTimerInterval);
+            EnableDisableFFSpeedButton(newTimerInterval != MinTimerInterval);
 
             string speedRate = ((double)StartTimerInterval / newTimerInterval).ToString("0.0");
             LabelSpeed.Text = " Speed: x" + speedRate;
 
             SetGameState(GameState.Playing);
-            TimerEnabled = true;
+
+            if (SessionState == Enums.SessionState.Running)
+            {
+                TimerEnabled = true;
+            }
         }
 
 
@@ -51,31 +55,38 @@ namespace RestaurantGame
         {
             if (GameState == GameState.Playing)
             {
+                // pause
                 SetGameState(GameState.Paused);
-                EnableDisableBtn(btnFastBackwards, true);
-                EnableDisableBtn(btnFastForward, true);
+
+                // enable fast speed buttons
+                EnableDisableFBSpeedButton(true);
+                EnableDisableFFSpeedButton(true);
             }
-            else
+            else // paused
             {
                 SetGameState(GameState.Playing);
             }
         }
 
-        private void EnableDisableSpeedButton(ImageButton btn, bool enable)
+        private void EnableDisableFFSpeedButton(bool enable)
         {
-            // TODO Complete this
-            EnableDisableBtn(btn, enable);
             EnableDisableBtn(btnFastForward, enable);
 
-            btnFastBackwards.ImageUrl = btnFastBackwards.Enabled ? "~/Images/fbButton.png" : "~/Images/fbButtonDisabled.png";
             btnFastForward.ImageUrl = btnFastForward.Enabled ? "~/Images/ffButton.png" : "~/Images/ffButtonDisabled.png";
+        }
 
+        private void EnableDisableFBSpeedButton(bool enable)
+        {
+            EnableDisableBtn(btnFastBackwards, enable);
+
+            btnFastBackwards.ImageUrl = btnFastBackwards.Enabled ? "~/Images/fbButton.png" : "~/Images/fbButtonDisabled.png";
         }
 
         protected void SetGameState(GameState gameState)
         {
             GameState = gameState;
-            Timer1.Enabled = (gameState == GameState.Playing);
+
+            Timer1.Enabled = (gameState == GameState.Playing) && (SessionState == Enums.SessionState.Running);
 
             if (gameState == GameState.Paused)
             {

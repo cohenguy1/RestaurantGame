@@ -3,7 +3,7 @@ using System.Text;
 
 namespace RestaurantGame
 {
-    // TODO: Finish uniform
+    // TODO: Finish uniform images
     // TODO: Thanks for participating
     // TODO GameBackground Stub
     // TODO Bonus rephrasing
@@ -14,7 +14,7 @@ namespace RestaurantGame
 
     public partial class Default : System.Web.UI.Page
     {
-        public const int PositionCandidatesNumber = DecisionMaker.PositionCandidatesNumber;
+        public const int NumberOfCandidates = DecisionMaker.NumberOfCandidates;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -153,7 +153,7 @@ namespace RestaurantGame
         {
             var currentCandidate = PositionCandidates[CurrentCandidateNumber];
 
-            var lastAvailableCandidate = GetRemainingStickManImage(PositionCandidatesNumber - CurrentCandidateNumber);
+            var lastAvailableCandidate = GetRemainingStickManImage(NumberOfCandidates - CurrentCandidateNumber);
 
             if (lastAvailableCandidate != null)
             {
@@ -193,6 +193,7 @@ namespace RestaurantGame
                 else
                 {
                     Timer1.Enabled = false;
+                    SessionState = Enums.SessionState.WaitingForUserDecision;
                 }
             }
             else if (currentCandidate.CandidateState == CandidateState.Completed)
@@ -299,7 +300,7 @@ namespace RestaurantGame
 
         private bool NewCandidateAwaits()
         {
-            return (CurrentCandidateNumber < PositionCandidatesNumber);
+            return (CurrentCandidateNumber < NumberOfCandidates);
         }
 
         private void UpdateImages(CandidateState candidateState)
@@ -422,6 +423,7 @@ namespace RestaurantGame
             }
 
             Timer1.Enabled = true;
+            SessionState = Enums.SessionState.Running;
         }
     }
 }

@@ -1048,6 +1048,186 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Image StickMan20;
         
         /// <summary>
+        /// StickManRow2Pos1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos1;
+        
+        /// <summary>
+        /// StickManRow2Pos2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos2;
+        
+        /// <summary>
+        /// StickManRow2Pos3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos3;
+        
+        /// <summary>
+        /// StickManRow2Pos4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos4;
+        
+        /// <summary>
+        /// StickManRow2Pos5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos5;
+        
+        /// <summary>
+        /// StickManRow2Pos6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos6;
+        
+        /// <summary>
+        /// StickManRow2Pos7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos7;
+        
+        /// <summary>
+        /// StickManRow2Pos8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos8;
+        
+        /// <summary>
+        /// StickManRow2Pos9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos9;
+        
+        /// <summary>
+        /// StickManRow2Pos10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos10;
+        
+        /// <summary>
+        /// StickManRow2Pos11 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos11;
+        
+        /// <summary>
+        /// StickManRow2Pos12 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos12;
+        
+        /// <summary>
+        /// StickManRow2Pos13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos13;
+        
+        /// <summary>
+        /// StickManRow2Pos14 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos14;
+        
+        /// <summary>
+        /// StickManRow2Pos15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos15;
+        
+        /// <summary>
+        /// StickManRow2Pos16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos16;
+        
+        /// <summary>
+        /// StickManRow2Pos17 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos17;
+        
+        /// <summary>
+        /// StickManRow2Pos18 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos18;
+        
+        /// <summary>
+        /// StickManRow2Pos19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos19;
+        
+        /// <summary>
+        /// StickManRow2Pos20 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image StickManRow2Pos20;
+        
+        /// <summary>
         /// PanelBasket control.
         /// </summary>
         /// <remarks>

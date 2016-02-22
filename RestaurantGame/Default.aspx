@@ -667,7 +667,48 @@
                                                 <asp:Image class="StickMan" ID="StickMan20" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
 
                                         </tr>
-
+                                        <tr>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos1" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos2" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos3" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos4" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos5" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos6" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos7" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos8" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos9" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos10" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos11" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos12" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos13" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos14" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos15" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos16" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos17" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos18" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos19" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                            <td>
+                                                <asp:Image class="StickMan" ID="StickManRow2Pos20" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
+                                        </tr>
                                     </table>
 
                                 </div>

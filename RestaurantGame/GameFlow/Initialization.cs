@@ -11,7 +11,7 @@ namespace RestaurantGame
         {
             var positionCandidates = new List<Candidate>();
 
-            for (var candidateIndex = 0; candidateIndex < PositionCandidatesNumber; candidateIndex++)
+            for (var candidateIndex = 0; candidateIndex < NumberOfCandidates; candidateIndex++)
             {
                 var newCandidate = new Candidate()
                 {
@@ -24,15 +24,15 @@ namespace RestaurantGame
             }
 
             var ranks = new List<int>();
-            for (var index = 1; index <= PositionCandidatesNumber; index++)
+            for (var index = 1; index <= NumberOfCandidates; index++)
             {
                 ranks.Add(index);
             }
 
-            var ranksRemaining = PositionCandidatesNumber;
+            var ranksRemaining = NumberOfCandidates;
             var randomGenerator = new Random();
 
-            for (var index = 0; index < PositionCandidatesNumber; index++)
+            for (var index = 0; index < NumberOfCandidates; index++)
             {
                 var position = randomGenerator.Next(1, ranksRemaining + 1) - 1;
 
