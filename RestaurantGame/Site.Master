@@ -50,10 +50,10 @@
     </asp:ContentPlaceHolder>
 </head>
 <script type="text/javascript" language="javascript">
+
     function Init() {
         if (document.hasFocus)
             setInterval("CheckFocus ()", 500);
-
     }
 
 

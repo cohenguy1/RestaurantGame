@@ -8,6 +8,8 @@ namespace RestaurantGame
     public enum CandidateCompletedStep
     {
         ShowCandidatesMap,
+        BlinkRemaimingCandidates,
+        RearrangeCandidatesMap,
         PickUniform,
         FillNextPosition
     }

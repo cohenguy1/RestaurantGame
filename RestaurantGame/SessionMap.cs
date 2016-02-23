@@ -37,6 +37,9 @@ namespace RestaurantGame
 
         public const string SessionStateStr = "SessionState";
 
+        public const string RemainingBlinkStateStr = "RemainingBlinkState";
+        public const string NumOfBlinksStr = "NumOfBlinks";
+
         public GameState GameState
         {
             get { return (GameState)Session[GameStateStr]; }
@@ -135,8 +138,30 @@ namespace RestaurantGame
 
         public SessionState SessionState
         {
-            get { return (SessionState)Session[SessionStateStr]; }
+            get
+            {
+                if (Session[SessionStateStr] == null)
+                {
+                    return SessionState.Running;
+                }
+                else
+                {
+                    return (SessionState)Session[SessionStateStr];
+                }
+            }
             set { Session[SessionStateStr] = value; }
+        }
+
+        public BlinkState RemainingBlinkState
+        {
+            get { return (BlinkState)Session[RemainingBlinkStateStr]; }
+            set { Session[RemainingBlinkStateStr] = value; }
+        }
+
+        public int NumOfBlinks
+        {
+            get { return (int)Session[NumOfBlinksStr]; }
+            set { Session[NumOfBlinksStr] = value; }
         }
     }
 }

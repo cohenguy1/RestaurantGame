@@ -119,6 +119,55 @@ namespace RestaurantGame
             }
         }
 
+        public Image GetStickManSecondRowImage(int imageNum)
+        {
+            switch (imageNum)
+            {
+                case 1:
+                    return StickManSecondRow1;
+                case 2:
+                    return StickManSecondRow2;
+                case 3:
+                    return StickManSecondRow3;
+                case 4:
+                    return StickManSecondRow4;
+                case 5:
+                    return StickManSecondRow5;
+                case 6:
+                    return StickManSecondRow6;
+                case 7:
+                    return StickManSecondRow7;
+                case 8:
+                    return StickManSecondRow8;
+                case 9:
+                    return StickManSecondRow9;
+                case 10:
+                    return StickManSecondRow10;
+                case 11:
+                    return StickManSecondRow11;
+                case 12:
+                    return StickManSecondRow12;
+                case 13:
+                    return StickManSecondRow13;
+                case 14:
+                    return StickManSecondRow14;
+                case 15:
+                    return StickManSecondRow15;
+                case 16:
+                    return StickManSecondRow16;
+                case 17:
+                    return StickManSecondRow17;
+                case 18:
+                    return StickManSecondRow18;
+                case 19:
+                    return StickManSecondRow19;
+                case 20:
+                    return StickManSecondRow20;
+                default:
+                    return StickManSecondRow1;
+            }
+        }
+
         public Image GetRemainingStickManImage(int imageNum)
         {
             switch (imageNum)
@@ -171,12 +220,7 @@ namespace RestaurantGame
         private void ShowCandidateMap(Candidate chosenCandidate)
         {
             var currentCandidateNumber = CurrentCandidateNumber;
-            var positionCandidates = PositionCandidates;
-
-            var sortedInterviewedCandidates = positionCandidates.Where(candidate => candidate.CandidateNumber <= currentCandidateNumber)
-                .OrderBy(viewedCandidate => viewedCandidate.CandidateRank);
-
-            var sortedRemainingCandidates = positionCandidates.Where(candidate => candidate.CandidateNumber > currentCandidateNumber)
+            var sortedInterviewedCandidates = PositionCandidates.Where(candidate => candidate.CandidateNumber <= currentCandidateNumber)
                 .OrderBy(viewedCandidate => viewedCandidate.CandidateRank);
 
             for (var index = 0; index < NumberOfCandidates; index++)
@@ -202,17 +246,68 @@ namespace RestaurantGame
                 }
 
                 stickManImage.ImageUrl = imageUrl;
-                //stickManImage.Visible = true;
             }
+        }
 
-            StickManRow2Pos1.ImageUrl = GetStickManImageUrlByRank(1, System.Drawing.Color.Black);
-            StickManRow2Pos1.Visible = true;
+        private void ShowRemainingCandidatesImages()
+        {
+            var sortedRemainingCandidates = PositionCandidates.Where(candidate => candidate.CandidateNumber > CurrentCandidateNumber)
+                .OrderBy(viewedCandidate => viewedCandidate.CandidateRank);
 
             for (var index = 0; index < sortedRemainingCandidates.Count(); index++)
             {
                 var stickManImage = GetRemainingStickManImage(index + 1);
                 string imageUrl = GetStickManImageUrlByRank(sortedRemainingCandidates.ElementAt(index).CandidateRank, System.Drawing.Color.Black);
                 stickManImage.ImageUrl = imageUrl;
+            }
+        }
+
+        private void HideRemainingCandidatesImages()
+        {
+            IEnumerable<Candidate> remainingCandidates = PositionCandidates.Where(candidate => candidate.CandidateNumber > CurrentCandidateNumber);
+
+            for (var index = 0; index < remainingCandidates.Count(); index++)
+            {
+                var stickManImage = GetRemainingStickManImage(index + 1);
+                stickManImage.ImageUrl = EmptyCandidateImage;
+            }
+        }
+
+        private void ShowCandidatesSecondRowImages()
+        {
+            var sortedRemainingCandidates = PositionCandidates.Where(candidate => candidate.CandidateNumber > CurrentCandidateNumber)
+                .OrderBy(viewedCandidate => viewedCandidate.CandidateRank);
+
+            for (var index = 0; index < NumberOfCandidates; index++)
+            {
+                var stickManImage = GetStickManSecondRowImage(index + 1);
+                string imageUrl = EmptyCandidateImage;
+                if (sortedRemainingCandidates.Any(candidate => candidate.CandidateRank == index + 1))
+                {
+                    imageUrl = GetStickManImageUrlByRank(index + 1, System.Drawing.Color.Black);
+                }
+
+                stickManImage.ImageUrl = imageUrl;
+                stickManImage.Visible = true;
+            }
+        }
+
+        private void HideCandidatesSecondRowImages()
+        {
+            for (var index = 0; index < NumberOfCandidates; index++)
+            {
+                var stickManImage = GetStickManSecondRowImage(index + 1);
+                stickManImage.ImageUrl = EmptyCandidateImage;
+                stickManImage.Visible = true;
+            }
+        }
+
+        private void FullyHideCandidatesSecondRowImages()
+        {
+            for (var index = 0; index < NumberOfCandidates; index++)
+            {
+                var stickManImage = GetStickManSecondRowImage(index + 1);
+                stickManImage.Visible = false;
             }
         }
 

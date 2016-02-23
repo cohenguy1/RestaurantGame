@@ -11,7 +11,7 @@ namespace RestaurantGame
     {
         protected void RateAdvisor()
         {
-            Timer1.Enabled = false;
+            TimerGame.Enabled = false;
 
             MultiView2.ActiveViewIndex = 1;
         }
@@ -24,7 +24,7 @@ namespace RestaurantGame
 
             MultiView2.ActiveViewIndex = 0;
 
-            Timer1.Enabled = true;
+            TimerGame.Enabled = true;
         }
 
         private void SaveRatingToDB(int adviserRating)

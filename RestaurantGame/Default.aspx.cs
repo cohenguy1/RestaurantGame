@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantGame.Enums;
+using System;
 using System.Text;
 
 namespace RestaurantGame
@@ -7,10 +8,14 @@ namespace RestaurantGame
     // TODO: Thanks for participating
     // TODO GameBackground Stub
     // TODO Bonus rephrasing
-    // TODO Candidates Blink
-    // TODO Candidates Second Row
-    // TODO Bugs
-    // TODO Rank Blinks
+    // TODO Bug of only one training after speeding in training
+    // TODO background alignment
+    // TODO short blinking
+    // TODO configuration of rating position
+    // TODO Upload Site
+
+    // Next Generation
+    // TODO convert instructions to javascript
 
     public partial class Default : System.Web.UI.Page
     {
@@ -21,6 +26,8 @@ namespace RestaurantGame
         {
             if (!IsPostBack)
             {
+                RandomHimHer();
+
                 var t = new DecisionMaker();
 
                 String val = null;
@@ -35,8 +42,8 @@ namespace RestaurantGame
                     btnNextToInfo.Enabled = true;
                 }
 
-                Timer1.Enabled = false;
-                Timer1.Interval = StartTimerInterval;
+                TimerGame.Enabled = false;
+                TimerGame.Interval = StartTimerInterval;
 
                 AlreadyAskedForRating = false;
 
@@ -53,9 +60,19 @@ namespace RestaurantGame
             }
         }
 
+        private void RandomHimHer()
+        {
+            Random rand = new Random();
+            int randHim = rand.Next(2);
+            if (randHim == 1)
+            {
+                backgroundText.Text = backgroundText.Text.Replace("him", "her");
+            }
+        }
+
         private void StartInterviewsForPosition(int position)
         {
-            Timer1.Enabled = false;
+            TimerGame.Enabled = false;
 
             CurrentCandidate = null;
             SetCurrentPositionNumber(position);
@@ -73,9 +90,9 @@ namespace RestaurantGame
             CurrentCandidateNumber = 0;
             CandidateCompletedStep = CandidateCompletedStep.ShowCandidatesMap;
 
-            Timer1.Interval = 4000;
+            TimerGame.Interval = 4000;
 
-            Timer1.Enabled = true;
+            TimerGame.Enabled = true;
         }
 
         private void SetTitle()
@@ -104,9 +121,9 @@ namespace RestaurantGame
             positionCell.Font.Bold = true;
         }
 
-        protected void Timer1_Tick(object sender, EventArgs e)
+        protected void TimerGame_Tick(object sender, EventArgs e)
         {
-            Timer1.Interval = TimerInterval;
+            TimerGame.Interval = TimerInterval;
 
             if (AskForRating)
             {
@@ -129,7 +146,7 @@ namespace RestaurantGame
 
         private void FillNextPosition()
         {
-            Timer1.Enabled = false;
+            TimerGame.Enabled = false;
 
             IncreaseCurrentPosition();
 
@@ -157,8 +174,7 @@ namespace RestaurantGame
 
             if (lastAvailableCandidate != null)
             {
-                lastAvailableCandidate.ImageUrl = null;
-                lastAvailableCandidate.Visible = false;
+                lastAvailableCandidate.ImageUrl = EmptyCandidateImage;
             }
 
             RestoreButtonSizes(btnThumbsUp, btnThumbsDown);
@@ -192,7 +208,7 @@ namespace RestaurantGame
                 }
                 else
                 {
-                    Timer1.Enabled = false;
+                    TimerGame.Enabled = false;
                     SessionState = Enums.SessionState.WaitingForUserDecision;
                 }
             }
@@ -202,31 +218,19 @@ namespace RestaurantGame
 
                 if (currentCandidate.CandidateAccepted)
                 {
-                    var candidateCompletedStep = CandidateCompletedStep;
-
-                    switch (candidateCompletedStep)
+                    switch (CandidateCompletedStep)
                     {
                         case CandidateCompletedStep.ShowCandidatesMap:
                             UpdatePositionToAcceptedCandidate(currentCandidate);
-                            Timer1.Interval = 6000;
-                            CandidateCompletedStep = CandidateCompletedStep.PickUniform;
+                            TimerGame.Interval = 3000;
+                            CandidateCompletedStep = CandidateCompletedStep.BlinkRemaimingCandidates;
+                            break;
+                        case CandidateCompletedStep.BlinkRemaimingCandidates:
+                            BlinkRemainingCandidates();
+                            CandidateCompletedStep = CandidateCompletedStep.RearrangeCandidatesMap;
                             break;
                         case CandidateCompletedStep.PickUniform:
-
-                            Timer1.Enabled = false;
-                            TrainingPassed++;
-
-                            if (gameMode == GameMode.Training && TrainingPassed >= 3)
-                            {
-                                MultiView2.ActiveViewIndex = 2;
-                            }
-                            else
-                            {
-                                MultiView2.ActiveViewIndex = 3;
-                                ShowUniforms();
-                            }
-
-                            CandidateCompletedStep = CandidateCompletedStep.FillNextPosition;
+                            PickUniform();
                             break;
                         case CandidateCompletedStep.FillNextPosition:
                             FillNextPosition();
@@ -246,6 +250,88 @@ namespace RestaurantGame
                     EnterNewCandidate();
                 }
             }
+        }
+
+        private void BlinkRemainingCandidates()
+        {
+            NumOfBlinks = 0;
+            RemainingBlinkState = BlinkState.Visible;
+            TimerGame.Enabled = false;
+            TimerBlinkRemainingCandidates.Enabled = true;
+            TimerBlinkRemainingCandidates.Interval = 500;
+        }
+
+        protected void TimerBlinkRemainingCandidates_Tick(object sender, EventArgs e)
+        {
+            if (RemainingBlinkState == BlinkState.Visible)
+            {
+                HideRemainingCandidatesImages();
+                RemainingBlinkState = BlinkState.Hidden;
+                SetCurrentPositionCellVisibility(RemainingBlinkState);
+                NumOfBlinks++;
+            }
+            else
+            {
+                ShowRemainingCandidatesImages();
+                RemainingBlinkState = BlinkState.Visible;
+                SetCurrentPositionCellVisibility(RemainingBlinkState);
+            }
+
+            if (NumOfBlinks >= 5)
+            {
+                TimerBlinkRemainingCandidates.Enabled = false;
+                RearrangeCandidatesMap();
+            }
+        }
+
+        private void RearrangeCandidatesMap()
+        {
+            NumOfBlinks = 0;
+            RemainingBlinkState = BlinkState.Hidden;
+            TimerRearrangeCandidatesMap.Enabled = true;
+            TimerRearrangeCandidatesMap.Interval = 500;
+        }
+
+        protected void TimerRearrangeCandidatesMap_Tick(object sender, EventArgs e)
+        {
+            if (RemainingBlinkState == BlinkState.Visible)
+            {
+                HideCandidatesSecondRowImages();
+                RemainingBlinkState = BlinkState.Hidden;
+                SetCurrentPositionCellVisibility(RemainingBlinkState);
+                NumOfBlinks++;
+            }
+            else
+            {
+                ShowCandidatesSecondRowImages();
+                RemainingBlinkState = BlinkState.Visible;
+                SetCurrentPositionCellVisibility(RemainingBlinkState);
+            }
+
+            if (NumOfBlinks >= 5)
+            {
+                TimerRearrangeCandidatesMap.Enabled = false;
+                SetCurrentPositionCellVisibility(BlinkState.Visible);
+                FullyHideCandidatesSecondRowImages();
+                PickUniform();
+            }
+        }
+
+        private void PickUniform()
+        {
+            TrainingPassed++;
+
+            if (GameMode == GameMode.Training && TrainingPassed >= 3)
+            {
+                MultiView2.ActiveViewIndex = 2;
+            }
+            else
+            {
+                MultiView2.ActiveViewIndex = 3;
+                ShowUniforms();
+            }
+
+            CandidateCompletedStep = CandidateCompletedStep.FillNextPosition;
         }
 
         private void ShowUniforms()
@@ -275,11 +361,11 @@ namespace RestaurantGame
         {
             if (TimerEnabled)
             {
-                Timer1.Enabled = TimerEnabled;
+                TimerGame.Enabled = TimerEnabled;
             }
             else
             {
-                Timer1.Enabled = defaultCommand;
+                TimerGame.Enabled = defaultCommand;
             }
         }
 
@@ -422,7 +508,7 @@ namespace RestaurantGame
                 currentCandidate.CandidateState = CandidateState.Completed;
             }
 
-            Timer1.Enabled = true;
+            TimerGame.Enabled = true;
             SessionState = Enums.SessionState.Running;
         }
     }

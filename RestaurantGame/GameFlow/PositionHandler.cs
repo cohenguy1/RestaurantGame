@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantGame.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -134,5 +135,17 @@ namespace RestaurantGame
 
         }
 
+        private void SetCurrentPositionCellVisibility(BlinkState blinkState)
+        {
+            TableCell cell = GetCurrentPositionCell();
+            if (blinkState == BlinkState.Hidden)
+            {
+                cell.ForeColor = System.Drawing.Color.White;
+            }
+            else
+            {
+                cell.ForeColor = System.Drawing.Color.Green;
+            }
+        }
     }
 }

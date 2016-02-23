@@ -15,7 +15,7 @@ namespace RestaurantGame
 
         protected void btnFastBackwards_Click(object sender, EventArgs e)
         {
-            Timer1.Enabled = false;
+            TimerGame.Enabled = false;
 
             int newTimerInterval = Math.Min(TimerInterval + 500, MaxTimerInterval);
 
@@ -24,7 +24,7 @@ namespace RestaurantGame
 
         protected void btnFastForward_Click(object sender, EventArgs e)
         {
-            Timer1.Enabled = false;
+            TimerGame.Enabled = false;
 
             int newTimerInterval = Math.Max(TimerInterval - 500, MinTimerInterval);
 
@@ -34,7 +34,7 @@ namespace RestaurantGame
         private void UpdateFastPlaySpeed(int newTimerInterval)
         {
             TimerInterval = newTimerInterval;
-            Timer1.Interval = newTimerInterval;
+            TimerGame.Interval = newTimerInterval;
 
             EnableDisableFBSpeedButton(newTimerInterval != MaxTimerInterval);
             EnableDisableFFSpeedButton(newTimerInterval != MinTimerInterval);
@@ -86,7 +86,7 @@ namespace RestaurantGame
         {
             GameState = gameState;
 
-            Timer1.Enabled = (gameState == GameState.Playing) && (SessionState == Enums.SessionState.Running);
+            TimerGame.Enabled = (gameState == GameState.Playing) && (SessionState == Enums.SessionState.Running);
 
             if (gameState == GameState.Paused)
             {
