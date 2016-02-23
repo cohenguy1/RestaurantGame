@@ -37,8 +37,8 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <asp:Timer ID="TimerGame" OnTick="TimerGame_Tick" runat="server" Enabled="false"></asp:Timer>
-    <asp:Timer ID="TimerBlinkRemainingCandidates" ontick="TimerBlinkRemainingCandidates_Tick" runat="server" Enabled="false"></asp:Timer>
-    <asp:Timer ID="TimerRearrangeCandidatesMap" ontick="TimerRearrangeCandidatesMap_Tick" runat="server" Enabled="false"></asp:Timer>
+    <asp:Timer ID="TimerBlinkRemainingCandidates" OnTick="TimerBlinkRemainingCandidates_Tick" runat="server" Enabled="false"></asp:Timer>
+    <asp:Timer ID="TimerRearrangeCandidatesMap" OnTick="TimerRearrangeCandidatesMap_Tick" runat="server" Enabled="false"></asp:Timer>
 
     <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
         <asp:View ID="view0" runat="server">
@@ -49,53 +49,55 @@
                 &nbsp;
             </p>
             <h2>Game Background</h2>
-            <table style="text-align: center; width: 640px;" align="center;">
-                <tr>
-                    <td>You have decided to open up a restaurant.</td>
-                </tr>
-                <tr>
-                    <td>&lt;Dudi will fill here&gt; In this game you and an Human Resource (HR) team  will interview people for 10 positions for the restaurant.</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>&lt;Dudi will fill here&gt; The HR team will interview the candidates and decide about who fills each position,
+            <div style="text-align: center; width: 640px; margin: 0 auto;">
+                <table style="text-align: center; max-width: 640px;">
+                    <tr>
+                        <td>You have decided to open up a restaurant.</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;Dudi will fill here&gt; In this game you and an Human Resource (HR) team  will interview people for 10 positions for the restaurant.</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;Dudi will fill here&gt; The HR team will interview the candidates and decide about who fills each position,
                         and you will choose the uniform for each position</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>For Each position you have 20 candidates, ranked from 1 to 20. Your (and the HR's) interest is to pick the best candidate for each position.<br />
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>For Each position you have 20 candidates, ranked from 1 to 20. Your (and the HR's) interest is to pick the best candidate for each position.<br />
+                            <br />
+                            <asp:Label ID="backgroundText" runat="server"
+                                Text="When a candidate is interviewed, we must decide whether to hire him or not."></asp:Label>
+                            <br />
+                            If the candidate is rejected, he cannot be recalled.
                         <br />
-                        <asp:Label id="backgroundText" runat="server" 
-                            Text="When a candidate is interviewed, we must decide whether to hire him or not."></asp:Label>
-                        <br />
-                        If the candidate is rejected, he cannot be recalled.
-                        <br />
-                        <br />
-                    </td>
-                </tr>
+                            <br />
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <asp:Label ID="label44" runat="server" Font-Bold="true"> You will receive a bonus after the game. </asp:Label>
-                        <br />
-                        The amount of the bonus will be in accordance with the people you hire.
+                    <tr>
+                        <td>
+                            <asp:Label ID="label44" runat="server" Font-Bold="true"> You will receive a bonus after the game. </asp:Label>
+                            <br />
+                            The amount of the bonus will be in accordance with the people you hire.
                     <br />
-                        The better the ranking of the people you hire, the higher the bonus you get.
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
+                            The better the ranking of the people you hire, the higher the bonus you get.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <asp:Button ID="btnNextToInfo" runat="server" Text="Next" OnClick="btnNextToInfo_Click" Enabled="false" /></td>
-                </tr>
-            </table>
+                    <tr>
+                        <td>
+                            <asp:Button ID="btnNextToInfo" runat="server" Text="Next" OnClick="btnNextToInfo_Click" Enabled="false" /></td>
+                    </tr>
+                </table>
+            </div>
         </asp:View>
 
         <asp:View ID="viewInfo" runat="server">
@@ -105,7 +107,7 @@
                 <asp:Label ID="label3" runat="server" Text="Your Gender:" Style="color: #000000; text-align: center;"
                     Font-Size="Large" Font-Bold="True" Font-Names="Comic Sans MS"
                     Width="400px"></asp:Label>
-                <asp:DropDownList ID="DropDownList1" runat="server" Height="22px" Width="148px"
+                <asp:DropDownList ID="DropDownList1" runat="server" Height="22px" Width="170px"
                     Style="text-align: center">
                     <asp:ListItem>-- select one --</asp:ListItem>
                     <asp:ListItem>Male</asp:ListItem>
@@ -120,7 +122,7 @@
                 <asp:Label ID="label4" runat="server" Font-Bold="True" Font-Names="Comic Sans MS"
                     Font-Size="Large" Style="color: #000000; text-align: center;"
                     Text="Your Age:" Width="400px"></asp:Label>
-                <asp:DropDownList ID="DropDownList2" runat="server" Height="22px" Width="148px">
+                <asp:DropDownList ID="DropDownList2" runat="server" Height="22px" Width="170px">
                     <asp:ListItem>-- select one --</asp:ListItem>
                     <asp:ListItem>0-10</asp:ListItem>
                     <asp:ListItem>11-20</asp:ListItem>
@@ -144,7 +146,7 @@
                 <asp:Label ID="label5" runat="server" Font-Bold="True" Font-Names="Comic Sans MS"
                     Font-Size="Large" Style="color: #000000; text-align: center;" Text="Your Education:"
                     Width="400px"></asp:Label>
-                <asp:DropDownList ID="DropDownList3" runat="server" Height="22px" Width="148px">
+                <asp:DropDownList ID="DropDownList3" runat="server" Height="22px" Width="170px">
                     <asp:ListItem>-- select one --</asp:ListItem>
                     <asp:ListItem>Primary education</asp:ListItem>
                     <asp:ListItem>Secondary education</asp:ListItem>
@@ -162,7 +164,7 @@
                 <asp:Label ID="label6" runat="server" Font-Bold="True" Font-Names="Comic Sans MS"
                     Font-Size="Large" Style="color: #000000; text-align: center;" Text="Your Nationaity:"
                     Width="400px"></asp:Label>
-                <asp:DropDownList ID="DropDownList4" runat="server" Height="22px" Width="149px">
+                <asp:DropDownList ID="DropDownList4" runat="server" Height="22px" Width="170px">
                     <asp:ListItem>-- select one --</asp:ListItem>
                     <asp:ListItem>United States</asp:ListItem>
                     <asp:ListItem>India</asp:ListItem>
@@ -405,7 +407,7 @@
                 <asp:Label ID="label7" runat="server" Font-Bold="True" Font-Names="Comic Sans MS"
                     Font-Size="Large" Style="color: #000000; text-align: center;" Text="Reason for participating:"
                     Width="400px"></asp:Label>
-                <asp:DropDownList ID="DropDownList5" runat="server" Height="22px" Width="148px">
+                <asp:DropDownList ID="DropDownList5" runat="server" Height="22px" Width="170px">
                     <asp:ListItem>-- select one --</asp:ListItem>
                     <asp:ListItem>I am at work and I have spare time</asp:ListItem>
                     <asp:ListItem>My primary work is Amazon Turk</asp:ListItem>
@@ -547,7 +549,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>What is the relative rank of the first candidate in a position?
+                        <td>What is the relative rank of the candidate that arrives first?
                         <asp:RadioButtonList ID="rbl1" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
@@ -558,7 +560,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>What is the absolute rank of the first candidate in a position?
+                        <td>What is the absolute rank of the candidate that arrives first?
                         <asp:RadioButtonList ID="rbl2" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
@@ -569,7 +571,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>What is the relative rank of the last candidate in a position?
+                        <td>What is the absolute rank of the candidate that arrives last (19 candidates already interviewed)?
                         <asp:RadioButtonList ID="rbl3" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
@@ -580,13 +582,13 @@
                         </td>
                     </tr>
                     <!--<tr>
-                        <td>Lets suppose we rejected 10 candidates, and a new candidate arrives with rank 1.
+                        <td>Lets suppose we rejected 10 candidates, and a new candidate arrives with relative rank of 11 (worst so far).
                             <br />
                             What can be the absolute rank of the candidate?
                         <asp:RadioButtonList ID="rbl4" runat="server">
-                            <asp:ListItem>Must be 1</asp:ListItem>
-                            <asp:ListItem>Must be 10</asp:ListItem>
+                            <asp:ListItem>Must be 11</asp:ListItem>
                             <asp:ListItem>Can be every rank in range 1-10</asp:ListItem>
+                            <asp:ListItem>Can be every rank in range 11-20</asp:ListItem>
                             <asp:ListItem>Can be every rank in range 1-20</asp:ListItem>
                         </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="rfv4" Style="color: Red;" ControlToValidate="rbl4" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
@@ -999,5 +1001,30 @@
             </asp:Panel>
         </asp:View>
 
+        <asp:View ID="Thanks" runat="server">
+            <h2>Thank you for playing!</h2>
+            <div style="text-align: center; width: 640px; margin: 0 auto;">
+                <table style="text-align: left; width: 640px;" border="1">
+                    <tr>
+                        <td>
+                            <br />
+                            Thanks for playing, You did great!
+                            <br />
+                            <br />
+                            The average rank of the people you hired was:
+                            <br />
+                            <br />
+                            <asp:Label ID="AverageRank" runat="server" Font-Bold="true" ForeColor="Green" Font-Size="Medium"></asp:Label>
+                            <br />
+                            <br />
+                            <asp:Label ID="Bonus" runat="server" Font-Bold="true" ForeColor="Blue" Font-Size="Medium"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <asp:Button ID="Button1" runat="server" Text="Next" OnClick="btnNextToTraining_Click" />
+
+        </asp:View>
     </asp:MultiView>
 </asp:Content>

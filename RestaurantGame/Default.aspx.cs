@@ -6,10 +6,8 @@ namespace RestaurantGame
 {
     // TODO: Finish uniform images
     // TODO: Thanks for participating
-    // TODO GameBackground Stub
     // TODO Bonus rephrasing
     // TODO Bug of only one training after speeding in training
-    // TODO background alignment
     // TODO short blinking
     // TODO configuration of rating position
     // TODO Upload Site
@@ -159,11 +157,27 @@ namespace RestaurantGame
             {
                 StartInterviewsForPosition(currentPositionNumber);
             }
-            else if (GameMode == GameMode.Training)
+            else 
             {
-                // wrap around
-                StartInterviewsForPosition(0);
+                if (GameMode == GameMode.Training)
+                {
+                    // wrap around
+                    StartInterviewsForPosition(0);
+                }
+                else
+                {
+                    EndGame();
+                }
             }
+        }
+
+        private void EndGame()
+        {
+            MultiView1.ActiveViewIndex = 7;
+            double averageRank = CalculateAveragePosition();
+            int bonus = NumberOfCandidates - (int)Math.Round(averageRank);
+            AverageRank.Text = averageRank.ToString("0.00");
+            Bonus.Text = bonus.ToString() + " cents";
         }
 
         private void EnterNewCandidate()
