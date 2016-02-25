@@ -10,7 +10,6 @@ namespace RestaurantGame
         ShowCandidatesMap,
         BlinkRemaimingCandidates,
         RearrangeCandidatesMap,
-        PickUniform,
         FillNextPosition
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Linq;
 using System.Web;
 
@@ -14,9 +14,9 @@ namespace RestaurantGame
             if (!UserId.Equals("friend"))
             {
                 String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-                using (SqlConnection sqlConnection1 = new SqlConnection(connectionString))
+                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("Select Assignment_Id from [User] Where UserId='" + UserId + "'");
+                    SQLiteCommand cmd = new SQLiteCommand("Select Assignment_Id from [User] Where UserId='" + UserId + "'");
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
                     sqlConnection1.Open();
@@ -27,7 +27,7 @@ namespace RestaurantGame
                     {
                         //new user -insert to DB
                         DateTime curentT = DateTime.UtcNow;
-                        cmd = new SqlCommand("insert into [User] (UserId, Assignment_Id,time) VALUES ('" + UserId + "','" + Session["turkAss"] + "','" + curentT.ToString() + "')");
+                        cmd = new SQLiteCommand("insert into [User] (UserId, Assignment_Id,time) VALUES ('" + UserId + "','" + Session["turkAss"] + "','" + curentT.ToString() + "')");
                         cmd.CommandType = CommandType.Text;
                         cmd.Connection = sqlConnection1;
                         cmd.ExecuteNonQuery();
@@ -51,6 +51,7 @@ namespace RestaurantGame
             DisableThumbsButtons();
             TrainingPassed = 0;
 
+            CurrentPositionNumber = 0;
             StartInterviewsForPosition(0);
         }
 
@@ -66,9 +67,9 @@ namespace RestaurantGame
 
             try
             {
-                using (SqlConnection sqlConnection1 = new SqlConnection(connectionString))
+                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, Mobile ) VALUES (@UserId, @Gender, @Age, @Education,@Nationality,@Reason,@Mobile)");
+                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, Mobile ) VALUES (@UserId, @Gender, @Age, @Education,@Nationality,@Reason,@Mobile)");
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
                     cmd.Parameters.AddWithValue("@UserId", UserId);
@@ -82,7 +83,7 @@ namespace RestaurantGame
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch (SqlException ex)
+            catch (SQLiteException ex)
             {
                 Alert.Show("Error: " + Environment.NewLine + ex.Message);
                 return;
@@ -109,7 +110,7 @@ namespace RestaurantGame
             ImageInterview.Visible = false;
             ImageManForward.Visible = true;
 
-            SetCurrentPositionNumber(0);
+            CurrentPositionNumber = 0;
 
             ClearPositionsTable();
 

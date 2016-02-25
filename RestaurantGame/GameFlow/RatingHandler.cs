@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Linq;
 using System.Web;
 
@@ -31,9 +31,9 @@ namespace RestaurantGame
         {
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
 
-            using (SqlConnection sqlConnection1 = new SqlConnection(connectionString))
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
+                SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
                     "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank ) " +
                     " VALUES (@UserId, @AdviserRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
                     "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank)");
@@ -41,7 +41,7 @@ namespace RestaurantGame
                 cmd.Connection = sqlConnection1;
                 cmd.Parameters.AddWithValue("@UserId", UserId);
                 cmd.Parameters.AddWithValue("@AdviserRating", adviserRating.ToString());
-                cmd.Parameters.AddWithValue("@RatingPosition", PositionToFill.ToString());
+                cmd.Parameters.AddWithValue("@RatingPosition", CurrentPositionNumber.ToString());
                 cmd.Parameters.AddWithValue("@Position1Rank", GetChosenPositionToInsertToDb(1));
                 cmd.Parameters.AddWithValue("@Position2Rank", GetChosenPositionToInsertToDb(2));
                 cmd.Parameters.AddWithValue("@Position3Rank", GetChosenPositionToInsertToDb(3));

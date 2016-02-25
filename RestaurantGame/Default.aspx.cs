@@ -4,13 +4,12 @@ using System.Text;
 
 namespace RestaurantGame
 {
-    // TODO: Finish uniform images
-    // TODO: Thanks for participating
-    // TODO Bonus rephrasing
-    // TODO Bug of only one training after speeding in training
-    // TODO short blinking
     // TODO configuration of rating position
-    // TODO Upload Site
+    // TODO limit screen size
+    // TODO Finish uniform images
+    // You were wrong 3 times
+    // Why jumping
+    // divide to web pages
 
     // Next Generation
     // TODO convert instructions to javascript
@@ -24,7 +23,7 @@ namespace RestaurantGame
         {
             if (!IsPostBack)
             {
-                RandomHimHer();
+                DecideRandomStuff();
 
                 var t = new DecisionMaker();
 
@@ -43,6 +42,7 @@ namespace RestaurantGame
                 TimerGame.Enabled = false;
                 TimerGame.Interval = StartTimerInterval;
 
+                CurrentPositionNumber = 0;
                 AlreadyAskedForRating = false;
 
                 TimerInterval = StartTimerInterval;
@@ -58,7 +58,7 @@ namespace RestaurantGame
             }
         }
 
-        private void RandomHimHer()
+        private void DecideRandomStuff()
         {
             Random rand = new Random();
             int randHim = rand.Next(2);
@@ -66,6 +66,8 @@ namespace RestaurantGame
             {
                 backgroundText.Text = backgroundText.Text.Replace("him", "her");
             }
+
+            AskPosition = (randHim == 0) ? 1 : 10;
         }
 
         private void StartInterviewsForPosition(int position)
@@ -73,12 +75,12 @@ namespace RestaurantGame
             TimerGame.Enabled = false;
 
             CurrentCandidate = null;
-            SetCurrentPositionNumber(position);
 
             StatusLabel.Text = "";
 
             SetTitle();
 
+            CleanCurrentPosition();
             ShowAllRemainingCandidatesImages();
             ImageHired.Visible = false;
 
@@ -96,7 +98,7 @@ namespace RestaurantGame
         private void SetTitle()
         {
             string jobTitle = GetCurrentJobTitle();
-            var currentPositionNumber = GetCurrentPositionNumber();
+            var currentPositionNumber = CurrentPositionNumber;
 
             PositionHeader.Text = "Position: " + jobTitle;
 
@@ -128,6 +130,7 @@ namespace RestaurantGame
                 RateAdvisor();
 
                 AskForRating = false;
+                AlreadyAskedForRating = true;
 
                 return;
             }
@@ -138,37 +141,37 @@ namespace RestaurantGame
             }
             else
             {
-                FillNextPosition();
-            }
-        }
-
-        private void FillNextPosition()
-        {
-            TimerGame.Enabled = false;
-
-            IncreaseCurrentPosition();
-
-            ClearCandidateImages();
-            ClearInterviewImages();
-
-            var currentPositionNumber = GetCurrentPositionNumber();
-
-            if (currentPositionNumber < 10)
-            {
-                StartInterviewsForPosition(currentPositionNumber);
-            }
-            else 
-            {
-                if (GameMode == GameMode.Training)
+                if (CurrentPositionNumber < 9 || GameMode == GameMode.Training)
                 {
-                    // wrap around
-                    StartInterviewsForPosition(0);
+                    FillNextPosition();
                 }
                 else
                 {
                     EndGame();
                 }
             }
+        }
+
+        private void FillNextPosition()
+        {
+            IncreaseCurrentPosition();
+
+            if (GameMode == GameMode.Training && CurrentPositionNumber == 11)
+            {
+                // wrap around
+                CurrentPositionNumber = 0;
+            }
+
+            StartInterviewsForPosition(CurrentPositionNumber);
+        }
+
+        private void CleanCurrentPosition()
+        {
+            TimerGame.Enabled = false;
+
+            ClearCandidateImages();
+            ClearInterviewImages();
+
         }
 
         private void EndGame()
@@ -243,18 +246,6 @@ namespace RestaurantGame
                             BlinkRemainingCandidates();
                             CandidateCompletedStep = CandidateCompletedStep.RearrangeCandidatesMap;
                             break;
-                        case CandidateCompletedStep.PickUniform:
-                            PickUniform();
-                            break;
-                        case CandidateCompletedStep.FillNextPosition:
-                            FillNextPosition();
-
-                            if (!AlreadyAskedForRating && gameMode == GameMode.Advisor)
-                            {
-                                AskForRating = true;
-                                AlreadyAskedForRating = true;
-                            }
-                            break;
                     }
                 }
                 else
@@ -283,12 +274,14 @@ namespace RestaurantGame
                 RemainingBlinkState = BlinkState.Hidden;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
                 NumOfBlinks++;
+                TimerBlinkRemainingCandidates.Interval = 250;
             }
             else
             {
                 ShowRemainingCandidatesImages();
                 RemainingBlinkState = BlinkState.Visible;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
+                TimerBlinkRemainingCandidates.Interval = 350;
             }
 
             if (NumOfBlinks >= 5)
@@ -314,12 +307,14 @@ namespace RestaurantGame
                 RemainingBlinkState = BlinkState.Hidden;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
                 NumOfBlinks++;
+                TimerRearrangeCandidatesMap.Interval = 250;
             }
             else
             {
                 ShowCandidatesSecondRowImages();
                 RemainingBlinkState = BlinkState.Visible;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
+                TimerRearrangeCandidatesMap.Interval = 350;
             }
 
             if (NumOfBlinks >= 5)
@@ -334,6 +329,11 @@ namespace RestaurantGame
         private void PickUniform()
         {
             TrainingPassed++;
+
+            if (!AlreadyAskedForRating && GameMode == GameMode.Advisor && AskPosition == CurrentPositionNumber + 1)
+            {
+                AskForRating = true;
+            }
 
             if (GameMode == GameMode.Training && TrainingPassed >= 3)
             {
@@ -400,7 +400,17 @@ namespace RestaurantGame
 
         private bool NewCandidateAwaits()
         {
-            return (CurrentCandidateNumber < NumberOfCandidates);
+            if (CurrentCandidate == null)
+            {
+                return true;
+            }
+            else if (CurrentCandidate.CandidateAccepted && CandidateCompletedStep == CandidateCompletedStep.FillNextPosition)
+            {
+                // finished candidate
+                return false;
+            }
+
+            return (CurrentCandidateNumber < NumberOfCandidates); ;
         }
 
         private void UpdateImages(CandidateState candidateState)
@@ -485,7 +495,7 @@ namespace RestaurantGame
             ImageHired.Visible = true;
             ImageInterview.Visible = false;
 
-            AcceptedCandidates[PositionToFill] = currentPosition.ChosenCandidate.CandidateRank;
+            AcceptedCandidates[CurrentPositionNumber] = currentPosition.ChosenCandidate.CandidateRank;
 
             double avgRank = CalculateAveragePosition();
             UpdatePositionsTable(currentPosition, avgRank);

@@ -12,7 +12,7 @@ namespace RestaurantGame
 
         public const string CurrentCandidateStr = "CurrentCandidate";
         public const string PositionsStr = "Positions";
-        public const string PositionToFillStr = "PositionToFill";
+        public const string CurrentPositionNumberStr = "CurrentPositionNumber";
 
         public const string PositionCandidiatesStr = "PositionCandidates";
         public const string CurrentCandidateNumberStr = "CurrentCandidateNumber";
@@ -39,6 +39,8 @@ namespace RestaurantGame
 
         public const string RemainingBlinkStateStr = "RemainingBlinkState";
         public const string NumOfBlinksStr = "NumOfBlinks";
+
+        public const string AskPositionStr = "AskPosition";
 
         public GameState GameState
         {
@@ -82,10 +84,10 @@ namespace RestaurantGame
             set { Session[AskForRatingStr] = value; }
         }
 
-        public int PositionToFill
+        public int CurrentPositionNumber
         {
-            get { return (int)Session[PositionToFillStr]; }
-            set { Session[PositionToFillStr] = value; }
+            get { return (int)Session[CurrentPositionNumberStr]; }
+            set { Session[CurrentPositionNumberStr] = value; }
         }
 
         public List<Position> Positions
@@ -162,6 +164,12 @@ namespace RestaurantGame
         {
             get { return (int)Session[NumOfBlinksStr]; }
             set { Session[NumOfBlinksStr] = value; }
+        }
+
+        public int AskPosition
+        {
+            get { return (int)Session[AskPositionStr]; }
+            set { Session[AskPositionStr] = value; }
         }
     }
 }

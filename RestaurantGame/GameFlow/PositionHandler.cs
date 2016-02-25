@@ -9,16 +9,6 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        private int GetCurrentPositionNumber()
-        {
-            return PositionToFill;
-        }
-
-        private void SetCurrentPositionNumber(int positionNumber)
-        {
-            PositionToFill = positionNumber;
-        }
-
         private void GeneratePositions()
         {
             var positions = new List<Position>();
@@ -42,7 +32,7 @@ namespace RestaurantGame
 
         private void IncreaseCurrentPosition()
         {
-            SetCurrentPositionNumber(PositionToFill + 1);
+            CurrentPositionNumber++;
         }
 
         private double CalculateAveragePosition()
@@ -84,7 +74,7 @@ namespace RestaurantGame
 
         private Position GetCurrentPosition()
         {
-            return GetPosition(PositionToFill);
+            return GetPosition(CurrentPositionNumber);
         }
 
         private string GetCurrentJobTitle()

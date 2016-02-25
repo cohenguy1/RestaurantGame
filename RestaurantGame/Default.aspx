@@ -107,8 +107,7 @@
                 <asp:Label ID="label3" runat="server" Text="Your Gender:" Style="color: #000000; text-align: center;"
                     Font-Size="Large" Font-Bold="True" Font-Names="Comic Sans MS"
                     Width="400px"></asp:Label>
-                <asp:DropDownList ID="DropDownList1" runat="server" Height="22px" Width="170px"
-                    Style="text-align: center">
+                <asp:DropDownList ID="DropDownList1" runat="server" Height="22px" Width="170px">
                     <asp:ListItem>-- select one --</asp:ListItem>
                     <asp:ListItem>Male</asp:ListItem>
                     <asp:ListItem>Female</asp:ListItem>
@@ -433,64 +432,64 @@
             <asp:MultiView ID="MultiviewInstructions" runat="server" ActiveViewIndex="0">
                 <asp:View ID="view8" runat="server">
 
-                    <asp:Image ID="InstructionImage" ImageUrl="~/Images/Instructions0.png" Width="700px" runat="server" />
+                    <asp:Image ID="InstructionImage" ImageUrl="~/Images/Instructions0.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view9" runat="server">
-                    <asp:Image ID="Image1" ImageUrl="~/Images/Instructions1.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image1" ImageUrl="~/Images/Instructions1.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view10" runat="server">
-                    <asp:Image ID="Image2" ImageUrl="~/Images/Instructions2.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image2" ImageUrl="~/Images/Instructions2.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view11" runat="server">
-                    <asp:Image ID="Image3" ImageUrl="~/Images/Instructions3.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image3" ImageUrl="~/Images/Instructions3.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view12" runat="server">
-                    <asp:Image ID="Image4" ImageUrl="~/Images/Instructions4.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image4" ImageUrl="~/Images/Instructions4.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view13" runat="server">
-                    <asp:Image ID="Image5" ImageUrl="~/Images/Instructions5.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image5" ImageUrl="~/Images/Instructions5.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view14" runat="server">
-                    <asp:Image ID="Image6" ImageUrl="~/Images/Instructions6.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image6" ImageUrl="~/Images/Instructions6.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view15" runat="server">
-                    <asp:Image ID="Image7" ImageUrl="~/Images/Instructions7.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image7" ImageUrl="~/Images/Instructions7.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view16" runat="server">
-                    <asp:Image ID="Image8" ImageUrl="~/Images/Instructions8.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image8" ImageUrl="~/Images/Instructions8.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view17" runat="server">
-                    <asp:Image ID="Image9" ImageUrl="~/Images/Instructions9.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image9" ImageUrl="~/Images/Instructions9.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view18" runat="server">
-                    <asp:Image ID="Image10" ImageUrl="~/Images/Instructions10.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image10" ImageUrl="~/Images/Instructions10.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view19" runat="server">
-                    <asp:Image ID="Image11" ImageUrl="~/Images/Instructions11.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image11" ImageUrl="~/Images/Instructions11.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view20" runat="server">
-                    <asp:Image ID="Image12" ImageUrl="~/Images/Instructions12.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image12" ImageUrl="~/Images/Instructions12.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view21" runat="server">
-                    <asp:Image ID="Image13" ImageUrl="~/Images/Instructions13.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image13" ImageUrl="~/Images/Instructions13.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view22" runat="server">
-                    <asp:Image ID="Image14" ImageUrl="~/Images/Instructions14.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image14" ImageUrl="~/Images/Instructions14.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view23" runat="server">
-                    <asp:Image ID="Image15" ImageUrl="~/Images/Instructions15.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image15" ImageUrl="~/Images/Instructions15.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view24" runat="server">
-                    <asp:Image ID="Image16" ImageUrl="~/Images/Instructions16.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image16" ImageUrl="~/Images/Instructions16.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view25" runat="server">
-                    <asp:Image ID="Image17" ImageUrl="~/Images/Instructions17.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image17" ImageUrl="~/Images/Instructions17.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view26" runat="server">
-                    <asp:Image ID="Image18" ImageUrl="~/Images/Instructions18.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image18" ImageUrl="~/Images/Instructions18.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
                 <asp:View ID="view27" runat="server">
-                    <asp:Image ID="Image19" ImageUrl="~/Images/Instructions19.png" Width="700px" runat="server" />
+                    <asp:Image ID="Image19" ImageUrl="~/Images/Instructions19.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
             </asp:MultiView>
             <br />
@@ -514,19 +513,19 @@
                     <tr>
                         <td>
                             <br />
-                            We will now proceed to the training mode.
+                            &nbsp;We will now proceed to the training mode.
                             <br />
                             <br />
-                            In the training mode, we will play as the Human resource team, and you will choose whether to accept or reject each candidate.
+                            &nbsp;In the training mode, we will play as the Human resource team, and you will choose whether to accept or reject each candidate.
                             <br />
                             <br />
-                            After a candidate is accepted, you will also choose the uniform for the position.
+                            &nbsp;After a candidate is accepted, you will also choose the uniform for the position.
                             <br />
                             <br />
-                            You need to play the first 3 positions before you can proceed to the real game.
+                            &nbsp;You need to play the first 3 positions before you can proceed to the real game.
                             <br />
                             <br />
-                            The training will not affect your bonus.
+                            &nbsp;The training will not affect your bonus.
                             <br />
                             <br />
                             <br />
@@ -549,7 +548,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>What is the relative rank of the candidate that arrives first?
+                        <td>What is the <b>relative rank</b> of the candidate that arrives first?
                         <asp:RadioButtonList ID="rbl1" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
@@ -560,7 +559,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>What is the absolute rank of the candidate that arrives first?
+                        <td>What is the <b>absolute rank</b> of the candidate that arrives first?
                         <asp:RadioButtonList ID="rbl2" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
@@ -571,7 +570,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>What is the absolute rank of the candidate that arrives last (19 candidates already interviewed)?
+                        <td>What is the <b>absolute rank</b> of the candidate that arrives last (19 candidates already interviewed)?
                         <asp:RadioButtonList ID="rbl3" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
@@ -609,13 +608,13 @@
                     <tr>
                         <td>
                             <br />
-                            We will now proceed to the play the game.
+                            &nbsp;We will now proceed to the play the game.
                             <br />
                             <br />
-                            In the game, the Human Resource team will choose whether to accept or reject each candidate.
+                            &nbsp;In the game, the Human Resource team will choose whether to accept or reject each candidate.
                             <br />
                             <br />
-                            After a candidate is accepted, you will choose the uniform for the position.
+                            &nbsp;After a candidate is accepted, you will choose the uniform for the position.
                             <br />
                             <br />
                             <br />
@@ -1008,23 +1007,29 @@
                     <tr>
                         <td>
                             <br />
-                            Thanks for playing, You did great!
+                            &nbsp;Thanks for playing, You did great!
                             <br />
                             <br />
-                            The average rank of the people you hired was:
+                            &nbsp;The average rank of the people you hired is:
                             <br />
                             <br />
-                            <asp:Label ID="AverageRank" runat="server" Font-Bold="true" ForeColor="Green" Font-Size="Medium"></asp:Label>
+                            <center>
+                            <asp:Label ID="AverageRank" runat="server" Font-Bold="true" ForeColor="Green" Font-Size="Larger"></asp:Label>
+                            </center>
+                            <br />
+                            &nbsp;Your bonus is:
                             <br />
                             <br />
-                            <asp:Label ID="Bonus" runat="server" Font-Bold="true" ForeColor="Blue" Font-Size="Medium"></asp:Label>
+                            <center>
+                            <asp:Label ID="Bonus" runat="server" Font-Bold="true" ForeColor="Blue" Font-Size="Larger"></asp:Label>
+                            </center>
+                            <br />
+                            <br />
+                            
                         </td>
                     </tr>
                 </table>
             </div>
-            <br />
-            <asp:Button ID="Button1" runat="server" Text="Next" OnClick="btnNextToTraining_Click" />
-
         </asp:View>
     </asp:MultiView>
 </asp:Content>
