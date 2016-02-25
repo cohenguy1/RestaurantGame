@@ -17,7 +17,16 @@ namespace RestaurantGame
             }
             else
             {
-                Alert.Show("wrong answer, please try again");
+                NumOfWrongQuizAnswers++;
+
+                if (NumOfWrongQuizAnswers > 2)
+                {
+                    MultiView1.ActiveViewIndex = 8;
+                }
+                else
+                {
+                    Alert.Show("wrong answer, please try again");
+                }
             }
         }
     }

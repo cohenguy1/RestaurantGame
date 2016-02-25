@@ -1031,5 +1031,24 @@
                 </table>
             </div>
         </asp:View>
+
+        <asp:View ID="QuizWrong" runat="server">
+            <h2>Quiz</h2>
+            <div style="text-align: center; width: 640px; margin: 0 auto;">
+                <table style="text-align: left; width: 640px;" border="1">
+                    <tr>
+                        <td>
+                            <br />
+                            &nbsp;You have been wrong for 3 times.
+                            <br />
+                            <br />
+                            &nbsp;The game is over, thank you for your time.
+                            <br />
+                            <br />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </asp:View>
     </asp:MultiView>
 </asp:Content>

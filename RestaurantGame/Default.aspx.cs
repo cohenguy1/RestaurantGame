@@ -4,9 +4,7 @@ using System.Text;
 
 namespace RestaurantGame
 {
-    // TODO configuration of rating position
     // TODO limit screen size
-    // TODO Finish uniform images
     // You were wrong 3 times
     // Why jumping
     // divide to web pages

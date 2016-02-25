@@ -59,6 +59,7 @@ namespace RestaurantGame
             else
             {
                 MultiView1.ActiveViewIndex = 4;
+                NumOfWrongQuizAnswers = 0;
             }
         }
 

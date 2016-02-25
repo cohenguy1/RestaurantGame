@@ -42,6 +42,8 @@ namespace RestaurantGame
 
         public const string AskPositionStr = "AskPosition";
 
+        public const string NumOfWrongQuizAnswersStr = "NumOfWrongQuizAnswers";
+
         public GameState GameState
         {
             get { return (GameState)Session[GameStateStr]; }
@@ -170,6 +172,12 @@ namespace RestaurantGame
         {
             get { return (int)Session[AskPositionStr]; }
             set { Session[AskPositionStr] = value; }
+        }
+
+        public int NumOfWrongQuizAnswers
+        {
+            get { return (int)Session[NumOfWrongQuizAnswersStr]; }
+            set { Session[NumOfWrongQuizAnswersStr] = value; }
         }
     }
 }
