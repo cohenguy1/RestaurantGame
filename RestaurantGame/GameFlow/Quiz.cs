@@ -9,6 +9,8 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
+        public const int MaxNumOfWrongQuizAnswers = 5;
+
         protected void btnNextToProceedToGame_Click(object sender, EventArgs e)
         {
             if (rbl1.SelectedIndex == 0 && rbl2.SelectedIndex == 3 && rbl3.SelectedIndex == 3)
@@ -19,7 +21,7 @@ namespace RestaurantGame
             {
                 NumOfWrongQuizAnswers++;
 
-                if (NumOfWrongQuizAnswers > 2)
+                if (NumOfWrongQuizAnswers >= MaxNumOfWrongQuizAnswers)
                 {
                     MultiView1.ActiveViewIndex = 8;
                 }

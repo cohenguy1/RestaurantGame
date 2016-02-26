@@ -63,6 +63,7 @@ namespace RestaurantGame
             if (randHim == 1)
             {
                 backgroundText.Text = backgroundText.Text.Replace("him", "her");
+                backgroundText2.Text = backgroundText2.Text.Replace("he", "she");
             }
 
             AskPosition = (randHim == 0) ? 1 : 10;
@@ -87,8 +88,6 @@ namespace RestaurantGame
 
             CurrentCandidateNumber = 0;
             CandidateCompletedStep = CandidateCompletedStep.ShowCandidatesMap;
-
-            TimerGame.Interval = 4000;
 
             TimerGame.Enabled = true;
         }
@@ -174,10 +173,11 @@ namespace RestaurantGame
 
         private void EndGame()
         {
+            TimerGame.Enabled = false;
             MultiView1.ActiveViewIndex = 7;
             double averageRank = CalculateAveragePosition();
-            int bonus = NumberOfCandidates - (int)Math.Round(averageRank);
-            AverageRank.Text = averageRank.ToString("0.00");
+            double bonus = NumberOfCandidates - averageRank;
+            AverageRank.Text = averageRank.ToString("0.0");
             Bonus.Text = bonus.ToString() + " cents";
         }
 
@@ -224,7 +224,7 @@ namespace RestaurantGame
                 else
                 {
                     TimerGame.Enabled = false;
-                    SessionState = Enums.SessionState.WaitingForUserDecision;
+                    SessionState = SessionState.WaitingForUserDecision;
                 }
             }
             else if (currentCandidate.CandidateState == CandidateState.Completed)
@@ -282,7 +282,7 @@ namespace RestaurantGame
                 TimerBlinkRemainingCandidates.Interval = 350;
             }
 
-            if (NumOfBlinks >= 5)
+            if (NumOfBlinks >= 2)
             {
                 TimerBlinkRemainingCandidates.Enabled = false;
                 RearrangeCandidatesMap();
@@ -304,7 +304,6 @@ namespace RestaurantGame
                 HideCandidatesSecondRowImages();
                 RemainingBlinkState = BlinkState.Hidden;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
-                NumOfBlinks++;
                 TimerRearrangeCandidatesMap.Interval = 250;
             }
             else
@@ -313,15 +312,34 @@ namespace RestaurantGame
                 RemainingBlinkState = BlinkState.Visible;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
                 TimerRearrangeCandidatesMap.Interval = 350;
+                NumOfBlinks++;
             }
 
-            if (NumOfBlinks >= 5)
+            if (NumOfBlinks >= 2)
             {
                 TimerRearrangeCandidatesMap.Enabled = false;
                 SetCurrentPositionCellVisibility(BlinkState.Visible);
-                FullyHideCandidatesSecondRowImages();
-                PickUniform();
+                PositionSummary();
             }
+        }
+
+        private void PositionSummary()
+        {
+            btnThumbsDown.Visible = false;
+            btnThumbsUp.Visible = false;
+            btnFastBackwards.Visible = false;
+            btnPausePlay.Visible = false;
+            btnFastForward.Visible = false;
+            LabelSpeed.Visible = false;
+            PositionSummaryLbl1.Visible = true;
+            PositionSummaryLbl2.Visible = true;
+            PositionSummaryLbl3.Visible = true;
+            SummaryNextLbl.Visible = true;
+            btnNextToUniform.Visible = true;
+            PanelBasket.Visible = false;
+
+            PositionSummaryLbl2.Text = CurrentCandidate.CandidateRank.ToString();
+            SummaryNextLbl.Text = "<br /><br />Press 'Next' to pick uniform for the " + GetCurrentJobTitle() + ".<br />";
         }
 
         private void PickUniform()
@@ -468,16 +486,16 @@ namespace RestaurantGame
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("The new candidate has a relative rank of ");
+            sb.Append("The new candidate has a relative ranking of ");
             sb.Append(newCandidateIndex + 1);
-            sb.Append(" out of ");
+            sb.Append(" out of the ");
             sb.Append(totalCandidatesByNow);
-            sb.Append(".");
+            sb.Append(" interviewed by now.");
 
             if (GameMode == GameMode.Training)
             {
                 sb.Append("<br />");
-                sb.Append("Choose to Accept or Reject the candidate, using the thumbs buttons.");
+                sb.Append("Choose to Accept or Reject the candidate, using the thumbs buttons below.");
             }
 
             StatusLabel.Text = sb.ToString();
@@ -505,6 +523,12 @@ namespace RestaurantGame
 
         protected void btnThumbsDown_Click(object sender, EventArgs e)
         {
+            if (CurrentCandidateNumber >= NumberOfCandidates - 1)
+            {
+                Alert.Show("You cannot reject the last candidate, no more candidates avaliable.");
+                return;
+            }
+
             AcceptCandidateByUser(false);
             IncreaseButtonSize(btnThumbsDown);
         }
@@ -530,8 +554,28 @@ namespace RestaurantGame
                 currentCandidate.CandidateState = CandidateState.Completed;
             }
 
+            TimerGame.Interval = 500;
             TimerGame.Enabled = true;
-            SessionState = Enums.SessionState.Running;
+            SessionState = SessionState.Running;
+        }
+
+        protected void btnNextToUniform_Click(object sender, EventArgs e)
+        {
+            btnThumbsDown.Visible = true;
+            btnThumbsUp.Visible = true;
+            btnFastBackwards.Visible = true;
+            btnPausePlay.Visible = true;
+            btnFastForward.Visible = true;
+            LabelSpeed.Visible = true;
+            PositionSummaryLbl1.Visible = false;
+            PositionSummaryLbl2.Visible = false;
+            PositionSummaryLbl3.Visible = false;
+            SummaryNextLbl.Visible = false;
+            btnNextToUniform.Visible = false;
+            PanelBasket.Visible = true;
+
+            FullyHideCandidatesSecondRowImages();
+            PickUniform();
         }
     }
 }

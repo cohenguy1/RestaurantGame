@@ -42,38 +42,34 @@
 
     <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
         <asp:View ID="view0" runat="server">
-
-            <h2 class="style3">You will recieve &lt;X&gt; cents for this Game and it will take &lt;X&gt; minutes of your time. </h2>
-
-            <p class="style3">
-                &nbsp;
-            </p>
             <h2>Game Background</h2>
-            <div style="text-align: center; width: 640px; margin: 0 auto;">
-                <table style="text-align: center; max-width: 640px;">
+            <div style="text-align: center; width: 700px; margin: 0 auto;">
+                <table style="text-align: center; max-width: 700px; font-size:large">
                     <tr>
                         <td>You have decided to open up a restaurant.</td>
                     </tr>
                     <tr>
-                        <td>&lt;Dudi will fill here&gt; In this game you and an Human Resource (HR) team  will interview people for 10 positions for the restaurant.</td>
+                        <td>In this game you and an Human Resource (HR) executive will interview people for 10 positions in the restaurant.</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td>&lt;Dudi will fill here&gt; The HR team will interview the candidates and decide about who fills each position,
+                        <td>The HR executive will interview the candidates and decide about who fills each position,
                         and you will choose the uniform for each position</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td>For Each position you have 20 candidates, ranked from 1 to 20. Your (and the HR's) interest is to pick the best candidate for each position.<br />
+                        <td>For Each position you have 20 candidates, ranked from 1 to 20. Your (and the HR executive's) interest is to pick highly 
+                            qualified (as possible) workers for the different positions.<br />
                             <br />
                             <asp:Label ID="backgroundText" runat="server"
                                 Text="When a candidate is interviewed, we must decide whether to hire him or not."></asp:Label>
                             <br />
-                            If the candidate is rejected, he cannot be recalled.
+                            <asp:Label ID="backgroundText2" runat="server"
+                                Text="If the candidate is rejected, he leaves forever and cannot be recalled."></asp:Label>
                         <br />
                             <br />
                         </td>
@@ -83,15 +79,18 @@
                         <td>
                             <asp:Label ID="label44" runat="server" Font-Bold="true"> You will receive a bonus after the game. </asp:Label>
                             <br />
-                            The amount of the bonus will be in accordance with the people you hire.
-                    <br />
-                            The better the ranking of the people you hire, the higher the bonus you get.
+                            The bonus will be in accordance with the average ranking of the people you hired – you will be given now an additional 20 cents as a bonus and we will deduct from that amount the average of the rankings of the people you've hired (e.g., if you end up hiring the third-best person for the job (on average) your bonus will be 17 cents).
                         </td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                     </tr>
-
+                    <tr>
+                        <td>Press 'Next' to continue. </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
                     <tr>
                         <td>
                             <asp:Button ID="btnNextToInfo" runat="server" Text="Next" OnClick="btnNextToInfo_Click" Enabled="false" /></td>
@@ -507,7 +506,7 @@
         </asp:View>
 
         <asp:View ID="viewProceedToTraining" runat="server">
-            <h2>Game Instructions</h2>
+            <h2>Training Mode</h2>
             <div style="text-align: center; width: 640px; margin: 0 auto;">
                 <table style="text-align: left; width: 640px;" border="1">
                     <tr>
@@ -516,19 +515,23 @@
                             &nbsp;We will now proceed to the training mode.
                             <br />
                             <br />
-                            &nbsp;In the training mode, we will play as the Human resource team, and you will choose whether to accept or reject each candidate.
+                            &nbsp;In the training mode, we will play as the Human Resource executive, and you will choose whether to accept or reject each candidate.
                             <br />
                             <br />
-                            &nbsp;After a candidate is accepted, you will also choose the uniform for the position.
+                            &nbsp;After a candidate is hired, you will also choose the uniform for the position.
                             <br />
                             <br />
-                            &nbsp;You need to play the first 3 positions before you can proceed to the real game.
+                            &nbsp;You need to fill in 3 positions in the training mode before you can proceed to the real game.
                             <br />
                             <br />
                             &nbsp;The training will not affect your bonus.
                             <br />
                             <br />
                             <br />
+                            &nbsp;Press 'Next' to continue.
+                            <br />
+                            <br />
+
                         </td>
                     </tr>
                 </table>
@@ -548,34 +551,34 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>What is the <b>relative rank</b> of the candidate that arrives first?
+                        <td>What is the <b>relative ranking</b> of the candidate that arrives first?
                         <asp:RadioButtonList ID="rbl1" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
                             <asp:ListItem>20</asp:ListItem>
-                            <asp:ListItem>Can be every rank in range 1-20</asp:ListItem>
+                            <asp:ListItem>Can be every ranking in range 1-20</asp:ListItem>
                         </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="rfv1" Style="color: Red;" ControlToValidate="rbl1" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
-                        <td>What is the <b>absolute rank</b> of the candidate that arrives first?
+                        <td>What is the <b>absolute ranking</b> of the candidate that arrives first?
                         <asp:RadioButtonList ID="rbl2" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
                             <asp:ListItem>20</asp:ListItem>
-                            <asp:ListItem>Can be every rank in range 1-20</asp:ListItem>
+                            <asp:ListItem>Can be every ranking in range 1-20</asp:ListItem>
                         </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="rfv2" Style="color: Red;" ControlToValidate="rbl2" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
-                        <td>What is the <b>absolute rank</b> of the candidate that arrives last (19 candidates already interviewed)?
+                        <td>What is the <b>absolute ranking</b> of the candidate that arrives last (19 candidates already interviewed)?
                         <asp:RadioButtonList ID="rbl3" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
                             <asp:ListItem>20</asp:ListItem>
-                            <asp:ListItem>Can be every rank in range 1-20</asp:ListItem>
+                            <asp:ListItem>Can be every ranking in range 1-20</asp:ListItem>
                         </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="rfv3" Style="color: Red;" ControlToValidate="rbl3" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                         </td>
@@ -608,14 +611,17 @@
                     <tr>
                         <td>
                             <br />
-                            &nbsp;We will now proceed to the play the game.
+                            &nbsp;We will now proceed to the real game.
                             <br />
                             <br />
-                            &nbsp;In the game, the Human Resource team will choose whether to accept or reject each candidate.
+                            &nbsp;In the game, the Human Resource executive will choose whether to accept or reject each candidate.
                             <br />
                             <br />
-                            &nbsp;After a candidate is accepted, you will choose the uniform for the position.
+                            &nbsp;After a candidate is hired, you will choose the uniform for the position.
                             <br />
+                            <br />
+                            <br />
+                            &nbsp;Press 'Next' to continue.
                             <br />
                             <br />
                         </td>
@@ -838,8 +844,13 @@
                             <asp:ImageButton ID="btnFastBackwards" runat="server" ImageUrl="~/Images/fbButton.png" OnClick="btnFastBackwards_Click" Enabled="true" />
                             <asp:ImageButton ID="btnPausePlay" runat="server" ImageUrl="~/Images/pauseButton.png" OnClick="btnPausePlay_Click" Enabled="true" />
                             <asp:ImageButton ID="btnFastForward" runat="server" ImageUrl="~/Images/ffButton.png" OnClick="btnFastForward_Click" Enabled="true" Style="margin-bottom: auto" />
+                            <asp:Label ID="PositionSummaryLbl1" runat="server" Font-Size="Large" Visible="false" Text="The worker you hired has an absolute rank of&nbsp;"></asp:Label>
+                            <asp:Label ID="PositionSummaryLbl2" runat="server" Font-Size="X-Large" Visible="false" ForeColor="Green" Font-Bold="true"></asp:Label>
+                            <asp:Label ID="PositionSummaryLbl3" runat="server" Font-Size="Large" Visible="false" Text="."></asp:Label>
+                            <asp:Label ID="SummaryNextLbl" runat="server" Visible="false"></asp:Label>
                             <br />
                             <asp:Label ID="LabelSpeed" runat="server" Font-Size="Medium" Text="&nbsp;Speed: x1.0"></asp:Label>
+                            <asp:Button ID="btnNextToUniform" runat="server" Visible="false" Text="Next" OnClick="btnNextToUniform_Click" />
                         </asp:Panel>
 
 
@@ -857,9 +868,9 @@
                                     <td>&nbsp;Hi!
                                         <br />
                                         <br />
-                                        &nbsp;We stopped for a moment so you can rate your advisor.
+                                        &nbsp;We stopped for a moment so you can rate the HR executive.
                                         <br />
-                                        &nbsp;Your rating should be based on how good you think your advisor is.
+                                        &nbsp;Your rating should be based on how good you think the HR executive is.
                                         <br />
                                         <br />
 
@@ -868,11 +879,11 @@
                                         </asp:Label>
                                         <br />
                                         <br />
-                                        &nbsp;Rate the advisor from 1 to 10, 10 being the best:
+                                        &nbsp;Rate the HR executive from 1 to 10, 10 being the best:
                                         <br />
                                         <br />
-                                        <asp:RadioButtonList ID="RatingRbL" runat="server">
-                                            <asp:ListItem>1 - The worst advisor ever!</asp:ListItem>
+                                        <asp:RadioButtonList ID="RatingRbL" runat="server" value="null">
+                                            <asp:ListItem>1 - The worst HR executive ever!</asp:ListItem>
                                             <asp:ListItem>2</asp:ListItem>
                                             <asp:ListItem>3</asp:ListItem>
                                             <asp:ListItem>4</asp:ListItem>
@@ -881,7 +892,7 @@
                                             <asp:ListItem>7</asp:ListItem>
                                             <asp:ListItem>8</asp:ListItem>
                                             <asp:ListItem>9</asp:ListItem>
-                                            <asp:ListItem>10 - I'm loving it!</asp:ListItem>
+                                            <asp:ListItem>10 - I'm loving him!</asp:ListItem>
                                         </asp:RadioButtonList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Style="color: Red;" ControlToValidate="RatingRbL" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                                     </td>
@@ -960,7 +971,7 @@
                     GridLines="Both"
                     runat="server">
                     <asp:TableRow Height="35px">
-                        <asp:TableCell ID="cell1" Width="155px" HorizontalAlign="Left" Text="&nbsp;Restaurant Positions" Style="color: blue;" Font-Bold="true"></asp:TableCell>
+                        <asp:TableCell ID="cell1" Width="157px" HorizontalAlign="Left" Text="&nbsp;Restaurant Positions" Style="color: blue;" Font-Bold="true"></asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow Height="35px">
                         <asp:TableCell ID="ManagerCell" HorizontalAlign="Left" Text="&nbsp;Manager:"></asp:TableCell>
@@ -993,7 +1004,7 @@
                         <asp:TableCell ID="BartenderCell" HorizontalAlign="Left" Text="&nbsp;Bartender:"></asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow Height="35px">
-                        <asp:TableCell ID="AvgRankCell" Font-Bold="true" ForeColor="Purple" HorizontalAlign="Left" Text="&nbsp;Average Rank:"></asp:TableCell>
+                        <asp:TableCell ID="AvgRankCell" Font-Bold="true" ForeColor="Purple" HorizontalAlign="Left" Text="&nbsp;Average Ranking:"></asp:TableCell>
                     </asp:TableRow>
 
                 </asp:Table>
@@ -1010,7 +1021,7 @@
                             &nbsp;Thanks for playing, You did great!
                             <br />
                             <br />
-                            &nbsp;The average rank of the people you hired is:
+                            &nbsp;The average ranking of the people you hired is:
                             <br />
                             <br />
                             <center>

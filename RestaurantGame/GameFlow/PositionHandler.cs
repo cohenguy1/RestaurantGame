@@ -37,7 +37,11 @@ namespace RestaurantGame
 
         private double CalculateAveragePosition()
         {
-            return Positions.Where(position => position.ChosenCandidate != null).Average(pos => pos.ChosenCandidate.CandidateRank);
+            double average = Positions.Where(position => position.ChosenCandidate != null).
+                Average(pos => pos.ChosenCandidate.CandidateRank);
+
+            // with one decimal precision
+            return Math.Round(average, 1);
         }
 
         private void UpdatePositionsTable(Position currentPosition, double avgRank)
@@ -45,7 +49,7 @@ namespace RestaurantGame
             var positionCell = GetPositionCell(currentPosition);
             positionCell.Text = "&nbsp;" + currentPosition.GetJobTitle() + ": " + currentPosition.ChosenCandidate.CandidateRank;
 
-            AvgRankCell.Text = "&nbsp;Average Rank: " + avgRank.ToString("0.00");
+            AvgRankCell.Text = "&nbsp;Average Ranking: " + avgRank.ToString("0.0") + " ";
         }
 
         private void ClearPositionsTable()
@@ -64,7 +68,7 @@ namespace RestaurantGame
                 positionCell.Font.Bold = false;
             }
 
-            AvgRankCell.Text = "&nbsp;Average Rank: ";
+            AvgRankCell.Text = "&nbsp;Average Ranking: ";
         }
 
         private Position GetPosition(int indexPosition)

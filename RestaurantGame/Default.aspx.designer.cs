@@ -76,6 +76,15 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Label backgroundText;
         
         /// <summary>
+        /// backgroundText2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label backgroundText2;
+        
+        /// <summary>
         /// label44 control.
         /// </summary>
         /// <remarks>
@@ -1570,6 +1579,42 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.ImageButton btnFastForward;
         
         /// <summary>
+        /// PositionSummaryLbl1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PositionSummaryLbl1;
+        
+        /// <summary>
+        /// PositionSummaryLbl2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PositionSummaryLbl2;
+        
+        /// <summary>
+        /// PositionSummaryLbl3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PositionSummaryLbl3;
+        
+        /// <summary>
+        /// SummaryNextLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SummaryNextLbl;
+        
+        /// <summary>
         /// LabelSpeed control.
         /// </summary>
         /// <remarks>
@@ -1577,6 +1622,15 @@ namespace RestaurantGame {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelSpeed;
+        
+        /// <summary>
+        /// btnNextToUniform control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNextToUniform;
         
         /// <summary>
         /// ViewRating control.
