@@ -583,15 +583,15 @@
                             <asp:RequiredFieldValidator ID="rfv3" Style="color: Red;" ControlToValidate="rbl3" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
-                    <!--<tr>
-                        <td>Lets suppose we rejected 10 candidates, and a new candidate arrives with relative rank of 11 (worst so far).
+                    <tr>
+                        <td>Let's suppose you ended up hiring on average the 4-th ranked candidate.
                             <br />
-                            What can be the absolute rank of the candidate?
+                            What will be your bonus?
                         <asp:RadioButtonList ID="rbl4" runat="server">
-                            <asp:ListItem>Must be 11</asp:ListItem>
-                            <asp:ListItem>Can be every rank in range 1-10</asp:ListItem>
-                            <asp:ListItem>Can be every rank in range 11-20</asp:ListItem>
-                            <asp:ListItem>Can be every rank in range 1-20</asp:ListItem>
+                            <asp:ListItem>0</asp:ListItem>
+                            <asp:ListItem>16</asp:ListItem>
+                            <asp:ListItem>17</asp:ListItem>
+                            <asp:ListItem>20</asp:ListItem>
                         </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="rfv4" Style="color: Red;" ControlToValidate="rbl4" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                         </td>
@@ -1050,7 +1050,7 @@
                     <tr>
                         <td>
                             <br />
-                            &nbsp;You have been wrong for 3 times.
+                            <asp:Label ID="QuizWrongLbl" runat="server"></asp:Label>
                             <br />
                             <br />
                             &nbsp;The game is over, thank you for your time.

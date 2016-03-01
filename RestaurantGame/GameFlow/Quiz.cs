@@ -13,7 +13,10 @@ namespace RestaurantGame
 
         protected void btnNextToProceedToGame_Click(object sender, EventArgs e)
         {
-            if (rbl1.SelectedIndex == 0 && rbl2.SelectedIndex == 3 && rbl3.SelectedIndex == 3)
+            if (rbl1.SelectedIndex == 0 &&
+                rbl2.SelectedIndex == 3 &&
+                rbl3.SelectedIndex == 3 &&
+                rbl4.SelectedIndex == 1)
             {
                 MultiView1.ActiveViewIndex = 5;
             }
@@ -23,11 +26,13 @@ namespace RestaurantGame
 
                 if (NumOfWrongQuizAnswers >= MaxNumOfWrongQuizAnswers)
                 {
+                    QuizWrongLbl.Text = "&nbsp;You have been wrong for " + MaxNumOfWrongQuizAnswers + " times.";
                     MultiView1.ActiveViewIndex = 8;
                 }
                 else
                 {
-                    Alert.Show("wrong answer, please try again");
+                    var triesRemianing = MaxNumOfWrongQuizAnswers - NumOfWrongQuizAnswers;
+                    Alert.Show("Wrong answer, please try again. You have " + triesRemianing + " tries remianing.");
                 }
             }
         }
