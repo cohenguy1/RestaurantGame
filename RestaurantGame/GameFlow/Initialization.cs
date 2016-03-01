@@ -9,7 +9,11 @@ namespace RestaurantGame
     {
         private void GenerateCandidatesForPosition()
         {
+            var positionNumber = CurrentPositionNumber;
+
             var positionCandidates = new List<Candidate>();
+
+            int[] candidateRanks = DbHandler.GetCandidateRanksForPosition(positionNumber);
 
             for (var candidateIndex = 0; candidateIndex < NumberOfCandidates; candidateIndex++)
             {
@@ -17,29 +21,11 @@ namespace RestaurantGame
                 {
                     CandidateState = CandidateState.New,
                     CandidateNumber = candidateIndex,
-                    CandidateAccepted = false
+                    CandidateAccepted = false,
+                    CandidateRank = candidateRanks[candidateIndex]
                 };
 
                 positionCandidates.Add(newCandidate);
-            }
-
-            var ranks = new List<int>();
-            for (var index = 1; index <= NumberOfCandidates; index++)
-            {
-                ranks.Add(index);
-            }
-
-            var ranksRemaining = NumberOfCandidates;
-            var randomGenerator = new Random();
-
-            for (var index = 0; index < NumberOfCandidates; index++)
-            {
-                var position = randomGenerator.Next(1, ranksRemaining + 1) - 1;
-
-                positionCandidates[index].CandidateRank = ranks[position];
-
-                ranks.RemoveAt(position);
-                ranksRemaining--;
             }
 
             PositionCandidates = positionCandidates;

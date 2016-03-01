@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantGame.Enums;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -9,6 +10,58 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
+        private bool NeedToAskRating()
+        {
+            if (AlreadyAskedForRating || GameMode != GameMode.Advisor)
+            {
+                return false;
+            }
+
+            if (AskPosition == AskPositionHeuristic.First)
+            {
+                return (CurrentPositionNumber + 1 == 1);
+            }
+            
+            if (AskPosition == AskPositionHeuristic.Last)
+            {
+                return (CurrentPositionNumber + 1 == 10);
+            }
+
+            if (AskPosition == AskPositionHeuristic.Random)
+            {
+                return (CurrentPositionNumber == DbHandler.RandomHuristicAskPosition);
+            }
+
+            // AskPosition == Optimal
+            /*
+             * 10 Stopping Value: 20
+             * 9 Stopping Value: 2
+             * 8 Stopping Value: 1
+             * 7 Stopping Value: 1
+             * 6 Stopping Value: 1
+             * 5 Stopping Value: 1
+             * 4 Stopping Value: 1
+             * 3 Stopping Value: 1
+             * 2 Stopping Value: 1
+             * 1 Stopping Value: 1
+             */
+            if (CurrentPositionNumber == 9)
+            {
+                return true;
+            }
+
+            var acceptedCandidateRank = CurrentCandidate.CandidateRank;
+            if (CurrentPositionNumber == 8)
+            {
+                if (acceptedCandidateRank <= 2)
+                {
+                    return true;
+                }
+            }
+
+            return (acceptedCandidateRank == 1);
+        }
+
         protected void RateAdvisor()
         {
             TimerGame.Enabled = false;
@@ -41,7 +94,7 @@ namespace RestaurantGame
                 cmd.Connection = sqlConnection1;
                 cmd.Parameters.AddWithValue("@UserId", UserId);
                 cmd.Parameters.AddWithValue("@AdviserRating", adviserRating.ToString());
-                cmd.Parameters.AddWithValue("@RatingPosition", CurrentPositionNumber.ToString());
+                cmd.Parameters.AddWithValue("@RatingPosition", (CurrentPositionNumber + 1).ToString());
                 cmd.Parameters.AddWithValue("@Position1Rank", GetChosenPositionToInsertToDb(1));
                 cmd.Parameters.AddWithValue("@Position2Rank", GetChosenPositionToInsertToDb(2));
                 cmd.Parameters.AddWithValue("@Position3Rank", GetChosenPositionToInsertToDb(3));
@@ -66,3 +119,4 @@ namespace RestaurantGame
         }
     }
 }
+ 

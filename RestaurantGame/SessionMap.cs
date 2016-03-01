@@ -168,9 +168,9 @@ namespace RestaurantGame
             set { Session[NumOfBlinksStr] = value; }
         }
 
-        public int AskPosition
+        public AskPositionHeuristic AskPosition
         {
-            get { return (int)Session[AskPositionStr]; }
+            get { return (AskPositionHeuristic)Session[AskPositionStr]; }
             set { Session[AskPositionStr] = value; }
         }
 

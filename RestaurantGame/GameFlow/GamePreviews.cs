@@ -16,7 +16,7 @@ namespace RestaurantGame
                 String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SQLiteCommand cmd = new SQLiteCommand("Select Assignment_Id from [User] Where UserId='" + UserId + "'");
+                    SQLiteCommand cmd = new SQLiteCommand("Select Assignment_Id from [Users] Where UserId='" + UserId + "'");
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
                     sqlConnection1.Open();
@@ -26,8 +26,8 @@ namespace RestaurantGame
                     if (assignmentId == null)
                     {
                         //new user -insert to DB
-                        DateTime curentT = DateTime.UtcNow;
-                        cmd = new SQLiteCommand("insert into [User] (UserId, Assignment_Id,time) VALUES ('" + UserId + "','" + Session["turkAss"] + "','" + curentT.ToString() + "')");
+                        DateTime currentTime = DateTime.Now;
+                        cmd = new SQLiteCommand("insert into [Users] (UserId, Assignment_Id, time) VALUES ('" + UserId + "','" + Session["turkAss"] + "','" + currentTime.ToString() + "')");
                         cmd.CommandType = CommandType.Text;
                         cmd.Connection = sqlConnection1;
                         cmd.ExecuteNonQuery();
@@ -69,7 +69,7 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, Mobile ) VALUES (@UserId, @Gender, @Age, @Education,@Nationality,@Reason,@Mobile)");
+                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, VectorNum, AskPosition) VALUES (@UserId, @Gender, @Age, @Education,@Nationality,@Reason,@VectorNum, @AskPosition)");
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
                     cmd.Parameters.AddWithValue("@UserId", UserId);
@@ -78,7 +78,8 @@ namespace RestaurantGame
                     cmd.Parameters.AddWithValue("@Education", DropDownList3.Text);
                     cmd.Parameters.AddWithValue("@Nationality", DropDownList4.Text);
                     cmd.Parameters.AddWithValue("@Reason", DropDownList5.Text);
-                    cmd.Parameters.AddWithValue("@Mobile", mobile);
+                    cmd.Parameters.AddWithValue("@VectorNum", DbHandler.VectorNum);
+                    cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
                     sqlConnection1.Open();
                     cmd.ExecuteNonQuery();
                 }

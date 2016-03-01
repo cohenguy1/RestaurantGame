@@ -23,9 +23,7 @@ namespace RestaurantGame
             {
                 DecideRandomStuff();
 
-                var t = new DecisionMaker();
-
-                String val = null;
+                string val = null;
 
                 // friend assigment
                 val = Request.QueryString["assignmentId"];
@@ -66,7 +64,7 @@ namespace RestaurantGame
                 backgroundText2.Text = backgroundText2.Text.Replace("he", "she");
             }
 
-            AskPosition = (randHim == 0) ? 1 : 10;
+            AskPosition = DbHandler.GetAskPosition();
         }
 
         private void StartInterviewsForPosition(int position)
@@ -346,7 +344,7 @@ namespace RestaurantGame
         {
             TrainingPassed++;
 
-            if (!AlreadyAskedForRating && GameMode == GameMode.Advisor && AskPosition == CurrentPositionNumber + 1)
+            if (NeedToAskRating())
             {
                 AskForRating = true;
             }
