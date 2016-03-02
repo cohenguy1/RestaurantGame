@@ -54,7 +54,10 @@
     function Init() {
         if (document.hasFocus)
             setInterval("CheckFocus ()", 500);
+
     }
+
+
 
 
     function disableBackButton() {
@@ -64,6 +67,11 @@
     window.onload = disableBackButton();
     window.onpageshow = function (evt) { if (evt.persisted) disableBackButton() }
     window.onunload = function () { void (0) }
+
+    $(document).ready(function () {
+        $("#clientScreenWidth").val($(window).width());
+        $("#clientScreenHeight").val($(window).height());
+    });
 </script>
 <body onload="Init();" onresize="sizeFunction()">
 

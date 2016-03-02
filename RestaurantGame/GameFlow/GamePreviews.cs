@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -9,6 +11,8 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
+        public static Stopwatch InstructionsTimer = new Stopwatch();
+
         protected void btnNextToInfo_Click(object sender, EventArgs e)
         {
             if (!UserId.Equals("friend"))
@@ -60,9 +64,28 @@ namespace RestaurantGame
             // Save user info to DB
             String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
             string mobile = "not_mobile";
+
+            string heightS = HttpContext.Current.Request.Params["clientScreenHeight"];
+            string widthS = HttpContext.Current.Request.Params["clientScreenWidth"];
+
+            int height;
+            int width;
+            bool heightConvertResult = int.TryParse(heightS, out height);
+            bool widthConvertResult = int.TryParse(widthS, out width);
+            
             if (Request.Browser.IsMobileDevice)
             {
-                mobile = "mobile_user";
+                MultiView1.ActiveViewIndex = 9;
+                return;
+            }
+
+            if (heightConvertResult && widthConvertResult)
+            {
+                if (height < 200 || width < 700)
+                {
+                    MultiView1.ActiveViewIndex = 9;
+                    return;
+                }
             }
 
             try
@@ -95,6 +118,8 @@ namespace RestaurantGame
             MultiView1.ActiveViewIndex = 2;
             MultiviewInstructions.ActiveViewIndex = 0;
             ProgressBar1.Value = 0;
+
+            InstructionsTimer.Start();
         }
 
         protected void btnNextToGame_Click(object sender, EventArgs e)
@@ -116,6 +141,16 @@ namespace RestaurantGame
             ClearPositionsTable();
 
             StartInterviewsForPosition(0);
+        }
+
+        protected void rewardBtn_Click(object sender, EventArgs e)
+        {
+            NameValueCollection data = new NameValueCollection();
+            data.Add("assignmentId", (String)Session["turkAss"]);
+            data.Add("workerId", (String)Session["user_id"]);
+            data.Add("hitId", (String)Session["hitId"]);
+
+            Alert.RedirectAndPOST(this.Page, "https://www.mturk.com/mturk/externalSubmit", data);
         }
     }
 }

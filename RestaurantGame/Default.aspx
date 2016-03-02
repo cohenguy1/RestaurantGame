@@ -34,6 +34,9 @@
         }
     </style>
 
+    <input type="hidden" value="" name="clientScreenHeight" id="clientScreenHeight" />
+    <input type="hidden" value="" name="clientScreenWidth" id="clientScreenWidth" />
+
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <asp:Timer ID="TimerGame" OnTick="TimerGame_Tick" runat="server" Enabled="false"></asp:Timer>
@@ -1036,11 +1039,16 @@
                             </center>
                             <br />
                             <br />
-                            
+                            &nbsp;Please click on 'Collect your reward' to submit the HIT.
+                            <br />
+                            <br />
+                            <br />
                         </td>
                     </tr>
                 </table>
             </div>
+
+            <asp:Button ID="rewardBtn" runat="server" OnClick="rewardBtn_Click" Text="Collect your reward" />
         </asp:View>
 
         <asp:View ID="QuizWrong" runat="server">
@@ -1056,6 +1064,28 @@
                             &nbsp;The game is over, thank you for your time.
                             <br />
                             <br />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </asp:View>
+
+        <asp:View ID="ResolutionProblem" runat="server">
+            <h2></h2>
+            <div style="text-align: center; width: 640px; margin: 0 auto;">
+                <table style="text-align: left; width: 640px;" border="1">
+                    <tr>
+                        <td>
+                            <br />
+                            <asp:Label ID="Label10" runat="server"></asp:Label>
+                            <br />
+                            &nbsp;Sorry, you cannot enter the game from a mobile device, or with a small browser size.
+                            <br />
+                            <br />
+                            &nbsp;Please open the game with a browser resolution of at least 800x500.
+                            <br />
+                            <br />
+                            &nbsp;
                         </td>
                     </tr>
                 </table>

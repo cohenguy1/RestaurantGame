@@ -14,7 +14,6 @@ namespace RestaurantGame
 
         public static int VectorNum;
 
-
         public static int RandomHuristicAskPosition;
 
         public static AskPositionHeuristic GetAskPosition()

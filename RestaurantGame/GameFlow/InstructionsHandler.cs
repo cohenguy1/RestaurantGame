@@ -30,6 +30,7 @@ namespace RestaurantGame
 
             if (MultiviewInstructions.ActiveViewIndex == NumOfInstructions - 1)
             {
+                InstructionsTimer.Stop();
                 MultiView1.ActiveViewIndex = 3;
                 return;
             }

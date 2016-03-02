@@ -1966,6 +1966,15 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Label Bonus;
         
         /// <summary>
+        /// rewardBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button rewardBtn;
+        
+        /// <summary>
         /// QuizWrong control.
         /// </summary>
         /// <remarks>
@@ -1982,5 +1991,23 @@ namespace RestaurantGame {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label QuizWrongLbl;
+        
+        /// <summary>
+        /// ResolutionProblem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View ResolutionProblem;
+        
+        /// <summary>
+        /// Label10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label10;
     }
 }

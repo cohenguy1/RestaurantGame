@@ -302,14 +302,12 @@ namespace RestaurantGame
                 HideCandidatesSecondRowImages();
                 RemainingBlinkState = BlinkState.Hidden;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
-                TimerRearrangeCandidatesMap.Interval = 250;
             }
             else
             {
                 ShowCandidatesSecondRowImages();
                 RemainingBlinkState = BlinkState.Visible;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
-                TimerRearrangeCandidatesMap.Interval = 350;
                 NumOfBlinks++;
             }
 
