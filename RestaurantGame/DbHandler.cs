@@ -16,8 +16,30 @@ namespace RestaurantGame
 
         public static int RandomHuristicAskPosition;
 
-        public static AskPositionHeuristic GetAskPosition()
+        public static AskPositionHeuristic GetAskPosition(bool isFriend)
         {
+            if (isFriend)
+            {
+                Random ran = new Random();
+                int randomAsk = ran.Next(4);
+
+                VectorNum = ran.Next(50) + 1;
+
+                switch (randomAsk)
+                {
+                    case 0:
+                        return AskPositionHeuristic.First;
+                    case 1:
+                        return AskPositionHeuristic.Last;
+                    case 2:
+                        return AskPositionHeuristic.Random;
+                    case 3:
+                        return AskPositionHeuristic.Optimal;
+                    default:
+                        return AskPositionHeuristic.First;
+                }
+            }
+
             var firstPlaceAskRequests = GetIntFromConfig("FirstPlaceAskRequests");
             var askRequestPerMetodology = GetIntFromConfig("AskRequestsPerMetodology");
 

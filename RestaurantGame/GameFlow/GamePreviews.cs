@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Amazon.WebServices.MechanicalTurk;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
@@ -11,10 +12,14 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        public static Stopwatch InstructionsTimer = new Stopwatch();
+        public static Stopwatch InstructionsStopwatch = new Stopwatch();
+
+        public static Stopwatch GameStopwatch = new Stopwatch();
 
         protected void btnNextToInfo_Click(object sender, EventArgs e)
         {
+            GameStopwatch.Start();
+
             if (!UserId.Equals("friend"))
             {
                 String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
@@ -92,7 +97,7 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, VectorNum, AskPosition) VALUES (@UserId, @Gender, @Age, @Education,@Nationality,@Reason,@VectorNum, @AskPosition)");
+                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, VectorNum, AskPosition, time) VALUES (@UserId, @Gender, @Age, @Education,@Nationality,@Reason,@VectorNum, @AskPosition, @time)");
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
                     cmd.Parameters.AddWithValue("@UserId", UserId);
@@ -103,6 +108,7 @@ namespace RestaurantGame
                     cmd.Parameters.AddWithValue("@Reason", DropDownList5.Text);
                     cmd.Parameters.AddWithValue("@VectorNum", DbHandler.VectorNum);
                     cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
+                    cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString());
                     sqlConnection1.Open();
                     cmd.ExecuteNonQuery();
                 }
@@ -119,7 +125,7 @@ namespace RestaurantGame
             MultiviewInstructions.ActiveViewIndex = 0;
             ProgressBar1.Value = 0;
 
-            InstructionsTimer.Start();
+            InstructionsStopwatch.Start();
         }
 
         protected void btnNextToGame_Click(object sender, EventArgs e)
@@ -145,12 +151,53 @@ namespace RestaurantGame
 
         protected void rewardBtn_Click(object sender, EventArgs e)
         {
-            NameValueCollection data = new NameValueCollection();
-            data.Add("assignmentId", (String)Session["turkAss"]);
-            data.Add("workerId", (String)Session["user_id"]);
-            data.Add("hitId", (String)Session["hitId"]);
+            string workerId = UserId;
 
-            Alert.RedirectAndPOST(this.Page, "https://www.mturk.com/mturk/externalSubmit", data);
+            string assignmentId = (string)Session["turkAss"];
+
+            NameValueCollection data = new NameValueCollection();
+            data.Add("assignmentId", assignmentId);
+            data.Add("workerId", workerId);
+            data.Add("hitId", (string)Session["hitId"]);
+
+            double averageRank = CalculateAveragePosition();
+            double bonusAmount = (50 - averageRank)/100.0;
+            decimal bonusDecimal = Convert.ToDecimal(bonusAmount);
+
+            if (workerId != "friend")
+            {
+                SimpleClient client = new SimpleClient();
+                client.GrantBonus(workerId, bonusDecimal, assignmentId, "Thanks for doing great work!");
+
+                Alert.RedirectAndPOST(this.Page, "https://www.mturk.com/mturk/externalSubmit", data);
+            }
+
+            SendFeedback(bonusAmount);
+        }
+
+        private void SendFeedback(double bonus)
+        {
+            String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+            string feedback = feedbackTxtBox.Text;
+
+            try
+            {
+                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserFeedback (UserId, Feedback, TotalTime, Bonus) VALUES (@UserId, @Feedback, @TotalTime, @Bonus)");
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    cmd.Parameters.AddWithValue("@UserId", UserId);
+                    cmd.Parameters.AddWithValue("@Feedback", feedback);
+                    cmd.Parameters.AddWithValue("@TotalTime", Math.Round(GameStopwatch.Elapsed.TotalMinutes, 1));
+                    cmd.Parameters.AddWithValue("@Bonus", Math.Round(bonus, 3));
+                    sqlConnection1.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException ex)
+            {
+            }
         }
     }
 }

@@ -82,7 +82,7 @@
                         <td>
                             <asp:Label ID="label44" runat="server" Font-Bold="true"> You will receive a bonus after the game. </asp:Label>
                             <br />
-                            The bonus will be in accordance with the average ranking of the people you hired – you will be given now an additional 20 cents as a bonus and we will deduct from that amount the average of the rankings of the people you've hired (e.g., if you end up hiring the third-best person for the job (on average) your bonus will be 17 cents).
+                            The bonus will be in accordance with the average ranking of the people you hired – you will be given now an additional 50 cents as a bonus and we will deduct from that amount the average of the rankings of the people you've hired (e.g., if you end up hiring the third-best person for the job (on average) your bonus will be 47 cents).
                         </td>
                     </tr>
                     <tr>
@@ -592,9 +592,9 @@
                             What will be your bonus?
                         <asp:RadioButtonList ID="rbl4" runat="server">
                             <asp:ListItem>0</asp:ListItem>
-                            <asp:ListItem>16</asp:ListItem>
-                            <asp:ListItem>17</asp:ListItem>
-                            <asp:ListItem>20</asp:ListItem>
+                            <asp:ListItem>46</asp:ListItem>
+                            <asp:ListItem>47</asp:ListItem>
+                            <asp:ListItem>50</asp:ListItem>
                         </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="rfv4" Style="color: Red;" ControlToValidate="rbl4" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                         </td>
@@ -1024,6 +1024,12 @@
                             &nbsp;Thanks for playing, You did great!
                             <br />
                             <br />
+                            &nbsp;Please provide feedback about the game (how hard it was, was it fun, game graphics):
+                            <br />
+                            <br />
+                            <asp:TextBox ID="feedbackTxtBox" onkeypress="return this.value.length<=120" runat="server" Rows="4" columns="40" TextMode="multiline" style="margin-left:5px"></asp:TextBox>
+                            <br />
+                            <br />
                             &nbsp;The average ranking of the people you hired is:
                             <br />
                             <br />
@@ -1039,7 +1045,7 @@
                             </center>
                             <br />
                             <br />
-                            &nbsp;Please click on 'Collect your reward' to submit the HIT.
+                            &nbsp;Please click on 'Collect your reward' to submit the HIT and send your feedback.
                             <br />
                             <br />
                             <br />
@@ -1047,7 +1053,8 @@
                     </tr>
                 </table>
             </div>
-
+            <br />
+            <br />
             <asp:Button ID="rewardBtn" runat="server" OnClick="rewardBtn_Click" Text="Collect your reward" />
         </asp:View>
 
@@ -1062,6 +1069,9 @@
                             <br />
                             <br />
                             &nbsp;The game is over, thank you for your time.
+                            <br />
+                            <br />
+                            &nbsp;Please return the HIT.
                             <br />
                             <br />
                         </td>
@@ -1082,10 +1092,12 @@
                             &nbsp;Sorry, you cannot enter the game from a mobile device, or with a small browser size.
                             <br />
                             <br />
-                            &nbsp;Please open the game with a browser resolution of at least 800x500.
+                            &nbsp;The game is compatible with a browser resolution of at least 800x500.
                             <br />
                             <br />
-                            &nbsp;
+                            &nbsp;Please return the HIT.
+                            <br />
+                            <br />
                         </td>
                     </tr>
                 </table>

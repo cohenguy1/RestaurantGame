@@ -42,6 +42,12 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Amazon.WebServices.MechanicalTurk">
+      <HintPath>References\Amazon.WebServices.MechanicalTurk.dll</HintPath>
+    </Reference>
+    <Reference Include="Amazon.WebServices.MechanicalTurk.Domain">
+      <HintPath>References\Amazon.WebServices.MechanicalTurk.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="EO.Base">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Essential Objects\EO.Total 2015\EO.Base.dll</HintPath>
     </Reference>

@@ -21,8 +21,6 @@ namespace RestaurantGame
         {
             if (!IsPostBack)
             {
-                DecideRandomStuff();
-
                 string val = null;
 
                 // friend assigment
@@ -34,6 +32,8 @@ namespace RestaurantGame
                     Session["hitId"] = "hit id friend";
                     btnNextToInfo.Enabled = true;
                 }
+
+                DecideRandomStuff();
 
                 TimerGame.Enabled = false;
                 TimerGame.Interval = StartTimerInterval;
@@ -64,7 +64,7 @@ namespace RestaurantGame
                 backgroundText2.Text = backgroundText2.Text.Replace("he", "she");
             }
 
-            AskPosition = DbHandler.GetAskPosition();
+            AskPosition = DbHandler.GetAskPosition(UserId == "friend");
         }
 
         private void StartInterviewsForPosition(int position)
@@ -172,9 +172,10 @@ namespace RestaurantGame
         private void EndGame()
         {
             TimerGame.Enabled = false;
+            GameStopwatch.Stop();
             MultiView1.ActiveViewIndex = 7;
             double averageRank = CalculateAveragePosition();
-            double bonus = NumberOfCandidates - averageRank;
+            double bonus = 50 - averageRank;
             AverageRank.Text = averageRank.ToString("0.0");
             Bonus.Text = bonus.ToString() + " cents";
         }

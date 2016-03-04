@@ -106,7 +106,7 @@ namespace RestaurantGame
                 cmd.Parameters.AddWithValue("@Position9Rank", GetChosenPositionToInsertToDb(9));
                 cmd.Parameters.AddWithValue("@Position10Rank", GetChosenPositionToInsertToDb(10));
                 cmd.Parameters.AddWithValue("@AvgRanking", CalculateAveragePosition());
-                cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsTimer.Elapsed.TotalMinutes, 3));
+                cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 3));
                 sqlConnection1.Open();
                 cmd.ExecuteNonQuery();
             }
