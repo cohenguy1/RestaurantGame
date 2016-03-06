@@ -96,7 +96,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="btnNextToInfo" runat="server" Text="Next" OnClick="btnNextToInfo_Click" Enabled="false" /></td>
+                            <asp:Button ID="btnNextToInfo" runat="server" Text="Next" OnClick="btnNextToInfo_Click" Enabled="true" /></td>
                     </tr>
                 </table>
             </div>

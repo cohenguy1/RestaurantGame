@@ -16,20 +16,34 @@ namespace RestaurantGame
     {
         public const int NumberOfCandidates = DecisionMaker.NumberOfCandidates;
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 string val = null;
-
-                // friend assigment
+                
                 val = Request.QueryString["assignmentId"];
+            
+                // friend assigment
                 if (val == null)
                 {
-                    UserId = "friend";
+                    Session["user_id"] = "friend";
                     Session["turkAss"] = "turkAss";
                     Session["hitId"] = "hit id friend";
+                    btnNextToInfo.Enabled = true;
+                }
+                //from AMT but did not took the assigment
+                else if (val.Equals("ASSIGNMENT_ID_NOT_AVAILABLE"))
+                {
+                    btnNextToInfo.Enabled = false;
+                    return;
+                }
+                //from AMT and accepted the assigment - continue to experiment
+                else
+                {
+                    Session["user_id"] = Request.QueryString["workerId"];	//save participant's user ID
+                    Session["turkAss"] = val;                               //save participant's assignment ID
+                    Session["hitId"] = Request.QueryString["hitId"];        // save the hit id
                     btnNextToInfo.Enabled = true;
                 }
 

@@ -45,33 +45,24 @@ namespace RestaurantGame
 
             if (firstPlaceAskRequests < askRequestPerMetodology)
             {
-                firstPlaceAskRequests++;
                 VectorNum = firstPlaceAskRequests;
-                SetIntToConfig("FirstPlaceAskRequests", firstPlaceAskRequests);
-
                 return AskPositionHeuristic.First;
             }
 
             var lastPlaceAskRequests = GetIntFromConfig("LastPlaceAskRequests");
             if (lastPlaceAskRequests < askRequestPerMetodology)
             {
-                lastPlaceAskRequests++;
                 VectorNum = lastPlaceAskRequests;
-                SetIntToConfig("LastPlaceAskRequests", lastPlaceAskRequests);
-
                 return AskPositionHeuristic.Last;
             }
 
             Random random = new Random();
-            RandomHuristicAskPosition = random.Next(10);
+            RandomHuristicAskPosition = random.Next(10) + 1;
 
             var randomPlaceAskRequests = GetIntFromConfig("RandomPlaceAskRequests");
             if (randomPlaceAskRequests < askRequestPerMetodology)
             {
-                randomPlaceAskRequests++;
                 VectorNum = randomPlaceAskRequests;
-                SetIntToConfig("RandomPlaceAskRequests", randomPlaceAskRequests);
-
                 return AskPositionHeuristic.Random;
             }
 
@@ -79,9 +70,24 @@ namespace RestaurantGame
             // wrap around
             VectorNum = (optimalPlaceAskRequests % askRequestPerMetodology) + 1;
 
-            optimalPlaceAskRequests++;
-            SetIntToConfig("OptimalPlaceAskRequests", optimalPlaceAskRequests);
             return AskPositionHeuristic.Optimal;
+        }
+
+        public static string GetConfigKeyByAskPositionHeuristic(AskPositionHeuristic heuristic)
+        {
+            switch (heuristic)
+            {
+                case AskPositionHeuristic.First:
+                    return "FirstPlaceAskRequests";
+                case AskPositionHeuristic.Last:
+                    return "LastPlaceAskRequests";
+                case AskPositionHeuristic.Random:
+                    return "RandomPlaceAskRequests";
+                case AskPositionHeuristic.Optimal:
+                    return "OptimalPlaceAskRequests";
+                default:
+                    return "FirstPlaceAskRequests";
+            }
         }
 
         public static int[] GetCandidateRanksForPosition(int positionNumber)
@@ -113,7 +119,7 @@ namespace RestaurantGame
             return ranks;
         }
 
-        private static int GetIntFromConfig(string key)
+        public static int GetIntFromConfig(string key)
         {
             string value;
             using (SQLiteConnection sqlConnection1 = new SQLiteConnection(_connectionString))
@@ -141,7 +147,7 @@ namespace RestaurantGame
             return intValue;
         }
 
-        private static void SetIntToConfig(string key, int value)
+        public static void SetIntToConfig(string key, int value)
         {
             using (SQLiteConnection sqlConnection1 = new SQLiteConnection(_connectionString))
             {

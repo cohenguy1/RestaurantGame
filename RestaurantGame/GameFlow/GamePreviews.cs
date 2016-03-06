@@ -20,9 +20,10 @@ namespace RestaurantGame
         {
             GameStopwatch.Start();
 
+            String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
             if (!UserId.Equals("friend"))
             {
-                String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
                     SQLiteCommand cmd = new SQLiteCommand("Select Assignment_Id from [Users] Where UserId='" + UserId + "'");
@@ -34,11 +35,14 @@ namespace RestaurantGame
 
                     if (assignmentId == null)
                     {
-                        //new user -insert to DB
-                        DateTime currentTime = DateTime.Now;
-                        cmd = new SQLiteCommand("insert into [Users] (UserId, Assignment_Id, time) VALUES ('" + UserId + "','" + Session["turkAss"] + "','" + currentTime.ToString() + "')");
+                        //new user - insert to DB
+                        cmd = new SQLiteCommand("INSERT INTO Users (UserId, Assignment_Id, hitId, time) VALUES (@UserId, @Assignment_Id, @hitId, @time)");
                         cmd.CommandType = CommandType.Text;
                         cmd.Connection = sqlConnection1;
+                        cmd.Parameters.AddWithValue("@UserId", UserId);
+                        cmd.Parameters.AddWithValue("@Assignment_Id", (string)Session["turkAss"]);
+                        cmd.Parameters.AddWithValue("@hitId", (string)Session["hitId"]);
+                        cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString());
                         cmd.ExecuteNonQuery();
                     }
                     else
@@ -46,6 +50,21 @@ namespace RestaurantGame
                         Alert.Show("You already participated in this game. Please return the HIT");
                         return;
                     }
+                }
+            }
+            else
+            {
+                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Users (UserId, Assignment_Id, hitId, time) VALUES (@UserId, @Assignment_Id, @hitId, @time)");
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    cmd.Parameters.AddWithValue("@UserId", UserId);
+                    cmd.Parameters.AddWithValue("@Assignment_Id", (string)Session["turkAss"]);
+                    cmd.Parameters.AddWithValue("@hitId", (string)Session["hitId"]);
+                    cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString());
+                    sqlConnection1.Open();
+                    cmd.ExecuteNonQuery();
                 }
             }
 
@@ -68,7 +87,6 @@ namespace RestaurantGame
         {
             // Save user info to DB
             String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-            string mobile = "not_mobile";
 
             string heightS = HttpContext.Current.Request.Params["clientScreenHeight"];
             string widthS = HttpContext.Current.Request.Params["clientScreenWidth"];
@@ -97,7 +115,9 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, VectorNum, AskPosition, time) VALUES (@UserId, @Gender, @Age, @Education,@Nationality,@Reason,@VectorNum, @AskPosition, @time)");
+                    SQLiteCommand cmd = new SQLiteCommand
+                        ("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, VectorNum, AskPosition, time) " +
+                         "VALUES (@UserId, @Gender, @Age, @Education, @Nationality, @Reason, @VectorNum, @AskPosition, @time)");
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
                     cmd.Parameters.AddWithValue("@UserId", UserId);
@@ -113,14 +133,12 @@ namespace RestaurantGame
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch (SQLiteException ex)
+            catch (Exception ex)
             {
                 Alert.Show("Error: " + Environment.NewLine + ex.Message);
                 return;
             }
-
-
-
+            
             MultiView1.ActiveViewIndex = 2;
             MultiviewInstructions.ActiveViewIndex = 0;
             ProgressBar1.Value = 0;
@@ -166,13 +184,26 @@ namespace RestaurantGame
 
             if (workerId != "friend")
             {
-                SimpleClient client = new SimpleClient();
-                client.GrantBonus(workerId, bonusDecimal, assignmentId, "Thanks for doing great work!");
+                //SimpleClient client = new SimpleClient();
+                //client.GrantBonus(workerId, bonusDecimal, assignmentId, "Thanks for doing great work!");
 
                 Alert.RedirectAndPOST(this.Page, "https://www.mturk.com/mturk/externalSubmit", data);
+
+                IncreaseAskPositionCount();
             }
 
             SendFeedback(bonusAmount);
+
+            rewardBtn.Enabled = false;
+        }
+
+        public void IncreaseAskPositionCount()
+        {
+            string askPositionConfigKey = DbHandler.GetConfigKeyByAskPositionHeuristic(AskPosition);
+
+            var askRequests = DbHandler.GetIntFromConfig(askPositionConfigKey);
+            askRequests++;
+            DbHandler.SetIntToConfig(askPositionConfigKey, askRequests);
         }
 
         private void SendFeedback(double bonus)

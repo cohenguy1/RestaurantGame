@@ -29,7 +29,7 @@ namespace RestaurantGame
 
             if (AskPosition == AskPositionHeuristic.Random)
             {
-                return (CurrentPositionNumber == DbHandler.RandomHuristicAskPosition);
+                return (CurrentPositionNumber + 1 == DbHandler.RandomHuristicAskPosition);
             }
 
             // AskPosition == Optimal
