@@ -109,6 +109,8 @@ namespace RestaurantGame
                 cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 3));
                 sqlConnection1.Open();
                 cmd.ExecuteNonQuery();
+
+                sqlConnection1.Close();
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using Amazon.WebServices.MechanicalTurk;
+using RestaurantGame.Enums;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -199,11 +200,25 @@ namespace RestaurantGame
 
         public void IncreaseAskPositionCount()
         {
-            string askPositionConfigKey = DbHandler.GetConfigKeyByAskPositionHeuristic(AskPosition);
+            string nextAskPosition = null;
 
-            var askRequests = DbHandler.GetIntFromConfig(askPositionConfigKey);
-            askRequests++;
-            DbHandler.SetIntToConfig(askPositionConfigKey, askRequests);
+            switch (AskPosition)
+            {
+                case AskPositionHeuristic.First:
+                    nextAskPosition = AskPositionHeuristic.Last.ToString();
+                    break;
+                case AskPositionHeuristic.Last:
+                    nextAskPosition = AskPositionHeuristic.Random.ToString();
+                    break;
+                case AskPositionHeuristic.Random:
+                    nextAskPosition = AskPositionHeuristic.Optimal.ToString();
+                    break;
+                case AskPositionHeuristic.Optimal:
+                    nextAskPosition = "Done";
+                    break;
+            }
+
+            DbHandler.SetVectorNextAskPosition(nextAskPosition);
         }
 
         private void SendFeedback(double bonus)
@@ -224,6 +239,8 @@ namespace RestaurantGame
                     cmd.Parameters.AddWithValue("@Bonus", Math.Round(bonus, 3));
                     sqlConnection1.Open();
                     cmd.ExecuteNonQuery();
+
+                    sqlConnection1.Close();
                 }
             }
             catch (SQLiteException ex)

@@ -12,7 +12,7 @@ namespace RestaurantGame
     {
         private static string _connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
 
-        public static int VectorNum;
+        public static int? VectorNum;
 
         public static int RandomHuristicAskPosition;
 
@@ -40,37 +40,31 @@ namespace RestaurantGame
                 }
             }
 
-            var firstPlaceAskRequests = GetIntFromConfig("FirstPlaceAskRequests");
-            var askRequestPerMetodology = GetIntFromConfig("AskRequestsPerMetodology");
-
-            if (firstPlaceAskRequests < askRequestPerMetodology)
+            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.First.ToString());
+            if (VectorNum != null)
             {
-                VectorNum = firstPlaceAskRequests;
                 return AskPositionHeuristic.First;
             }
 
-            var lastPlaceAskRequests = GetIntFromConfig("LastPlaceAskRequests");
-            if (lastPlaceAskRequests < askRequestPerMetodology)
+            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Last.ToString());
+            if (VectorNum != null)
             {
-                VectorNum = lastPlaceAskRequests;
                 return AskPositionHeuristic.Last;
             }
 
-            Random random = new Random();
-            RandomHuristicAskPosition = random.Next(10) + 1;
-
-            var randomPlaceAskRequests = GetIntFromConfig("RandomPlaceAskRequests");
-            if (randomPlaceAskRequests < askRequestPerMetodology)
+            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Random.ToString());
+            if (VectorNum != null)
             {
-                VectorNum = randomPlaceAskRequests;
                 return AskPositionHeuristic.Random;
             }
 
-            var optimalPlaceAskRequests = GetIntFromConfig("OptimalPlaceAskRequests");
-            // wrap around
-            VectorNum = (optimalPlaceAskRequests % askRequestPerMetodology) + 1;
+            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Optimal.ToString());
+            if (VectorNum != null)
+            {
+                return AskPositionHeuristic.Optimal;
+            }
 
-            return AskPositionHeuristic.Optimal;
+            throw new Exception("No Hit Slots available");
         }
 
         public static string GetConfigKeyByAskPositionHeuristic(AskPositionHeuristic heuristic)
@@ -93,30 +87,88 @@ namespace RestaurantGame
         public static int[] GetCandidateRanksForPosition(int positionNumber)
         {
             int[] ranks = new int[DecisionMaker.NumberOfCandidates];
-            SQLiteDataReader result;
 
             using (SQLiteConnection sqlConnection1 = new SQLiteConnection(_connectionString))
             {
-                SQLiteCommand cmd = new SQLiteCommand("Select Rank1,Rank2,Rank3,Rank4,Rank5,Rank6, " + 
-                    "Rank7,Rank8,Rank9,Rank10,Rank11,Rank12,Rank13,Rank14,Rank15,Rank16,Rank17,Rank18,Rank19,Rank20 " + 
+                SQLiteCommand cmd = new SQLiteCommand("Select Rank1,Rank2,Rank3,Rank4,Rank5,Rank6, " +
+                    "Rank7,Rank8,Rank9,Rank10,Rank11,Rank12,Rank13,Rank14,Rank15,Rank16,Rank17,Rank18,Rank19,Rank20 " +
                     "from Vectors Where VectorNum=" + VectorNum +
                     " and PositionNum = " + positionNumber);
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = sqlConnection1;
                 sqlConnection1.Open();
 
-                result = (SQLiteDataReader)cmd.ExecuteReader();
-
-                while (result.Read())
+                using (SQLiteDataReader result = (SQLiteDataReader)cmd.ExecuteReader())
                 {
-                    for (int i = 0; i < DecisionMaker.NumberOfCandidates; i++)
+                    while (result.Read())
                     {
-                        ranks[i] = result.GetInt32(i);
-                    }
-                };
+                        for (int i = 0; i < DecisionMaker.NumberOfCandidates; i++)
+                        {
+                            ranks[i] = result.GetInt32(i);
+                        }
+                    };
+                }
+
+                sqlConnection1.Close();
             }
 
             return ranks;
+        }
+
+        public static int? GetFirstVectorSatisfying(string askPosition)
+        {
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(_connectionString))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand("Select VectorNum, LastStarted " +
+                    "from VectorsAssignments Where NextAskHeuristic='" + askPosition + "' order by VectorNum"))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    sqlConnection1.Open();
+
+                    int vectorNum = 0;
+
+                    using (SQLiteDataReader result = (SQLiteDataReader)cmd.ExecuteReader())
+                    {
+                        while (result.Read())
+                        {
+                            vectorNum = result.GetInt32(0);
+
+                            DateTime lastStarted;
+                            double diffFromNow;
+
+                            if (!result.IsDBNull(1))
+                            {
+                                lastStarted = DateTime.Parse(result.GetString(1));
+                                diffFromNow = (DateTime.Now - lastStarted).TotalHours;
+
+                                if (diffFromNow < 2)
+                                {
+                                    continue;
+                                }
+                            }
+
+                            lastStarted = DateTime.Now;
+
+                            using (SQLiteCommand cmd2 = new SQLiteCommand("update VectorsAssignments set LastStarted='" + lastStarted.ToString() + "' " +
+                                "where VectorNum = " + vectorNum))
+                            {
+                                cmd2.CommandType = CommandType.Text;
+                                cmd2.Connection = sqlConnection1;
+
+                                cmd2.ExecuteNonQuery();
+                            }
+
+                            sqlConnection1.Close();
+                            return vectorNum;
+                        }
+                    }
+                }
+
+                sqlConnection1.Close();
+            }
+
+            return null;
         }
 
         public static int GetIntFromConfig(string key)
@@ -155,6 +207,25 @@ namespace RestaurantGame
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = sqlConnection1;
                 sqlConnection1.Open();
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static void SetVectorNextAskPosition(string nextAskPosition)
+        {
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(_connectionString))
+            {
+                SQLiteCommand cmd = new SQLiteCommand("update VectorsAssignments set NextAskHeuristic ='" + nextAskPosition + "' Where VectorNum=" + VectorNum);
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = sqlConnection1;
+                sqlConnection1.Open();
+
+                cmd.ExecuteNonQuery();
+
+                cmd = new SQLiteCommand("update VectorsAssignments set LastStarted = NULL Where VectorNum=" + VectorNum);
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = sqlConnection1;
 
                 cmd.ExecuteNonQuery();
             }

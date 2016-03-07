@@ -4,9 +4,6 @@ using System.Text;
 
 namespace RestaurantGame
 {
-    // TODO limit screen size
-    // You were wrong 3 times
-    // Why jumping
     // divide to web pages
 
     // Next Generation
@@ -75,11 +72,26 @@ namespace RestaurantGame
             if (randHim == 1)
             {
                 backgroundText.Text = backgroundText.Text.Replace("him", "her");
-                backgroundText2.Text = backgroundText2.Text.Replace("he", "she");
+                backgroundText2.Text = backgroundText2.Text.Replace(", he", ", she");
             }
 
-            AskPosition = DbHandler.GetAskPosition(UserId == "friend");
+            try
+            {
+                AskPosition = DbHandler.GetAskPosition(UserId == "friend");
+            }
+            catch (Exception ex)
+            {
+                // TODO Here
+                // to do timer for game?
+                NoHitSlotsAvailable();
+            }
         }
+
+        private void NoHitSlotsAvailable()
+        {
+            MultiView1.ActiveViewIndex = 10;
+        }
+
 
         private void StartInterviewsForPosition(int position)
         {
