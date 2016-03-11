@@ -8,15 +8,11 @@ using System.Web;
 
 namespace RestaurantGame
 {
-    public class DbHandler
+    public partial class Default
     {
         private static string _connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
 
-        public static int? VectorNum;
-
-        public static int RandomHuristicAskPosition;
-
-        public static AskPositionHeuristic GetAskPosition(bool isFriend)
+        public AskPositionHeuristic GetAskPosition(bool isFriend)
         {
             if (isFriend)
             {
@@ -55,6 +51,8 @@ namespace RestaurantGame
             VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Random.ToString());
             if (VectorNum != null)
             {
+                Random ran = new Random();
+                RandomHuristicAskPosition = ran.Next(10) + 1;
                 return AskPositionHeuristic.Random;
             }
 
@@ -84,7 +82,7 @@ namespace RestaurantGame
             }
         }
 
-        public static int[] GetCandidateRanksForPosition(int positionNumber)
+        public int[] GetCandidateRanksForPosition(int positionNumber)
         {
             int[] ranks = new int[DecisionMaker.NumberOfCandidates];
 
@@ -212,7 +210,7 @@ namespace RestaurantGame
             }
         }
 
-        public static void SetVectorNextAskPosition(string nextAskPosition)
+        public void SetVectorNextAskPosition(string nextAskPosition)
         {
             using (SQLiteConnection sqlConnection1 = new SQLiteConnection(_connectionString))
             {

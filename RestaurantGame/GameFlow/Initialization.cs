@@ -13,7 +13,7 @@ namespace RestaurantGame
 
             var positionCandidates = new List<Candidate>();
 
-            int[] candidateRanks = DbHandler.GetCandidateRanksForPosition(positionNumber);
+            int[] candidateRanks = GetCandidateRanksForPosition(positionNumber);
 
             for (var candidateIndex = 0; candidateIndex < NumberOfCandidates; candidateIndex++)
             {

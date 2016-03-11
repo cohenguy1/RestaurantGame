@@ -45,6 +45,7 @@
 
     <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
         <asp:View ID="view0" runat="server">
+            <h2>You will recieve 50 cents for this HIT and it will take about 15 minutes of your time. </h2>
             <h2>Game Background</h2>
             <div style="text-align: center; width: 700px; margin: 0 auto;">
                 <table style="text-align: center; max-width: 700px; font-size:large">
@@ -80,9 +81,9 @@
 
                     <tr>
                         <td>
-                            <asp:Label ID="label44" runat="server" Font-Bold="true"> You will receive a bonus after the game. </asp:Label>
+                            <asp:Label ID="label44" runat="server" Font-Size="Large" Font-Bold="true"> You will receive a bonus after the game. </asp:Label>
                             <br />
-                            The bonus will be in accordance with the average ranking of the people you hired – you will be given now an additional 50 cents as a bonus and we will deduct from that amount the average of the rankings of the people you've hired (e.g., if you end up hiring the third-best person for the job (on average) your bonus will be 47 cents).
+                            The bonus will be in accordance with the average ranking of the people you hired – you will be given now an additional 20 cents as a bonus and we will deduct from that amount the average of the rankings of the people you've hired (e.g., if you end up hiring the third-best person for the job (on average) your bonus will be 17 cents).
                         </td>
                     </tr>
                     <tr>
@@ -592,9 +593,9 @@
                             What will be your bonus?
                         <asp:RadioButtonList ID="rbl4" runat="server">
                             <asp:ListItem>0</asp:ListItem>
-                            <asp:ListItem>46</asp:ListItem>
-                            <asp:ListItem>47</asp:ListItem>
-                            <asp:ListItem>50</asp:ListItem>
+                            <asp:ListItem>16</asp:ListItem>
+                            <asp:ListItem>17</asp:ListItem>
+                            <asp:ListItem>20</asp:ListItem>
                         </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="rfv4" Style="color: Red;" ControlToValidate="rbl4" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                         </td>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Diagnostics;
 
 namespace RestaurantGame
 {
@@ -43,6 +44,12 @@ namespace RestaurantGame
         public const string AskPositionStr = "AskPosition";
 
         public const string NumOfWrongQuizAnswersStr = "NumOfWrongQuizAnswers";
+
+        public const string RandomHuristicAskPositionStr = "RandomHuristicAskPosition";
+        public const string VectorNumStr = "VectorNum";
+
+        public const string InstructionsStopwatchStr = "InstructionsStopwatch";
+        public const string GameStopwatchStr = "GameStopwatch";
 
         public GameState GameState
         {
@@ -179,5 +186,30 @@ namespace RestaurantGame
             get { return (int)Session[NumOfWrongQuizAnswersStr]; }
             set { Session[NumOfWrongQuizAnswersStr] = value; }
         }
+
+        public int RandomHuristicAskPosition
+        {
+            get { return (int)Session[RandomHuristicAskPositionStr]; }
+            set { Session[RandomHuristicAskPositionStr] = value; }
+        }
+
+        public int? VectorNum
+        {
+            get { return (int?)Session[VectorNumStr]; }
+            set { Session[VectorNumStr] = value; }
+        }
+
+        public Stopwatch InstructionsStopwatch
+        {
+            get { return (Stopwatch)Session[InstructionsStopwatchStr]; }
+            set { Session[InstructionsStopwatchStr] = value; }
+        }
+
+        public Stopwatch GameStopwatch
+        {
+            get { return (Stopwatch)Session[GameStopwatchStr]; }
+            set { Session[GameStopwatchStr] = value; }
+        }
+
     }
 }

@@ -11,6 +11,8 @@ namespace RestaurantGame
 
     public partial class Default : System.Web.UI.Page
     {
+        public const int InitialBonus = 20;
+
         public const int NumberOfCandidates = DecisionMaker.NumberOfCandidates;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -77,7 +79,7 @@ namespace RestaurantGame
 
             try
             {
-                AskPosition = DbHandler.GetAskPosition(UserId == "friend");
+                AskPosition = GetAskPosition(UserId == "friend");
             }
             catch (Exception ex)
             {
@@ -201,7 +203,7 @@ namespace RestaurantGame
             GameStopwatch.Stop();
             MultiView1.ActiveViewIndex = 7;
             double averageRank = CalculateAveragePosition();
-            double bonus = 50 - averageRank;
+            double bonus = InitialBonus - averageRank;
             AverageRank.Text = averageRank.ToString("0.0");
             Bonus.Text = bonus.ToString() + " cents";
         }

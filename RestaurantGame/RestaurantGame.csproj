@@ -209,7 +209,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbHandler.cs" />
+    <Compile Include="DbHandler.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Enums\AskPositionHeuristic.cs" />
     <Compile Include="Enums\BlinkState.cs" />
     <Compile Include="Enums\SessionState.cs" />

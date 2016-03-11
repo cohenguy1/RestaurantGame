@@ -13,12 +13,9 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        public static Stopwatch InstructionsStopwatch = new Stopwatch();
-
-        public static Stopwatch GameStopwatch = new Stopwatch();
-
         protected void btnNextToInfo_Click(object sender, EventArgs e)
         {
+            GameStopwatch = new Stopwatch();
             GameStopwatch.Start();
 
             String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
@@ -27,14 +24,14 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SQLiteCommand cmd = new SQLiteCommand("Select Assignment_Id from [Users] Where UserId='" + UserId + "'");
+                    SQLiteCommand cmd = new SQLiteCommand("Select UserId from [UserRatings] Where UserId='" + UserId + "'");
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
                     sqlConnection1.Open();
 
-                    string assignmentId = (string)cmd.ExecuteScalar();
+                    string userId = (string)cmd.ExecuteScalar();
 
-                    if (assignmentId == null)
+                    if (userId == null)
                     {
                         //new user - insert to DB
                         cmd = new SQLiteCommand("INSERT INTO Users (UserId, Assignment_Id, hitId, time) VALUES (@UserId, @Assignment_Id, @hitId, @time)");
@@ -127,7 +124,7 @@ namespace RestaurantGame
                     cmd.Parameters.AddWithValue("@Education", DropDownList3.Text);
                     cmd.Parameters.AddWithValue("@Nationality", DropDownList4.Text);
                     cmd.Parameters.AddWithValue("@Reason", DropDownList5.Text);
-                    cmd.Parameters.AddWithValue("@VectorNum", DbHandler.VectorNum);
+                    cmd.Parameters.AddWithValue("@VectorNum", VectorNum);
                     cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
                     cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString());
                     sqlConnection1.Open();
@@ -144,6 +141,7 @@ namespace RestaurantGame
             MultiviewInstructions.ActiveViewIndex = 0;
             ProgressBar1.Value = 0;
 
+            InstructionsStopwatch = new Stopwatch();
             InstructionsStopwatch.Start();
         }
 
@@ -180,7 +178,7 @@ namespace RestaurantGame
             data.Add("hitId", (string)Session["hitId"]);
 
             double averageRank = CalculateAveragePosition();
-            double bonusAmount = (50 - averageRank)/100.0;
+            double bonusAmount = (InitialBonus - averageRank)/100.0;
             decimal bonusDecimal = Convert.ToDecimal(bonusAmount);
 
             if (workerId != "friend")
@@ -218,7 +216,7 @@ namespace RestaurantGame
                     break;
             }
 
-            DbHandler.SetVectorNextAskPosition(nextAskPosition);
+            SetVectorNextAskPosition(nextAskPosition);
         }
 
         private void SendFeedback(double bonus)
