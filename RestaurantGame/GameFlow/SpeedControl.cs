@@ -42,7 +42,7 @@ namespace RestaurantGame
             string speedRate = ((double)StartTimerInterval / newTimerInterval).ToString("0.0");
             LabelSpeed.Text = " Speed: x" + speedRate;
 
-            SetGameState(GameState.Playing);
+            SetGameState(PlayPauseState.Playing);
 
             if (SessionState == Enums.SessionState.Running)
             {
@@ -53,10 +53,10 @@ namespace RestaurantGame
 
         protected void btnPausePlay_Click(object sender, ImageClickEventArgs e)
         {
-            if (GameState == GameState.Playing)
+            if (GamePlayPauseState == PlayPauseState.Playing)
             {
                 // pause
-                SetGameState(GameState.Paused);
+                SetGameState(PlayPauseState.Paused);
 
                 // enable fast speed buttons
                 EnableDisableFBSpeedButton(true);
@@ -64,7 +64,7 @@ namespace RestaurantGame
             }
             else // paused
             {
-                SetGameState(GameState.Playing);
+                SetGameState(PlayPauseState.Playing);
             }
         }
 
@@ -82,13 +82,13 @@ namespace RestaurantGame
             btnFastBackwards.ImageUrl = btnFastBackwards.Enabled ? "~/Images/fbButton.png" : "~/Images/fbButtonDisabled.png";
         }
 
-        protected void SetGameState(GameState gameState)
+        protected void SetGameState(PlayPauseState gameState)
         {
-            GameState = gameState;
+            GamePlayPauseState = gameState;
 
-            TimerGame.Enabled = (gameState == GameState.Playing) && (SessionState == Enums.SessionState.Running);
+            TimerGame.Enabled = (gameState == PlayPauseState.Playing) && (SessionState == Enums.SessionState.Running);
 
-            if (gameState == GameState.Paused)
+            if (gameState == PlayPauseState.Paused)
             {
                 btnPausePlay.ImageUrl = "~/Images/playButton.png";
             }

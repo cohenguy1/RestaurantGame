@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantGame.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,8 +31,11 @@ namespace RestaurantGame
 
             if (MultiviewInstructions.ActiveViewIndex == NumOfInstructions - 1)
             {
+                // training start
                 InstructionsStopwatch.Stop();
                 MultiView1.ActiveViewIndex = 3;
+                UpdateTimesTable(GameState.TrainingStart);
+
                 return;
             }
 
@@ -54,11 +58,15 @@ namespace RestaurantGame
         {
             if (trainingRBL.SelectedIndex == 0)
             {
+                // continue training
                 MultiView2.ActiveViewIndex = 3;
                 ShowUniforms();
             }
             else
             {
+                // show quiz
+                UpdateTimesTable(GameState.Quiz);
+
                 MultiView1.ActiveViewIndex = 4;
                 NumOfWrongQuizAnswers = 0;
             }

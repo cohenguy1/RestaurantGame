@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RestaurantGame
 {
-    public enum GameState
+    public enum PlayPauseState
     {
         Playing,
         Paused

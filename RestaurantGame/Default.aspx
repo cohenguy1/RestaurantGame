@@ -541,7 +541,7 @@
                 </table>
             </div>
             <br />
-            <asp:Button ID="btnNextToTraining" runat="server" Text="Next" OnClick="btnNextToTraining_Click" />
+            <asp:Button ID="btnNextToTraining" runat="server" Text="Next" OnClick="btnNextToTraining_Click" Enabled="true" />
 
         </asp:View>
 

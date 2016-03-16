@@ -1,5 +1,8 @@
 ﻿using RestaurantGame.Enums;
 using System;
+using System.Data;
+using System.Data.SQLite;
+using System.Diagnostics;
 using System.Text;
 
 namespace RestaurantGame
@@ -19,12 +22,10 @@ namespace RestaurantGame
         {
             if (!IsPostBack)
             {
-                string val = null;
-                
-                val = Request.QueryString["assignmentId"];
-            
+                string assignmentId = Request.QueryString["assignmentId"];
+
                 // friend assigment
-                if (val == null)
+                if (assignmentId == null)
                 {
                     Session["user_id"] = "friend";
                     Session["turkAss"] = "turkAss";
@@ -32,7 +33,7 @@ namespace RestaurantGame
                     btnNextToInfo.Enabled = true;
                 }
                 //from AMT but did not took the assigment
-                else if (val.Equals("ASSIGNMENT_ID_NOT_AVAILABLE"))
+                else if (assignmentId.Equals("ASSIGNMENT_ID_NOT_AVAILABLE"))
                 {
                     btnNextToInfo.Enabled = false;
                     return;
@@ -40,11 +41,14 @@ namespace RestaurantGame
                 //from AMT and accepted the assigment - continue to experiment
                 else
                 {
-                    Session["user_id"] = Request.QueryString["workerId"];	//save participant's user ID
-                    Session["turkAss"] = val;                               //save participant's assignment ID
+                    Session["user_id"] = Request.QueryString["workerId"];	// save participant's user ID
+                    Session["turkAss"] = assignmentId;                      // save participant's assignment ID
                     Session["hitId"] = Request.QueryString["hitId"];        // save the hit id
                     btnNextToInfo.Enabled = true;
                 }
+
+                GameStateStopwatch = new Stopwatch();
+                GameStateStopwatch.Start();
 
                 DecideRandomStuff();
 
@@ -57,7 +61,7 @@ namespace RestaurantGame
                 TimerInterval = StartTimerInterval;
                 TimerEnabled = true;
 
-                GameState = GameState.Playing;
+                GamePlayPauseState = PlayPauseState.Playing;
 
                 GeneratePositions();
 
@@ -81,10 +85,8 @@ namespace RestaurantGame
             {
                 AskPosition = GetAskPosition(UserId == "friend");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // TODO Here
-                // to do timer for game?
                 NoHitSlotsAvailable();
             }
         }
@@ -93,7 +95,6 @@ namespace RestaurantGame
         {
             MultiView1.ActiveViewIndex = 10;
         }
-
 
         private void StartInterviewsForPosition(int position)
         {
@@ -206,6 +207,8 @@ namespace RestaurantGame
             double bonus = InitialBonus - averageRank;
             AverageRank.Text = averageRank.ToString("0.0");
             Bonus.Text = bonus.ToString() + " cents";
+
+            UpdateTimesTable(GameState.EndGame);
         }
 
         private void EnterNewCandidate()
@@ -350,6 +353,11 @@ namespace RestaurantGame
 
         private void PositionSummary()
         {
+            if (NeedToAskRating())
+            {
+                UpdateTimesTable(GameState.BeforeRate);
+            }
+
             btnThumbsDown.Visible = false;
             btnThumbsUp.Visible = false;
             btnFastBackwards.Visible = false;
@@ -369,7 +377,23 @@ namespace RestaurantGame
 
         private void PickUniform()
         {
-            TrainingPassed++;
+            if (GameMode == GameMode.Training)
+            {
+                TrainingPassed++;
+
+                if (TrainingPassed == 1)
+                {
+                    UpdateTimesTable(GameState.AfterTraining1);
+                }
+                else if (TrainingPassed == 2)
+                {
+                    UpdateTimesTable(GameState.AfterTraining2);
+                }
+                else if (TrainingPassed == 3)
+                {
+                    UpdateTimesTable(GameState.AfterTraining3);
+                }
+            }
 
             if (NeedToAskRating())
             {
@@ -601,6 +625,75 @@ namespace RestaurantGame
 
             FullyHideCandidatesSecondRowImages();
             PickUniform();
+        }
+
+        private void UpdateTimesTable(GameState gameState)
+        {
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
+            GameStateStopwatch.Stop();
+            var minutes = Math.Round(GameStateStopwatch.Elapsed.TotalMinutes, 1);
+
+            if (gameState == GameState.UserInfo)
+            {
+                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand("Select UserId from [Times] Where UserId='" + UserId + "'");
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    sqlConnection1.Open();
+
+                    string userId = (string)cmd.ExecuteScalar();
+
+                    if (userId != null)
+                    {
+                        //new user - insert to DB
+                        cmd = new SQLiteCommand("Delete from Times Where UserId='" + UserId + "'");
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection = sqlConnection1;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Times (UserId, UserInfo, Instructions, TrainingStart," +
+                        " AfterTraining1, AfterTraining2, AfterTraining3, Quiz, GameStart, BeforeRate, Rate, AfterRate, EndGame, CollectedPrize) VALUES " +
+                        "(@UserId, @UserInfo, @Instructions, @TrainingStart, @AfterTraining1, @AfterTraining2, @AfterTraining3, " +
+                        " @Quiz, @GameStart, @BeforeRate, @Rate, @AfterRate, @EndGame, @CollectedPrize)");
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    sqlConnection1.Open();
+                    cmd.Parameters.AddWithValue("@UserId", UserId);
+                    cmd.Parameters.AddWithValue("@UserInfo", null);
+                    cmd.Parameters.AddWithValue("@Instructions", null);
+                    cmd.Parameters.AddWithValue("@TrainingStart", null);
+                    cmd.Parameters.AddWithValue("@AfterTraining1", null);
+                    cmd.Parameters.AddWithValue("@AfterTraining2", null);
+                    cmd.Parameters.AddWithValue("@AfterTraining3", null);
+                    cmd.Parameters.AddWithValue("@Quiz", null);
+                    cmd.Parameters.AddWithValue("@GameStart", null);
+                    cmd.Parameters.AddWithValue("@BeforeRate", null);
+                    cmd.Parameters.AddWithValue("@Rate", null);
+                    cmd.Parameters.AddWithValue("@AfterRate", null);
+                    cmd.Parameters.AddWithValue("@EndGame", null);
+                    cmd.Parameters.AddWithValue("@CollectedPrize", null);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            string gameStateColumn = GetGameStateColumn(gameState);
+
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
+            {
+                SQLiteCommand cmd = new SQLiteCommand("Update Times set " + gameStateColumn +  " = " + minutes + " Where UserId='" + UserId + "'");
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = sqlConnection1;
+                sqlConnection1.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            GameStateStopwatch.Restart();
         }
     }
 }

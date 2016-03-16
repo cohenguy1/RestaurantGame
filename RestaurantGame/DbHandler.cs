@@ -228,5 +228,40 @@ namespace RestaurantGame
                 cmd.ExecuteNonQuery();
             }
         }
+
+        private string GetGameStateColumn(GameState gameState)
+        {
+            switch (gameState)
+            {
+                case GameState.UserInfo:
+                    return "UserInfo";
+                case GameState.Instructions:
+                    return "Instructions";
+                case GameState.TrainingStart:
+                    return "TrainingStart";
+                case GameState.AfterTraining1:
+                    return "AfterTraining1";
+                case GameState.AfterTraining2:
+                    return "AfterTraining2";
+                case GameState.AfterTraining3:
+                    return "AfterTraining3";
+                case GameState.Quiz:
+                    return "Quiz";
+                case GameState.GameStart:
+                    return "GameStart";
+                case GameState.BeforeRate:
+                    return "BeforeRate";
+                case GameState.Rate:
+                    return "Rate";
+                case GameState.AfterRate:
+                    return "AfterRate";
+                case GameState.EndGame:
+                    return "EndGame";
+                case GameState.CollectedPrize:
+                    return "CollectedPrize";
+            }
+
+            return null;
+        }
     }
 }

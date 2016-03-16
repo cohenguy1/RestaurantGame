@@ -28,7 +28,7 @@ namespace RestaurantGame
         public const string TimerIntervalStr = "TimerInterval";
         public const string TimerEnabledStr = "TimerEnabled";
 
-        public const string GameStateStr = "GameState";
+        public const string GamePlayPauseStateStr = "GamePlayPauseState";
         public const string GameModeStr = "GameMode";
         public const string TrainingStepStr = "TrainingStep";
 
@@ -50,11 +50,12 @@ namespace RestaurantGame
 
         public const string InstructionsStopwatchStr = "InstructionsStopwatch";
         public const string GameStopwatchStr = "GameStopwatch";
+        public const string GameStateStopwatchStr = "GameStateStopwatch";
 
-        public GameState GameState
+        public PlayPauseState GamePlayPauseState
         {
-            get { return (GameState)Session[GameStateStr]; }
-            set { Session[GameStateStr] = value; }
+            get { return (PlayPauseState)Session[GamePlayPauseStateStr]; }
+            set { Session[GamePlayPauseStateStr] = value; }
         }
 
         public GameMode GameMode
@@ -209,6 +210,12 @@ namespace RestaurantGame
         {
             get { return (Stopwatch)Session[GameStopwatchStr]; }
             set { Session[GameStopwatchStr] = value; }
+        }
+
+        public Stopwatch GameStateStopwatch
+        {
+            get { return (Stopwatch)Session[GameStateStopwatchStr]; }
+            set { Session[GameStateStopwatchStr] = value; }
         }
 
     }

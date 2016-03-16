@@ -18,7 +18,9 @@ namespace RestaurantGame
             GameStopwatch = new Stopwatch();
             GameStopwatch.Start();
 
-            String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
+            UpdateTimesTable(GameState.UserInfo);
 
             if (!UserId.Equals("friend"))
             {
@@ -143,6 +145,8 @@ namespace RestaurantGame
 
             InstructionsStopwatch = new Stopwatch();
             InstructionsStopwatch.Start();
+
+            UpdateTimesTable(GameState.Instructions);
         }
 
         protected void btnNextToGame_Click(object sender, EventArgs e)
@@ -169,6 +173,8 @@ namespace RestaurantGame
         protected void rewardBtn_Click(object sender, EventArgs e)
         {
             string workerId = UserId;
+
+            UpdateTimesTable(GameState.CollectedPrize);
 
             string assignmentId = (string)Session["turkAss"];
 

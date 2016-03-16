@@ -214,6 +214,7 @@
     </Compile>
     <Compile Include="Enums\AskPositionHeuristic.cs" />
     <Compile Include="Enums\BlinkState.cs" />
+    <Compile Include="Enums\GameState.cs" />
     <Compile Include="Enums\SessionState.cs" />
     <Compile Include="GameFlow\Quiz.cs">
       <SubType>ASPXCodeBehind</SubType>
