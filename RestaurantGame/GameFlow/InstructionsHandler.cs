@@ -9,7 +9,7 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        public const int NumOfInstructions = 20;
+        public const int NumOfInstructions = 21;
 
         protected void btnPrevInstruction_Click(object sender, EventArgs e)
         {

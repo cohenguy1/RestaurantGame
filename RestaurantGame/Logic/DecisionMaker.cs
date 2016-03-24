@@ -52,5 +52,21 @@ namespace RestaurantGame
 
             return (newCandidate.CandidateRank < minRank);
         }
+
+        public int GetCandidateRelativePosition(List<Candidate> candidatesByNow, Candidate newCandidate)
+        {
+            int newCandidateIndex = 0;
+            foreach (var candidate in candidatesByNow)
+            {
+                if (candidate.CandidateRank > newCandidate.CandidateRank)
+                {
+                    break;
+                }
+
+                newCandidateIndex++;
+            }
+
+            return newCandidateIndex;
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        public const int MaxNumOfWrongQuizAnswers = 5;
+        public const int MaxNumOfWrongQuizAnswers = 3;
 
         protected void btnNextToProceedToGame_Click(object sender, EventArgs e)
         {
@@ -73,8 +73,8 @@ namespace RestaurantGame
                 }
                 else
                 {
-                    var triesRemianing = MaxNumOfWrongQuizAnswers - NumOfWrongQuizAnswers;
-                    Alert.Show("Wrong answer, please try again. You have " + triesRemianing + " tries remianing.");
+                    var triesRemaining = MaxNumOfWrongQuizAnswers - NumOfWrongQuizAnswers;
+                    Alert.Show("Wrong answer, please try again. You have " + triesRemaining + " tries remaining.");
                 }
             }
         }

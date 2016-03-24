@@ -494,6 +494,9 @@
                 <asp:View ID="view27" runat="server">
                     <asp:Image ID="Image19" ImageUrl="~/Images/Instructions19.png" Width="700px" Height="400px" runat="server" />
                 </asp:View>
+                <asp:View ID="view28" runat="server">
+                    <asp:Image ID="Image20" ImageUrl="~/Images/Instructions20.png" Width="700px" Height="400px" runat="server" />
+                </asp:View>
             </asp:MultiView>
             <br />
             <br />
@@ -531,6 +534,9 @@
                             &nbsp;The training will not affect your bonus.
                             <br />
                             <br />
+                            <center>
+                                <asp:Image ID="Image21" ImageUrl="~/Images/InstructionsTraining.png" Width="500px" Height="300px" runat="server" />
+                            </center>
                             <br />
                             &nbsp;Press 'Next' to continue.
                             <br />
@@ -548,6 +554,8 @@
         <asp:View ID="viewQuiz" runat="server">
             <h2>Quiz</h2>
             <div style="text-align: center; width: 640px; margin: 0 auto;">
+                <h3>Think carefully before you answer, you have only 3 chances to pass the quiz.</h3>
+
                 <table style="text-align: left; width: 640px;" border="1">
                     <tr>
                         <td>
@@ -588,19 +596,18 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Let's suppose you ended up hiring on average the 4-th ranked candidate.
+                        <td>Let's suppose you ended up with an average ranking of 4.
                             <br />
                             What will be your bonus?
                         <asp:RadioButtonList ID="rbl4" runat="server">
-                            <asp:ListItem>0</asp:ListItem>
-                            <asp:ListItem>16</asp:ListItem>
-                            <asp:ListItem>17</asp:ListItem>
-                            <asp:ListItem>20</asp:ListItem>
+                            <asp:ListItem>0 cents</asp:ListItem>
+                            <asp:ListItem>16 cents</asp:ListItem>
+                            <asp:ListItem>17 cents</asp:ListItem>
+                            <asp:ListItem>20 cents</asp:ListItem>
                         </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="rfv4" Style="color: Red;" ControlToValidate="rbl4" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
-                    -->
                 </table>
             </div>
             <br />
@@ -622,6 +629,9 @@
                             <br />
                             <br />
                             &nbsp;After a candidate is hired, you will choose the uniform for the position.
+                            <br />
+                            <br />
+                            &nbsp;This is a fun part where the HR executive will be doing most of the work for you!
                             <br />
                             <br />
                             <br />
@@ -835,15 +845,15 @@
 
                         <br />
                         <asp:Panel ID="PanelSpeed" runat="server" Style="margin-left: 0px; margin-top: 60px; align-content: center;" Width="600px">
+                            <asp:Image ID="ChooseBaloon" runat="server" ImageUrl="~/Images/Choose.png" Height="130px" Width="150px" Visible="false" Style="margin-left: -150px" />
                             <asp:Image ID="ImageManForward" runat="server" Height="147px" Width="184px" ImageUrl="~/Images/ManForward.gif" />
                             <asp:Image ID="ImageInterview" runat="server" Height="147px" Width="184px" ImageUrl="~/Images/JobInterview.png" Visible="False" />
                             <asp:Image ID="ImageHired" runat="server" Height="147px" Width="184px" ImageUrl="~/Images/Hired.jpg" Visible="False" />
                             <asp:Label ID="MovingToNextPositionLabel" runat="server" Font-Size="Larger" Visible="false"></asp:Label>
                             <asp:Label ID="MovingJobTitleLabel" runat="server" Style="margin-top: 20px;" Font-Bold="true" Font-Size="X-Large" Visible="false" ForeColor="Green"></asp:Label>
                             <br />
-                            <asp:Image ID="ChooseBaloon" runat="server" ImageUrl="~/Images/Choose.png" Height="55px" Width="94px" Visible="false" Style="margin-left: -94px" />
-                            <asp:ImageButton ID="btnThumbsDown" runat="server" ImageUrl="~/Images/thumbsDownButton.jpg" Height="48px" Width="48px" OnClick="btnThumbsDown_Click" ToolTip="Reject" Enabled="false" />
                             <asp:ImageButton ID="btnThumbsUp" runat="server" ImageUrl="~/Images/thumbsUpButton.jpg" Height="48px" Width="48px" OnClick="btnThumbsUp_Click" ToolTip="Accept" Enabled="false" />
+                            <asp:ImageButton ID="btnThumbsDown" runat="server" ImageUrl="~/Images/thumbsDownButton.jpg" Height="48px" Width="48px" OnClick="btnThumbsDown_Click" ToolTip="Reject" Enabled="false" />
                             <br />
                             <asp:ImageButton ID="btnFastBackwards" runat="server" ImageUrl="~/Images/fbButton.png" OnClick="btnFastBackwards_Click" Enabled="true" />
                             <asp:ImageButton ID="btnPausePlay" runat="server" ImageUrl="~/Images/pauseButton.png" OnClick="btnPausePlay_Click" Enabled="true" />
@@ -889,14 +899,14 @@
                                         <asp:RadioButtonList ID="RatingRbL" runat="server" value="null">
                                             <asp:ListItem>1 - The worst HR executive ever!</asp:ListItem>
                                             <asp:ListItem>2</asp:ListItem>
-                                            <asp:ListItem>3</asp:ListItem>
+                                            <asp:ListItem>3 - Making poor decisions.</asp:ListItem>
                                             <asp:ListItem>4</asp:ListItem>
                                             <asp:ListItem>5</asp:ListItem>
                                             <asp:ListItem>6</asp:ListItem>
                                             <asp:ListItem>7</asp:ListItem>
-                                            <asp:ListItem>8</asp:ListItem>
+                                            <asp:ListItem>8 - Making good decisions.</asp:ListItem>
                                             <asp:ListItem>9</asp:ListItem>
-                                            <asp:ListItem>10 - I'm loving him!</asp:ListItem>
+                                            <asp:ListItem>10 - I&#39;m loving him!</asp:ListItem>
                                         </asp:RadioButtonList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Style="color: Red;" ControlToValidate="RatingRbL" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                                     </td>

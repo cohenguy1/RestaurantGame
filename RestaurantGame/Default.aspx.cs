@@ -71,31 +71,6 @@ namespace RestaurantGame
             }
         }
 
-        private void DecideRandomStuff()
-        {
-            Random rand = new Random();
-            int randHim = rand.Next(2);
-            if (randHim == 1)
-            {
-                backgroundText.Text = backgroundText.Text.Replace("him", "her");
-                backgroundText2.Text = backgroundText2.Text.Replace(", he", ", she");
-            }
-
-            try
-            {
-                AskPosition = GetAskPosition(UserId == "friend");
-            }
-            catch (Exception)
-            {
-                NoHitSlotsAvailable();
-            }
-        }
-
-        private void NoHitSlotsAvailable()
-        {
-            MultiView1.ActiveViewIndex = 10;
-        }
-
         private void StartInterviewsForPosition(int position)
         {
             TimerGame.Enabled = false;
@@ -478,32 +453,15 @@ namespace RestaurantGame
             return (CurrentCandidateNumber < NumberOfCandidates); ;
         }
 
-        private void UpdateImages(CandidateState candidateState)
-        {
-            ImageManForward.Visible = (candidateState == CandidateState.New);
-            ImageInterview.Visible = (candidateState == CandidateState.Interview);
-            MovingToNextPositionLabel.Visible = false;
-            MovingJobTitleLabel.Visible = false;
-        }
-
         private void DetermineCandidateRank(Candidate newCandidate)
         {
             var candidatesByNow = CandidatesByNow;
 
-            int newCandidateIndex = 0;
-            foreach (var candidate in candidatesByNow)
-            {
-                if (candidate.CandidateRank > newCandidate.CandidateRank)
-                {
-                    break;
-                }
+            var dm = new DecisionMaker();
 
-                newCandidateIndex++;
-            }
+            var newCandidateIndex = dm.GetCandidateRelativePosition(candidatesByNow, newCandidate);
 
             candidatesByNow.Insert(newCandidateIndex, newCandidate);
-
-            var dm = new DecisionMaker();
 
             if (GameMode == GameMode.Advisor)
             {
@@ -568,44 +526,6 @@ namespace RestaurantGame
             StatusLabel.Text = "It's time to reveal the absolute rankings of the candidates:";
             StatusLabel.Font.Bold = true;
             ShowCandidateMap(currentPosition.ChosenCandidate);
-        }
-
-        protected void btnThumbsDown_Click(object sender, EventArgs e)
-        {
-            if (CurrentCandidateNumber >= NumberOfCandidates - 1)
-            {
-                Alert.Show("You cannot reject the last candidate, no more candidates avaliable.");
-                return;
-            }
-
-            AcceptCandidateByUser(false);
-            IncreaseButtonSize(btnThumbsDown);
-        }
-
-        protected void btnThumbsUp_Click(object sender, EventArgs e)
-        {
-            AcceptCandidateByUser(true);
-            IncreaseButtonSize(btnThumbsUp);
-        }
-
-        private void AcceptCandidateByUser(bool accepted)
-        {
-            var currentCandidate = CurrentCandidate;
-
-            if (currentCandidate == null)
-            {
-                EnterNewCandidate();
-            }
-            else if (currentCandidate.CandidateState == CandidateState.Interview)
-            {
-                currentCandidate.CandidateAccepted = accepted;
-
-                currentCandidate.CandidateState = CandidateState.Completed;
-            }
-
-            TimerGame.Interval = 500;
-            TimerGame.Enabled = true;
-            SessionState = SessionState.Running;
         }
 
         protected void btnNextToUniform_Click(object sender, EventArgs e)

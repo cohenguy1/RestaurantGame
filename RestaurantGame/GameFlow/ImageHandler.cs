@@ -11,6 +11,14 @@ namespace RestaurantGame
     {
         public const string EmptyCandidateImage = "~/Images/EmptyStickMan.png";
 
+        private void UpdateImages(CandidateState candidateState)
+        {
+            ImageManForward.Visible = (candidateState == CandidateState.New);
+            ImageInterview.Visible = (candidateState == CandidateState.Interview);
+            MovingToNextPositionLabel.Visible = false;
+            MovingJobTitleLabel.Visible = false;
+        }
+
         public static void DrawCandidatesByNow(List<Candidate> candidatesByNow, int newCandidateIndex, Default page)
         {
             for (var candidateIndex = 0; candidateIndex < candidatesByNow.Count; candidateIndex++)

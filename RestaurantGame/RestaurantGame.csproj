@@ -219,6 +219,9 @@
     <Compile Include="GameFlow\Quiz.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="GameFlow\TrainingHandler.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Utils\Alert.cs" />
     <Compile Include="Candidate.cs" />
     <Compile Include="Enums\CandidateCompletedStep.cs" />
