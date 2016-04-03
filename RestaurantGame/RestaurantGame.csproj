@@ -99,6 +99,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Restaurant.db" />
+    <Content Include="InstructionsPage.aspx" />
+    <Content Include="ProceedToTraining.aspx" />
     <Content Include="UserInfoPage.aspx" />
     <None Include="Properties\PublishProfiles\RestaurantGame.pubxml" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -221,6 +223,23 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="GameFlow\TrainingHandler.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InstructionsPage.aspx.cs">
+      <DependentUpon>InstructionsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InstructionsPage.aspx.designer.cs">
+      <DependentUpon>InstructionsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProceedToTraining.aspx.cs">
+      <DependentUpon>ProceedToTraining.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProceedToTraining.aspx.designer.cs">
+      <DependentUpon>ProceedToTraining.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SessionMap\SessionMapProceedToTraining.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SessionMap\SessionMapDbHandler.cs">

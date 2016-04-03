@@ -22,54 +22,69 @@ namespace RestaurantGame
         {
             if (!IsPostBack)
             {
-                string assignmentId = Request.QueryString["assignmentId"];
-
-                // friend assigment
-                if (assignmentId == null)
+                if (GameMode == GameMode.Initial)
                 {
-                    Session["user_id"] = "friend";
-                    Session["turkAss"] = "turkAss";
-                    Session["hitId"] = "hit id friend";
-                    btnNextToInfo.Enabled = true;
+                    string assignmentId = Request.QueryString["assignmentId"];
+
+                    // friend assigment
+                    if (assignmentId == null)
+                    {
+                        Session["user_id"] = "friend";
+                        Session["turkAss"] = "turkAss";
+                        Session["hitId"] = "hit id friend";
+                        btnNextToInfo.Enabled = true;
+                    }
+                    //from AMT but did not took the assigment
+                    else if (assignmentId.Equals("ASSIGNMENT_ID_NOT_AVAILABLE"))
+                    {
+                        btnNextToInfo.Enabled = false;
+                        return;
+                    }
+                    //from AMT and accepted the assigment - continue to experiment
+                    else
+                    {
+                        Session["user_id"] = Request.QueryString["workerId"];   // save participant's user ID
+                        Session["turkAss"] = assignmentId;                      // save participant's assignment ID
+                        Session["hitId"] = Request.QueryString["hitId"];        // save the hit id
+                        btnNextToInfo.Enabled = true;
+                    }
+
+                    dbHandler = new DbHandler();
+
+                    GameStateStopwatch = new Stopwatch();
+                    GameStateStopwatch.Start();
+
+                    DecideRandomStuff();
+
+                    TimerGame.Enabled = false;
+                    TimerGame.Interval = StartTimerInterval;
+
+                    CurrentPositionNumber = 0;
+                    AlreadyAskedForRating = false;
+
+                    TimerInterval = StartTimerInterval;
+                    TimerEnabled = true;
+
+                    GamePlayPauseState = PlayPauseState.Playing;
+
+                    GeneratePositions();
+
+                    CurrentCandidateNumber = 0;
+
+                    AskForRating = false;
                 }
-                //from AMT but did not took the assigment
-                else if (assignmentId.Equals("ASSIGNMENT_ID_NOT_AVAILABLE"))
+                else if (GameMode == GameMode.Training)
                 {
-                    btnNextToInfo.Enabled = false;
-                    return;
+                    MultiView1.ActiveViewIndex = 3;
+
+                    DisableThumbsButtons();
+
+                    TrainingPassed = 0;
+
+                    CurrentPositionNumber = 0;
+                    StartInterviewsForPosition(0);
                 }
-                //from AMT and accepted the assigment - continue to experiment
-                else
-                {
-                    Session["user_id"] = Request.QueryString["workerId"];	// save participant's user ID
-                    Session["turkAss"] = assignmentId;                      // save participant's assignment ID
-                    Session["hitId"] = Request.QueryString["hitId"];        // save the hit id
-                    btnNextToInfo.Enabled = true;
-                }
-
-                dbHandler = new DbHandler();
-
-                GameStateStopwatch = new Stopwatch();
-                GameStateStopwatch.Start();
-
-                DecideRandomStuff();
-
-                TimerGame.Enabled = false;
-                TimerGame.Interval = StartTimerInterval;
-
-                CurrentPositionNumber = 0;
-                AlreadyAskedForRating = false;
-
-                TimerInterval = StartTimerInterval;
-                TimerEnabled = true;
-
-                GamePlayPauseState = PlayPauseState.Playing;
-
-                GeneratePositions();
-
-                CurrentCandidateNumber = 0;
-
-                AskForRating = false;
+                
             }
         }
 

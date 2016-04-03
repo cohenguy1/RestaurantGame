@@ -103,19 +103,6 @@ namespace RestaurantGame
 
             Response.Redirect("UserInfoPage.aspx");
         }
-
-        protected void btnNextToTraining_Click(object sender, EventArgs e)
-        {
-            MultiView1.ActiveViewIndex = 6;
-
-            GameMode = GameMode.Training;
-            DisableThumbsButtons();
-            TrainingPassed = 0;
-
-            CurrentPositionNumber = 0;
-            StartInterviewsForPosition(0);
-        }
-
         
 
         protected void btnNextToGame_Click(object sender, EventArgs e)

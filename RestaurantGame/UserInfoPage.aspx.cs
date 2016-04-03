@@ -33,7 +33,7 @@ namespace RestaurantGame
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
                     cmd.Parameters.AddWithValue("@UserId", UserId);
-                    //cmd.Parameters.AddWithValue("@Gender", DropDownList1.Text);
+                    cmd.Parameters.AddWithValue("@Gender", DropDownList1.Text);
                     cmd.Parameters.AddWithValue("@Age", DropDownList2.Text);
                     cmd.Parameters.AddWithValue("@Education", DropDownList3.Text);
                     cmd.Parameters.AddWithValue("@Nationality", DropDownList4.Text);
@@ -50,17 +50,13 @@ namespace RestaurantGame
                 Alert.Show("Error: " + Environment.NewLine + ex.Message);
                 return;
             }
-
-            Response.Redirect("InstructionsPage.aspx");
-            /*
-            MultiView1.ActiveViewIndex = 2;
-            MultiviewInstructions.ActiveViewIndex = 0;
-            ProgressBar1.Value = 0;
-            */
+            
             InstructionsStopwatch = new Stopwatch();
             InstructionsStopwatch.Start();
 
             dbHandler.UpdateTimesTable(GameState.Instructions);
+
+            Response.Redirect("InstructionsPage.aspx");
         }
     }
 }

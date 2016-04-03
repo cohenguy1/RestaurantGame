@@ -9,51 +9,6 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        public const int NumOfInstructions = 21;
-
-        protected void btnPrevInstruction_Click(object sender, EventArgs e)
-        {
-            ProgressBar1.Value = GetTrainingProgress(MultiviewInstructions.ActiveViewIndex - 1);
-
-            MultiviewInstructions.ActiveViewIndex--;
-
-            btnNextInstruction.Text = "Next";
-
-            if (MultiviewInstructions.ActiveViewIndex == 0)
-            {
-                btnPrevInstruction.Enabled = false;
-            }
-        }
-
-        protected void btnNextInstruction_Click(object sender, EventArgs e)
-        {
-            ProgressBar1.Value = GetTrainingProgress(MultiviewInstructions.ActiveViewIndex + 1);
-
-            if (MultiviewInstructions.ActiveViewIndex == NumOfInstructions - 1)
-            {
-                // training start
-                InstructionsStopwatch.Stop();
-                MultiView1.ActiveViewIndex = 3;
-                dbHandler.UpdateTimesTable(GameState.TrainingStart);
-
-                return;
-            }
-
-            MultiviewInstructions.ActiveViewIndex++;
-            btnPrevInstruction.Enabled = true;
-
-            if (MultiviewInstructions.ActiveViewIndex == NumOfInstructions - 1)
-            {
-                btnNextInstruction.Text = "Continue to Training";
-            }
-        }
-
-        public int GetTrainingProgress(int currentInstructionPage)
-        {
-            double progress = (currentInstructionPage + 1) / (double)NumOfInstructions * 100;
-            return (int)progress;
-        }
-
         protected void btnNextToQuiz_Click(object sender, EventArgs e)
         {
             if (trainingRBL.SelectedIndex == 0)

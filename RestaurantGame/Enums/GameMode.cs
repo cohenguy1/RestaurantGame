@@ -7,6 +7,7 @@ namespace RestaurantGame
 {
     public enum GameMode
     {
+        Initial,
         Training,
         Advisor
     }
