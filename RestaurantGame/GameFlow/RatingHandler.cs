@@ -68,7 +68,7 @@ namespace RestaurantGame
 
             MultiView2.ActiveViewIndex = 1;
 
-            UpdateTimesTable(GameState.Rate);
+            dbHandler.UpdateTimesTable(GameState.Rate);
         }
 
         protected void btnRate_Click(object sender, EventArgs e)
@@ -79,7 +79,7 @@ namespace RestaurantGame
 
             MultiView2.ActiveViewIndex = 0;
 
-            UpdateTimesTable(GameState.AfterRate);
+            dbHandler.UpdateTimesTable(GameState.AfterRate);
 
             TimerGame.Enabled = true;
         }

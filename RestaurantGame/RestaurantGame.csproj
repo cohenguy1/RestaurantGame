@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Restaurant.db" />
+    <Content Include="UserInfoPage.aspx" />
     <None Include="Properties\PublishProfiles\RestaurantGame.pubxml" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Images\Choose.png" />
@@ -222,6 +223,18 @@
     <Compile Include="GameFlow\TrainingHandler.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="SessionMap\SessionMapDbHandler.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionMap\SessionMapDefault.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionMap\SessionMapInstructions.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionMap\SessionMapUserInfo.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Utils\Alert.cs" />
     <Compile Include="Candidate.cs" />
     <Compile Include="Enums\CandidateCompletedStep.cs" />
@@ -257,9 +270,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Enums\RestaurantPosition.cs" />
-    <Compile Include="SessionMap.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="SessionMap\SessionMap.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -269,6 +280,13 @@
     </Compile>
     <Compile Include="GameFlow\SpeedControl.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfoPage.aspx.cs">
+      <DependentUpon>UserInfoPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfoPage.aspx.designer.cs">
+      <DependentUpon>UserInfoPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

@@ -51,15 +51,7 @@
 </head>
 <script type="text/javascript" language="javascript">
 
-    function Init() {
-        if (document.hasFocus)
-            setInterval("CheckFocus ()", 500);
-
-    }
-
-
-
-
+    
     function disableBackButton() {
         window.history.forward()
     }
@@ -73,7 +65,7 @@
         $("#clientScreenHeight").val($(window).height());
     });
 </script>
-<body onload="Init();" onresize="sizeFunction()">
+<body onload=";" onresize="sizeFunction()">
 
     <form id="form1" runat="server">
 

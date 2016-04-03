@@ -47,6 +47,8 @@ namespace RestaurantGame
                     btnNextToInfo.Enabled = true;
                 }
 
+                dbHandler = new DbHandler();
+
                 GameStateStopwatch = new Stopwatch();
                 GameStateStopwatch.Start();
 
@@ -183,7 +185,7 @@ namespace RestaurantGame
             AverageRank.Text = averageRank.ToString("0.0");
             Bonus.Text = bonus.ToString() + " cents";
 
-            UpdateTimesTable(GameState.EndGame);
+            dbHandler.UpdateTimesTable(GameState.EndGame);
         }
 
         private void EnterNewCandidate()
@@ -330,7 +332,7 @@ namespace RestaurantGame
         {
             if (NeedToAskRating())
             {
-                UpdateTimesTable(GameState.BeforeRate);
+                dbHandler.UpdateTimesTable(GameState.BeforeRate);
             }
 
             btnThumbsDown.Visible = false;
@@ -358,15 +360,15 @@ namespace RestaurantGame
 
                 if (TrainingPassed == 1)
                 {
-                    UpdateTimesTable(GameState.AfterTraining1);
+                    dbHandler.UpdateTimesTable(GameState.AfterTraining1);
                 }
                 else if (TrainingPassed == 2)
                 {
-                    UpdateTimesTable(GameState.AfterTraining2);
+                    dbHandler.UpdateTimesTable(GameState.AfterTraining2);
                 }
                 else if (TrainingPassed == 3)
                 {
-                    UpdateTimesTable(GameState.AfterTraining3);
+                    dbHandler.UpdateTimesTable(GameState.AfterTraining3);
                 }
             }
 
@@ -545,75 +547,6 @@ namespace RestaurantGame
 
             FullyHideCandidatesSecondRowImages();
             PickUniform();
-        }
-
-        private void UpdateTimesTable(GameState gameState)
-        {
-            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-
-            GameStateStopwatch.Stop();
-            var minutes = Math.Round(GameStateStopwatch.Elapsed.TotalMinutes, 1);
-
-            if (gameState == GameState.UserInfo)
-            {
-                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
-                {
-                    SQLiteCommand cmd = new SQLiteCommand("Select UserId from [Times] Where UserId='" + UserId + "'");
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Connection = sqlConnection1;
-                    sqlConnection1.Open();
-
-                    string userId = (string)cmd.ExecuteScalar();
-
-                    if (userId != null)
-                    {
-                        //new user - insert to DB
-                        cmd = new SQLiteCommand("Delete from Times Where UserId='" + UserId + "'");
-                        cmd.CommandType = CommandType.Text;
-                        cmd.Connection = sqlConnection1;
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
-                {
-                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Times (UserId, UserInfo, Instructions, TrainingStart," +
-                        " AfterTraining1, AfterTraining2, AfterTraining3, Quiz, GameStart, BeforeRate, Rate, AfterRate, EndGame, CollectedPrize) VALUES " +
-                        "(@UserId, @UserInfo, @Instructions, @TrainingStart, @AfterTraining1, @AfterTraining2, @AfterTraining3, " +
-                        " @Quiz, @GameStart, @BeforeRate, @Rate, @AfterRate, @EndGame, @CollectedPrize)");
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Connection = sqlConnection1;
-                    sqlConnection1.Open();
-                    cmd.Parameters.AddWithValue("@UserId", UserId);
-                    cmd.Parameters.AddWithValue("@UserInfo", null);
-                    cmd.Parameters.AddWithValue("@Instructions", null);
-                    cmd.Parameters.AddWithValue("@TrainingStart", null);
-                    cmd.Parameters.AddWithValue("@AfterTraining1", null);
-                    cmd.Parameters.AddWithValue("@AfterTraining2", null);
-                    cmd.Parameters.AddWithValue("@AfterTraining3", null);
-                    cmd.Parameters.AddWithValue("@Quiz", null);
-                    cmd.Parameters.AddWithValue("@GameStart", null);
-                    cmd.Parameters.AddWithValue("@BeforeRate", null);
-                    cmd.Parameters.AddWithValue("@Rate", null);
-                    cmd.Parameters.AddWithValue("@AfterRate", null);
-                    cmd.Parameters.AddWithValue("@EndGame", null);
-                    cmd.Parameters.AddWithValue("@CollectedPrize", null);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-
-            string gameStateColumn = GetGameStateColumn(gameState);
-
-            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
-            {
-                SQLiteCommand cmd = new SQLiteCommand("Update Times set " + gameStateColumn +  " = " + minutes + " Where UserId='" + UserId + "'");
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = sqlConnection1;
-                sqlConnection1.Open();
-                cmd.ExecuteNonQuery();
-            }
-
-            GameStateStopwatch.Restart();
         }
     }
 }

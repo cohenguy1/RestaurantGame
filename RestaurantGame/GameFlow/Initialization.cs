@@ -19,7 +19,7 @@ namespace RestaurantGame
 
             try
             {
-                AskPosition = GetAskPosition(UserId == "friend");
+                AskPosition = dbHandler.GetAskPosition(UserId == "friend");
             }
             catch (Exception)
             {
@@ -39,7 +39,7 @@ namespace RestaurantGame
 
             var positionCandidates = new List<Candidate>();
 
-            int[] candidateRanks = GetCandidateRanksForPosition(positionNumber);
+            int[] candidateRanks = dbHandler.GetCandidateRanksForPosition(positionNumber);
 
             for (var candidateIndex = 0; candidateIndex < NumberOfCandidates; candidateIndex++)
             {

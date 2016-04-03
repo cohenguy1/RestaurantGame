@@ -60,7 +60,7 @@ namespace RestaurantGame
             {
                 MultiView1.ActiveViewIndex = 5;
 
-                UpdateTimesTable(GameState.GameStart);
+                dbHandler.UpdateTimesTable(GameState.GameStart);
             }
             else
             {

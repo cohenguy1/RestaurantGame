@@ -20,7 +20,7 @@ namespace RestaurantGame
 
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
 
-            UpdateTimesTable(GameState.UserInfo);
+            dbHandler.UpdateTimesTable(GameState.UserInfo);
 
             if (!UserId.Equals("friend"))
             {
@@ -68,25 +68,6 @@ namespace RestaurantGame
                 }
             }
 
-            MultiView1.ActiveViewIndex = 1;
-        }
-
-        protected void btnNextToTraining_Click(object sender, EventArgs e)
-        {
-            MultiView1.ActiveViewIndex = 6;
-
-            GameMode = GameMode.Training;
-            DisableThumbsButtons();
-            TrainingPassed = 0;
-
-            CurrentPositionNumber = 0;
-            StartInterviewsForPosition(0);
-        }
-
-        protected void btnNextToInstructions_Click(object sender, EventArgs e)
-        {
-            // Save user info to DB
-            String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
 
             string heightS = HttpContext.Current.Request.Params["clientScreenHeight"];
             string widthS = HttpContext.Current.Request.Params["clientScreenWidth"];
@@ -95,7 +76,7 @@ namespace RestaurantGame
             int width;
             bool heightConvertResult = int.TryParse(heightS, out height);
             bool widthConvertResult = int.TryParse(widthS, out width);
-            
+
             if (Request.Browser.IsMobileDevice)
             {
                 MultiView1.ActiveViewIndex = 9;
@@ -111,43 +92,31 @@ namespace RestaurantGame
                 }
             }
 
-            try
+            // experiment opened from iexplorer
+            HttpBrowserCapabilities browser = Request.Browser;
+            var browserType = browser.Type.ToLower();
+            if (browserType.Contains("internetexplorer"))
             {
-                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
-                {
-                    SQLiteCommand cmd = new SQLiteCommand
-                        ("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, VectorNum, AskPosition, time) " +
-                         "VALUES (@UserId, @Gender, @Age, @Education, @Nationality, @Reason, @VectorNum, @AskPosition, @time)");
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Connection = sqlConnection1;
-                    cmd.Parameters.AddWithValue("@UserId", UserId);
-                    cmd.Parameters.AddWithValue("@Gender", DropDownList1.Text);
-                    cmd.Parameters.AddWithValue("@Age", DropDownList2.Text);
-                    cmd.Parameters.AddWithValue("@Education", DropDownList3.Text);
-                    cmd.Parameters.AddWithValue("@Nationality", DropDownList4.Text);
-                    cmd.Parameters.AddWithValue("@Reason", DropDownList5.Text);
-                    cmd.Parameters.AddWithValue("@VectorNum", VectorNum);
-                    cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
-                    cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString());
-                    sqlConnection1.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                Alert.Show("Error: " + Environment.NewLine + ex.Message);
+                MultiView1.ActiveViewIndex = 11;
                 return;
             }
-            
-            MultiView1.ActiveViewIndex = 2;
-            MultiviewInstructions.ActiveViewIndex = 0;
-            ProgressBar1.Value = 0;
 
-            InstructionsStopwatch = new Stopwatch();
-            InstructionsStopwatch.Start();
-
-            UpdateTimesTable(GameState.Instructions);
+            Response.Redirect("UserInfoPage.aspx");
         }
+
+        protected void btnNextToTraining_Click(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 6;
+
+            GameMode = GameMode.Training;
+            DisableThumbsButtons();
+            TrainingPassed = 0;
+
+            CurrentPositionNumber = 0;
+            StartInterviewsForPosition(0);
+        }
+
+        
 
         protected void btnNextToGame_Click(object sender, EventArgs e)
         {
@@ -174,7 +143,7 @@ namespace RestaurantGame
         {
             string workerId = UserId;
 
-            UpdateTimesTable(GameState.CollectedPrize);
+            dbHandler.UpdateTimesTable(GameState.CollectedPrize);
 
             string assignmentId = (string)Session["turkAss"];
 
@@ -222,7 +191,8 @@ namespace RestaurantGame
                     break;
             }
 
-            SetVectorNextAskPosition(nextAskPosition);
+            DbHandler dbHandler = new DbHandler();
+            dbHandler.SetVectorNextAskPosition(nextAskPosition);
         }
 
         private void SendFeedback(double bonus)

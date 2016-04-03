@@ -34,7 +34,7 @@ namespace RestaurantGame
                 // training start
                 InstructionsStopwatch.Stop();
                 MultiView1.ActiveViewIndex = 3;
-                UpdateTimesTable(GameState.TrainingStart);
+                dbHandler.UpdateTimesTable(GameState.TrainingStart);
 
                 return;
             }
@@ -65,7 +65,7 @@ namespace RestaurantGame
             else
             {
                 // show quiz
-                UpdateTimesTable(GameState.Quiz);
+                dbHandler.UpdateTimesTable(GameState.Quiz);
 
                 MultiView1.ActiveViewIndex = 4;
                 NumOfWrongQuizAnswers = 0;

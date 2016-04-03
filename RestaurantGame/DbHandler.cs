@@ -8,12 +8,12 @@ using System.Web;
 
 namespace RestaurantGame
 {
-    public partial class Default
+    public partial class DbHandler : System.Web.UI.Page
     {
-        private static string _connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-
         public AskPositionHeuristic GetAskPosition(bool isFriend)
         {
+            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
             if (isFriend)
             {
                 Random ran = new Random();
@@ -86,9 +86,11 @@ namespace RestaurantGame
 
         public int[] GetCandidateRanksForPosition(int positionNumber)
         {
+            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
             int[] ranks = new int[DecisionMaker.NumberOfCandidates];
 
-            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(_connectionString))
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
                 SQLiteCommand cmd = new SQLiteCommand("Select Rank1,Rank2,Rank3,Rank4,Rank5,Rank6, " +
                     "Rank7,Rank8,Rank9,Rank10,Rank11,Rank12,Rank13,Rank14,Rank15,Rank16,Rank17,Rank18,Rank19,Rank20 " +
@@ -117,7 +119,9 @@ namespace RestaurantGame
 
         public static int? GetFirstVectorSatisfying(string askPosition)
         {
-            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(_connectionString))
+            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
                 using (SQLiteCommand cmd = new SQLiteCommand("Select VectorNum, LastStarted " +
                     "from VectorsAssignments Where NextAskHeuristic='" + askPosition + "' order by VectorNum"))
@@ -173,8 +177,10 @@ namespace RestaurantGame
 
         public static int GetIntFromConfig(string key)
         {
+            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
             string value;
-            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(_connectionString))
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
                 SQLiteCommand cmd = new SQLiteCommand("Select Value from Configuration Where Key='" + key + "'");
                 cmd.CommandType = CommandType.Text;
@@ -201,7 +207,9 @@ namespace RestaurantGame
 
         public static void SetIntToConfig(string key, int value)
         {
-            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(_connectionString))
+            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
                 SQLiteCommand cmd = new SQLiteCommand("update Configuration set Value='" + value.ToString() + "' Where Key='" + key + "'");
                 cmd.CommandType = CommandType.Text;
@@ -214,7 +222,9 @@ namespace RestaurantGame
 
         public void SetVectorNextAskPosition(string nextAskPosition)
         {
-            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(_connectionString))
+            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
                 SQLiteCommand cmd = new SQLiteCommand("update VectorsAssignments set NextAskHeuristic ='" + nextAskPosition + "' Where VectorNum=" + VectorNum);
                 cmd.CommandType = CommandType.Text;
@@ -264,6 +274,75 @@ namespace RestaurantGame
             }
 
             return null;
+        }
+
+        public void UpdateTimesTable(GameState gameState)
+        {
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
+            GameStateStopwatch.Stop();
+            var minutes = Math.Round(GameStateStopwatch.Elapsed.TotalMinutes, 1);
+
+            if (gameState == GameState.UserInfo)
+            {
+                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand("Select UserId from [Times] Where UserId='" + UserId + "'");
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    sqlConnection1.Open();
+
+                    string userId = (string)cmd.ExecuteScalar();
+
+                    if (userId != null)
+                    {
+                        //new user - insert to DB
+                        cmd = new SQLiteCommand("Delete from Times Where UserId='" + UserId + "'");
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection = sqlConnection1;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Times (UserId, UserInfo, Instructions, TrainingStart," +
+                        " AfterTraining1, AfterTraining2, AfterTraining3, Quiz, GameStart, BeforeRate, Rate, AfterRate, EndGame, CollectedPrize) VALUES " +
+                        "(@UserId, @UserInfo, @Instructions, @TrainingStart, @AfterTraining1, @AfterTraining2, @AfterTraining3, " +
+                        " @Quiz, @GameStart, @BeforeRate, @Rate, @AfterRate, @EndGame, @CollectedPrize)");
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    sqlConnection1.Open();
+                    cmd.Parameters.AddWithValue("@UserId", UserId);
+                    cmd.Parameters.AddWithValue("@UserInfo", null);
+                    cmd.Parameters.AddWithValue("@Instructions", null);
+                    cmd.Parameters.AddWithValue("@TrainingStart", null);
+                    cmd.Parameters.AddWithValue("@AfterTraining1", null);
+                    cmd.Parameters.AddWithValue("@AfterTraining2", null);
+                    cmd.Parameters.AddWithValue("@AfterTraining3", null);
+                    cmd.Parameters.AddWithValue("@Quiz", null);
+                    cmd.Parameters.AddWithValue("@GameStart", null);
+                    cmd.Parameters.AddWithValue("@BeforeRate", null);
+                    cmd.Parameters.AddWithValue("@Rate", null);
+                    cmd.Parameters.AddWithValue("@AfterRate", null);
+                    cmd.Parameters.AddWithValue("@EndGame", null);
+                    cmd.Parameters.AddWithValue("@CollectedPrize", null);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            string gameStateColumn = GetGameStateColumn(gameState);
+
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
+            {
+                SQLiteCommand cmd = new SQLiteCommand("Update Times set " + gameStateColumn + " = " + minutes + " Where UserId='" + UserId + "'");
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = sqlConnection1;
+                sqlConnection1.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            GameStateStopwatch.Restart();
         }
     }
 }
