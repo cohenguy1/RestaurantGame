@@ -334,16 +334,10 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Enums\GameMode.cs" />
-    <Compile Include="GameFlow\GamePreviews.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="GameFlow\ImageHandler.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="GameFlow\Initialization.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GameFlow\InstructionsHandler.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Enums\PausePlayState.cs" />

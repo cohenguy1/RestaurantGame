@@ -7,10 +7,6 @@ namespace RestaurantGame
 {
     public partial class Game : System.Web.UI.Page
     {
-        
-
-        
-
         private void GenerateCandidatesForPosition()
         {
             var positionNumber = CurrentPositionNumber;

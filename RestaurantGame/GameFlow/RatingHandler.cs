@@ -91,9 +91,11 @@ namespace RestaurantGame
             using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
                 SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
-                    "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank, AvgRanking, InstructionsTime, TrainingPassed ) " +
+                    "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank, AvgRanking, " +
+                    " InstructionsTime, TrainingPassed, AskPosition) " +
                     " VALUES (@UserId, @AdviserRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
-                    "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank, @AvgRanking, @InstructionsTime, @TrainingPassed)");
+                    "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank, @AvgRanking, " +
+                    "@InstructionsTime, @TrainingPassed, @AskPosition)");
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = sqlConnection1;
                 cmd.Parameters.AddWithValue("@UserId", UserId);
@@ -112,6 +114,7 @@ namespace RestaurantGame
                 cmd.Parameters.AddWithValue("@AvgRanking", Common.CalculateAveragePosition(Positions));
                 cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 3));
                 cmd.Parameters.AddWithValue("@TrainingPassed", TrainingPassed);
+                cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
                 sqlConnection1.Open();
                 cmd.ExecuteNonQuery();
 
