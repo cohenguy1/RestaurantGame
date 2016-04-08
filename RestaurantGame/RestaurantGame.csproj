@@ -99,9 +99,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Restaurant.db" />
+    <Content Include="EndGame.aspx" />
+    <Content Include="Game.aspx" />
+    <Content Include="IExplorerProblem.aspx" />
     <Content Include="InstructionsPage.aspx" />
+    <Content Include="ProceedToGame.aspx" />
     <Content Include="ProceedToTraining.aspx" />
+    <Content Include="Quiz.aspx" />
+    <Content Include="ResolutionProblem.aspx" />
+    <Content Include="SlotsProblem.aspx" />
     <Content Include="UserInfoPage.aspx" />
+    <Content Include="WrongQuiz.aspx" />
     <None Include="Properties\PublishProfiles\RestaurantGame.pubxml" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Images\Choose.png" />
@@ -212,18 +220,37 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common.cs" />
     <Compile Include="DbHandler.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EndGame.aspx.cs">
+      <DependentUpon>EndGame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EndGame.aspx.designer.cs">
+      <DependentUpon>EndGame.aspx</DependentUpon>
     </Compile>
     <Compile Include="Enums\AskPositionHeuristic.cs" />
     <Compile Include="Enums\BlinkState.cs" />
     <Compile Include="Enums\GameState.cs" />
     <Compile Include="Enums\SessionState.cs" />
-    <Compile Include="GameFlow\Quiz.cs">
+    <Compile Include="Game.aspx.cs">
+      <DependentUpon>Game.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game.aspx.designer.cs">
+      <DependentUpon>Game.aspx</DependentUpon>
     </Compile>
     <Compile Include="GameFlow\TrainingHandler.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IExplorerProblem.aspx.cs">
+      <DependentUpon>IExplorerProblem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IExplorerProblem.aspx.designer.cs">
+      <DependentUpon>IExplorerProblem.aspx</DependentUpon>
     </Compile>
     <Compile Include="InstructionsPage.aspx.cs">
       <DependentUpon>InstructionsPage.aspx</DependentUpon>
@@ -232,12 +259,45 @@
     <Compile Include="InstructionsPage.aspx.designer.cs">
       <DependentUpon>InstructionsPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ProceedToGame.aspx.cs">
+      <DependentUpon>ProceedToGame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProceedToGame.aspx.designer.cs">
+      <DependentUpon>ProceedToGame.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProceedToTraining.aspx.cs">
       <DependentUpon>ProceedToTraining.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ProceedToTraining.aspx.designer.cs">
       <DependentUpon>ProceedToTraining.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz.aspx.cs">
+      <DependentUpon>Quiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz.aspx.designer.cs">
+      <DependentUpon>Quiz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResolutionProblem.aspx.cs">
+      <DependentUpon>ResolutionProblem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResolutionProblem.aspx.designer.cs">
+      <DependentUpon>ResolutionProblem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SessionMap\SessionMapGame.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionMap\SessionMapEndGame.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionMap\SessionMapProceedToGame.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionMap\SessionMapQuiz.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SessionMap\SessionMapProceedToTraining.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -253,6 +313,13 @@
     </Compile>
     <Compile Include="SessionMap\SessionMapUserInfo.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SlotsProblem.aspx.cs">
+      <DependentUpon>SlotsProblem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SlotsProblem.aspx.designer.cs">
+      <DependentUpon>SlotsProblem.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Alert.cs" />
     <Compile Include="Candidate.cs" />
@@ -306,6 +373,13 @@
     </Compile>
     <Compile Include="UserInfoPage.aspx.designer.cs">
       <DependentUpon>UserInfoPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WrongQuiz.aspx.cs">
+      <DependentUpon>WrongQuiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WrongQuiz.aspx.designer.cs">
+      <DependentUpon>WrongQuiz.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

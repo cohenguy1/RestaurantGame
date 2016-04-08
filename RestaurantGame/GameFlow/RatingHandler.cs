@@ -8,7 +8,7 @@ using System.Web;
 
 namespace RestaurantGame
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Game : System.Web.UI.Page
     {
         private bool NeedToAskRating()
         {
@@ -109,7 +109,7 @@ namespace RestaurantGame
                 cmd.Parameters.AddWithValue("@Position8Rank", GetChosenPositionToInsertToDb(8));
                 cmd.Parameters.AddWithValue("@Position9Rank", GetChosenPositionToInsertToDb(9));
                 cmd.Parameters.AddWithValue("@Position10Rank", GetChosenPositionToInsertToDb(10));
-                cmd.Parameters.AddWithValue("@AvgRanking", CalculateAveragePosition());
+                cmd.Parameters.AddWithValue("@AvgRanking", Common.CalculateAveragePosition(Positions));
                 cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 3));
                 cmd.Parameters.AddWithValue("@TrainingPassed", TrainingPassed);
                 sqlConnection1.Open();

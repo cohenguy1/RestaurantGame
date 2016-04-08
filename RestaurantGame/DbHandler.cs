@@ -146,7 +146,7 @@ namespace RestaurantGame
                                 lastStarted = DateTime.Parse(result.GetString(1));
                                 diffFromNow = (DateTime.Now - lastStarted).TotalHours;
 
-                                if (diffFromNow < 2)
+                                if (diffFromNow < 1.5)
                                 {
                                     continue;
                                 }

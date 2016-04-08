@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace RestaurantGame
 {
-    public partial class UserInfoPage : System.Web.UI.Page
+    public partial class Quiz : System.Web.UI.Page
     {
         public string UserId
         {
@@ -15,16 +15,10 @@ namespace RestaurantGame
             set { Session[SessionMap.UserIdStr] = value; }
         }
 
-        public AskPositionHeuristic AskPosition
+        public int NumOfWrongQuizAnswers
         {
-            get { return (AskPositionHeuristic)Session[SessionMap.AskPositionStr]; }
-            set { Session[SessionMap.AskPositionStr] = value; }
-        }
-
-        public int? VectorNum
-        {
-            get { return (int?)Session[SessionMap.VectorNumStr]; }
-            set { Session[SessionMap.VectorNumStr] = value; }
+            get { return (int)Session[SessionMap.NumOfWrongQuizAnswersStr]; }
+            set { Session[SessionMap.NumOfWrongQuizAnswersStr] = value; }
         }
 
         public DbHandler dbHandler

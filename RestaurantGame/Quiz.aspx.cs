@@ -2,15 +2,26 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace RestaurantGame
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Quiz : System.Web.UI.Page
     {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                dbHandler.UpdateTimesTable(GameState.Quiz);
+
+                NumOfWrongQuizAnswers = 0;
+            }
+        }
+
         public const int MaxNumOfWrongQuizAnswers = 3;
 
         protected void btnNextToProceedToGame_Click(object sender, EventArgs e)
@@ -55,12 +66,9 @@ namespace RestaurantGame
             }
 
 
-
             if (correct)
             {
-                MultiView1.ActiveViewIndex = 5;
-
-                dbHandler.UpdateTimesTable(GameState.GameStart);
+                Response.Redirect("ProceedToGame.aspx");
             }
             else
             {
@@ -68,8 +76,7 @@ namespace RestaurantGame
 
                 if (NumOfWrongQuizAnswers >= MaxNumOfWrongQuizAnswers)
                 {
-                    QuizWrongLbl.Text = "&nbsp;You have been wrong for " + MaxNumOfWrongQuizAnswers + " times.";
-                    MultiView1.ActiveViewIndex = 8;
+                    Response.Redirect("WrongQuiz.aspx");
                 }
                 else
                 {

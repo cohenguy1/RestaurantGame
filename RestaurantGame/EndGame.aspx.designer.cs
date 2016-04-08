@@ -10,51 +10,42 @@
 namespace RestaurantGame {
     
     
-    public partial class Default {
+    public partial class EndGame {
         
         /// <summary>
-        /// ScriptManager1 control.
+        /// feedbackTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.WebControls.TextBox feedbackTxtBox;
         
         /// <summary>
-        /// backgroundText control.
+        /// AverageRank control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label backgroundText;
+        protected global::System.Web.UI.WebControls.Label AverageRank;
         
         /// <summary>
-        /// backgroundText2 control.
+        /// Bonus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label backgroundText2;
+        protected global::System.Web.UI.WebControls.Label Bonus;
         
         /// <summary>
-        /// label44 control.
+        /// rewardBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label44;
-        
-        /// <summary>
-        /// btnNextToInfo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNextToInfo;
+        protected global::System.Web.UI.WebControls.Button rewardBtn;
     }
 }

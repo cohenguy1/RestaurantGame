@@ -7,9 +7,9 @@ using System.Web.UI.WebControls;
 
 namespace RestaurantGame
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Game : System.Web.UI.Page
     {
-        public int StartTimerInterval = 2000;
+        public const int StartTimerInterval = 2000;
         public const int MinTimerInterval = 1000;
         public const int MaxTimerInterval = 3000;
 

@@ -7,41 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace RestaurantGame
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Game : System.Web.UI.Page
     {
-        private void GeneratePositions()
-        {
-            var positions = new List<Position>();
-
-            positions.Add(new Position(RestaurantPosition.Manager));
-            positions.Add(new Position(RestaurantPosition.HeadChef));
-            positions.Add(new Position(RestaurantPosition.Cook));
-            positions.Add(new Position(RestaurantPosition.Baker));
-            positions.Add(new Position(RestaurantPosition.Dishwasher));
-            positions.Add(new Position(RestaurantPosition.Waiter1));
-            positions.Add(new Position(RestaurantPosition.Waiter2));
-            positions.Add(new Position(RestaurantPosition.Waiter3));
-            positions.Add(new Position(RestaurantPosition.Host));
-            positions.Add(new Position(RestaurantPosition.Bartender));
-
-            Positions = positions;
-
-            var acceptedCandidates = new int[positions.Count];
-            AcceptedCandidates = acceptedCandidates;
-        }
 
         private void IncreaseCurrentPosition()
         {
             CurrentPositionNumber++;
-        }
-
-        private double CalculateAveragePosition()
-        {
-            double average = Positions.Where(position => position.ChosenCandidate != null).
-                Average(pos => pos.ChosenCandidate.CandidateRank);
-
-            // with one decimal precision
-            return Math.Round(average, 1);
         }
 
         private void UpdatePositionsTable(Position currentPosition, double avgRank)

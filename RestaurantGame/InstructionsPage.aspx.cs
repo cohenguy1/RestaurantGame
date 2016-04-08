@@ -1,6 +1,7 @@
 ﻿using RestaurantGame.Enums;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -16,6 +17,11 @@ namespace RestaurantGame
             {
                 MultiviewInstructions.ActiveViewIndex = 0;
                 ProgressBar1.Value = 0;
+
+                InstructionsStopwatch = new Stopwatch();
+                InstructionsStopwatch.Start();
+
+                dbHandler.UpdateTimesTable(GameState.Instructions);
             }
         }
 

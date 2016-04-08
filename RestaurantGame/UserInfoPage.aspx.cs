@@ -15,13 +15,16 @@ namespace RestaurantGame
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                dbHandler.UpdateTimesTable(GameState.UserInfo);
+            }
         }
 
         protected void btnNextToInstructions_Click(object sender, EventArgs e)
         {
             // Save user info to DB
-            String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
 
             try
             {
@@ -51,11 +54,6 @@ namespace RestaurantGame
                 return;
             }
             
-            InstructionsStopwatch = new Stopwatch();
-            InstructionsStopwatch.Start();
-
-            dbHandler.UpdateTimesTable(GameState.Instructions);
-
             Response.Redirect("InstructionsPage.aspx");
         }
     }

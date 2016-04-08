@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace RestaurantGame
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Game : System.Web.UI.Page
     {
         public const string EmptyCandidateImage = "~/Images/EmptyStickMan.png";
 
@@ -19,7 +19,7 @@ namespace RestaurantGame
             MovingJobTitleLabel.Visible = false;
         }
 
-        public static void DrawCandidatesByNow(List<Candidate> candidatesByNow, int newCandidateIndex, Default page)
+        public static void DrawCandidatesByNow(List<Candidate> candidatesByNow, int newCandidateIndex, Game page)
         {
             for (var candidateIndex = 0; candidateIndex < candidatesByNow.Count; candidateIndex++)
             {

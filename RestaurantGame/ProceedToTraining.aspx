@@ -1,8 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProceedToTraining.aspx.cs" Inherits="RestaurantGame.ProceedToTraining" %>
 
-
-<%@ Register TagPrefix="eo" Namespace="EO.Web" Assembly="EO.Web" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

@@ -8,7 +8,7 @@ using System.Data;
 
 namespace RestaurantGame
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Game : System.Web.UI.Page
     {
         protected void btnThumbsDown_Click(object sender, EventArgs e)
         {
