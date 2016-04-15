@@ -190,11 +190,6 @@ namespace RestaurantGame
             // experiment opened from iexplorer
             HttpBrowserCapabilities browser = Request.Browser;
             var browserType = browser.Type.ToLower();
-            if (browserType.Contains("internetexplorer"))
-            {
-                Response.Redirect("IExplorerProblem.aspx");
-                return;
-            }
 
             Response.Redirect("UserInfoPage.aspx");
         }

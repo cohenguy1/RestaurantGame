@@ -143,6 +143,12 @@ namespace RestaurantGame
             set { Session[SessionMap.NumOfBlinksStr] = value; }
         }
 
+        public int NumOfBlinks2
+        {
+            get { return (int)Session[SessionMap.NumOfBlinks2Str]; }
+            set { Session[SessionMap.NumOfBlinks2Str] = value; }
+        }
+
         public AskPositionHeuristic AskPosition
         {
             get { return (AskPositionHeuristic)Session[SessionMap.AskPositionStr]; }

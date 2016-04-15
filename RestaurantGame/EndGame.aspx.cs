@@ -70,15 +70,15 @@ namespace RestaurantGame
             switch (AskPosition)
             {
                 case AskPositionHeuristic.First:
+                    nextAskPosition = AskPositionHeuristic.Optimal.ToString();
+                    break;
+                case AskPositionHeuristic.Optimal:
                     nextAskPosition = AskPositionHeuristic.Last.ToString();
                     break;
                 case AskPositionHeuristic.Last:
                     nextAskPosition = AskPositionHeuristic.Random.ToString();
                     break;
                 case AskPositionHeuristic.Random:
-                    nextAskPosition = AskPositionHeuristic.Optimal.ToString();
-                    break;
-                case AskPositionHeuristic.Optimal:
                     nextAskPosition = "Done";
                     break;
             }

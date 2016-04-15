@@ -9,8 +9,9 @@
     <asp:Timer ID="TimerGame" OnTick="TimerGame_Tick" runat="server" Enabled="false"></asp:Timer>
     <asp:Timer ID="TimerBlinkRemainingCandidates" OnTick="TimerBlinkRemainingCandidates_Tick" runat="server" Enabled="false"></asp:Timer>
     <asp:Timer ID="TimerRearrangeCandidatesMap" OnTick="TimerRearrangeCandidatesMap_Tick" runat="server" Enabled="false"></asp:Timer>
+    <asp:Timer ID="TimerShowCandidatesMap" OnTick="TimerShowCandidatesMap_Tick" runat="server" Enabled="false" Interval="3000"></asp:Timer>
 
-
+    
     <asp:MultiView ID="MultiView2" runat="server" ActiveViewIndex="0">
         <asp:View ID="ViewGame" runat="server">
             <asp:Label ID="PositionHeader" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;"></asp:Label>

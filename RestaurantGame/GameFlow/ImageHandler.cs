@@ -259,17 +259,14 @@ namespace RestaurantGame
 
         private void ShowRemainingCandidatesImages()
         {
-            var sortedRemainingCandidates = PositionCandidates.Where(candidate => candidate.CandidateNumber > CurrentCandidateNumber)
-                .OrderBy(viewedCandidate => viewedCandidate.CandidateRank);
+            IEnumerable<Candidate> remainingCandidates = PositionCandidates.Where(candidate => candidate.CandidateNumber > CurrentCandidateNumber);
 
-            for (var index = 0; index < sortedRemainingCandidates.Count(); index++)
+            for (var index = 0; index < remainingCandidates.Count(); index++)
             {
                 var stickManImage = GetRemainingStickManImage(index + 1);
-                string imageUrl = GetStickManImageUrlByRank(sortedRemainingCandidates.ElementAt(index).CandidateRank, System.Drawing.Color.Black);
-                stickManImage.ImageUrl = imageUrl;
+                stickManImage.ImageUrl = "~/Images/SmallStickMan.png";
             }
         }
-
         private void HideRemainingCandidatesImages()
         {
             IEnumerable<Candidate> remainingCandidates = PositionCandidates.Where(candidate => candidate.CandidateNumber > CurrentCandidateNumber);

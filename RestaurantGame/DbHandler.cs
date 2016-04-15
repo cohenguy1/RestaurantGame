@@ -44,6 +44,12 @@ namespace RestaurantGame
                 return AskPositionHeuristic.First;
             }
 
+            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Optimal.ToString());
+            if (VectorNum != null)
+            {
+                return AskPositionHeuristic.Optimal;
+            }
+
             VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Last.ToString());
             if (VectorNum != null)
             {
@@ -56,12 +62,6 @@ namespace RestaurantGame
                 Random ran = new Random();
                 RandomHuristicAskPosition = ran.Next(10) + 1;
                 return AskPositionHeuristic.Random;
-            }
-
-            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Optimal.ToString());
-            if (VectorNum != null)
-            {
-                return AskPositionHeuristic.Optimal;
             }
 
             throw new Exception("No Hit Slots available");

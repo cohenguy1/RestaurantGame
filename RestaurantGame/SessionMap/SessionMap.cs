@@ -41,6 +41,8 @@ namespace RestaurantGame
         public const string RemainingBlinkStateStr = "RemainingBlinkState";
         public const string NumOfBlinksStr = "NumOfBlinks";
 
+        public const string NumOfBlinks2Str = "NumOfBlinks2";
+
         public const string AskPositionStr = "AskPosition";
 
         public const string NumOfWrongQuizAnswersStr = "NumOfWrongQuizAnswers";

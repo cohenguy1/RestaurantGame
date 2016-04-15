@@ -216,18 +216,9 @@ namespace RestaurantGame
 
                 if (currentCandidate.CandidateAccepted)
                 {
-                    switch (CandidateCompletedStep)
-                    {
-                        case CandidateCompletedStep.ShowCandidatesMap:
-                            UpdatePositionToAcceptedCandidate(currentCandidate);
-                            TimerGame.Interval = 3000;
-                            CandidateCompletedStep = CandidateCompletedStep.BlinkRemaimingCandidates;
-                            break;
-                        case CandidateCompletedStep.BlinkRemaimingCandidates:
-                            BlinkRemainingCandidates();
-                            CandidateCompletedStep = CandidateCompletedStep.RearrangeCandidatesMap;
-                            break;
-                    }
+                    UpdatePositionToAcceptedCandidate(currentCandidate);
+                    TimerShowCandidatesMap.Enabled = true;
+                    CandidateCompletedStep = CandidateCompletedStep.BlinkRemaimingCandidates;
                 }
                 else
                 {
@@ -238,43 +229,55 @@ namespace RestaurantGame
             }
         }
 
+        protected void TimerShowCandidatesMap_Tick(object sender, EventArgs e)
+        {
+            TimerGame.Enabled = false;
+            TimerShowCandidatesMap.Enabled = false;
+            BlinkRemainingCandidates();
+            CandidateCompletedStep = CandidateCompletedStep.RearrangeCandidatesMap;
+        }
+
         private void BlinkRemainingCandidates()
         {
             NumOfBlinks = 0;
             RemainingBlinkState = BlinkState.Visible;
             TimerGame.Enabled = false;
             TimerBlinkRemainingCandidates.Enabled = true;
-            TimerBlinkRemainingCandidates.Interval = 500;
+            TimerBlinkRemainingCandidates.Interval = 400;
         }
 
         protected void TimerBlinkRemainingCandidates_Tick(object sender, EventArgs e)
         {
+            TimerGame.Enabled = false;
+
             if (RemainingBlinkState == BlinkState.Visible)
             {
                 HideRemainingCandidatesImages();
                 RemainingBlinkState = BlinkState.Hidden;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
                 NumOfBlinks++;
-                TimerBlinkRemainingCandidates.Interval = 250;
             }
             else
             {
                 ShowRemainingCandidatesImages();
                 RemainingBlinkState = BlinkState.Visible;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
-                TimerBlinkRemainingCandidates.Interval = 350;
             }
 
             if (NumOfBlinks >= 2)
             {
                 TimerBlinkRemainingCandidates.Enabled = false;
-                RearrangeCandidatesMap();
+
+                if (!TimerRearrangeCandidatesMap.Enabled)
+                {
+                    RearrangeCandidatesMap();
+                }
             }
         }
 
         private void RearrangeCandidatesMap()
         {
-            NumOfBlinks = 0;
+            NumOfBlinks2 = 0;
             RemainingBlinkState = BlinkState.Hidden;
             TimerRearrangeCandidatesMap.Enabled = true;
             TimerRearrangeCandidatesMap.Interval = 500;
@@ -282,6 +285,9 @@ namespace RestaurantGame
 
         protected void TimerRearrangeCandidatesMap_Tick(object sender, EventArgs e)
         {
+            TimerGame.Enabled = false;
+            TimerBlinkRemainingCandidates.Enabled = false;
+
             if (RemainingBlinkState == BlinkState.Visible)
             {
                 HideCandidatesSecondRowImages();
@@ -293,10 +299,10 @@ namespace RestaurantGame
                 ShowCandidatesSecondRowImages();
                 RemainingBlinkState = BlinkState.Visible;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
-                NumOfBlinks++;
+                NumOfBlinks2++;
             }
 
-            if (NumOfBlinks >= 2)
+            if (NumOfBlinks2 >= 2)
             {
                 TimerRearrangeCandidatesMap.Enabled = false;
                 SetCurrentPositionCellVisibility(BlinkState.Visible);
@@ -306,6 +312,8 @@ namespace RestaurantGame
 
         private void PositionSummary()
         {
+            TimerGame.Enabled = false;
+
             if (NeedToAskRating())
             {
                 dbHandler.UpdateTimesTable(GameState.BeforeRate);
@@ -474,6 +482,7 @@ namespace RestaurantGame
 
         private void UpdatePositionToAcceptedCandidate(Candidate candidate)
         {
+            TimerGame.Enabled = false;
             var currentPosition = GetCurrentPosition();
 
             currentPosition.ChosenCandidate = candidate;
