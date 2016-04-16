@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -143,7 +144,7 @@ namespace RestaurantGame
 
                             if (!result.IsDBNull(1))
                             {
-                                lastStarted = DateTime.Parse(result.GetString(1));
+                                lastStarted = DateTime.Parse(result.GetString(1), new CultureInfo("fr-FR", false));
                                 diffFromNow = (DateTime.Now - lastStarted).TotalHours;
 
                                 if (diffFromNow < 1.5)
@@ -152,9 +153,9 @@ namespace RestaurantGame
                                 }
                             }
 
-                            lastStarted = DateTime.Now;
+                            var lastStartedStr = DateTime.Now.ToString(new CultureInfo("fr-FR", false));
 
-                            using (SQLiteCommand cmd2 = new SQLiteCommand("update VectorsAssignments set LastStarted='" + lastStarted.ToString() + "' " +
+                            using (SQLiteCommand cmd2 = new SQLiteCommand("update VectorsAssignments set LastStarted='" + lastStartedStr + "' " +
                                 "where VectorNum = " + vectorNum))
                             {
                                 cmd2.CommandType = CommandType.Text;

@@ -1,3 +1,0 @@
-update VectorsAssignments
-set NextAskHeuristic = 'Optimal'
-where NextAskHeuristic = 'Last'
