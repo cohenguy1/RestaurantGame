@@ -5,9 +5,6 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <asp:Timer ID="TimerGame" OnTick="TimerGame_Tick" runat="server" Enabled="false"></asp:Timer>
-    <asp:Timer ID="TimerBlinkRemainingCandidates" OnTick="TimerBlinkRemainingCandidates_Tick" runat="server" Enabled="false"></asp:Timer>
-    <asp:Timer ID="TimerRearrangeCandidatesMap" OnTick="TimerRearrangeCandidatesMap_Tick" runat="server" Enabled="false"></asp:Timer>
-    <asp:Timer ID="TimerShowCandidatesMap" OnTick="TimerShowCandidatesMap_Tick" runat="server" Enabled="false" Interval="3000"></asp:Timer>
 
     
     <asp:MultiView ID="MultiView2" runat="server" ActiveViewIndex="0">

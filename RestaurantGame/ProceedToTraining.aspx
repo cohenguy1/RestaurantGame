@@ -23,7 +23,7 @@
                             <br />
                             <br />
                             <center>
-                                <img src="/Images/InstructionsTraining.png" Width="500px" Height="300px" />
+                                <img src="Images/InstructionsTraining.png" Width="500px" Height="300px" />
                             </center>
                             <br />
                             &nbsp;Press 'Next' to continue.

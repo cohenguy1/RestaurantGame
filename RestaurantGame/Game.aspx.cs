@@ -80,7 +80,7 @@ namespace RestaurantGame
             GenerateCandidatesByNow();
 
             CurrentCandidateNumber = 0;
-            CandidateCompletedStep = CandidateCompletedStep.ShowCandidatesMap;
+            CandidateCompletedStep = CandidateCompletedStep.Initial;
 
             TimerGame.Enabled = true;
         }
@@ -212,13 +212,47 @@ namespace RestaurantGame
             }
             else if (currentCandidate.CandidateState == CandidateState.Completed)
             {
-                DisableThumbsButtons();
+                if (GameMode == GameMode.Training)
+                {
+                    DisableThumbsButtons();
+                }
 
                 if (currentCandidate.CandidateAccepted)
                 {
-                    UpdatePositionToAcceptedCandidate(currentCandidate);
-                    TimerShowCandidatesMap.Enabled = true;
-                    CandidateCompletedStep = CandidateCompletedStep.BlinkRemaimingCandidates;
+                    if (!TimerGame.Enabled)
+                    {
+                        TimerGame.Enabled = true;
+                    }
+                    TimerGame.Interval = 750;
+
+                    switch (CandidateCompletedStep)
+                    {
+                        case CandidateCompletedStep.Initial:
+                            UpdatePositionToAcceptedCandidate(currentCandidate);
+                            CandidateCompletedStep = CandidateCompletedStep.BlinkRemaimingCandidates;
+                            NumOfBlinks = 0;
+                            NumOfBlinks2 = 0;
+                            RemainingBlinkState = BlinkState.Visible;
+                            break;
+                        case CandidateCompletedStep.BlinkRemaimingCandidates:
+                            BlinkRemainingCandidates();
+
+                            if (NumOfBlinks >= 2)
+                            {
+                                RemainingBlinkState = BlinkState.Hidden;
+                                CandidateCompletedStep = CandidateCompletedStep.RearrangeCandidatesMap;
+                            }
+                            break;
+                        case CandidateCompletedStep.RearrangeCandidatesMap:
+                            RearrangeCandidatesMap();
+
+                            if (NumOfBlinks2 >= 1)
+                            {
+                                SetCurrentPositionCellVisibility(BlinkState.Visible);
+                                PositionSummary();
+                            }
+                            break;
+                    }
                 }
                 else
                 {
@@ -229,27 +263,8 @@ namespace RestaurantGame
             }
         }
 
-        protected void TimerShowCandidatesMap_Tick(object sender, EventArgs e)
-        {
-            TimerGame.Enabled = false;
-            TimerShowCandidatesMap.Enabled = false;
-            BlinkRemainingCandidates();
-            CandidateCompletedStep = CandidateCompletedStep.RearrangeCandidatesMap;
-        }
-
         private void BlinkRemainingCandidates()
         {
-            NumOfBlinks = 0;
-            RemainingBlinkState = BlinkState.Visible;
-            TimerGame.Enabled = false;
-            TimerBlinkRemainingCandidates.Enabled = true;
-            TimerBlinkRemainingCandidates.Interval = 400;
-        }
-
-        protected void TimerBlinkRemainingCandidates_Tick(object sender, EventArgs e)
-        {
-            TimerGame.Enabled = false;
-
             if (RemainingBlinkState == BlinkState.Visible)
             {
                 HideRemainingCandidatesImages();
@@ -263,31 +278,10 @@ namespace RestaurantGame
                 RemainingBlinkState = BlinkState.Visible;
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
             }
-
-            if (NumOfBlinks >= 1)
-            {
-                TimerBlinkRemainingCandidates.Enabled = false;
-
-                if (!TimerRearrangeCandidatesMap.Enabled)
-                {
-                    RearrangeCandidatesMap();
-                }
-            }
         }
 
         private void RearrangeCandidatesMap()
         {
-            NumOfBlinks2 = 0;
-            RemainingBlinkState = BlinkState.Hidden;
-            TimerRearrangeCandidatesMap.Enabled = true;
-            TimerRearrangeCandidatesMap.Interval = 500;
-        }
-
-        protected void TimerRearrangeCandidatesMap_Tick(object sender, EventArgs e)
-        {
-            TimerGame.Enabled = false;
-            TimerBlinkRemainingCandidates.Enabled = false;
-
             if (RemainingBlinkState == BlinkState.Visible)
             {
                 HideCandidatesSecondRowImages();
@@ -301,24 +295,19 @@ namespace RestaurantGame
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
                 NumOfBlinks2++;
             }
-
-            if (NumOfBlinks2 >= 1)
-            {
-                TimerRearrangeCandidatesMap.Enabled = false;
-                SetCurrentPositionCellVisibility(BlinkState.Visible);
-                PositionSummary();
-            }
         }
 
         private void PositionSummary()
         {
             TimerGame.Enabled = false;
+            TimerGame.Interval = TimerInterval;
 
             if (NeedToAskRating())
             {
                 dbHandler.UpdateTimesTable(GameState.BeforeRate);
             }
 
+            CandidateCompletedStep = CandidateCompletedStep.Initial;
             btnThumbsDown.Visible = false;
             btnThumbsUp.Visible = false;
             btnFastBackwards.Visible = false;
@@ -482,7 +471,6 @@ namespace RestaurantGame
 
         private void UpdatePositionToAcceptedCandidate(Candidate candidate)
         {
-            TimerGame.Enabled = false;
             var currentPosition = GetCurrentPosition();
 
             currentPosition.ChosenCandidate = candidate;
