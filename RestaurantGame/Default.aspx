@@ -1,27 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="RestaurantGame.Default" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-    <script src="Scripts/jquery-1.4.1.js" type="text/javascript"></script>
-
-    <script type="text/javascript" language="javascript">
-        function hideRemainingCandidatesImages() {
-            for (var i = 1; i <= 20; i++) {
-                var imageControl = document.getElementById("remainImage" + i);
-                imageControl.style.visibility = 'hidden';
-            }
-        }
-
-        function showRemainingCandidatesImages() {
-            for (var i = 1; i <= 20; i++) {
-                var imageControl = document.getElementById("remainImage" + i);
-                imageControl.style.visibility = 'visible';
-            }
-        }
-    </script>
-
-
-</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <input type="hidden" value="" name="clientScreenHeight" id="clientScreenHeight" />
@@ -65,7 +43,7 @@
 
             <tr>
                 <td>
-                    <asp:Label ID="label44" runat="server" Font-Size="Large" Font-Bold="true"> You will receive a bonus after the game. </asp:Label>
+                    <b><span style="font-size: 20px;"> You will receive a bonus after the game. </span></b>
                     <br />
                     The bonus will be in accordance with the average ranking of the people you hired – you will be given now an additional 20 cents as a bonus and we will deduct from that amount the average of the rankings of the people you've hired (e.g., if you end up hiring the third-best person for the job (on average) your bonus will be 17 cents).
                 </td>

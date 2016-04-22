@@ -40,15 +40,6 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Label backgroundText2;
         
         /// <summary>
-        /// label44 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label44;
-        
-        /// <summary>
         /// btnNextToInfo control.
         /// </summary>
         /// <remarks>

@@ -264,7 +264,7 @@ namespace RestaurantGame
                 SetCurrentPositionCellVisibility(RemainingBlinkState);
             }
 
-            if (NumOfBlinks >= 2)
+            if (NumOfBlinks >= 1)
             {
                 TimerBlinkRemainingCandidates.Enabled = false;
 
@@ -302,7 +302,7 @@ namespace RestaurantGame
                 NumOfBlinks2++;
             }
 
-            if (NumOfBlinks2 >= 2)
+            if (NumOfBlinks2 >= 1)
             {
                 TimerRearrangeCandidatesMap.Enabled = false;
                 SetCurrentPositionCellVisibility(BlinkState.Visible);

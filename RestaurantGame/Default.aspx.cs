@@ -1,10 +1,8 @@
-﻿using RestaurantGame.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
-using System.Text;
 using System.Web;
 
 namespace RestaurantGame
@@ -121,29 +119,33 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SQLiteCommand cmd = new SQLiteCommand("Select UserId from [UserRatings] Where UserId='" + UserId + "'");
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Connection = sqlConnection1;
-                    sqlConnection1.Open();
-
-                    string userId = (string)cmd.ExecuteScalar();
-
-                    if (userId == null)
+                    using (SQLiteCommand cmd = new SQLiteCommand("Select UserId from [UserRatings] Where UserId='" + UserId + "'"))
                     {
-                        //new user - insert to DB
-                        cmd = new SQLiteCommand("INSERT INTO Users (UserId, Assignment_Id, hitId, time) VALUES (@UserId, @Assignment_Id, @hitId, @time)");
                         cmd.CommandType = CommandType.Text;
                         cmd.Connection = sqlConnection1;
-                        cmd.Parameters.AddWithValue("@UserId", UserId);
-                        cmd.Parameters.AddWithValue("@Assignment_Id", (string)Session["turkAss"]);
-                        cmd.Parameters.AddWithValue("@hitId", (string)Session["hitId"]);
-                        cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString());
-                        cmd.ExecuteNonQuery();
-                    }
-                    else
-                    {
-                        Alert.Show("You already participated in this game. Please return the HIT");
-                        return;
+                        sqlConnection1.Open();
+
+                        string userId = (string)cmd.ExecuteScalar();
+
+                        if (userId == null)
+                        {
+                            //new user - insert to DB
+                            using (SQLiteCommand cmd2 = new SQLiteCommand("INSERT INTO Users (UserId, Assignment_Id, hitId, time) VALUES (@UserId, @Assignment_Id, @hitId, @time)"))
+                            {
+                                cmd2.CommandType = CommandType.Text;
+                                cmd2.Connection = sqlConnection1;
+                                cmd2.Parameters.AddWithValue("@UserId", UserId);
+                                cmd2.Parameters.AddWithValue("@Assignment_Id", (string)Session["turkAss"]);
+                                cmd2.Parameters.AddWithValue("@hitId", (string)Session["hitId"]);
+                                cmd2.Parameters.AddWithValue("@time", DateTime.Now.ToString());
+                                cmd2.ExecuteNonQuery();
+                            }
+                        }
+                        else
+                        {
+                            Alert.Show("You already participated in this game. Please return the HIT");
+                            return;
+                        }
                     }
                 }
             }
@@ -151,15 +153,17 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Users (UserId, Assignment_Id, hitId, time) VALUES (@UserId, @Assignment_Id, @hitId, @time)");
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Connection = sqlConnection1;
-                    cmd.Parameters.AddWithValue("@UserId", UserId);
-                    cmd.Parameters.AddWithValue("@Assignment_Id", (string)Session["turkAss"]);
-                    cmd.Parameters.AddWithValue("@hitId", (string)Session["hitId"]);
-                    cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString());
-                    sqlConnection1.Open();
-                    cmd.ExecuteNonQuery();
+                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Users (UserId, Assignment_Id, hitId, time) VALUES (@UserId, @Assignment_Id, @hitId, @time)"))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection = sqlConnection1;
+                        cmd.Parameters.AddWithValue("@UserId", UserId);
+                        cmd.Parameters.AddWithValue("@Assignment_Id", (string)Session["turkAss"]);
+                        cmd.Parameters.AddWithValue("@hitId", (string)Session["hitId"]);
+                        cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString());
+                        sqlConnection1.Open();
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
 
@@ -190,6 +194,11 @@ namespace RestaurantGame
             // experiment opened from iexplorer
             HttpBrowserCapabilities browser = Request.Browser;
             var browserType = browser.Type.ToLower();
+
+            if (browserType.Contains("internetexplorer"))
+            {
+                Response.Redirect("IExplorerProblem.aspx");
+            }
 
             Response.Redirect("UserInfoPage.aspx");
         }

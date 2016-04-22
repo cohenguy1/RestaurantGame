@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProceedToTraining.aspx.cs" Inherits="RestaurantGame.ProceedToTraining" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <h2>Training Mode</h2>
             <div style="text-align: center; width: 640px; margin: 0 auto;">
@@ -25,7 +23,7 @@
                             <br />
                             <br />
                             <center>
-                                <asp:Image ID="Image21" ImageUrl="~/Images/InstructionsTraining.png" Width="500px" Height="300px" runat="server" />
+                                <img src="/Images/InstructionsTraining.png" Width="500px" Height="300px" />
                             </center>
                             <br />
                             &nbsp;Press 'Next' to continue.

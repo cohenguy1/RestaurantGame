@@ -43,20 +43,22 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SQLiteCommand cmd = new SQLiteCommand
+                    using (SQLiteCommand cmd = new SQLiteCommand
                         ("INSERT INTO Quiz (UserId, TryNumber, Answer1, Answer2, Answer3, Answer4, Correct) " +
-                         "VALUES (@UserId, @TryNumber, @Answer1, @Answer2, @Answer3, @Answer4, @Correct)");
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Connection = sqlConnection1;
-                    cmd.Parameters.AddWithValue("@UserId", UserId);
-                    cmd.Parameters.AddWithValue("@TryNumber", tryNumber);
-                    cmd.Parameters.AddWithValue("@Answer1", answer1);
-                    cmd.Parameters.AddWithValue("@Answer2", answer2);
-                    cmd.Parameters.AddWithValue("@Answer3", answer3);
-                    cmd.Parameters.AddWithValue("@Answer4", answer4);
-                    cmd.Parameters.AddWithValue("@Correct", correct.ToString());
-                    sqlConnection1.Open();
-                    cmd.ExecuteNonQuery();
+                         "VALUES (@UserId, @TryNumber, @Answer1, @Answer2, @Answer3, @Answer4, @Correct)"))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection = sqlConnection1;
+                        cmd.Parameters.AddWithValue("@UserId", UserId);
+                        cmd.Parameters.AddWithValue("@TryNumber", tryNumber);
+                        cmd.Parameters.AddWithValue("@Answer1", answer1);
+                        cmd.Parameters.AddWithValue("@Answer2", answer2);
+                        cmd.Parameters.AddWithValue("@Answer3", answer3);
+                        cmd.Parameters.AddWithValue("@Answer4", answer4);
+                        cmd.Parameters.AddWithValue("@Correct", correct.ToString());
+                        sqlConnection1.Open();
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
             catch (Exception ex)

@@ -30,22 +30,24 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SQLiteCommand cmd = new SQLiteCommand
+                    using (SQLiteCommand cmd = new SQLiteCommand
                         ("INSERT INTO UserInfo (UserId, Gender, Age, Education, Nationality, Reason, VectorNum, AskPosition, time) " +
-                         "VALUES (@UserId, @Gender, @Age, @Education, @Nationality, @Reason, @VectorNum, @AskPosition, @time)");
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Connection = sqlConnection1;
-                    cmd.Parameters.AddWithValue("@UserId", UserId);
-                    cmd.Parameters.AddWithValue("@Gender", DropDownList1.Text);
-                    cmd.Parameters.AddWithValue("@Age", DropDownList2.Text);
-                    cmd.Parameters.AddWithValue("@Education", DropDownList3.Text);
-                    cmd.Parameters.AddWithValue("@Nationality", DropDownList4.Text);
-                    cmd.Parameters.AddWithValue("@Reason", DropDownList5.Text);
-                    cmd.Parameters.AddWithValue("@VectorNum", VectorNum);
-                    cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
-                    cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString());
-                    sqlConnection1.Open();
-                    cmd.ExecuteNonQuery();
+                         "VALUES (@UserId, @Gender, @Age, @Education, @Nationality, @Reason, @VectorNum, @AskPosition, @time)"))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection = sqlConnection1;
+                        cmd.Parameters.AddWithValue("@UserId", UserId);
+                        cmd.Parameters.AddWithValue("@Gender", DropDownList1.Text);
+                        cmd.Parameters.AddWithValue("@Age", DropDownList2.Text);
+                        cmd.Parameters.AddWithValue("@Education", DropDownList3.Text);
+                        cmd.Parameters.AddWithValue("@Nationality", DropDownList4.Text);
+                        cmd.Parameters.AddWithValue("@Reason", DropDownList5.Text);
+                        cmd.Parameters.AddWithValue("@VectorNum", VectorNum);
+                        cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
+                        cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString());
+                        sqlConnection1.Open();
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
             catch (Exception ex)

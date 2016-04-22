@@ -48,19 +48,18 @@ namespace RestaurantGame
             double bonusAmount = (InitialBonus - averageRank) / 100.0;
             decimal bonusDecimal = Convert.ToDecimal(bonusAmount);
 
-            if (workerId != "friend")
-            {
-                //SimpleClient client = new SimpleClient();
-                //client.GrantBonus(workerId, bonusDecimal, assignmentId, "Thanks for doing great work!");
-
-                Alert.RedirectAndPOST(this.Page, "https://www.mturk.com/mturk/externalSubmit", data);
-
-                IncreaseAskPositionCount();
-            }
-
             SendFeedback(bonusAmount);
 
-            rewardBtn.Enabled = false;
+            if (workerId != "friend")
+            {
+                rewardBtn.Enabled = false;
+
+                IncreaseAskPositionCount();
+
+                DisposeSession();
+
+                Alert.RedirectAndPOST(this.Page, "https://www.mturk.com/mturk/externalSubmit", data);
+            }
         }
 
         public void IncreaseAskPositionCount()
@@ -96,21 +95,41 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserFeedback (UserId, Feedback, TotalTime, Bonus) VALUES (@UserId, @Feedback, @TotalTime, @Bonus)");
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Connection = sqlConnection1;
-                    cmd.Parameters.AddWithValue("@UserId", UserId);
-                    cmd.Parameters.AddWithValue("@Feedback", feedback);
-                    cmd.Parameters.AddWithValue("@TotalTime", Math.Round(GameStopwatch.Elapsed.TotalMinutes, 1));
-                    cmd.Parameters.AddWithValue("@Bonus", Math.Round(bonus, 3));
-                    sqlConnection1.Open();
-                    cmd.ExecuteNonQuery();
+                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserFeedback (UserId, Feedback, TotalTime, Bonus) VALUES (@UserId, @Feedback, @TotalTime, @Bonus)"))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection = sqlConnection1;
+                        cmd.Parameters.AddWithValue("@UserId", UserId);
+                        cmd.Parameters.AddWithValue("@Feedback", feedback);
+                        cmd.Parameters.AddWithValue("@TotalTime", Math.Round(GameStopwatch.Elapsed.TotalMinutes, 1));
+                        cmd.Parameters.AddWithValue("@Bonus", Math.Round(bonus, 3));
+                        sqlConnection1.Open();
+                        cmd.ExecuteNonQuery();
 
-                    sqlConnection1.Close();
+                        sqlConnection1.Close();
+                    }
                 }
             }
             catch (SQLiteException ex)
             {
+            }
+        }
+
+        private void DisposeSession()
+        {
+            if (dbHandler != null)
+            {
+                dbHandler.Dispose();
+            }
+            
+            if (Positions != null)
+            {
+                Positions = null;
+            }
+
+            if (PositionCandidates != null)
+            {
+                PositionCandidates = null;
             }
         }
     }

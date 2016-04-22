@@ -15,7 +15,9 @@ namespace RestaurantGame
         {
             if (!IsPostBack)
             {
-                MultiviewInstructions.ActiveViewIndex = 0;
+                //MultiviewInstructions.ActiveViewIndex = 0;
+                Session["CurrentInstruction"] = 0;
+
                 ProgressBar1.Value = 0;
 
                 InstructionsStopwatch = new Stopwatch();
@@ -29,13 +31,18 @@ namespace RestaurantGame
 
         protected void btnPrevInstruction_Click(object sender, EventArgs e)
         {
-            ProgressBar1.Value = GetTrainingProgress(MultiviewInstructions.ActiveViewIndex - 1);
+            ProgressBar1.Value = GetTrainingProgress((int)Session["CurrentInstruction"] - 1);
 
-            MultiviewInstructions.ActiveViewIndex--;
+            Session["CurrentInstruction"] = (int)Session["CurrentInstruction"] - 1;
 
-            btnNextInstruction.Text = "Next";
+            InstructionImage1.ImageUrl = "~/Images/Instructions" + Session["CurrentInstruction"] + ".png";
 
-            if (MultiviewInstructions.ActiveViewIndex == 0)
+            if ((int)Session["CurrentInstruction"] != NumOfInstructions - 1)
+            {
+                btnNextInstruction.Text = "Next";
+            }
+
+            if ((int)Session["CurrentInstruction"] == 0)
             {
                 btnPrevInstruction.Enabled = false;
             }
@@ -43,9 +50,9 @@ namespace RestaurantGame
 
         protected void btnNextInstruction_Click(object sender, EventArgs e)
         {
-            ProgressBar1.Value = GetTrainingProgress(MultiviewInstructions.ActiveViewIndex + 1);
+            ProgressBar1.Value = GetTrainingProgress((int)Session["CurrentInstruction"] + 1);
 
-            if (MultiviewInstructions.ActiveViewIndex == NumOfInstructions - 1)
+            if ((int)Session["CurrentInstruction"] == NumOfInstructions - 1)
             {
                 // training start
                 InstructionsStopwatch.Stop();
@@ -56,10 +63,11 @@ namespace RestaurantGame
                 return;
             }
 
-            MultiviewInstructions.ActiveViewIndex++;
+            Session["CurrentInstruction"] = (int)Session["CurrentInstruction"] + 1;
+            InstructionImage1.ImageUrl = "~/Images/Instructions" + Session["CurrentInstruction"] + ".png";
             btnPrevInstruction.Enabled = true;
 
-            if (MultiviewInstructions.ActiveViewIndex == NumOfInstructions - 1)
+            if ((int)Session["CurrentInstruction"] == NumOfInstructions - 1)
             {
                 btnNextInstruction.Text = "Continue to Training";
             }

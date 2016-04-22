@@ -69,19 +69,21 @@ namespace RestaurantGame
 
             using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
-                SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Training (UserId, PositionNumber, CandidateNumber, CandidateRank , Decision ) " +
-                    " VALUES (@UserId, @PositionNumber, @CandidateNumber, @CandidateRank, @Decision)");
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = sqlConnection1;
-                cmd.Parameters.AddWithValue("@UserId", UserId);
-                cmd.Parameters.AddWithValue("@PositionNumber", CurrentPositionNumber);
-                cmd.Parameters.AddWithValue("@CandidateNumber", currentCandidateNumber);
-                cmd.Parameters.AddWithValue("@CandidateRank",currentCandidateRank);
-                cmd.Parameters.AddWithValue("@Decision", decision);
-                sqlConnection1.Open();
-                cmd.ExecuteNonQuery();
+                using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Training (UserId, PositionNumber, CandidateNumber, CandidateRank , Decision ) " +
+                    " VALUES (@UserId, @PositionNumber, @CandidateNumber, @CandidateRank, @Decision)"))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    cmd.Parameters.AddWithValue("@UserId", UserId);
+                    cmd.Parameters.AddWithValue("@PositionNumber", CurrentPositionNumber);
+                    cmd.Parameters.AddWithValue("@CandidateNumber", currentCandidateNumber);
+                    cmd.Parameters.AddWithValue("@CandidateRank", currentCandidateRank);
+                    cmd.Parameters.AddWithValue("@Decision", decision);
+                    sqlConnection1.Open();
+                    cmd.ExecuteNonQuery();
 
-                sqlConnection1.Close();
+                    sqlConnection1.Close();
+                }
             }
         }
     }

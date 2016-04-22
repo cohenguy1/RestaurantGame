@@ -90,35 +90,35 @@ namespace RestaurantGame
 
             using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
-                SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
+                using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
                     "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank, AvgRanking, " +
                     " InstructionsTime, TrainingPassed, AskPosition) " +
                     " VALUES (@UserId, @AdviserRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
                     "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank, @AvgRanking, " +
-                    "@InstructionsTime, @TrainingPassed, @AskPosition)");
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = sqlConnection1;
-                cmd.Parameters.AddWithValue("@UserId", UserId);
-                cmd.Parameters.AddWithValue("@AdviserRating", adviserRating.ToString());
-                cmd.Parameters.AddWithValue("@RatingPosition", (CurrentPositionNumber + 1).ToString());
-                cmd.Parameters.AddWithValue("@Position1Rank", GetChosenPositionToInsertToDb(1));
-                cmd.Parameters.AddWithValue("@Position2Rank", GetChosenPositionToInsertToDb(2));
-                cmd.Parameters.AddWithValue("@Position3Rank", GetChosenPositionToInsertToDb(3));
-                cmd.Parameters.AddWithValue("@Position4Rank", GetChosenPositionToInsertToDb(4));
-                cmd.Parameters.AddWithValue("@Position5Rank", GetChosenPositionToInsertToDb(5));
-                cmd.Parameters.AddWithValue("@Position6Rank", GetChosenPositionToInsertToDb(6));
-                cmd.Parameters.AddWithValue("@Position7Rank", GetChosenPositionToInsertToDb(7));
-                cmd.Parameters.AddWithValue("@Position8Rank", GetChosenPositionToInsertToDb(8));
-                cmd.Parameters.AddWithValue("@Position9Rank", GetChosenPositionToInsertToDb(9));
-                cmd.Parameters.AddWithValue("@Position10Rank", GetChosenPositionToInsertToDb(10));
-                cmd.Parameters.AddWithValue("@AvgRanking", Common.CalculateAveragePosition(Positions));
-                cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 3));
-                cmd.Parameters.AddWithValue("@TrainingPassed", TrainingPassed);
-                cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
-                sqlConnection1.Open();
-                cmd.ExecuteNonQuery();
-
-                sqlConnection1.Close();
+                    "@InstructionsTime, @TrainingPassed, @AskPosition)"))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    cmd.Parameters.AddWithValue("@UserId", UserId);
+                    cmd.Parameters.AddWithValue("@AdviserRating", adviserRating.ToString());
+                    cmd.Parameters.AddWithValue("@RatingPosition", (CurrentPositionNumber + 1).ToString());
+                    cmd.Parameters.AddWithValue("@Position1Rank", GetChosenPositionToInsertToDb(1));
+                    cmd.Parameters.AddWithValue("@Position2Rank", GetChosenPositionToInsertToDb(2));
+                    cmd.Parameters.AddWithValue("@Position3Rank", GetChosenPositionToInsertToDb(3));
+                    cmd.Parameters.AddWithValue("@Position4Rank", GetChosenPositionToInsertToDb(4));
+                    cmd.Parameters.AddWithValue("@Position5Rank", GetChosenPositionToInsertToDb(5));
+                    cmd.Parameters.AddWithValue("@Position6Rank", GetChosenPositionToInsertToDb(6));
+                    cmd.Parameters.AddWithValue("@Position7Rank", GetChosenPositionToInsertToDb(7));
+                    cmd.Parameters.AddWithValue("@Position8Rank", GetChosenPositionToInsertToDb(8));
+                    cmd.Parameters.AddWithValue("@Position9Rank", GetChosenPositionToInsertToDb(9));
+                    cmd.Parameters.AddWithValue("@Position10Rank", GetChosenPositionToInsertToDb(10));
+                    cmd.Parameters.AddWithValue("@AvgRanking", Common.CalculateAveragePosition(Positions));
+                    cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 3));
+                    cmd.Parameters.AddWithValue("@TrainingPassed", TrainingPassed);
+                    cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
+                    sqlConnection1.Open();
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 

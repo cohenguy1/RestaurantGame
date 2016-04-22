@@ -299,11 +299,16 @@ namespace RestaurantGame
 
         private void HideCandidatesSecondRowImages()
         {
+            var sortedRemainingCandidates = PositionCandidates.Where(candidate => candidate.CandidateNumber > CurrentCandidateNumber)
+                .OrderBy(viewedCandidate => viewedCandidate.CandidateRank);
+
             for (var index = 0; index < NumberOfCandidates; index++)
             {
-                var stickManImage = GetStickManSecondRowImage(index + 1);
-                stickManImage.ImageUrl = EmptyCandidateImage;
-                stickManImage.Visible = true;
+                if (sortedRemainingCandidates.Any(candidate => candidate.CandidateRank == index + 1))
+                {
+                    var stickManImage = GetStickManSecondRowImage(index + 1);
+                    stickManImage.ImageUrl = EmptyCandidateImage;
+                }
             }
         }
 

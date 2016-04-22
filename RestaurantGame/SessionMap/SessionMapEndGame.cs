@@ -40,5 +40,11 @@ namespace RestaurantGame
             get { return (DbHandler)Session[SessionMap.DbHandlerStr]; }
             set { Session[SessionMap.DbHandlerStr] = value; }
         }
+
+        public List<Candidate> PositionCandidates
+        {
+            get { return (List<Candidate>)Session[SessionMap.PositionCandidiatesStr]; }
+            set { Session[SessionMap.PositionCandidiatesStr] = value; }
+        }
     }
 }
