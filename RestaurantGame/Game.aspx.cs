@@ -265,6 +265,8 @@ namespace RestaurantGame
 
         private void BlinkRemainingCandidates()
         {
+            ClearInterviewImages();
+
             if (RemainingBlinkState == BlinkState.Visible)
             {
                 HideRemainingCandidatesImages();
@@ -417,9 +419,16 @@ namespace RestaurantGame
         {
             var candidatesByNow = CandidatesByNow;
 
-            var dm = new DecisionMaker();
+            var dm = DecisionMaker.GetInstance();
 
             var newCandidateIndex = dm.GetCandidateRelativePosition(candidatesByNow, newCandidate);
+
+            // Impossible
+            if (candidatesByNow.Contains(newCandidate))
+            {
+                Alert.Show("Something went wrong");
+                return;
+            }
 
             candidatesByNow.Insert(newCandidateIndex, newCandidate);
 

@@ -50,10 +50,10 @@ namespace RestaurantGame
 
             SendFeedback(bonusAmount);
 
+            rewardBtn.Enabled = false;
+
             if (workerId != "friend")
             {
-                rewardBtn.Enabled = false;
-
                 IncreaseAskPositionCount();
 
                 DisposeSession();

@@ -12,6 +12,12 @@ namespace RestaurantGame
     {
         protected void btnThumbsDown_Click(object sender, EventArgs e)
         {
+            if (SessionState == SessionState.Running)
+            {
+                // already pushed
+                return;
+            }
+
             var currentCandidate = CurrentCandidate;
 
             if (currentCandidate.CandidateState == CandidateState.Interview)
@@ -31,6 +37,12 @@ namespace RestaurantGame
 
         protected void btnThumbsUp_Click(object sender, EventArgs e)
         {
+            if (SessionState == SessionState.Running)
+            {
+                // already pushed
+                return;
+            }
+
             var currentCandidate = CurrentCandidate;
 
             if (currentCandidate.CandidateState == CandidateState.Interview)
@@ -46,6 +58,7 @@ namespace RestaurantGame
         {
             if (currentCandidate == null)
             {
+                // impossible
                 EnterNewCandidate();
             }
             else if (currentCandidate.CandidateState == CandidateState.Interview)
@@ -55,8 +68,11 @@ namespace RestaurantGame
                 currentCandidate.CandidateState = CandidateState.Completed;
             }
 
-            TimerGame.Interval = 500;
-            TimerGame.Enabled = true;
+            if (!TimerGame.Enabled)
+            {
+                TimerGame.Enabled = true;
+            }
+            
             SessionState = SessionState.Running;
         }
 

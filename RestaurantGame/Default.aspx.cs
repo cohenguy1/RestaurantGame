@@ -119,7 +119,7 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("Select UserId from [UserRatings] Where UserId='" + UserId + "'"))
+                    using (SQLiteCommand cmd = new SQLiteCommand("Select UserId from [UserFeedback] Where UserId='" + UserId + "'"))
                     {
                         cmd.CommandType = CommandType.Text;
                         cmd.Connection = sqlConnection1;

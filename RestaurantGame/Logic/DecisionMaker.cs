@@ -7,13 +7,25 @@ namespace RestaurantGame
 {
     public class DecisionMaker
     {
+        private static DecisionMaker _instance = null;
+
         public const int NumberOfCandidates = 20;
 
         private static double[] c = new double[NumberOfCandidates + 1];
 
         public static int[] StoppingRule = new int[NumberOfCandidates + 1];
 
-        public DecisionMaker()
+        public static DecisionMaker GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new DecisionMaker();
+            }
+
+            return _instance;
+        }
+
+        private DecisionMaker()
         {
             int n = NumberOfCandidates;
 
