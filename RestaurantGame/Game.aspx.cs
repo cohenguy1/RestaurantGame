@@ -221,7 +221,7 @@ namespace RestaurantGame
                     if (!TimerGame.Enabled)
                     {
                         TimerGame.Enabled = true;
-                        TimerGame.Interval = 800;
+                        TimerGame.Interval = 1000;
                     }
 
                     switch (CandidateCompletedStep)
