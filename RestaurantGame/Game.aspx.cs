@@ -221,7 +221,7 @@ namespace RestaurantGame
                     if (!TimerGame.Enabled)
                     {
                         TimerGame.Enabled = true;
-                        TimerGame.Interval = 1250;
+                        TimerGame.Interval = 800;
                     }
 
                     switch (CandidateCompletedStep)
@@ -236,7 +236,7 @@ namespace RestaurantGame
                         case CandidateCompletedStep.BlinkRemaimingCandidates:
                             BlinkRemainingCandidates();
 
-                            if (NumOfBlinks >= 2)
+                            if (NumOfBlinks >= 1)
                             {
                                 RemainingBlinkState = BlinkState.Hidden;
                                 CandidateCompletedStep = CandidateCompletedStep.RearrangeCandidatesMap;
