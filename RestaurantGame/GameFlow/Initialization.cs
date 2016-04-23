@@ -1,7 +1,6 @@
-﻿using System;
+﻿using RestaurantGame.Enums;
+using RestaurantGame.Logic;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RestaurantGame
 {

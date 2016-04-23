@@ -1,11 +1,8 @@
 ﻿using RestaurantGame.Enums;
+using RestaurantGame.Logic;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace RestaurantGame
 {
@@ -114,7 +111,10 @@ namespace RestaurantGame
 
         protected void TimerGame_Tick(object sender, EventArgs e)
         {
-            TimerGame.Interval = TimerInterval;
+            if (TimerGame.Interval != TimerInterval)
+            {
+                TimerGame.Interval = TimerInterval;
+            }
 
             if (AskForRating)
             {
@@ -163,7 +163,6 @@ namespace RestaurantGame
 
             ClearCandidateImages();
             ClearInterviewImages();
-
         }
 
         private void EnterNewCandidate()
@@ -222,8 +221,8 @@ namespace RestaurantGame
                     if (!TimerGame.Enabled)
                     {
                         TimerGame.Enabled = true;
+                        TimerGame.Interval = 1250;
                     }
-                    TimerGame.Interval = 750;
 
                     switch (CandidateCompletedStep)
                     {
@@ -385,18 +384,9 @@ namespace RestaurantGame
         {
             MultiView2.ActiveViewIndex = 0;
 
-            EnableDisableTimer(true);
-        }
-
-        private void EnableDisableTimer(bool defaultCommand)
-        {
-            if (TimerEnabled)
+            if (!TimerGame.Enabled)
             {
-                TimerGame.Enabled = TimerEnabled;
-            }
-            else
-            {
-                TimerGame.Enabled = defaultCommand;
+                TimerGame.Enabled = true;
             }
         }
 

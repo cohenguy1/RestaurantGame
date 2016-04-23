@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace RestaurantGame
+namespace RestaurantGame.Logic
 {
     public class DecisionMaker
     {

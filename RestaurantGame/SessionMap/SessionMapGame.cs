@@ -1,8 +1,6 @@
 ﻿using RestaurantGame.Enums;
-using System;
+using RestaurantGame.Logic;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Diagnostics;
 
 namespace RestaurantGame
@@ -47,12 +45,6 @@ namespace RestaurantGame
         {
             get { return (int)Session[SessionMap.TimerIntervalStr]; }
             set { Session[SessionMap.TimerIntervalStr] = value; }
-        }
-
-        public bool TimerEnabled
-        {
-            get { return (bool)Session[SessionMap.TimerEnabledStr]; }
-            set { Session[SessionMap.TimerEnabledStr] = value; }
         }
 
         public bool AskForRating

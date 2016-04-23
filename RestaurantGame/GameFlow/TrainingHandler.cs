@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using RestaurantGame.Enums;
 using System.Data.SQLite;
 using System.Data;
+using RestaurantGame.Logic;
 
 namespace RestaurantGame
 {

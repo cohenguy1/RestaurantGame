@@ -4,6 +4,8 @@ using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Web;
+using RestaurantGame.Enums;
+using RestaurantGame.Logic;
 
 namespace RestaurantGame
 {
@@ -55,7 +57,6 @@ namespace RestaurantGame
                     DecideRandomStuff();                    
 
                     TimerInterval = StartTimerInterval;
-                    TimerEnabled = true;
 
                     GeneratePositions();
                 }

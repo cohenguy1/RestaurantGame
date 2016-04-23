@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantGame.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -34,7 +35,11 @@ namespace RestaurantGame
         private void UpdateFastPlaySpeed(int newTimerInterval)
         {
             TimerInterval = newTimerInterval;
-            TimerGame.Interval = newTimerInterval;
+
+            if (TimerGame.Interval != newTimerInterval)
+            {
+                TimerGame.Interval = newTimerInterval;
+            }
 
             EnableDisableFBSpeedButton(newTimerInterval != MaxTimerInterval);
             EnableDisableFFSpeedButton(newTimerInterval != MinTimerInterval);
@@ -43,11 +48,6 @@ namespace RestaurantGame
             LabelSpeed.Text = " Speed: x" + speedRate;
 
             SetGameState(PlayPauseState.Playing);
-
-            if (SessionState == Enums.SessionState.Running)
-            {
-                TimerEnabled = true;
-            }
         }
 
 

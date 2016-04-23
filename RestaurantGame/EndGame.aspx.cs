@@ -110,7 +110,7 @@ namespace RestaurantGame
                     }
                 }
             }
-            catch (SQLiteException ex)
+            catch (SQLiteException)
             {
             }
         }

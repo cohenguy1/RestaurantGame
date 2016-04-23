@@ -322,7 +322,7 @@
       <DependentUpon>SlotsProblem.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Alert.cs" />
-    <Compile Include="Candidate.cs" />
+    <Compile Include="Logic\Candidate.cs" />
     <Compile Include="Enums\CandidateCompletedStep.cs" />
     <Compile Include="Enums\CandidateState.cs" />
     <Compile Include="Logic\DecisionMaker.cs" />
@@ -341,7 +341,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Enums\PausePlayState.cs" />
-    <Compile Include="Position.cs" />
+    <Compile Include="Logic\Position.cs" />
     <Compile Include="GameFlow\PositionHandler.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

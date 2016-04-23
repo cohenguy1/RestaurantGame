@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using RestaurantGame.Enums;
 
-namespace RestaurantGame
+namespace RestaurantGame.Logic
 {
     public class Candidate
     {
