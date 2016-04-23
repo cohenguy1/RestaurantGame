@@ -164,5 +164,11 @@ namespace RestaurantGame
             get { return (DbHandler)Session[SessionMap.DbHandlerStr]; }
             set { Session[SessionMap.DbHandlerStr] = value; }
         }
+
+        public int? VectorNum
+        {
+            get { return (int?)Session[SessionMap.VectorNumStr]; }
+            set { Session[SessionMap.VectorNumStr] = value; }
+        }
     }
 }

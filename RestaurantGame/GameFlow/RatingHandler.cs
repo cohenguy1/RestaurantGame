@@ -92,10 +92,10 @@ namespace RestaurantGame
             {
                 using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
                     "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank, AvgRanking, " +
-                    " InstructionsTime, TrainingPassed, AskPosition) " +
+                    " InstructionsTime, TrainingPassed, AskPosition, VectorNum) " +
                     " VALUES (@UserId, @AdviserRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
                     "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank, @AvgRanking, " +
-                    "@InstructionsTime, @TrainingPassed, @AskPosition)"))
+                    "@InstructionsTime, @TrainingPassed, @AskPosition, @VectorNum)"))
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
@@ -116,6 +116,7 @@ namespace RestaurantGame
                     cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 3));
                     cmd.Parameters.AddWithValue("@TrainingPassed", TrainingPassed);
                     cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
+                    cmd.Parameters.AddWithValue("@VectorNum", VectorNum);
                     sqlConnection1.Open();
                     cmd.ExecuteNonQuery();
                 }
