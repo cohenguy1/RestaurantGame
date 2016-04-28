@@ -77,6 +77,7 @@ namespace RestaurantGame
             GenerateCandidatesByNow();
 
             CurrentCandidateNumber = 0;
+            CurrentCandidate = PositionCandidates[CurrentCandidateNumber];
             CandidateCompletedStep = CandidateCompletedStep.Initial;
 
             TimerGame.Enabled = true;
@@ -167,8 +168,6 @@ namespace RestaurantGame
 
         private void EnterNewCandidate()
         {
-            CurrentCandidate = PositionCandidates[CurrentCandidateNumber];
-
             var lastAvailableCandidate = GetRemainingStickManImage(NumberOfCandidates - CurrentCandidateNumber);
 
             if (lastAvailableCandidate != null)
@@ -190,7 +189,7 @@ namespace RestaurantGame
             var gameMode = GameMode;
             var currentCandidate = CurrentCandidate;
 
-            if (currentCandidate == null)
+            if (currentCandidate == null || currentCandidate.CandidateState == CandidateState.New)
             {
                 EnterNewCandidate();
             }
@@ -256,6 +255,7 @@ namespace RestaurantGame
                 else
                 {
                     CurrentCandidateNumber++;
+                    CurrentCandidate = PositionCandidates[CurrentCandidateNumber];
 
                     EnterNewCandidate();
                 }
@@ -321,6 +321,8 @@ namespace RestaurantGame
             SummaryNextLbl.Visible = true;
             btnNextToUniform.Visible = true;
             PanelBasket.Visible = false;
+
+            RestoreButtonSizes(btnThumbsUp, btnThumbsDown);
 
             PositionSummaryLbl2.Text = CurrentCandidate.CandidateRank.ToString();
             SummaryNextLbl.Text = "<br /><br />Press 'Next' to pick uniform for the " + GetCurrentJobTitle() + ".<br />";
@@ -409,16 +411,16 @@ namespace RestaurantGame
         {
             var candidatesByNow = CandidatesByNow;
 
-            var dm = DecisionMaker.GetInstance();
-
-            var newCandidateIndex = dm.GetCandidateRelativePosition(candidatesByNow, newCandidate);
-
             // Impossible
             if (candidatesByNow.Contains(newCandidate))
             {
                 Alert.Show("Something went wrong");
                 return;
             }
+
+            var dm = DecisionMaker.GetInstance();
+
+            var newCandidateIndex = dm.GetCandidateRelativePosition(candidatesByNow, newCandidate);
 
             candidatesByNow.Insert(newCandidateIndex, newCandidate);
 
