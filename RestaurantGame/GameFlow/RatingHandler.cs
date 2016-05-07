@@ -34,9 +34,9 @@ namespace RestaurantGame
 
             // AskPosition == Optimal
             /*
-             * 10 Stopping Value: 20
-             * 9 Stopping Value: 2
-             * 8 Stopping Value: 1
+             * 10 Stopping Value: 15
+             * 9 Stopping Value: 4
+             * 8 Stopping Value: 2
              * 7 Stopping Value: 1
              * 6 Stopping Value: 1
              * 5 Stopping Value: 1
@@ -52,6 +52,14 @@ namespace RestaurantGame
 
             var acceptedCandidateRank = CurrentCandidate.CandidateRank;
             if (CurrentPositionNumber == 8)
+            {
+                if (acceptedCandidateRank <= 4)
+                {
+                    return true;
+                }
+            }
+
+            if (CurrentPositionNumber == 7)
             {
                 if (acceptedCandidateRank <= 2)
                 {
@@ -92,10 +100,10 @@ namespace RestaurantGame
             {
                 using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
                     "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank, AvgRanking, " +
-                    " InstructionsTime, TrainingPassed, AskPosition, VectorNum) " +
+                    " InstructionsTime, AskPosition, VectorNum) " +
                     " VALUES (@UserId, @AdviserRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
                     "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank, @AvgRanking, " +
-                    "@InstructionsTime, @TrainingPassed, @AskPosition, @VectorNum)"))
+                    "@InstructionsTime, @AskPosition, @VectorNum)"))
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
@@ -114,7 +122,6 @@ namespace RestaurantGame
                     cmd.Parameters.AddWithValue("@Position10Rank", GetChosenPositionToInsertToDb(10));
                     cmd.Parameters.AddWithValue("@AvgRanking", Common.CalculateAveragePosition(Positions));
                     cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 3));
-                    cmd.Parameters.AddWithValue("@TrainingPassed", TrainingPassed);
                     cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
                     cmd.Parameters.AddWithValue("@VectorNum", VectorNum);
                     sqlConnection1.Open();

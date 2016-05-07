@@ -69,6 +69,23 @@ namespace RestaurantGame
             throw new Exception("No Hit Slots available");
         }
 
+        public void SetVectorAssignmentNull()
+        {
+            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand("update VectorsAssignments set LastStarted = NULL Where VectorNum=" + VectorNum))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+
+                    sqlConnection1.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         public static string GetConfigKeyByAskPositionHeuristic(AskPositionHeuristic heuristic)
         {
             switch (heuristic)
@@ -148,7 +165,7 @@ namespace RestaurantGame
                                 lastStarted = DateTime.Parse(result.GetString(1), new CultureInfo("fr-FR", false));
                                 diffFromNow = (DateTime.Now - lastStarted).TotalHours;
 
-                                if (diffFromNow < 1.5)
+                                if (diffFromNow < 1)
                                 {
                                     continue;
                                 }

@@ -8,9 +8,6 @@ namespace RestaurantGame
 {
     public partial class Game : System.Web.UI.Page
     {
-        // TODO: Change Instructions
-        // TODO: Remove column in UserRatings
-        // TODO: Change order of columns
         // TODO: change reward
         // TODO: measure game
 

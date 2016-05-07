@@ -293,6 +293,15 @@
     <Compile Include="SessionMap\SessionMapProceedToGame.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="SessionMap\SessionMapResolutionProblem.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionMap\SessionMapWrongIExplorerProblem.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionMap\SessionMapWrongQuiz.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="SessionMap\SessionMapQuiz.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

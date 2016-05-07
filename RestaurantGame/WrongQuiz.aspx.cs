@@ -13,7 +13,12 @@ namespace RestaurantGame
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            QuizWrongLbl.Text = "&nbsp;You have been wrong for " + MaxNumOfWrongQuizAnswers + " times.";
+            if (!IsPostBack)
+            {
+                QuizWrongLbl.Text = "&nbsp;You have been wrong for " + MaxNumOfWrongQuizAnswers + " times.";
+
+                dbHandler.SetVectorAssignmentNull();
+            }
         }
     }
 }
