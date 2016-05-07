@@ -168,6 +168,7 @@ namespace RestaurantGame
 
         private void EnterNewCandidate()
         {
+            CurrentCandidate.CandidateState = CandidateState.Interview;
             var lastAvailableCandidate = GetRemainingStickManImage(NumberOfCandidates - CurrentCandidateNumber);
 
             if (lastAvailableCandidate != null)
@@ -181,7 +182,6 @@ namespace RestaurantGame
             DisableThumbsButtons();
 
             UpdateImages(CandidateState.New);
-            CurrentCandidate.CandidateState = CandidateState.Interview;
         }
 
         private void ProcessCandidate()
@@ -195,6 +195,7 @@ namespace RestaurantGame
             }
             else if (currentCandidate.CandidateState == CandidateState.Interview)
             {
+                currentCandidate.CandidateState = CandidateState.PostInterview;
                 UpdateImages(currentCandidate.CandidateState);
                 DetermineCandidateRank(currentCandidate);
 
@@ -398,7 +399,8 @@ namespace RestaurantGame
             {
                 return true;
             }
-            else if (CurrentCandidate.CandidateAccepted && CandidateCompletedStep == CandidateCompletedStep.FillNextPosition)
+
+            if (CurrentCandidate.CandidateAccepted && CandidateCompletedStep == CandidateCompletedStep.FillNextPosition)
             {
                 // finished candidate
                 return false;

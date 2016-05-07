@@ -18,7 +18,7 @@ namespace RestaurantGame
 
             var currentCandidate = CurrentCandidate;
 
-            if (currentCandidate.CandidateState == CandidateState.Interview)
+            if (currentCandidate.CandidateState == CandidateState.PostInterview)
             {
                 UpdateDbInUserDecision(currentCandidate, false);
             }
@@ -43,7 +43,7 @@ namespace RestaurantGame
 
             var currentCandidate = CurrentCandidate;
 
-            if (currentCandidate.CandidateState == CandidateState.Interview)
+            if (currentCandidate.CandidateState == CandidateState.PostInterview)
             {
                 UpdateDbInUserDecision(currentCandidate, true);
             }
@@ -59,7 +59,7 @@ namespace RestaurantGame
                 // impossible
                 EnterNewCandidate();
             }
-            else if (currentCandidate.CandidateState == CandidateState.Interview)
+            else if (currentCandidate.CandidateState == CandidateState.PostInterview)
             {
                 currentCandidate.CandidateAccepted = accepted;
 

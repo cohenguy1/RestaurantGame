@@ -4,6 +4,7 @@
     {
         New,
         Interview,
+        PostInterview,
         Completed,
         WaitingForUserDecision
     }

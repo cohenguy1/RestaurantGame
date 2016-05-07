@@ -146,13 +146,10 @@
     <Content Include="Images\Instructions7.png" />
     <Content Include="Images\Instructions8.png" />
     <Content Include="Images\Instructions9.png" />
-    <Content Include="Images\JobInterview.PNG" />
     <Content Include="Images\Manager.Uniform1.jpg" />
     <Content Include="Images\Manager.Uniform2.jpg" />
     <Content Include="Images\Manager.Uniform3.jpg" />
-    <Content Include="Images\ManBack.gif" />
     <Content Include="Images\ManForward.gif" />
-    <Content Include="Images\ManForward1.gif" />
     <Content Include="Images\pauseButton.png" />
     <Content Include="Images\playButton.png" />
     <Content Include="Images\SmallStickMan.png" />

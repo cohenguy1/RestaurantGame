@@ -14,7 +14,7 @@ namespace RestaurantGame
         private void UpdateImages(CandidateState candidateState)
         {
             ImageManForward.Visible = (candidateState == CandidateState.New);
-            ImageInterview.Visible = (candidateState == CandidateState.Interview);
+            ImageInterview.Visible = (candidateState == CandidateState.Interview || candidateState == CandidateState.PostInterview);
             MovingToNextPositionLabel.Visible = false;
             MovingJobTitleLabel.Visible = false;
         }
