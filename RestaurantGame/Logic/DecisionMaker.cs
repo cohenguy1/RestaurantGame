@@ -8,7 +8,7 @@ namespace RestaurantGame.Logic
     {
         private static DecisionMaker _instance = null;
 
-        public const int NumberOfCandidates = 20;
+        public const int NumberOfCandidates = 15;
 
         private static double[] c = new double[NumberOfCandidates + 1];
 
@@ -37,6 +37,14 @@ namespace RestaurantGame.Logic
             {
                 c[i - 1] = 1 / (double)(i) * (((n + 1) / (double)(i + 1)) * (StoppingRule[i] * (StoppingRule[i] + 1)) / 2.0 + (i - StoppingRule[i]) * c[i]);
                 StoppingRule[i - 1] = (int)Math.Floor((i) / ((double)n + 1) * c[i - 1]);
+            }
+
+            for (var i = 2; i <= NumberOfCandidates; i++)
+            {
+                if (StoppingRule[i] == 0)
+                {
+                    StoppingRule[i] = 1;
+                }
             }
         }
 

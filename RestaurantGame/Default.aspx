@@ -28,7 +28,7 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td>For Each position you have 20 candidates, ranked from 1 to 20. Your (and the HR executive's) interest is to pick highly 
+                <td>For Each position you have 15 candidates, ranked from 1 to 15. Your (and the HR executive's) interest is to pick highly 
                             qualified (as possible) workers for the different positions.<br />
                     <br />
                     <asp:Label ID="backgroundText" runat="server"

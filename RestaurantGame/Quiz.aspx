@@ -17,8 +17,8 @@
                         <asp:RadioButtonList ID="rbl1" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
-                            <asp:ListItem>20</asp:ListItem>
-                            <asp:ListItem>Can be every ranking in range 1-20</asp:ListItem>
+                            <asp:ListItem>15</asp:ListItem>
+                            <asp:ListItem>Can be every ranking in range 1-15</asp:ListItem>
                         </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="rfv1" Style="color: Red;" ControlToValidate="rbl1" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                 </td>
@@ -28,19 +28,19 @@
                         <asp:RadioButtonList ID="rbl2" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
-                            <asp:ListItem>20</asp:ListItem>
-                            <asp:ListItem>Can be every ranking in range 1-20</asp:ListItem>
+                            <asp:ListItem>15</asp:ListItem>
+                            <asp:ListItem>Can be every ranking in range 1-15</asp:ListItem>
                         </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="rfv2" Style="color: Red;" ControlToValidate="rbl2" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
-                <td>What is the <b>absolute ranking</b> of the candidate that arrives last (19 candidates already interviewed)?
+                <td>What is the <b>absolute ranking</b> of the candidate that arrives last (14 candidates already interviewed)?
                         <asp:RadioButtonList ID="rbl3" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
-                            <asp:ListItem>20</asp:ListItem>
-                            <asp:ListItem>Can be every ranking in range 1-20</asp:ListItem>
+                            <asp:ListItem>15</asp:ListItem>
+                            <asp:ListItem>Can be every ranking in range 1-15</asp:ListItem>
                         </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="rfv3" Style="color: Red;" ControlToValidate="rbl3" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                 </td>

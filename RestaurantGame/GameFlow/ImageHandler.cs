@@ -112,16 +112,6 @@ namespace RestaurantGame
                     return StickMan14;
                 case 15:
                     return StickMan15;
-                case 16:
-                    return StickMan16;
-                case 17:
-                    return StickMan17;
-                case 18:
-                    return StickMan18;
-                case 19:
-                    return StickMan19;
-                case 20:
-                    return StickMan20;
                 default:
                     return StickMan1;
             }
@@ -161,16 +151,6 @@ namespace RestaurantGame
                     return StickManSecondRow14;
                 case 15:
                     return StickManSecondRow15;
-                case 16:
-                    return StickManSecondRow16;
-                case 17:
-                    return StickManSecondRow17;
-                case 18:
-                    return StickManSecondRow18;
-                case 19:
-                    return StickManSecondRow19;
-                case 20:
-                    return StickManSecondRow20;
                 default:
                     return StickManSecondRow1;
             }
@@ -210,16 +190,6 @@ namespace RestaurantGame
                     return remainImage14;
                 case 15:
                     return remainImage15;
-                case 16:
-                    return remainImage16;
-                case 17:
-                    return remainImage17;
-                case 18:
-                    return remainImage18;
-                case 19:
-                    return remainImage19;
-                case 20:
-                    return remainImage20;
                 default:
                     return remainImage1;
             }

@@ -54,17 +54,6 @@
                                         <asp:Image class="StickMan" ID="StickMan14" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
                                     <td>
                                         <asp:Image class="StickMan" ID="StickMan15" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
-                                    <td>
-                                        <asp:Image class="StickMan" ID="StickMan16" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
-                                    <td>
-                                        <asp:Image class="StickMan" ID="StickMan17" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
-                                    <td>
-                                        <asp:Image class="StickMan" ID="StickMan18" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
-                                    <td>
-                                        <asp:Image class="StickMan" ID="StickMan19" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
-                                    <td>
-                                        <asp:Image class="StickMan" ID="StickMan20" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
-
                                 </tr>
                                 <tr>
                                     <td>
@@ -97,16 +86,6 @@
                                         <asp:Image class="StickMan" ID="StickManSecondRow14" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
                                     <td>
                                         <asp:Image class="StickMan" ID="StickManSecondRow15" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
-                                    <td>
-                                        <asp:Image class="StickMan" ID="StickManSecondRow16" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
-                                    <td>
-                                        <asp:Image class="StickMan" ID="StickManSecondRow17" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
-                                    <td>
-                                        <asp:Image class="StickMan" ID="StickManSecondRow18" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
-                                    <td>
-                                        <asp:Image class="StickMan" ID="StickManSecondRow19" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
-                                    <td>
-                                        <asp:Image class="StickMan" ID="StickManSecondRow20" runat="server" Height="79px" Width="30px" Visible="false"></asp:Image></td>
                                 </tr>
                             </table>
 
@@ -174,25 +153,6 @@
                                         <asp:Image ID="remainImage15" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
                                     </asp:TableCell>
                                 </asp:TableRow>
-                                <asp:TableRow>
-                                    <asp:TableCell>
-                                        <asp:Image ID="remainImage16" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
-                                    </asp:TableCell>
-                                    <asp:TableCell>
-                                        <asp:Image ID="remainImage17" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
-                                    </asp:TableCell>
-                                    <asp:TableCell>
-                                        <asp:Image ID="remainImage18" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
-                                    </asp:TableCell>
-                                    <asp:TableCell>
-                                        <asp:Image ID="remainImage19" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
-                                    </asp:TableCell>
-                                    <asp:TableCell>
-                                        <asp:Image ID="remainImage20" runat="server" ImageUrl="~/Images/SmallStickMan.png" Height="55px" Width="23px" Visible="true"></asp:Image>
-                                    </asp:TableCell>
-
-                                </asp:TableRow>
-
                             </asp:Table>
 
                         </div>
@@ -257,12 +217,12 @@
                                 <asp:RadioButtonList ID="RatingRbL" runat="server" value="null">
                                     <asp:ListItem>1 - The worst HR executive ever!</asp:ListItem>
                                     <asp:ListItem>2</asp:ListItem>
-                                    <asp:ListItem>3 - Making poor decisions.</asp:ListItem>
+                                    <asp:ListItem>3</asp:ListItem>
                                     <asp:ListItem>4</asp:ListItem>
                                     <asp:ListItem>5</asp:ListItem>
                                     <asp:ListItem>6</asp:ListItem>
                                     <asp:ListItem>7</asp:ListItem>
-                                    <asp:ListItem>8 - Making good decisions.</asp:ListItem>
+                                    <asp:ListItem>8</asp:ListItem>
                                     <asp:ListItem>9</asp:ListItem>
                                     <asp:ListItem>10 - I&#39;m loving him!</asp:ListItem>
                                 </asp:RadioButtonList>
