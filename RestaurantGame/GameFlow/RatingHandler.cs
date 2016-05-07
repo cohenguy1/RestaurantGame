@@ -53,18 +53,11 @@ namespace RestaurantGame
             var acceptedCandidateRank = CurrentCandidate.CandidateRank;
             if (CurrentPositionNumber == 8)
             {
-                if (acceptedCandidateRank <= 4)
-                {
-                    return true;
-                }
+                return (acceptedCandidateRank <= 4);
             }
-
-            if (CurrentPositionNumber == 7)
+            else if (CurrentPositionNumber == 7)
             {
-                if (acceptedCandidateRank <= 2)
-                {
-                    return true;
-                }
+                return (acceptedCandidateRank <= 2);
             }
 
             return (acceptedCandidateRank == 1);
