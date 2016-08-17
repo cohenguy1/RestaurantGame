@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <img id="InstructionImage" src="/Images/Instructions0.png" width="700" height="400" />
+    <img id="InstructionImage" src="Images/Instructions0.png" width="700" height="400" />
 
     <br />
     <br />
@@ -22,7 +22,7 @@
         var totalInstructions = 20;
 
         function updateInstruction() {
-            document.getElementById("InstructionImage").src = "/Images/Instructions" + currentInstruction.toString() + ".png";
+            document.getElementById("InstructionImage").src = "Images/Instructions" + currentInstruction.toString() + ".png";
         }
 
         function getCurrentProgress() {
