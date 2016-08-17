@@ -6,7 +6,7 @@
 
     <asp:Timer ID="TimerGame" OnTick="TimerGame_Tick" runat="server" Enabled="false"></asp:Timer>
 
-    
+
     <asp:MultiView ID="MultiView2" runat="server" ActiveViewIndex="0">
         <asp:View ID="ViewGame" runat="server">
             <asp:Label ID="PositionHeader" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;"></asp:Label>
@@ -194,6 +194,7 @@
             <br />
             <asp:Panel ID="Panel3" runat="server" Style="margin-left: 20px; float: right">
                 <br />
+
                 <div style="text-align: center; width: 600px; margin: 0 auto;">
                     <table style="text-align: left; width: 600px;" border="1">
                         <tr>
@@ -212,27 +213,34 @@
                                 <br />
                                 <br />
                                 &nbsp;Rate the HR executive from 1 to 10, 10 being the best:
-                                        <br />
                                 <br />
-                                <asp:RadioButtonList ID="RatingRbL" runat="server" value="null">
-                                    <asp:ListItem>1 - The worst HR executive ever!</asp:ListItem>
-                                    <asp:ListItem>2</asp:ListItem>
-                                    <asp:ListItem>3</asp:ListItem>
-                                    <asp:ListItem>4</asp:ListItem>
-                                    <asp:ListItem>5</asp:ListItem>
-                                    <asp:ListItem>6</asp:ListItem>
-                                    <asp:ListItem>7</asp:ListItem>
-                                    <asp:ListItem>8</asp:ListItem>
-                                    <asp:ListItem>9</asp:ListItem>
-                                    <asp:ListItem>10 - I&#39;m loving him!</asp:ListItem>
-                                </asp:RadioButtonList>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Style="color: Red;" ControlToValidate="RatingRbL" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
+                                <br />
+
+                                <div>
+                                    <div class="rating-star-block" id='rating-star-block'>
+                                        <div class="star outline" href="#" rating="1" title="rate 1">rate 1</div>
+                                        <div class="star outline" href="#" rating="2" title="rate 2">rate 2</div>
+                                        <div class="star outline" href="#" rating="3" title="rate 3">rate 3</div>
+                                        <div class="star outline" href="#" rating="4" title="rate 4">rate 4</div>
+                                        <div class="star outline" href="#" rating="5" title="rate 5">rate 5</div>
+                                        <div class="star outline" href="#" rating="6" title="rate 6">rate 6</div>
+                                        <div class="star outline" href="#" rating="7" title="rate 7">rate 7</div>
+                                        <div class="star outline" href="#" rating="8" title="rate 8">rate 8</div>
+                                        <div class="star outline" href="#" rating="9" title="rate 9">rate 9</div>
+                                        <div class="star outline" href="#" rating="10" title="rate 10">rate 10</div>
+                                        <div class="ratingLabel" id="ratingLbl"></div>
+                                    </div>
+                                </div>
+
+                                <asp:HiddenField ID="ratingHdnValue" Value="40" runat="server" />
+
+                                <br />
                             </td>
                         </tr>
                     </table>
                 </div>
                 <br />
-                <asp:Button ID="btnRate" runat="server" Text="Rate!" OnClick="btnRate_Click" />
+                <asp:Button ID="btnRate" runat="server" Text="Rate!" OnClientClick="returnString();" OnClick="btnRate_Click" />
             </asp:Panel>
         </asp:View>
 
@@ -342,4 +350,27 @@
         </asp:Table>
     </asp:Panel>
 
+    
+    <script language="javascript" type="text/javascript">
+       function returnString() {
+           debugger;
+           var ratingStarBlock = document.getElementById('rating-star-block');
+           var stars = ratingStarBlock.getElementsByTagName('div');
+
+           var savedRank = 0;
+           for (var i = 0; i < stars.length; i++) {
+               var child = stars[i];
+               if (child.classList.contains("selected")) {
+                   savedRank++;
+               }
+           }
+
+           if (savedRank == 0) {
+               alert("Please rate the HR executive!");
+               return false;
+           }
+
+           document.getElementById('<%=ratingHdnValue.ClientID %>').value = savedRank.toString();
+       }
+   </script>
 </asp:Content>

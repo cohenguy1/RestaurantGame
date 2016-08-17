@@ -74,15 +74,20 @@ namespace RestaurantGame
 
         protected void btnRate_Click(object sender, EventArgs e)
         {
-            int agentRating = RatingRbL.SelectedIndex + 1;
+            if (!IsPostBack)
+            {
+                string userRating = ratingHdnValue.Value;
 
-            SaveRatingToDB(agentRating);
+                int agentRating = int.Parse(userRating);
 
-            MultiView2.ActiveViewIndex = 0;
+                SaveRatingToDB(agentRating);
 
-            dbHandler.UpdateTimesTable(GameState.AfterRate);
+                MultiView2.ActiveViewIndex = 0;
 
-            TimerGame.Enabled = true;
+                dbHandler.UpdateTimesTable(GameState.AfterRate);
+
+                TimerGame.Enabled = true;
+            }
         }
 
         private void SaveRatingToDB(int adviserRating)

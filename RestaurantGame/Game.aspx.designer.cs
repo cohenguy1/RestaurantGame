@@ -715,22 +715,13 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Panel Panel3;
         
         /// <summary>
-        /// RatingRbL control.
+        /// ratingHdnValue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RatingRbL;
-        
-        /// <summary>
-        /// RequiredFieldValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        protected global::System.Web.UI.WebControls.HiddenField ratingHdnValue;
         
         /// <summary>
         /// btnRate control.
