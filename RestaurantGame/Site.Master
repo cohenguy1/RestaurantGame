@@ -27,6 +27,29 @@
             display: inline-block;
         }
 
+        #myProgress {
+            position: relative;
+            margin-left:auto;
+            margin-right:auto;
+            display: inline-block;
+            width: 300px;
+            height: 20px;
+            background-color: #ddd;
+        }
+
+        #myBar {
+            position: absolute;
+            width: 0%;
+            height: 100%;
+            background-color: #0066ff;
+        }
+
+        #label {
+            text-align: center;
+            line-height: 20px;
+            color: white;
+        }
+
         .rating-star-block .star.outline {
             background: url("/Images/star-empty-lg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
         }
@@ -47,24 +70,24 @@
             margin-left: 60px;
         }
 
-        .rating-star-block .star {
-            color: rgba(0,0,0,0);
-            display: inline-block;
-            height: 32px;
-            overflow: hidden;
-            text-indent: -999em;
-            width: 32px;
-        }
+            .rating-star-block .star {
+                color: rgba(0,0,0,0);
+                display: inline-block;
+                height: 32px;
+                overflow: hidden;
+                text-indent: -999em;
+                width: 32px;
+            }
 
-        .rating-star-block .ratingLabel {
-            display: inline-block;
-            height: 32px;
-            color:black;
-            overflow: hidden;
-            font-size:xx-large;
-            margin-left:10px;
-            font-weight: bold;
-        }
+            .rating-star-block .ratingLabel {
+                display: inline-block;
+                height: 32px;
+                color: black;
+                overflow: hidden;
+                font-size: xx-large;
+                margin-left: 10px;
+                font-weight: bold;
+            }
 
         a {
             color: #005782;

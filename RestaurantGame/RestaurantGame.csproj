@@ -50,16 +50,6 @@
     <Reference Include="Amazon.WebServices.MechanicalTurk.Domain">
       <HintPath>References\Amazon.WebServices.MechanicalTurk.Domain.dll</HintPath>
     </Reference>
-    <Reference Include="EO.Base">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Essential Objects\EO.Total 2015\EO.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="EO.Web, Version=15.4.5.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Essential Objects\EO.Total 2015\EO.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="EO.Web.Design">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Essential Objects\EO.Total 2015\EO.Web.Design.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>

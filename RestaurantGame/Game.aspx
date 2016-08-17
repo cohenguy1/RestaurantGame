@@ -351,7 +351,7 @@
     </asp:Panel>
 
     
-    <script language="javascript" type="text/javascript">
+    <script type="text/javascript">
        function returnString() {
            debugger;
            var ratingStarBlock = document.getElementById('rating-star-block');

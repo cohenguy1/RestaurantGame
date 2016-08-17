@@ -1,21 +1,89 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="InstructionsPage.aspx.cs" Inherits="RestaurantGame.InstructionsPage" %>
 
-<%@ Register TagPrefix="eo" Namespace="EO.Web" Assembly="EO.Web" %>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:Image ID="InstructionImage1" ImageUrl="~/Images/Instructions0.png" Width="700px" Height="400px" runat="server" />
+    <img id="InstructionImage" src="/Images/Instructions0.png" width="700" height="400" />
 
-            <br />
-            <br />
+    <br />
+    <br />
+    <div id="myProgress">
+        <div id="myBar">
+            <div id="label"></div>
+        </div>
+    </div>
 
-            <asp:Panel ID="PanelProgress" runat="server" Style="margin-left: 200px">
-                <eo:ProgressBar ID="ProgressBar1" runat="server" BorderColor="Black" BorderWidth="1px"
-                    Height="20px" IndicatorColor="0x0066ff" ControlSkinID="None" BorderStyle="Solid"
-                    Width="300px" ShowPercentage="true" Font-Bold="true" Font-Size="Small">
-                </eo:ProgressBar>
-            </asp:Panel>
-            <br />
-            <asp:Button ID="btnPrevInstruction" runat="server" Text="Prev" OnClick="btnPrevInstruction_Click" Enabled="false" />
-            <asp:Button ID="btnNextInstruction" runat="server" Text="Next" OnClick="btnNextInstruction_Click" />
+    <br />
+
+    <button id="prevBtn" onclick="prev()" type='button' disabled="disabled">Prev</button>
+    <button id="nextBtn" onclick="next()" type='button'>Next</button>
+    <asp:Button ID="continueToTraining" Text="Continue to Training" style="display:none" runat="server" OnClick="btnNextInstruction_Click"/>
+    <script type="text/javascript">
+        var currentInstruction = 0;
+        var totalInstructions = 20;
+
+        function updateInstruction() {
+            document.getElementById("InstructionImage").src = "/Images/Instructions" + currentInstruction.toString() + ".png";
+        }
+
+        function getCurrentProgress() {
+            return Math.round(currentInstruction * 100 / totalInstructions);
+        }
+
+        function updateProgressBar() {
+            var progress = getCurrentProgress();
+            var elem = document.getElementById("myBar");
+            elem.style.width = progress + '%';
+            document.getElementById("label").innerHTML = progress * 1 + '%';
+        }
+
+        function next() {
+            if (currentInstruction <= totalInstructions) {
+                currentInstruction++;
+
+                updateInstruction();
+
+                var prevBtn = document.getElementById("prevBtn");
+                prevBtn.disabled = false;
+                
+                if (currentInstruction == totalInstructions) {
+                    var nextBtn = document.getElementById("nextBtn");
+                    nextBtn.disabled = true;
+                    nextBtn.hidden = true;
+
+                    var trainingBtn = document.getElementById('<%= continueToTraining.ClientID %>');
+                    if (trainingBtn) {
+                        trainingBtn.style.display = 'inherit';
+                    }
+                }
+
+                updateProgressBar();
+                return false;
+            }
+        }
+
+        function prev() {
+            if (currentInstruction > 0) {
+                currentInstruction--;
+
+                updateInstruction();
+
+                var nextBtn = document.getElementById("nextBtn");
+                nextBtn.disabled = false;
+                nextBtn.hidden = false;
+
+                var trainingBtn = document.getElementById('<%= continueToTraining.ClientID %>');
+                if (trainingBtn) {
+                    trainingBtn.style.display = 'none';
+                }
+
+                if (currentInstruction == 0) {
+                    var prevBtn = document.getElementById("prevBtn");
+                    prevBtn.disabled = true;
+                }
+
+                updateProgressBar();
+                return false;
+            }
+        }
+    </script>
 </asp:Content>
