@@ -21,7 +21,7 @@ namespace RestaurantGame
             {
                 return (CurrentPositionNumber + 1 == 1);
             }
-            
+
             if (AskPosition == AskPositionHeuristic.Last)
             {
                 return (CurrentPositionNumber + 1 == 10);
@@ -74,20 +74,22 @@ namespace RestaurantGame
 
         protected void btnRate_Click(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            string userRating = ratingHdnValue.Value;
+
+            if (string.IsNullOrEmpty(userRating) || userRating == "0")
             {
-                string userRating = ratingHdnValue.Value;
-
-                int agentRating = int.Parse(userRating);
-
-                SaveRatingToDB(agentRating);
-
-                MultiView2.ActiveViewIndex = 0;
-
-                dbHandler.UpdateTimesTable(GameState.AfterRate);
-
-                TimerGame.Enabled = true;
+                return;
             }
+
+            int agentRating = int.Parse(userRating);
+
+            SaveRatingToDB(agentRating);
+
+            MultiView2.ActiveViewIndex = 0;
+
+            dbHandler.UpdateTimesTable(GameState.AfterRate);
+
+            TimerGame.Enabled = true;
         }
 
         private void SaveRatingToDB(int adviserRating)
@@ -136,4 +138,3 @@ namespace RestaurantGame
         }
     }
 }
- 

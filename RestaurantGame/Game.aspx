@@ -232,7 +232,7 @@
                                     </div>
                                 </div>
 
-                                <asp:HiddenField ID="ratingHdnValue" Value="40" runat="server" />
+                                <asp:HiddenField ID="ratingHdnValue" Value="0" runat="server" />
 
                                 <br />
                             </td>
