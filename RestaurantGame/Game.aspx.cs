@@ -198,6 +198,12 @@ namespace RestaurantGame
             }
             else if (currentCandidate.CandidateState == CandidateState.Interview)
             {
+                if (gameMode == GameMode.Training)
+                {
+                    SessionState = SessionState.WaitingForUserDecision;
+                    TimerGame.Enabled = false;
+                }
+
                 currentCandidate.CandidateState = CandidateState.PostInterview;
                 UpdateImages(currentCandidate.CandidateState);
                 DetermineCandidateRank(currentCandidate);
@@ -206,15 +212,10 @@ namespace RestaurantGame
                 {
                     currentCandidate.CandidateState = CandidateState.Completed;
                 }
-                else
-                {
-                    TimerGame.Enabled = false;
-                    SessionState = SessionState.WaitingForUserDecision;
-                }
             }
             else if (currentCandidate.CandidateState == CandidateState.Completed)
             {
-                if (GameMode == GameMode.Training)
+                if (gameMode == GameMode.Training)
                 {
                     DisableThumbsButtons();
                 }
@@ -223,8 +224,8 @@ namespace RestaurantGame
                 {
                     if (!TimerGame.Enabled)
                     {
-                        TimerGame.Enabled = true;
                         TimerGame.Interval = 1000;
+                        TimerGame.Enabled = true;
                     }
 
                     switch (CandidateCompletedStep)

@@ -16,6 +16,9 @@ namespace RestaurantGame
                 return;
             }
 
+            // state running but still enable timer game later
+            SessionState = SessionState.Running;
+
             var currentCandidate = CurrentCandidate;
 
             if (currentCandidate.CandidateState == CandidateState.PostInterview)
@@ -41,6 +44,9 @@ namespace RestaurantGame
                 return;
             }
 
+            // state running but still enable timer game later
+            SessionState = SessionState.Running;
+
             var currentCandidate = CurrentCandidate;
 
             if (currentCandidate.CandidateState == CandidateState.PostInterview)
@@ -65,13 +71,11 @@ namespace RestaurantGame
 
                 currentCandidate.CandidateState = CandidateState.Completed;
             }
-
+         
             if (!TimerGame.Enabled)
             {
                 TimerGame.Enabled = true;
             }
-            
-            SessionState = SessionState.Running;
         }
 
         private void UpdateDbInUserDecision(Candidate currentCandidate, bool accepted)
