@@ -1,19 +1,19 @@
-﻿using RestaurantGame.Enums;
+﻿using Amazon.WebServices.MechanicalTurk;
+using RestaurantGame.Enums;
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
 using System.Data.SQLite;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace RestaurantGame
 {
     public partial class EndGame : System.Web.UI.Page
     {
         public int InitialBonus = Default.InitialBonus;
+
+        private string _bonusReason = "Thank you for participating in the Restaurant Game";
+
+        private static SimpleClient _client = new SimpleClient();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -46,7 +46,7 @@ namespace RestaurantGame
 
             double averageRank = Common.CalculateAveragePosition(Positions);
             double bonusAmount = (InitialBonus - averageRank) / 100.0;
-            decimal bonusDecimal = Convert.ToDecimal(bonusAmount);
+            decimal bonusDecimal = Convert.ToDecimal(Math.Round(bonusAmount, 2));
 
             SendFeedback(bonusAmount);
 
@@ -56,9 +56,11 @@ namespace RestaurantGame
             {
                 IncreaseAskPositionCount();
 
+                _client.GrantBonus(workerId, bonusDecimal, assignmentId, _bonusReason);
+
                 DisposeSession();
 
-                Alert.RedirectAndPOST(this.Page, "https://www.mturk.com/mturk/externalSubmit", data);
+                Alert.RedirectAndPOST(Page, "https://www.mturk.com/mturk/externalSubmit", data);
             }
         }
 
@@ -102,7 +104,7 @@ namespace RestaurantGame
                         cmd.Parameters.AddWithValue("@UserId", UserId);
                         cmd.Parameters.AddWithValue("@Feedback", feedback);
                         cmd.Parameters.AddWithValue("@TotalTime", Math.Round(GameStopwatch.Elapsed.TotalMinutes, 1));
-                        cmd.Parameters.AddWithValue("@Bonus", Math.Round(bonus, 3));
+                        cmd.Parameters.AddWithValue("@Bonus", Math.Round(bonus, 2));
                         sqlConnection1.Open();
                         cmd.ExecuteNonQuery();
 
