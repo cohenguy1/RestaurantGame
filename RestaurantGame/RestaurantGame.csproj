@@ -91,7 +91,7 @@
     <Content Include="App_Data\Restaurant.db" />
     <Content Include="EndGame.aspx" />
     <Content Include="Game.aspx" />
-    <Content Include="IExplorerProblem.aspx" />
+    <Content Include="BrowserProblem.aspx" />
     <Content Include="InstructionsPage.aspx" />
     <Content Include="ProceedToGame.aspx" />
     <Content Include="ProceedToTraining.aspx" />
@@ -232,12 +232,12 @@
     <Compile Include="GameFlow\TrainingHandler.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="IExplorerProblem.aspx.cs">
-      <DependentUpon>IExplorerProblem.aspx</DependentUpon>
+    <Compile Include="BrowserProblem.aspx.cs">
+      <DependentUpon>BrowserProblem.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="IExplorerProblem.aspx.designer.cs">
-      <DependentUpon>IExplorerProblem.aspx</DependentUpon>
+    <Compile Include="BrowserProblem.aspx.designer.cs">
+      <DependentUpon>BrowserProblem.aspx</DependentUpon>
     </Compile>
     <Compile Include="InstructionsPage.aspx.cs">
       <DependentUpon>InstructionsPage.aspx</DependentUpon>

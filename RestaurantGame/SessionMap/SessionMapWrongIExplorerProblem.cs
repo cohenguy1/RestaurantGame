@@ -1,6 +1,6 @@
 ﻿namespace RestaurantGame
 {
-    public partial class IExplorerProblem : System.Web.UI.Page
+    public partial class BrowserProblem : System.Web.UI.Page
     {
         public DbHandler dbHandler
         {

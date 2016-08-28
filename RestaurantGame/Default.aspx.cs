@@ -9,9 +9,6 @@ using RestaurantGame.Logic;
 
 namespace RestaurantGame
 {
-    // Next Generation
-    // TODO convert instructions to javascript
-
     public partial class Default : System.Web.UI.Page
     {
         public int StartTimerInterval = Game.StartTimerInterval;
@@ -192,13 +189,13 @@ namespace RestaurantGame
                 }
             }
 
-            // experiment opened from iexplorer
+            // experiment opened not from chrome
             HttpBrowserCapabilities browser = Request.Browser;
             var browserType = browser.Type.ToLower();
 
-            if (browserType.Contains("internetexplorer"))
+            if (!browserType.Contains("chrome"))
             {
-                Response.Redirect("IExplorerProblem.aspx");
+                Response.Redirect("BrowserProblem.aspx");
             }
 
             Response.Redirect("UserInfoPage.aspx");

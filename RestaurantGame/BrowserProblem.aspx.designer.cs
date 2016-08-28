@@ -10,7 +10,7 @@
 namespace RestaurantGame {
     
     
-    public partial class IExplorerProblem {
+    public partial class BrowserProblem {
         
         /// <summary>
         /// Label12 control.

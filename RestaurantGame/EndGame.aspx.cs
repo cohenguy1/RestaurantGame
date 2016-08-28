@@ -40,8 +40,8 @@ namespace RestaurantGame
             data.Add("hitId", (string)Session["hitId"]);
 
             double averageRank = Common.CalculateAveragePosition(Positions);
-            double bonusAmount = (InitialBonus - averageRank) / 100.0;
-            decimal bonusDecimal = Convert.ToDecimal(Math.Round(bonusAmount, 2));
+            double bonusAmount = Math.Round((InitialBonus - averageRank) / 100.0, 2);
+            decimal bonusDecimal = Convert.ToDecimal(bonusAmount);
 
             SendFeedback(bonusAmount);
 
@@ -97,7 +97,7 @@ namespace RestaurantGame
                         cmd.Parameters.AddWithValue("@UserId", UserId);
                         cmd.Parameters.AddWithValue("@Feedback", feedback);
                         cmd.Parameters.AddWithValue("@TotalTime", Math.Round(GameStopwatch.Elapsed.TotalMinutes, 1));
-                        cmd.Parameters.AddWithValue("@Bonus", Math.Round(bonus, 3));
+                        cmd.Parameters.AddWithValue("@Bonus", bonus);
                         sqlConnection1.Open();
                         cmd.ExecuteNonQuery();
 

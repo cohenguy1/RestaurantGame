@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="IExplorerProblem.aspx.cs" Inherits="RestaurantGame.IExplorerProblem" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BrowserProblem.aspx.cs" Inherits="RestaurantGame.BrowserProblem" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2></h2>
@@ -9,7 +9,7 @@
                             <br />
                             <asp:Label ID="Label12" runat="server"></asp:Label>
                             <br />
-                            &nbsp;Sorry, you cannot play this game from Internet explorer.
+                            &nbsp;Sorry, you cannot play this game from this browser.
                             <br />
                             <br />
                             &nbsp;Please return the HIT.
