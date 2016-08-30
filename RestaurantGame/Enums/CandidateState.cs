@@ -2,7 +2,6 @@
 {
     public enum CandidateState
     {
-        New,
         Interview,
         PostInterview,
         Completed,

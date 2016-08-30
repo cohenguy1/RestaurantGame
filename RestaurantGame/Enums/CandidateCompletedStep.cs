@@ -1,10 +1,9 @@
 ﻿namespace RestaurantGame.Enums
 {
-    public enum CandidateCompletedStep
+    public enum PositionStatus
     {
         Initial,
-        BlinkRemaimingCandidates,
-        RearrangeCandidatesMap,
+        Interviewing,
         FillNextPosition
     }
 }

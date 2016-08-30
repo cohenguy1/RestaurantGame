@@ -77,10 +77,10 @@ namespace RestaurantGame
             set { Session[SessionMap.AcceptedCandidatesStr] = value; }
         }
 
-        public CandidateCompletedStep CandidateCompletedStep
+        public PositionStatus CurrentPositionStatus
         {
-            get { return (CandidateCompletedStep)Session[SessionMap.CandidateCompletedStepStr]; }
-            set { Session[SessionMap.CandidateCompletedStepStr] = value; }
+            get { return (PositionStatus)Session[SessionMap.CurrentPositionStatusStr]; }
+            set { Session[SessionMap.CurrentPositionStatusStr] = value; }
         }
 
         public List<Candidate> PositionCandidates

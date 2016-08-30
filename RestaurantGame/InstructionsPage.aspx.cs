@@ -25,7 +25,7 @@ namespace RestaurantGame
             InstructionsStopwatch.Stop();
             dbHandler.UpdateTimesTable(GameState.TrainingStart);
 
-            Response.Redirect("ProceedToTraining.aspx");
+            Response.Redirect("ProceedToGame.aspx");
         }
     }
 }

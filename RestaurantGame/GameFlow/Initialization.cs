@@ -18,7 +18,7 @@ namespace RestaurantGame
             {
                 var newCandidate = new Candidate()
                 {
-                    CandidateState = CandidateState.New,
+                    CandidateState = CandidateState.Interview,
                     CandidateNumber = candidateIndex,
                     CandidateAccepted = false,
                     CandidateRank = candidateRanks[candidateIndex]

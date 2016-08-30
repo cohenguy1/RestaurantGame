@@ -87,5 +87,35 @@ namespace RestaurantGame.Logic
 
             return newCandidateIndex;
         }
+
+        internal Candidate ProcessNextPosition(List<Candidate> positionCandidates)
+        {
+            var candidatesByNow = new List<Candidate>();
+            Candidate acceptedCandidate = null;
+
+            foreach (var newCandidate in positionCandidates)
+            {
+                // Impossible
+                if (candidatesByNow.Contains(newCandidate))
+                {
+                    Alert.Show("Something went wrong");
+                    return null;
+                }
+
+                var newCandidateIndex = GetCandidateRelativePosition(candidatesByNow, newCandidate);
+                candidatesByNow.Insert(newCandidateIndex, newCandidate);
+
+                var accepted = Decide(candidatesByNow, newCandidateIndex);
+                newCandidate.CandidateAccepted = accepted;
+
+                if (accepted)
+                {
+                    acceptedCandidate = newCandidate;
+                    break;
+                }
+            }
+
+            return acceptedCandidate;
+        }
     }
 }

@@ -24,7 +24,7 @@
         public const string GameModeStr = "GameMode";
         public const string TrainingStepStr = "TrainingStep";
 
-        public const string CandidateCompletedStepStr = "CandidateCompletedStep";
+        public const string CurrentPositionStatusStr = "CurrentPositionStatus";
 
         public const string TrainingPassedStr = "TrainingPassed";
 
