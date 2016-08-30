@@ -7,12 +7,6 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        public PlayPauseState GamePlayPauseState
-        {
-            get { return (PlayPauseState)Session[SessionMap.GamePlayPauseStateStr]; }
-            set { Session[SessionMap.GamePlayPauseStateStr] = value; }
-        }
-
         public GameMode GameMode
         {
             get
@@ -41,11 +35,6 @@ namespace RestaurantGame
             set { Session[SessionMap.AlreadyAskedForRatingStr] = value; }
         }
 
-        public int TimerInterval
-        {
-            get { return (int)Session[SessionMap.TimerIntervalStr]; }
-            set { Session[SessionMap.TimerIntervalStr] = value; }
-        }
 
         public bool AskForRating
         {

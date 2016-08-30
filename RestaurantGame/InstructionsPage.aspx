@@ -16,7 +16,7 @@
 
     <button id="prevBtn" onclick="prev()" type='button' disabled="disabled">Prev</button>
     <button id="nextBtn" onclick="next()" type='button'>Next</button>
-    <asp:Button ID="continueToTraining" Text="Continue to Training" style="display:none" runat="server" OnClick="btnNextInstruction_Click"/>
+    <asp:Button ID="continueToQuiz" Text="Continue to Quiz" style="display:none" runat="server" OnClick="btnNextInstruction_Click"/>
     <script type="text/javascript">
         var currentInstruction = 0;
         var totalInstructions = 20;
@@ -50,9 +50,9 @@
                     nextBtn.disabled = true;
                     nextBtn.hidden = true;
 
-                    var trainingBtn = document.getElementById('<%= continueToTraining.ClientID %>');
-                    if (trainingBtn) {
-                        trainingBtn.style.display = 'inherit';
+                    var quizBtn = document.getElementById('<%= continueToQuiz.ClientID %>');
+                    if (quizBtn) {
+                        quizBtn.style.display = 'inherit';
                     }
                 }
 
@@ -71,9 +71,9 @@
                 nextBtn.disabled = false;
                 nextBtn.hidden = false;
 
-                var trainingBtn = document.getElementById('<%= continueToTraining.ClientID %>');
-                if (trainingBtn) {
-                    trainingBtn.style.display = 'none';
+                var quizBtn = document.getElementById('<%= continueToQuiz.ClientID %>');
+                if (quizBtn) {
+                    quizBtn.style.display = 'none';
                 }
 
                 if (currentInstruction == 0) {

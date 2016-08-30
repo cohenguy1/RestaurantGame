@@ -17,8 +17,6 @@ namespace RestaurantGame
             }
         }
 
-        public const int NumOfInstructions = 21;
-
         protected void btnNextInstruction_Click(object sender, EventArgs e)
         {
             // training start

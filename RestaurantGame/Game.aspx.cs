@@ -8,6 +8,18 @@ namespace RestaurantGame
 {
     public partial class Game : System.Web.UI.Page
     {
+        // TODO change interview picture
+        // TODO add why textbox to rating
+        // TODO add dollars per worker
+        // TODO moodify instructions
+        // TODO Proceed to Quiz in last instruction
+        // TODO change label on button on last instruction of cont' to quiz
+        // TODO check same user enters bug
+        // TODO wrong quiz forbid replay
+        // TODO think about consequences
+        // TODO dollars / rank blink
+
+
         public const int StartTimerInterval = 2000;
         public const int NumberOfCandidates = DecisionMaker.NumberOfCandidates;
 
@@ -20,8 +32,6 @@ namespace RestaurantGame
 
                 AlreadyAskedForRating = false;
                 AskForRating = false;
-
-                GamePlayPauseState = PlayPauseState.Playing;
 
                 MultiView2.ActiveViewIndex = 0;
 
@@ -94,11 +104,6 @@ namespace RestaurantGame
 
         protected void TimerGame_Tick(object sender, EventArgs e)
         {
-            if (TimerGame.Interval != TimerInterval)
-            {
-                TimerGame.Interval = TimerInterval;
-            }
-
             if (AskForRating)
             {
                 RateAdvisor();
@@ -171,7 +176,6 @@ namespace RestaurantGame
         private void PositionSummary()
         {
             TimerGame.Enabled = false;
-            TimerGame.Interval = TimerInterval;
 
             if (NeedToAskRating())
             {

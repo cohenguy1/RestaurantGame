@@ -5,6 +5,5 @@
         Interview,
         PostInterview,
         Completed,
-        WaitingForUserDecision
     }
 }

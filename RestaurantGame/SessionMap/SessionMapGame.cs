@@ -7,12 +7,6 @@ namespace RestaurantGame
 {
     public partial class Game : System.Web.UI.Page
     {
-        public PlayPauseState GamePlayPauseState
-        {
-            get { return (PlayPauseState)Session[SessionMap.GamePlayPauseStateStr]; }
-            set { Session[SessionMap.GamePlayPauseStateStr] = value; }
-        }
-
         public GameMode GameMode
         {
             get
@@ -39,12 +33,6 @@ namespace RestaurantGame
         {
             get { return (bool)Session[SessionMap.AlreadyAskedForRatingStr]; }
             set { Session[SessionMap.AlreadyAskedForRatingStr] = value; }
-        }
-
-        public int TimerInterval
-        {
-            get { return (int)Session[SessionMap.TimerIntervalStr]; }
-            set { Session[SessionMap.TimerIntervalStr] = value; }
         }
 
         public bool AskForRating
@@ -105,40 +93,6 @@ namespace RestaurantGame
         {
             get { return (int)Session[SessionMap.TrainingPassedStr]; }
             set { Session[SessionMap.TrainingPassedStr] = value; }
-        }
-
-        public SessionState SessionState
-        {
-            get
-            {
-                if (Session[SessionMap.SessionStateStr] == null)
-                {
-                    return SessionState.Running;
-                }
-                else
-                {
-                    return (SessionState)Session[SessionMap.SessionStateStr];
-                }
-            }
-            set { Session[SessionMap.SessionStateStr] = value; }
-        }
-
-        public BlinkState RemainingBlinkState
-        {
-            get { return (BlinkState)Session[SessionMap.RemainingBlinkStateStr]; }
-            set { Session[SessionMap.RemainingBlinkStateStr] = value; }
-        }
-
-        public int NumOfBlinks
-        {
-            get { return (int)Session[SessionMap.NumOfBlinksStr]; }
-            set { Session[SessionMap.NumOfBlinksStr] = value; }
-        }
-
-        public int NumOfBlinks2
-        {
-            get { return (int)Session[SessionMap.NumOfBlinks2Str]; }
-            set { Session[SessionMap.NumOfBlinks2Str] = value; }
         }
 
         public AskPositionHeuristic AskPosition

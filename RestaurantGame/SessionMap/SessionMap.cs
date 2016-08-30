@@ -18,22 +18,11 @@
 
         public const string AcceptedCandidatesStr = "AcceptedCandidates";
 
-        public const string TimerIntervalStr = "TimerInterval";
-
-        public const string GamePlayPauseStateStr = "GamePlayPauseState";
         public const string GameModeStr = "GameMode";
-        public const string TrainingStepStr = "TrainingStep";
 
         public const string CurrentPositionStatusStr = "CurrentPositionStatus";
 
         public const string TrainingPassedStr = "TrainingPassed";
-
-        public const string SessionStateStr = "SessionState";
-
-        public const string RemainingBlinkStateStr = "RemainingBlinkState";
-        public const string NumOfBlinksStr = "NumOfBlinks";
-
-        public const string NumOfBlinks2Str = "NumOfBlinks2";
 
         public const string AskPositionStr = "AskPosition";
 

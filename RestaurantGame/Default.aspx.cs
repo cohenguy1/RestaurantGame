@@ -11,8 +11,6 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        public int StartTimerInterval = Game.StartTimerInterval;
-
         public const int InitialBonus = 20;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -52,8 +50,6 @@ namespace RestaurantGame
                     GameStateStopwatch.Start();
 
                     DecideRandomStuff();                    
-
-                    TimerInterval = StartTimerInterval;
 
                     GeneratePositions();
                 }
