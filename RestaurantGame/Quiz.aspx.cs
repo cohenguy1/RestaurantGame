@@ -78,12 +78,31 @@ namespace RestaurantGame
 
                 if (NumOfWrongQuizAnswers >= MaxNumOfWrongQuizAnswers)
                 {
+                    RevokeUser();
+
                     Response.Redirect("WrongQuiz.aspx");
                 }
                 else
                 {
                     var triesRemaining = MaxNumOfWrongQuizAnswers - NumOfWrongQuizAnswers;
                     Alert.Show("Wrong answer, please try again. You have " + triesRemaining + " tries remaining.");
+                }
+            }
+        }
+
+        public void RevokeUser()
+        {
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
+            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO WrongQuizUsers (UserId) VALUES (@UserId)"))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    cmd.Parameters.AddWithValue("@UserId", UserId);
+                    sqlConnection1.Open();
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

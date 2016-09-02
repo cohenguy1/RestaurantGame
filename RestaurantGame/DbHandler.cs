@@ -40,25 +40,25 @@ namespace RestaurantGame
                 }
             }
 
-            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.First.ToString());
+            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.First);
             if (VectorNum != null)
             {
                 return AskPositionHeuristic.First;
             }
 
-            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Optimal.ToString());
+            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Optimal);
             if (VectorNum != null)
             {
                 return AskPositionHeuristic.Optimal;
             }
 
-            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Last.ToString());
+            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Last);
             if (VectorNum != null)
             {
                 return AskPositionHeuristic.Last;
             }
 
-            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Random.ToString());
+            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Random);
             if (VectorNum != null)
             {
                 Random ran = new Random();
@@ -136,14 +136,21 @@ namespace RestaurantGame
             return ranks;
         }
 
-        public static int? GetFirstVectorSatisfying(string askPosition)
+        public static int? GetFirstVectorSatisfying(AskPositionHeuristic askPosition)
         {
+            var askPositionHeuristics = askPosition.ToString();
+
+            if (!IsAskHeuristicsEnabled(askPositionHeuristics))
+            {
+                return null;
+            }
+
             var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
 
             using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
                 using (SQLiteCommand cmd = new SQLiteCommand("Select VectorNum, LastStarted " +
-                    "from VectorsAssignments Where NextAskHeuristic='" + askPosition + "' order by VectorNum"))
+                    "from VectorsAssignments Where NextAskHeuristic='" + askPositionHeuristics + "' order by VectorNum"))
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
@@ -192,6 +199,41 @@ namespace RestaurantGame
             }
 
             return null;
+        }
+
+        private static bool IsAskHeuristicsEnabled(string askPositionHeuristics)
+        {
+            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+            bool enabled = false;
+            try
+            {
+                using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
+                {
+                    sqlConnection1.Open();
+
+                    using (SQLiteCommand cmd = new SQLiteCommand("Select Enabled from Configuration Where AskHeuristics='" + askPositionHeuristics + "'"))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection = sqlConnection1;
+
+                        using (SQLiteDataReader result = (SQLiteDataReader)cmd.ExecuteReader())
+                        {
+                            while (result.Read())
+                            {
+                                int value = result.GetInt32(0);
+                                enabled = value == 1 ? true : false;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                enabled = false;
+            }
+
+            return enabled;
         }
 
         public static int GetIntFromConfig(string key)

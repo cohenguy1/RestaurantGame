@@ -9,9 +9,6 @@
         public const string CurrentPositionNumberStr = "CurrentPositionNumber";
 
         public const string PositionCandidiatesStr = "PositionCandidates";
-        public const string CurrentCandidateNumberStr = "CurrentCandidateNumber";
-
-        public const string CandidatesByNowStr = "CandidatesByNow";
 
         public const string AskForRatingStr = "AskForRating";
         public const string AlreadyAskedForRatingStr = "AlreadyAskedForRating";
@@ -21,8 +18,6 @@
         public const string GameModeStr = "GameMode";
 
         public const string CurrentPositionStatusStr = "CurrentPositionStatus";
-
-        public const string TrainingPassedStr = "TrainingPassed";
 
         public const string AskPositionStr = "AskPosition";
 

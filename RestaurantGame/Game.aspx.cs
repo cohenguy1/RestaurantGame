@@ -11,14 +11,10 @@ namespace RestaurantGame
         // TODO change interview picture
         // TODO add why textbox to rating
         // TODO add dollars per worker
-        // TODO moodify instructions
-        // TODO Proceed to Quiz in last instruction
-        // TODO change label on button on last instruction of cont' to quiz
-        // TODO check same user enters bug
-        // TODO wrong quiz forbid replay
-        // TODO think about consequences
+        // TODO modify instructions ---
+        // TODO think about consequences ---
         // TODO dollars / rank blink
-
+        // change to 10 candidates & update probabilities
 
         public const int StartTimerInterval = 2000;
         public const int NumberOfCandidates = DecisionMaker.NumberOfCandidates;
@@ -63,10 +59,7 @@ namespace RestaurantGame
             CleanCurrentPosition();
 
             GenerateCandidatesForPosition();
-            GenerateCandidatesByNow();
 
-            CurrentCandidateNumber = 0;
-            CurrentCandidate = PositionCandidates[CurrentCandidateNumber];
             CurrentPositionStatus = PositionStatus.Initial;
 
             TimerGame.Enabled = true;
@@ -152,25 +145,19 @@ namespace RestaurantGame
 
         private void ProcessCandidate()
         {
-            var gameMode = GameMode;
-            var currentCandidate = CurrentCandidate;
+            var dm = DecisionMaker.GetInstance();
+            Candidate hiredWorker = dm.ProcessNextPosition(PositionCandidates);
+            hiredWorker.CandidateState = CandidateState.Completed;
 
-            if (currentCandidate.CandidateState == CandidateState.Interview)
+            if (!TimerGame.Enabled)
             {
-                var dm = DecisionMaker.GetInstance();
-                Candidate hiredWorker = dm.ProcessNextPosition(PositionCandidates);
-                hiredWorker.CandidateState = CandidateState.Completed;
-
-                if (!TimerGame.Enabled)
-                {
-                    TimerGame.Interval = 1000;
-                    TimerGame.Enabled = true;
-                }
-
-                CurrentCandidate = hiredWorker;
-                UpdatePositionToAcceptedCandidate(hiredWorker);
-                PositionSummary();
+                TimerGame.Interval = 1000;
+                TimerGame.Enabled = true;
             }
+
+            CurrentCandidate = hiredWorker;
+            UpdatePositionToAcceptedCandidate(hiredWorker);
+            PositionSummary();
         }
 
         private void PositionSummary()
@@ -249,7 +236,7 @@ namespace RestaurantGame
                 return false;
             }
 
-            return (CurrentCandidateNumber < NumberOfCandidates);
+            return true;
         }
 
         private void UpdatePositionToAcceptedCandidate(Candidate candidate)

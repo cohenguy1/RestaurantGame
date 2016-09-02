@@ -29,11 +29,5 @@ namespace RestaurantGame
 
             PositionCandidates = positionCandidates;
         }
-
-        private void GenerateCandidatesByNow()
-        {
-            CandidatesByNow = new List<Candidate>();
-        }
-
     }
 }

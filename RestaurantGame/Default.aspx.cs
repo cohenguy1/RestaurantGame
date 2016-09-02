@@ -113,29 +113,34 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
+                    sqlConnection1.Open();
+
                     using (SQLiteCommand cmd = new SQLiteCommand("Select UserId from [UserFeedback] Where UserId='" + UserId + "'"))
                     {
                         cmd.CommandType = CommandType.Text;
                         cmd.Connection = sqlConnection1;
-                        sqlConnection1.Open();
 
                         string userId = (string)cmd.ExecuteScalar();
 
                         if (userId == null)
                         {
-                            //new user - insert to DB
-                            using (SQLiteCommand cmd2 = new SQLiteCommand("INSERT INTO Users (UserId, Assignment_Id, hitId, time) VALUES (@UserId, @Assignment_Id, @hitId, @time)"))
-                            {
-                                cmd2.CommandType = CommandType.Text;
-                                cmd2.Connection = sqlConnection1;
-                                cmd2.Parameters.AddWithValue("@UserId", UserId);
-                                cmd2.Parameters.AddWithValue("@Assignment_Id", (string)Session["turkAss"]);
-                                cmd2.Parameters.AddWithValue("@hitId", (string)Session["hitId"]);
-                                cmd2.Parameters.AddWithValue("@time", DateTime.Now.ToString());
-                                cmd2.ExecuteNonQuery();
-                            }
+                            InsertNewUserToDB(sqlConnection1);
                         }
                         else
+                        {
+                            Alert.Show("You already participated in this game. Please return the HIT");
+                            return;
+                        }
+                    }
+
+                    using (SQLiteCommand cmd = new SQLiteCommand("Select UserId from [WrongQuizUsers] Where UserId='" + UserId + "'"))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection = sqlConnection1;
+
+                        string userId = (string)cmd.ExecuteScalar();
+
+                        if (userId != null)
                         {
                             Alert.Show("You already participated in this game. Please return the HIT");
                             return;
@@ -147,17 +152,9 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Users (UserId, Assignment_Id, hitId, time) VALUES (@UserId, @Assignment_Id, @hitId, @time)"))
-                    {
-                        cmd.CommandType = CommandType.Text;
-                        cmd.Connection = sqlConnection1;
-                        cmd.Parameters.AddWithValue("@UserId", UserId);
-                        cmd.Parameters.AddWithValue("@Assignment_Id", (string)Session["turkAss"]);
-                        cmd.Parameters.AddWithValue("@hitId", (string)Session["hitId"]);
-                        cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString());
-                        sqlConnection1.Open();
-                        cmd.ExecuteNonQuery();
-                    }
+                    sqlConnection1.Open();
+
+                    InsertNewUserToDB(sqlConnection1);
                 }
             }
 
@@ -195,6 +192,21 @@ namespace RestaurantGame
             }
 
             Response.Redirect("UserInfoPage.aspx");
+        }
+
+        private void InsertNewUserToDB(SQLiteConnection sqlConnection1)
+        {
+            //new user - insert to DB
+            using (SQLiteCommand cmd2 = new SQLiteCommand("INSERT INTO Users (UserId, Assignment_Id, hitId, time) VALUES (@UserId, @Assignment_Id, @hitId, @time)"))
+            {
+                cmd2.CommandType = CommandType.Text;
+                cmd2.Connection = sqlConnection1;
+                cmd2.Parameters.AddWithValue("@UserId", UserId);
+                cmd2.Parameters.AddWithValue("@Assignment_Id", (string)Session["turkAss"]);
+                cmd2.Parameters.AddWithValue("@hitId", (string)Session["hitId"]);
+                cmd2.Parameters.AddWithValue("@time", DateTime.Now.ToString());
+                cmd2.ExecuteNonQuery();
+            }
         }
     }
 }

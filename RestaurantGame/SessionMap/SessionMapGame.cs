@@ -53,12 +53,6 @@ namespace RestaurantGame
             set { Session[SessionMap.PositionsStr] = value; }
         }
 
-        public int CurrentCandidateNumber
-        {
-            get { return (int)Session[SessionMap.CurrentCandidateNumberStr]; }
-            set { Session[SessionMap.CurrentCandidateNumberStr] = value; }
-        }
-
         public int[] AcceptedCandidates
         {
             get { return (int[])Session[SessionMap.AcceptedCandidatesStr]; }
@@ -81,18 +75,6 @@ namespace RestaurantGame
         {
             get { return (Candidate)Session[SessionMap.CurrentCandidateStr]; }
             set { Session[SessionMap.CurrentCandidateStr] = value; }
-        }
-
-        public List<Candidate> CandidatesByNow
-        {
-            get { return (List<Candidate>)Session[SessionMap.CandidatesByNowStr]; }
-            set { Session[SessionMap.CandidatesByNowStr] = value; }
-        }
-
-        public int TrainingPassed
-        {
-            get { return (int)Session[SessionMap.TrainingPassedStr]; }
-            set { Session[SessionMap.TrainingPassedStr] = value; }
         }
 
         public AskPositionHeuristic AskPosition

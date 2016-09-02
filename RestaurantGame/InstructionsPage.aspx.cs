@@ -23,7 +23,7 @@ namespace RestaurantGame
             InstructionsStopwatch.Stop();
             dbHandler.UpdateTimesTable(GameState.TrainingStart);
 
-            Response.Redirect("ProceedToGame.aspx");
+            Response.Redirect("Quiz.aspx");
         }
     }
 }
