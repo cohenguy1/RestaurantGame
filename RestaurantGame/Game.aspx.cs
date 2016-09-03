@@ -8,15 +8,11 @@ namespace RestaurantGame
 {
     public partial class Game : System.Web.UI.Page
     {
-        // TODO change interview picture
-        // TODO add why textbox to rating
-        // TODO add dollars per worker
         // TODO modify instructions ---
         // TODO think about consequences ---
-        // TODO dollars / rank blink
         // change to 10 candidates & update probabilities
 
-        public const int StartTimerInterval = 2000;
+        public const int StartTimerInterval = 2500;
         public const int NumberOfCandidates = DecisionMaker.NumberOfCandidates;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -34,6 +30,7 @@ namespace RestaurantGame
                 ClearPositionsTable();
 
                 ImageInterview.Visible = true;
+                LabelInterviewing.Visible = true;
 
                 CurrentPositionNumber = 0;
 
@@ -170,13 +167,20 @@ namespace RestaurantGame
             }
 
             CurrentPositionStatus = PositionStatus.Initial;
+            ImageInterview.Visible = false;
+            LabelInterviewing.Visible = false;
+            ImageHired.Visible = true;
             PositionSummaryLbl1.Visible = true;
             PositionSummaryLbl2.Visible = true;
             PositionSummaryLbl3.Visible = true;
+            BonusLbl1.Visible = true;
+            BonusLbl2.Visible = true;
+            BonusLbl3.Visible = true;
             SummaryNextLbl.Visible = true;
             btnNextToUniform.Visible = true;
 
             PositionSummaryLbl2.Text = CurrentCandidate.CandidateRank.ToString();
+            BonusLbl2.Text = Math.Round((11 - CurrentCandidate.CandidateRank) * 0.2, 2).ToString() + "\u00A2";
             SummaryNextLbl.Text = "<br /><br />Press 'Next' to pick uniform for the " + GetCurrentJobTitle() + ".<br />";
         }
 
@@ -247,15 +251,19 @@ namespace RestaurantGame
 
             AcceptedCandidates[CurrentPositionNumber] = currentPosition.ChosenCandidate.CandidateRank;
 
-            double avgRank = Common.CalculateAveragePosition(Positions);
-            UpdatePositionsTable(currentPosition, avgRank);
+            double totalBonus = Common.GetTotalBonus(Positions);
+            UpdatePositionsTable(currentPosition, totalBonus);
         }
 
         protected void btnNextToUniform_Click(object sender, EventArgs e)
         {
+            ImageHired.Visible = false;
             PositionSummaryLbl1.Visible = false;
             PositionSummaryLbl2.Visible = false;
             PositionSummaryLbl3.Visible = false;
+            BonusLbl1.Visible = false;
+            BonusLbl2.Visible = false;
+            BonusLbl3.Visible = false;
             SummaryNextLbl.Visible = false;
             btnNextToUniform.Visible = false;
             PickUniform();

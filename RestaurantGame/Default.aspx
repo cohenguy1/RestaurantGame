@@ -7,11 +7,11 @@
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-    <h2>You will recieve 30 cents for this HIT and it will take about 10 minutes of your time. </h2>
+    <h2>You will recieve 20 cents for this HIT and it will take about 5 minutes of your time. </h2>
     <h2>Game Background</h2>
 
-    <div style="text-align: center; width: 700px; margin: 0 auto;">
-        <table style="text-align: center; max-width: 700px; font-size: large">
+    <div style="text-align: center; width: 800px; margin: 0 auto;">
+        <table style="text-align: center; max-width: 800px; font-size: large">
             <tr>
                 <td>You have decided to open up a restaurant.</td>
             </tr>
@@ -23,13 +23,13 @@
             </tr>
             <tr>
                 <td>The HR executive will interview the candidates and decide about who fills each position,
-                        and you will choose the uniform for each position</td>
+                        and you will choose the uniform for each position.</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td>For Each position you have 15 candidates, ranked from 1 to 15. Your (and the HR executive's) interest is to pick highly 
+                <td>For each position you have 10 candidates, ranked from 1 to 10. Your (and the HR executive's) interest is to pick highly 
                             qualified (as possible) workers for the different positions.<br />
                     <br />
                     <asp:Label ID="backgroundText" runat="server"
@@ -46,7 +46,11 @@
                 <td>
                     <b><span style="font-size: 20px;">You will receive a bonus after the game. </span></b>
                     <br />
-                    The bonus will be in accordance with the average ranking of the people you hired – you will be given now an additional 20 cents as a bonus and we will deduct from that amount the average of the rankings of the people you've hired (e.g., if you end up hiring the third-best person for the job (on average) your bonus will be 17 cents).
+                    For each worker you hire, you will receive 0.2 cents per rank. For example, if you hire the worst candidate, with an absolute ranking of 10, you will receive exactly 0.2 cents.
+                    <br />
+                    On the other hand, if you hire the best candidate, with an absolute ranking of 1, you will receive 2 cents.
+                    <br />
+                    The bonus you get will be the money you accumulated. The bonus can be up to 20 cents.
                 </td>
             </tr>
             <tr>

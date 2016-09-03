@@ -103,6 +103,15 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Panel PanelSpeed;
         
         /// <summary>
+        /// LabelInterviewing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelInterviewing;
+        
+        /// <summary>
         /// ImageInterview control.
         /// </summary>
         /// <remarks>
@@ -130,6 +139,15 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.Label MovingJobTitleLabel;
         
         /// <summary>
+        /// ImageHired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ImageHired;
+        
+        /// <summary>
         /// PositionSummaryLbl1 control.
         /// </summary>
         /// <remarks>
@@ -155,6 +173,33 @@ namespace RestaurantGame {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label PositionSummaryLbl3;
+        
+        /// <summary>
+        /// BonusLbl1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label BonusLbl1;
+        
+        /// <summary>
+        /// BonusLbl2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label BonusLbl2;
+        
+        /// <summary>
+        /// BonusLbl3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label BonusLbl3;
         
         /// <summary>
         /// SummaryNextLbl control.
@@ -209,6 +254,15 @@ namespace RestaurantGame {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField ratingHdnValue;
+        
+        /// <summary>
+        /// reasonTxtBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox reasonTxtBox;
         
         /// <summary>
         /// btnRate control.
@@ -409,12 +463,12 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.TableCell BartenderCell;
         
         /// <summary>
-        /// AvgRankCell control.
+        /// TotalBonusCell control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell AvgRankCell;
+        protected global::System.Web.UI.WebControls.TableCell TotalBonusCell;
     }
 }

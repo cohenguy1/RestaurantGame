@@ -7,13 +7,13 @@ namespace RestaurantGame
 {
     public static class Common
     {
-        public static double CalculateAveragePosition(IEnumerable<Position> positions)
+        public static double GetTotalBonus(IEnumerable<Position> positions)
         {
-            double average = positions.Where(position => position.ChosenCandidate != null).
-                Average(pos => pos.ChosenCandidate.CandidateRank);
+            int totalBonus = positions.Where(position => position.ChosenCandidate != null).
+                Sum(pos => 10 - pos.ChosenCandidate.CandidateRank + 1);
 
             // with one decimal precision
-            return Math.Round(average, 1);
+            return Math.Round(totalBonus * 0.2, 1);
         }
     }
 }

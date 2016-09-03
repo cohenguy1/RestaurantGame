@@ -11,8 +11,6 @@ namespace RestaurantGame
 {
     public partial class Default : System.Web.UI.Page
     {
-        public const int InitialBonus = 20;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

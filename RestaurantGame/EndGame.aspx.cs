@@ -8,18 +8,14 @@ namespace RestaurantGame
 {
     public partial class EndGame : System.Web.UI.Page
     {
-        public int InitialBonus = Default.InitialBonus;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 GameStopwatch.Stop();
                 
-                double averageRank = Common.CalculateAveragePosition(Positions);
-                double bonus = InitialBonus - averageRank;
+                double bonus = Common.GetTotalBonus(Positions);
 
-                AverageRank.Text = averageRank.ToString("0.0");
                 Bonus.Text = bonus.ToString() + " cents";
 
                 dbHandler.UpdateTimesTable(GameState.EndGame);
@@ -39,8 +35,7 @@ namespace RestaurantGame
             data.Add("workerId", workerId);
             data.Add("hitId", (string)Session["hitId"]);
 
-            double averageRank = Common.CalculateAveragePosition(Positions);
-            double bonusAmount = Math.Round((InitialBonus - averageRank) / 100.0, 2);
+            double bonusAmount = Math.Round(Common.GetTotalBonus(Positions), 2);
             decimal bonusDecimal = Convert.ToDecimal(bonusAmount);
 
             SendFeedback(bonusAmount);

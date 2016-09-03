@@ -10,18 +10,13 @@
                             &nbsp;Thanks for playing, You did great!
                             <br />
                             <br />
-                            &nbsp;Please provide feedback about the game (how hard it was, was it fun, game graphics):
-                            <br />
-                            <br />
-                            <asp:TextBox ID="feedbackTxtBox" onkeypress="return this.value.length<=120" runat="server" Rows="4" Columns="40" TextMode="multiline" Style="margin-left: 5px"></asp:TextBox>
-                            <br />
-                            <br />
-                            &nbsp;The average ranking of the people you hired is:
+                            &nbsp;Please provide feedback about the game (how hard it was, was it fun, etc.):
                             <br />
                             <br />
                             <center>
-                            <asp:Label ID="AverageRank" runat="server" Font-Bold="true" ForeColor="Green" Font-Size="Larger"></asp:Label>
+                            <asp:TextBox ID="feedbackTxtBox" onkeypress="return this.value.length<=300" runat="server" Rows="4" Columns="40" TextMode="multiline" Style="margin-left: 5px"></asp:TextBox>
                             </center>
+                            <br />
                             <br />
                             &nbsp;Your bonus is:
                             <br />

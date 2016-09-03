@@ -8,7 +8,7 @@ namespace RestaurantGame.Logic
     {
         private static DecisionMaker _instance = null;
 
-        public const int NumberOfCandidates = 15;
+        public const int NumberOfCandidates = 10;
 
         private static double[] c = new double[NumberOfCandidates + 1];
 

@@ -37,7 +37,7 @@ namespace RestaurantGame
             var correct = (rbl1.SelectedIndex == 0) &&
                           (rbl2.SelectedIndex == 3) &&
                           (rbl3.SelectedIndex == 3) &&
-                          (rbl4.SelectedIndex == 1);
+                          (rbl4.SelectedIndex == 2);
 
             try
             {

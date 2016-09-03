@@ -16,12 +16,12 @@ namespace RestaurantGame
             CurrentPositionNumber++;
         }
 
-        private void UpdatePositionsTable(Position currentPosition, double avgRank)
+        private void UpdatePositionsTable(Position currentPosition, double totalBonus)
         {
             var positionCell = GetPositionCell(currentPosition);
             positionCell.Text = "&nbsp;" + currentPosition.GetJobTitle() + ": " + currentPosition.ChosenCandidate.CandidateRank;
 
-            AvgRankCell.Text = "&nbsp;Average Ranking: " + avgRank.ToString("0.0") + " ";
+            TotalBonusCell.Text = "&nbsp;Total Bonus: " + totalBonus.ToString("0.0") + " \u00A2";
         }
 
         private void ClearPositionsTable()
@@ -40,7 +40,7 @@ namespace RestaurantGame
                 positionCell.Font.Bold = false;
             }
 
-            AvgRankCell.Text = "&nbsp;Average Ranking: ";
+            TotalBonusCell.Text = "&nbsp;Total Bonus: ";
         }
 
         private Position GetPosition(int indexPosition)

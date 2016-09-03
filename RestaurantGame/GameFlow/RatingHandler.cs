@@ -34,9 +34,9 @@ namespace RestaurantGame
 
             // AskPosition == Optimal
             /*
-             * 10 Stopping Value: 15
-             * 9 Stopping Value: 4
-             * 8 Stopping Value: 2
+             * 10 Stopping Value: 10
+             * 9 Stopping Value: 3
+             * 8 Stopping Value: 1
              * 7 Stopping Value: 1
              * 6 Stopping Value: 1
              * 5 Stopping Value: 1
@@ -53,11 +53,7 @@ namespace RestaurantGame
             var acceptedCandidateRank = CurrentCandidate.CandidateRank;
             if (CurrentPositionNumber == 8)
             {
-                return (acceptedCandidateRank <= 4);
-            }
-            else if (CurrentPositionNumber == 7)
-            {
-                return (acceptedCandidateRank <= 2);
+                return (acceptedCandidateRank <= 3);
             }
 
             return (acceptedCandidateRank == 1);
@@ -98,12 +94,14 @@ namespace RestaurantGame
 
             using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
+                sqlConnection1.Open();
+
                 using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
-                    "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank, AvgRanking, " +
-                    " InstructionsTime, AskPosition, VectorNum) " +
+                    "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank, TotalBonus, " +
+                    " InstructionsTime, AskPosition, VectorNum, Reason) " +
                     " VALUES (@UserId, @AdviserRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
-                    "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank, @AvgRanking, " +
-                    "@InstructionsTime, @AskPosition, @VectorNum)"))
+                    "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank, @TotalBonus, " +
+                    "@InstructionsTime, @AskPosition, @VectorNum, @Reason)"))
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
@@ -120,11 +118,11 @@ namespace RestaurantGame
                     cmd.Parameters.AddWithValue("@Position8Rank", GetChosenPositionToInsertToDb(8));
                     cmd.Parameters.AddWithValue("@Position9Rank", GetChosenPositionToInsertToDb(9));
                     cmd.Parameters.AddWithValue("@Position10Rank", GetChosenPositionToInsertToDb(10));
-                    cmd.Parameters.AddWithValue("@AvgRanking", Common.CalculateAveragePosition(Positions));
+                    cmd.Parameters.AddWithValue("@TotalBonus", Common.GetTotalBonus(Positions));
                     cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 3));
                     cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
                     cmd.Parameters.AddWithValue("@VectorNum", VectorNum);
-                    sqlConnection1.Open();
+                    cmd.Parameters.AddWithValue("@Reason", reasonTxtBox.Text);
                     cmd.ExecuteNonQuery();
                 }
             }

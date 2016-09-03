@@ -27,13 +27,18 @@
 
                 <br />
                 <asp:Panel ID="PanelSpeed" runat="server" Style="margin-left: 0px; margin-top: 60px; align-content: center;" Width="600px">
-                    <asp:Image ID="ImageInterview" runat="server" Height="147px" Width="184px" ImageUrl="~/Images/JobInterview.jpg" Visible="False" />
+                    <asp:Label ID="LabelInterviewing" runat="server" Font-Size="Medium" Text="Interviewing Candidates...<br /><br /><br />"></asp:Label>
+                    <asp:Image ID="ImageInterview" runat="server" Height="187px" Width="235px" ImageUrl="~/Images/InterviewingCandidates.gif" Visible="False" />
                     <asp:Label ID="MovingToNextPositionLabel" runat="server" Font-Size="Larger" Visible="false"></asp:Label>
                     <asp:Label ID="MovingJobTitleLabel" runat="server" Style="margin-top: 20px;" Font-Bold="true" Font-Size="X-Large" Visible="false" ForeColor="Green"></asp:Label>
                     <br />
-                    <asp:Label ID="PositionSummaryLbl1" runat="server" Font-Size="Large" Visible="false" Text="The worker you hired has an absolute rank of&nbsp;"></asp:Label>
+                    <asp:Image ID="ImageHired" runat="server" Height="147px" Width="184px" ImageUrl="~/Images/Hired.jpg" Visible="False" />
+                    <asp:Label ID="PositionSummaryLbl1" runat="server" Font-Size="Large" Visible="false" Text="<br />The worker you hired has an absolute rank of&nbsp;"></asp:Label>
                     <asp:Label ID="PositionSummaryLbl2" runat="server" Font-Size="X-Large" Visible="false" ForeColor="Green" Font-Bold="true"></asp:Label>
                     <asp:Label ID="PositionSummaryLbl3" runat="server" Font-Size="Large" Visible="false" Text="."></asp:Label>
+                    <asp:Label ID="BonusLbl1" runat="server" Font-Size="Large" Visible="false" Text="<br /><br />Bonus added:&nbsp;"></asp:Label>
+                    <asp:Label ID="BonusLbl2" runat="server" Font-Size="X-Large" Visible="false" ForeColor="Green" Font-Bold="true"></asp:Label>
+                    <asp:Label ID="BonusLbl3" runat="server" Font-Size="Large" Visible="false" Text="."></asp:Label>
                     <asp:Label ID="SummaryNextLbl" runat="server" Visible="false"></asp:Label>
                     <br />
                     <asp:Button ID="btnNextToUniform" runat="server" Visible="false" Text="Next" OnClick="btnNextToUniform_Click" />
@@ -88,6 +93,12 @@
 
                                 <asp:HiddenField ID="ratingHdnValue" Value="0" runat="server" />
 
+                                &nbsp;Please explain why you rated the HR executive as you did:
+                            <br />
+                                <br />
+                                <center>
+                            <asp:TextBox ID="reasonTxtBox" onkeypress="return this.value.length<=300" runat="server" Rows="5" Columns="40" TextMode="multiline" Style="margin-left: 5px"></asp:TextBox>
+                            </center>
                                 <br />
                             </td>
                         </tr>
@@ -138,7 +149,7 @@
             GridLines="Both"
             runat="server">
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="cell1" Width="157px" HorizontalAlign="Left" Text="&nbsp;Restaurant Positions" Style="color: blue;" Font-Bold="true"></asp:TableCell>
+                <asp:TableCell ID="cell1" Width="165px" HorizontalAlign="Left" Text="&nbsp;Restaurant Positions" Style="color: blue;" Font-Bold="true"></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
                 <asp:TableCell ID="ManagerCell" HorizontalAlign="Left" Text="&nbsp;Manager:"></asp:TableCell>
@@ -171,33 +182,33 @@
                 <asp:TableCell ID="BartenderCell" HorizontalAlign="Left" Text="&nbsp;Bartender:"></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="AvgRankCell" Font-Bold="true" ForeColor="Purple" HorizontalAlign="Left" Text="&nbsp;Average Ranking:"></asp:TableCell>
+                <asp:TableCell ID="TotalBonusCell" Font-Size="Larger" Font-Bold="true" ForeColor="Purple" HorizontalAlign="Left" Text="&nbsp;Total Bonus:"></asp:TableCell>
             </asp:TableRow>
 
         </asp:Table>
     </asp:Panel>
 
-    
+
     <script type="text/javascript">
-       function returnString() {
-           debugger;
-           var ratingStarBlock = document.getElementById('rating-star-block');
-           var stars = ratingStarBlock.getElementsByTagName('div');
+        function returnString() {
+            debugger;
+            var ratingStarBlock = document.getElementById('rating-star-block');
+            var stars = ratingStarBlock.getElementsByTagName('div');
 
-           var savedRank = 0;
-           for (var i = 0; i < stars.length; i++) {
-               var child = stars[i];
-               if (child.classList.contains("selected")) {
-                   savedRank++;
-               }
-           }
+            var savedRank = 0;
+            for (var i = 0; i < stars.length; i++) {
+                var child = stars[i];
+                if (child.classList.contains("selected")) {
+                    savedRank++;
+                }
+            }
 
-           if (savedRank == 0) {
-               alert("Please rate the HR executive!");
-               return false;
-           }
+            if (savedRank == 0) {
+                alert("Please rate the HR executive!");
+                return false;
+            }
 
-           document.getElementById('<%=ratingHdnValue.ClientID %>').value = savedRank.toString();
-       }
-   </script>
+            document.getElementById('<%=ratingHdnValue.ClientID %>').value = savedRank.toString();
+        }
+    </script>
 </asp:Content>

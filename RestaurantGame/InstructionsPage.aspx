@@ -19,7 +19,7 @@
     <asp:Button ID="continueToQuiz" Text="Continue to Quiz" style="display:none" runat="server" OnClick="btnNextInstruction_Click"/>
     <script type="text/javascript">
         var currentInstruction = 0;
-        var totalInstructions = 20;
+        var totalInstructions = 19;
 
         function updateInstruction() {
             document.getElementById("InstructionImage").src = "Images/Instructions" + currentInstruction.toString() + ".png";
