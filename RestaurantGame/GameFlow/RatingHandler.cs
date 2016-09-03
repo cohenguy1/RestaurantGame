@@ -96,10 +96,10 @@ namespace RestaurantGame
             {
                 sqlConnection1.Open();
 
-                using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserRatings (UserId, AdviserRating, RatingPosition, Position1Rank, Position2Rank, " +
+                using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserRatings (UserId, AdviserRating, Position1Rank, Position2Rank, " +
                     "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank, TotalBonus, " +
                     " InstructionsTime, AskPosition, VectorNum, Reason) " +
-                    " VALUES (@UserId, @AdviserRating, @RatingPosition, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
+                    " VALUES (@UserId, @AdviserRating, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
                     "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank, @TotalBonus, " +
                     "@InstructionsTime, @AskPosition, @VectorNum, @Reason)"))
                 {
@@ -107,7 +107,6 @@ namespace RestaurantGame
                     cmd.Connection = sqlConnection1;
                     cmd.Parameters.AddWithValue("@UserId", UserId);
                     cmd.Parameters.AddWithValue("@AdviserRating", adviserRating.ToString());
-                    cmd.Parameters.AddWithValue("@RatingPosition", (CurrentPositionNumber + 1).ToString());
                     cmd.Parameters.AddWithValue("@Position1Rank", GetChosenPositionToInsertToDb(1));
                     cmd.Parameters.AddWithValue("@Position2Rank", GetChosenPositionToInsertToDb(2));
                     cmd.Parameters.AddWithValue("@Position3Rank", GetChosenPositionToInsertToDb(3));
