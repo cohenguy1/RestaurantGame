@@ -16,24 +16,17 @@
                 <td>You have decided to open up a restaurant.</td>
             </tr>
             <tr>
-                <td>In this game you and an Human Resource (HR) executive will interview people for 10 positions in the restaurant.</td>
+                <td>In this game you and your Human Resource (HR) executive are in charge of hiring people for 10 positions in the restaurant. The HR executive will be doing the interviewing and hiring and you will choose the uniform for each position.</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td>The HR executive will interview the candidates and decide about who fills each position,
-                        and you will choose the uniform for each position.</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>For each position you have 10 candidates, ranked from 1 to 10. Your (and the HR executive's) interest is to pick highly 
+                <td>For each position you have 10 candidates, ranked from 1 to 10 (where "1" is the best and "10" is the worst). Your (and the HR executive's) interest is to pick highly 
                             qualified (as possible) workers for the different positions.<br />
                     <br />
                     <asp:Label ID="backgroundText" runat="server"
-                        Text="When a candidate is interviewed, we must decide whether to hire him or not."></asp:Label>
+                        Text="When a candidate is interviewed, the HR executive must decide whether to hire him or not."></asp:Label>
                     <br />
                     <asp:Label ID="backgroundText2" runat="server"
                         Text="If the candidate is rejected, he leaves forever and cannot be recalled."></asp:Label>
@@ -44,13 +37,9 @@
 
             <tr>
                 <td>
-                    <b><span style="font-size: 20px;">You will receive a bonus after the game. </span></b>
+                    <b><span style="font-size: 20px;">You will receive an additional bonus after the game. </span></b>
                     <br />
-                    For each worker you hire, you will receive 0.2 cents per rank. For example, if you hire the worst candidate, with an absolute ranking of 10, you will receive exactly 0.2 cents.
-                    <br />
-                    On the other hand, if you hire the best candidate, with an absolute ranking of 1, you will receive 2 cents.
-                    <br />
-                    The bonus you get will be the money you accumulated. The bonus can be up to 20 cents.
+                    Each worker hired will get you prize points according to her ranking. #1 ranked will get you 100 points, #2 will get you 90 points, and so on (#10 will get you 10 points). At the end, you will get a cent for each 50 prize points.
                 </td>
             </tr>
             <tr>

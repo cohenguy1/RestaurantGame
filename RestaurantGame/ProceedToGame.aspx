@@ -16,9 +16,6 @@
                     &nbsp;After a candidate is hired, you will choose the uniform for the position.
                             <br />
                     <br />
-                    &nbsp;This is a fun part where the HR executive will be doing most of the work for you!
-                            <br />
-                    <br />
                     <br />
                     &nbsp;Press 'Next' to continue.
                             <br />
