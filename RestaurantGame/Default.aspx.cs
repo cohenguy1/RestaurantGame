@@ -83,6 +83,7 @@ namespace RestaurantGame
             {
                 backgroundText.Text = backgroundText.Text.Replace("him", "her");
                 backgroundText2.Text = backgroundText2.Text.Replace(", he", ", she");
+                backgroundText3.Text = backgroundText3.Text.Replace(" his ", " her ");
             }
 
             try

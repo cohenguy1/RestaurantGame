@@ -16,12 +16,15 @@ namespace RestaurantGame
             CurrentPositionNumber++;
         }
 
-        private void UpdatePositionsTable(Position currentPosition, double totalBonus)
+        private void UpdatePositionsTable(Position currentPosition, int totalPrizePoints)
         {
             var positionCell = GetPositionCell(currentPosition);
-            positionCell.Text = "&nbsp;" + currentPosition.GetJobTitle() + ": " + currentPosition.ChosenCandidate.CandidateRank;
+            positionCell.Text = "&nbsp;" + currentPosition.GetJobTitle() + ": #" + currentPosition.ChosenCandidate.CandidateRank;
 
-            TotalBonusCell.Text = "&nbsp;Total Bonus: " + totalBonus.ToString("0.0") + " \u00A2";
+            var positionPrizeCell = GetPositionPrizeCell(currentPosition);
+            positionPrizeCell.Text = "&nbsp;" + (110 - currentPosition.ChosenCandidate.CandidateRank * 10).ToString();
+
+            TotalPrizePointsCell.Text = "&nbsp;Total Prize Points: " + totalPrizePoints.ToString();
         }
 
         private void ClearPositionsTable()
@@ -33,14 +36,20 @@ namespace RestaurantGame
                 currentPosition.ChosenCandidate = null;
 
                 var positionCell = GetPositionCell(currentPosition);
-
+                var positionPrizeCell = GetPositionPrizeCell(currentPosition);
                 positionCell.Text = "&nbsp;" + currentPosition.GetJobTitle() + ": " ;
                 positionCell.ForeColor = System.Drawing.Color.Black;
                 positionCell.Font.Italic = false;
                 positionCell.Font.Bold = false;
+
+                positionPrizeCell.Text = "";
+                positionPrizeCell.ForeColor = System.Drawing.Color.Black;
+                positionPrizeCell.Font.Italic = false;
+                positionPrizeCell.Font.Bold = false;
+
             }
 
-            TotalBonusCell.Text = "&nbsp;Total Bonus: ";
+            TotalPrizePointsCell.Text = "&nbsp;Total Prize Points: ";
         }
 
         private Position GetPosition(int indexPosition)
@@ -65,10 +74,22 @@ namespace RestaurantGame
             return GetPositionCell(position);
         }
 
+        private TableCell GetPositionPrizeCell(int positionIndex)
+        {
+            var position = GetPosition(positionIndex);
+            return GetPositionPrizeCell(position);
+        }
+
         private TableCell GetCurrentPositionCell()
         {
             var currentPosition = GetCurrentPosition();
             return GetPositionCell(currentPosition);
+        }
+
+        private TableCell GetCurrentPositionPrizeCell()
+        {
+            var currentPosition = GetCurrentPosition();
+            return GetPositionPrizeCell(currentPosition);
         }
 
         private TableCell GetPositionCell(Position position)
@@ -98,7 +119,35 @@ namespace RestaurantGame
                 default:
                     return null;
             }
+        }
 
+        private TableCell GetPositionPrizeCell(Position position)
+        {
+            switch (position.JobTitle)
+            {
+                case RestaurantPosition.Manager:
+                    return ManagerPrizeCell;
+                case RestaurantPosition.HeadChef:
+                    return HeadChefPrizeCell;
+                case RestaurantPosition.Cook:
+                    return CookPrizeCell;
+                case RestaurantPosition.Baker:
+                    return BakerPrizeCell;
+                case RestaurantPosition.Waiter1:
+                    return Waiter1PrizeCell;
+                case RestaurantPosition.Waiter2:
+                    return Waiter2PrizeCell;
+                case RestaurantPosition.Waiter3:
+                    return Waiter3PrizeCell;
+                case RestaurantPosition.Host:
+                    return HostPrizeCell;
+                case RestaurantPosition.Bartender:
+                    return BartenderPrizeCell;
+                case RestaurantPosition.Dishwasher:
+                    return DishwasherPrizeCell;
+                default:
+                    return null;
+            }
         }
     }
 }

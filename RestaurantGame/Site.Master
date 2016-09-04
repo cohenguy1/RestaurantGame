@@ -64,30 +64,31 @@
 
         .rating-star-block {
             height: 40px;
-            width: 450px;
+            width: 550px;
             display: inline-block;
             text-align: center;
-            margin-left: 60px;
+            margin-left: 30px;
         }
 
-            .rating-star-block .star {
-                color: rgba(0,0,0,0);
-                display: inline-block;
-                height: 32px;
-                overflow: hidden;
-                text-indent: -999em;
-                width: 32px;
-            }
+        .rating-star-block .star {
+            color: rgba(0,0,0,0);
+            display: inline-block;
+            height: 32px;
+            overflow: hidden;
+            text-indent: -999em;
+            width: 32px;
+        }
 
-            .rating-star-block .ratingLabel {
-                display: inline-block;
-                height: 32px;
-                color: black;
-                overflow: hidden;
-                font-size: xx-large;
-                margin-left: 10px;
-                font-weight: bold;
-            }
+        .rating-star-block .ratingLabel {
+            display: inline-block;
+            height: 32px;
+            color: black;
+            overflow: hidden;
+            font-size: x-large;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
 
         a {
             color: #005782;
@@ -158,7 +159,7 @@
             currentRating = 0;
             for (var i = 0; i < stars.length; i++) {
                 var child = stars[i];
-                if (child.classList.contains("selected")) {
+                if (child.id.toString().startsWith("star") && child.classList.contains("selected")) {
                     currentRating++;
                 }
             }
@@ -166,9 +167,14 @@
             var ratingLbl = document.getElementById('ratingLbl');
             ratingLbl.innerHTML = currentRating.toString() + "/10";
 
-            var v = $(this).attr('rating');
-            var newScore = 0;
-            var updateP = "#" + $(this).parent().attr('id') + ' .CurrentScore';
+            var ratingIndication = document.getElementById('ratingIndication');
+            if (currentRating.toString() == "1") {
+                ratingIndication.innerHTML = "Horrible";
+            } else if (currentRating.toString() == "10") {
+                ratingIndication.innerHTML = "Great";
+            } else {
+                ratingIndication.innerHTML = "";
+            }
         });
     });
 

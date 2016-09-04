@@ -22,13 +22,22 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.TextBox feedbackTxtBox;
         
         /// <summary>
-        /// Bonus control.
+        /// TotalPrizePointsLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Bonus;
+        protected global::System.Web.UI.WebControls.Label TotalPrizePointsLbl;
+        
+        /// <summary>
+        /// BonusLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label BonusLbl;
         
         /// <summary>
         /// rewardBtn control.

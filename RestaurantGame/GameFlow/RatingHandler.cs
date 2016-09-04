@@ -77,6 +77,13 @@ namespace RestaurantGame
                 return;
             }
 
+            string reason = reasonTxtBox.Text;
+            if (string.IsNullOrEmpty(reason.Trim()))
+            {
+                Alert.Show("Please explain your rating selection in the text box.");
+                return;
+            }
+
             int agentRating = int.Parse(userRating);
 
             SaveRatingToDB(agentRating);
@@ -97,10 +104,10 @@ namespace RestaurantGame
                 sqlConnection1.Open();
 
                 using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserRatings (UserId, AdviserRating, Position1Rank, Position2Rank, " +
-                    "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank, TotalBonus, " +
+                    "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank, TotalPrizePoints, " +
                     " InstructionsTime, AskPosition, VectorNum, Reason) " +
                     " VALUES (@UserId, @AdviserRating, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
-                    "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank, @TotalBonus, " +
+                    "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank, @TotalPrizePoints, " +
                     "@InstructionsTime, @AskPosition, @VectorNum, @Reason)"))
                 {
                     cmd.CommandType = CommandType.Text;
@@ -117,8 +124,8 @@ namespace RestaurantGame
                     cmd.Parameters.AddWithValue("@Position8Rank", GetChosenPositionToInsertToDb(8));
                     cmd.Parameters.AddWithValue("@Position9Rank", GetChosenPositionToInsertToDb(9));
                     cmd.Parameters.AddWithValue("@Position10Rank", GetChosenPositionToInsertToDb(10));
-                    cmd.Parameters.AddWithValue("@TotalBonus", Common.GetTotalBonus(Positions));
-                    cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 3));
+                    cmd.Parameters.AddWithValue("@TotalPrizePoints", Common.GetTotalPrizePoints(Positions));
+                    cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 2));
                     cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
                     cmd.Parameters.AddWithValue("@VectorNum", VectorNum);
                     cmd.Parameters.AddWithValue("@Reason", reasonTxtBox.Text);

@@ -84,12 +84,23 @@ namespace RestaurantGame
                     prevPositionCell.ForeColor = System.Drawing.Color.Blue;
                     prevPositionCell.Font.Bold = false;
                     prevPositionCell.Font.Italic = true;
+
+                    var prevPositionPrizeCell = GetPositionPrizeCell(currentPositionNumber - 1);
+                    prevPositionPrizeCell.ForeColor = System.Drawing.Color.Blue;
+                    prevPositionPrizeCell.Font.Bold = false;
+                    prevPositionPrizeCell.Font.Italic = true;
+
                 }
             }
 
             var positionCell = GetCurrentPositionCell();
             positionCell.ForeColor = System.Drawing.Color.Green;
             positionCell.Font.Bold = true;
+
+            var positionPrizeCell = GetCurrentPositionPrizeCell();
+            positionPrizeCell.ForeColor = System.Drawing.Color.Green;
+            positionPrizeCell.Font.Bold = true;
+
         }
 
         protected void TimerGame_Tick(object sender, EventArgs e)
@@ -173,14 +184,14 @@ namespace RestaurantGame
             PositionSummaryLbl1.Visible = true;
             PositionSummaryLbl2.Visible = true;
             PositionSummaryLbl3.Visible = true;
-            BonusLbl1.Visible = true;
-            BonusLbl2.Visible = true;
-            BonusLbl3.Visible = true;
+            PrizePointsLbl1.Visible = true;
+            PrizePointsLbl2.Visible = true;
+            PrizePointsLbl3.Visible = true;
             SummaryNextLbl.Visible = true;
             btnNextToUniform.Visible = true;
 
             PositionSummaryLbl2.Text = CurrentCandidate.CandidateRank.ToString();
-            BonusLbl2.Text = Math.Round((11 - CurrentCandidate.CandidateRank) * 0.2, 2).ToString() + "\u00A2";
+            PrizePointsLbl2.Text = (110 - CurrentCandidate.CandidateRank * 10).ToString();
             SummaryNextLbl.Text = "<br /><br />Press 'Next' to pick uniform for the " + GetCurrentJobTitle() + ".<br />";
         }
 
@@ -251,8 +262,8 @@ namespace RestaurantGame
 
             AcceptedCandidates[CurrentPositionNumber] = currentPosition.ChosenCandidate.CandidateRank;
 
-            double totalBonus = Common.GetTotalBonus(Positions);
-            UpdatePositionsTable(currentPosition, totalBonus);
+            int totalPrizePoints = Common.GetTotalPrizePoints(Positions);
+            UpdatePositionsTable(currentPosition, totalPrizePoints);
         }
 
         protected void btnNextToUniform_Click(object sender, EventArgs e)
@@ -261,9 +272,9 @@ namespace RestaurantGame
             PositionSummaryLbl1.Visible = false;
             PositionSummaryLbl2.Visible = false;
             PositionSummaryLbl3.Visible = false;
-            BonusLbl1.Visible = false;
-            BonusLbl2.Visible = false;
-            BonusLbl3.Visible = false;
+            PrizePointsLbl1.Visible = false;
+            PrizePointsLbl2.Visible = false;
+            PrizePointsLbl3.Visible = false;
             SummaryNextLbl.Visible = false;
             btnNextToUniform.Visible = false;
             PickUniform();

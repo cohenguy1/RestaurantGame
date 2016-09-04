@@ -18,11 +18,19 @@
                             </center>
                             <br />
                             <br />
+                            &nbsp;Total Prize Points won:
+                            <br />
+                            <br />
+                            <center>
+                            <asp:Label ID="TotalPrizePointsLbl" runat="server" Font-Bold="true" ForeColor="Green" Font-Size="Larger"></asp:Label>
+                            </center>
+                            <br />
+                            <br />
                             &nbsp;Your bonus is:
                             <br />
                             <br />
                             <center>
-                            <asp:Label ID="Bonus" runat="server" Font-Bold="true" ForeColor="Blue" Font-Size="Larger"></asp:Label>
+                            <asp:Label ID="BonusLbl" runat="server" Font-Bold="true" ForeColor="Blue" Font-Size="Larger"></asp:Label>
                             </center>
                             <br />
                             <br />

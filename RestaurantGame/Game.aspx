@@ -36,9 +36,9 @@
                     <asp:Label ID="PositionSummaryLbl1" runat="server" Font-Size="Large" Visible="false" Text="<br />The worker you hired has an absolute rank of&nbsp;"></asp:Label>
                     <asp:Label ID="PositionSummaryLbl2" runat="server" Font-Size="X-Large" Visible="false" ForeColor="Green" Font-Bold="true"></asp:Label>
                     <asp:Label ID="PositionSummaryLbl3" runat="server" Font-Size="Large" Visible="false" Text="."></asp:Label>
-                    <asp:Label ID="BonusLbl1" runat="server" Font-Size="Large" Visible="false" Text="<br /><br />Bonus added:&nbsp;"></asp:Label>
-                    <asp:Label ID="BonusLbl2" runat="server" Font-Size="X-Large" Visible="false" ForeColor="Green" Font-Bold="true"></asp:Label>
-                    <asp:Label ID="BonusLbl3" runat="server" Font-Size="Large" Visible="false" Text="."></asp:Label>
+                    <asp:Label ID="PrizePointsLbl1" runat="server" Font-Size="Large" Visible="false" Text="<br /><br />Prize points received:&nbsp;"></asp:Label>
+                    <asp:Label ID="PrizePointsLbl2" runat="server" Font-Size="X-Large" Visible="false" ForeColor="Green" Font-Bold="true"></asp:Label>
+                    <asp:Label ID="PrizePointsLbl3" runat="server" Font-Size="Large" Visible="false" Text="."></asp:Label>
                     <asp:Label ID="SummaryNextLbl" runat="server" Visible="false"></asp:Label>
                     <br />
                     <asp:Button ID="btnNextToUniform" runat="server" Visible="false" Text="Next" OnClick="btnNextToUniform_Click" />
@@ -75,24 +75,24 @@
                                 <br />
                                 <br />
 
-                                <div>
-                                    <div class="rating-star-block" id='rating-star-block'>
-                                        <div class="star outline" href="#" rating="1" title="rate 1">rate 1</div>
-                                        <div class="star outline" href="#" rating="2" title="rate 2">rate 2</div>
-                                        <div class="star outline" href="#" rating="3" title="rate 3">rate 3</div>
-                                        <div class="star outline" href="#" rating="4" title="rate 4">rate 4</div>
-                                        <div class="star outline" href="#" rating="5" title="rate 5">rate 5</div>
-                                        <div class="star outline" href="#" rating="6" title="rate 6">rate 6</div>
-                                        <div class="star outline" href="#" rating="7" title="rate 7">rate 7</div>
-                                        <div class="star outline" href="#" rating="8" title="rate 8">rate 8</div>
-                                        <div class="star outline" href="#" rating="9" title="rate 9">rate 9</div>
-                                        <div class="star outline" href="#" rating="10" title="rate 10">rate 10</div>
-                                        <div class="ratingLabel" id="ratingLbl"></div>
-                                    </div>
+                                <div class="rating-star-block" id='rating-star-block'>
+                                    <div class="ratingLabel" id="ratingIndication"></div>
+                                    <div class="star outline" href="#" rating="1" title="rate 1" id="star1">rate 1</div>
+                                    <div class="star outline" href="#" rating="2" title="rate 2" id="star2">rate 2</div>
+                                    <div class="star outline" href="#" rating="3" title="rate 3" id="star3">rate 3</div>
+                                    <div class="star outline" href="#" rating="4" title="rate 4" id="star4">rate 4</div>
+                                    <div class="star outline" href="#" rating="5" title="rate 5" id="star5">rate 5</div>
+                                    <div class="star outline" href="#" rating="6" title="rate 6" id="star6">rate 6</div>
+                                    <div class="star outline" href="#" rating="7" title="rate 7" id="star7">rate 7</div>
+                                    <div class="star outline" href="#" rating="8" title="rate 8" id="star8">rate 8</div>
+                                    <div class="star outline" href="#" rating="9" title="rate 9" id="star9">rate 9</div>
+                                    <div class="star outline" href="#" rating="10" title="rate 10" id="star10">rate 10</div>
+                                    <div class="ratingLabel" id="ratingLbl"></div>
                                 </div>
 
                                 <asp:HiddenField ID="ratingHdnValue" Value="0" runat="server" />
 
+                                <br />
                                 &nbsp;Please explain why you rated the HR executive as you did:
                             <br />
                                 <br />
@@ -149,40 +149,51 @@
             GridLines="Both"
             runat="server">
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="cell1" Width="165px" HorizontalAlign="Left" Text="&nbsp;Restaurant Positions" Style="color: blue;" Font-Bold="true"></asp:TableCell>
+                <asp:TableCell ID="cell1" Width="110px" HorizontalAlign="Left" Text="&nbsp;Positions" Style="color: blue;" Font-Bold="true"></asp:TableCell>
+                <asp:TableCell ID="cell2" Width="60px" HorizontalAlign="Center" Text="&nbsp;Prize Points" Style="color: blue;" Font-Bold="true"></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
                 <asp:TableCell ID="ManagerCell" HorizontalAlign="Left" Text="&nbsp;Manager:"></asp:TableCell>
+                <asp:TableCell ID="ManagerPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
                 <asp:TableCell ID="HeadChefCell" HorizontalAlign="Left" Text="&nbsp;Head Chef:"></asp:TableCell>
+                <asp:TableCell ID="HeadChefPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
                 <asp:TableCell ID="CookCell" HorizontalAlign="Left" Text="&nbsp;Cook:"></asp:TableCell>
+                <asp:TableCell ID="CookPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
                 <asp:TableCell ID="BakerCell" HorizontalAlign="Left" Text="&nbsp;Baker:"></asp:TableCell>
+                <asp:TableCell ID="BakerPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
                 <asp:TableCell ID="DishwasherCell" HorizontalAlign="Left" Text="&nbsp;Dishwasher:"></asp:TableCell>
+                <asp:TableCell ID="DishwasherPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="Waiter1Cell" Width="120px" HorizontalAlign="Left" Text="&nbsp;Waiter 1:"></asp:TableCell>
+                <asp:TableCell ID="Waiter1Cell" HorizontalAlign="Left" Text="&nbsp;Waiter 1:"></asp:TableCell>
+                <asp:TableCell ID="Waiter1PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
                 <asp:TableCell ID="Waiter2Cell" HorizontalAlign="Left" Text="&nbsp;Waiter 2:"></asp:TableCell>
+                <asp:TableCell ID="Waiter2PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
                 <asp:TableCell ID="Waiter3Cell" HorizontalAlign="Left" Text="&nbsp;Waiter 3:"></asp:TableCell>
+                <asp:TableCell ID="Waiter3PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
                 <asp:TableCell ID="HostCell" HorizontalAlign="Left" Text="&nbsp;Host:"></asp:TableCell>
+                <asp:TableCell ID="HostPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
                 <asp:TableCell ID="BartenderCell" HorizontalAlign="Left" Text="&nbsp;Bartender:"></asp:TableCell>
+                <asp:TableCell ID="BartenderPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="TotalBonusCell" Font-Size="Larger" Font-Bold="true" ForeColor="Purple" HorizontalAlign="Left" Text="&nbsp;Total Bonus:"></asp:TableCell>
+                <asp:TableCell ID="TotalPrizePointsCell" ColumnSpan="2" Font-Size="Medium" Font-Bold="true" ForeColor="Purple" HorizontalAlign="Left" Text="&nbsp;Total Prize Points:"></asp:TableCell>
             </asp:TableRow>
 
         </asp:Table>
@@ -198,7 +209,7 @@
             var savedRank = 0;
             for (var i = 0; i < stars.length; i++) {
                 var child = stars[i];
-                if (child.classList.contains("selected")) {
+                if (child.id.toString().startsWith("star") && child.classList.contains("selected")) {
                     savedRank++;
                 }
             }

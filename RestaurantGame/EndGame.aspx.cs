@@ -14,12 +14,19 @@ namespace RestaurantGame
             {
                 GameStopwatch.Stop();
                 
-                double bonus = Common.GetTotalBonus(Positions);
+                int prizePoints = Common.GetTotalPrizePoints(Positions);
 
-                Bonus.Text = bonus.ToString() + " cents";
+                TotalPrizePointsLbl.Text = prizePoints.ToString("");
+
+                BonusLbl.Text = Math.Round(prizePoints / 50.0, 2).ToString("0.0") + " cents";
 
                 dbHandler.UpdateTimesTable(GameState.EndGame);
             }
+        }
+
+        private double GetBonus()
+        {
+            return Math.Round(Common.GetTotalPrizePoints(Positions) / 50.0, 2);
         }
 
         protected void rewardBtn_Click(object sender, EventArgs e)
@@ -35,7 +42,7 @@ namespace RestaurantGame
             data.Add("workerId", workerId);
             data.Add("hitId", (string)Session["hitId"]);
 
-            double bonusAmount = Math.Round(Common.GetTotalBonus(Positions), 2);
+            double bonusAmount = GetBonus();
             decimal bonusDecimal = Convert.ToDecimal(bonusAmount);
 
             SendFeedback(bonusAmount);

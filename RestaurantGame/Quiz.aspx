@@ -35,7 +35,7 @@
                 </td>
             </tr>
             <tr>
-                <td>What is the <b>absolute ranking</b> of the candidate that arrives last (14 candidates already interviewed)?
+                <td>What is the <b>absolute ranking</b> of the candidate that arrives last (9 candidates already interviewed)?
                         <asp:RadioButtonList ID="rbl3" runat="server">
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>5</asp:ListItem>
@@ -46,14 +46,14 @@
                 </td>
             </tr>
             <tr>
-                <td>Let's suppose you hired a worker with an absolute ranking of 1.
+                <td>Let's suppose you hired a worker with an absolute rank #2.
                             <br />
-                    How many cents will be added to your bonus?
+                    How many prize points you will receive?
                         <asp:RadioButtonList ID="rbl4" runat="server">
-                            <asp:ListItem>0.2 cents</asp:ListItem>
-                            <asp:ListItem>1 cents</asp:ListItem>
-                            <asp:ListItem>2 cents</asp:ListItem>
-                            <asp:ListItem>10 cents</asp:ListItem>
+                            <asp:ListItem>10</asp:ListItem>
+                            <asp:ListItem>20</asp:ListItem>
+                            <asp:ListItem>90</asp:ListItem>
+                            <asp:ListItem>100</asp:ListItem>
                         </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="rfv4" Style="color: Red;" ControlToValidate="rbl4" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                 </td>

@@ -39,7 +39,7 @@
                 <td>
                     <b><span style="font-size: 20px;">You will receive an additional bonus after the game. </span></b>
                     <br />
-                    Each worker hired will get you prize points according to her ranking. #1 ranked will get you 100 points, #2 will get you 90 points, and so on (#10 will get you 10 points). At the end, you will get a cent for each 50 prize points.
+                    <asp:Label ID="backgroundText3" runat="server" Text="Each worker hired will get you prize points according to his ranking. #1 ranked will get you 100 points, #2 will get you 90 points, and so on (#10 will get you 10 points). At the end, you will get a cent for each 50 prize points."></asp:Label>
                 </td>
             </tr>
             <tr>
