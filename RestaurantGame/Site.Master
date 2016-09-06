@@ -64,7 +64,7 @@
 
         .rating-star-block {
             height: 40px;
-            width: 550px;
+            width: 600px;
             display: inline-block;
             text-align: center;
             margin-left: 30px;
@@ -164,17 +164,8 @@
                 }
             }
 
-            var ratingLbl = document.getElementById('ratingLbl');
-            ratingLbl.innerHTML = currentRating.toString() + "/10";
-
-            var ratingIndication = document.getElementById('ratingIndication');
-            if (currentRating.toString() == "1") {
-                ratingIndication.innerHTML = "Horrible";
-            } else if (currentRating.toString() == "10") {
-                ratingIndication.innerHTML = "Great";
-            } else {
-                ratingIndication.innerHTML = "";
-            }
+            //var ratingLbl = document.getElementById('ratingLbl');
+            //ratingLbl.innerHTML = currentRating.toString() + "/10";
         });
     });
 

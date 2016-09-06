@@ -16,7 +16,7 @@
                 <td>You have decided to open up a restaurant.</td>
             </tr>
             <tr>
-                <td>In this game you and your Human Resource (HR) executive are in charge of hiring people for 10 positions in the restaurant. The HR executive will be doing the interviewing and hiring and you will choose the uniform for each position.</td>
+                <td>In this game you and your Human Resource (HR) executive are in charge of hiring employees for 10 positions in the restaurant. The HR executive will be doing the interviewing and hiring and you will choose the uniform for each position.</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -39,7 +39,7 @@
                 <td>
                     <b><span style="font-size: 20px;">You will receive an additional bonus after the game. </span></b>
                     <br />
-                    <asp:Label ID="backgroundText3" runat="server" Text="Each worker hired will get you prize points according to his ranking. #1 ranked will get you 100 points, #2 will get you 90 points, and so on (#10 will get you 10 points). At the end, you will get a cent for each 50 prize points."></asp:Label>
+                    <asp:Label ID="backgroundText3" runat="server" Text="Each worker hired will get you prize points according to his ranking. #1 ranked will get you 100 points, #2 will get you 90 points, and so on (#10 will get you 10 points). At the end, you will get a cent for each 25 prize points."></asp:Label>
                 </td>
             </tr>
             <tr>

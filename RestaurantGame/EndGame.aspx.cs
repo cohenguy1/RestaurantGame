@@ -8,6 +8,8 @@ namespace RestaurantGame
 {
     public partial class EndGame : System.Web.UI.Page
     {
+        public const double PointsPerCent = 25;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -18,7 +20,7 @@ namespace RestaurantGame
 
                 TotalPrizePointsLbl.Text = prizePoints.ToString("");
 
-                BonusLbl.Text = Math.Round(prizePoints / 50.0, 2).ToString("0.0") + " cents";
+                BonusLbl.Text = Math.Round(prizePoints / PointsPerCent, 2).ToString("0.0") + " cents";
 
                 dbHandler.UpdateTimesTable(GameState.EndGame);
             }
@@ -26,7 +28,9 @@ namespace RestaurantGame
 
         private double GetBonus()
         {
-            return Math.Round(Common.GetTotalPrizePoints(Positions) / 50.0, 2);
+            var dollars = Common.GetTotalPrizePoints(Positions) / PointsPerCent;
+            var cents = dollars / 100;
+            return Math.Round(cents, 2);
         }
 
         protected void rewardBtn_Click(object sender, EventArgs e)
@@ -92,13 +96,15 @@ namespace RestaurantGame
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserFeedback (UserId, Feedback, TotalTime, Bonus) VALUES (@UserId, @Feedback, @TotalTime, @Bonus)"))
+                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserFeedback (UserId, Feedback, TotalTime, TotalPrizePoints, Bonus) " + 
+                        "VALUES (@UserId, @Feedback, @TotalTime, @TotalPrizePoints, @Bonus)"))
                     {
                         cmd.CommandType = CommandType.Text;
                         cmd.Connection = sqlConnection1;
                         cmd.Parameters.AddWithValue("@UserId", UserId);
                         cmd.Parameters.AddWithValue("@Feedback", feedback);
                         cmd.Parameters.AddWithValue("@TotalTime", Math.Round(GameStopwatch.Elapsed.TotalMinutes, 1));
+                        cmd.Parameters.AddWithValue("@TotalPrizePoints", Common.GetTotalPrizePoints(Positions));
                         cmd.Parameters.AddWithValue("@Bonus", bonus);
                         sqlConnection1.Open();
                         cmd.ExecuteNonQuery();

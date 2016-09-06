@@ -219,6 +219,7 @@
     </Compile>
     <Compile Include="Enums\AskPositionHeuristic.cs" />
     <Compile Include="Enums\GameState.cs" />
+    <Compile Include="Enums\TableColumnType.cs" />
     <Compile Include="Game.aspx.cs">
       <DependentUpon>Game.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

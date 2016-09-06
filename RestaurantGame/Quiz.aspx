@@ -29,31 +29,31 @@
                             <asp:ListItem>1</asp:ListItem>
                             <asp:ListItem>5</asp:ListItem>
                             <asp:ListItem>10</asp:ListItem>
-                            <asp:ListItem>Can be every ranking in range 1-10</asp:ListItem>
+                            <asp:ListItem>Can be any ranking in range 1-10</asp:ListItem>
                         </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="rfv2" Style="color: Red;" ControlToValidate="rbl2" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td>What is the <b>absolute ranking</b> of the candidate that arrives last (9 candidates already interviewed)?
-                        <asp:RadioButtonList ID="rbl3" runat="server">
-                            <asp:ListItem>1</asp:ListItem>
-                            <asp:ListItem>5</asp:ListItem>
-                            <asp:ListItem>10</asp:ListItem>
-                            <asp:ListItem>Can be every ranking in range 1-10</asp:ListItem>
-                        </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator ID="rfv3" Style="color: Red;" ControlToValidate="rbl3" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
                 <td>Let's suppose you hired a worker with an absolute rank #2.
                             <br />
                     How many prize points you will receive?
-                        <asp:RadioButtonList ID="rbl4" runat="server">
+                        <asp:RadioButtonList ID="rbl3" runat="server">
                             <asp:ListItem>10</asp:ListItem>
                             <asp:ListItem>20</asp:ListItem>
                             <asp:ListItem>90</asp:ListItem>
                             <asp:ListItem>100</asp:ListItem>
+                        </asp:RadioButtonList>
+                    <asp:RequiredFieldValidator ID="rfv3" Style="color: Red;" ControlToValidate="rbl3" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>Assuming you have managed to accumulate 1000 prize points. What will be your bonus?
+                        <asp:RadioButtonList ID="rbl4" runat="server">
+                            <asp:ListItem>10 cents</asp:ListItem>
+                            <asp:ListItem>40 cents</asp:ListItem>
+                            <asp:ListItem>25 cents</asp:ListItem>
+                            <asp:ListItem>20 cents</asp:ListItem>
                         </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="rfv4" Style="color: Red;" ControlToValidate="rbl4" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                 </td>

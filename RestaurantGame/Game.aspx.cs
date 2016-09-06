@@ -80,27 +80,11 @@ namespace RestaurantGame
 
                 if (currentPositionNumber > 0)
                 {
-                    var prevPositionCell = GetPositionCell(currentPositionNumber - 1);
-                    prevPositionCell.ForeColor = System.Drawing.Color.Blue;
-                    prevPositionCell.Font.Bold = false;
-                    prevPositionCell.Font.Italic = true;
-
-                    var prevPositionPrizeCell = GetPositionPrizeCell(currentPositionNumber - 1);
-                    prevPositionPrizeCell.ForeColor = System.Drawing.Color.Blue;
-                    prevPositionPrizeCell.Font.Bold = false;
-                    prevPositionPrizeCell.Font.Italic = true;
-
+                    SetSeenTableRowStyle(currentPositionNumber - 1);
                 }
             }
 
-            var positionCell = GetCurrentPositionCell();
-            positionCell.ForeColor = System.Drawing.Color.Green;
-            positionCell.Font.Bold = true;
-
-            var positionPrizeCell = GetCurrentPositionPrizeCell();
-            positionPrizeCell.ForeColor = System.Drawing.Color.Green;
-            positionPrizeCell.Font.Bold = true;
-
+            SetTableRowStyle(currentPositionNumber);
         }
 
         protected void TimerGame_Tick(object sender, EventArgs e)

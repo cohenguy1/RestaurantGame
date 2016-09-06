@@ -18,11 +18,11 @@ namespace RestaurantGame
 
         private void UpdatePositionsTable(Position currentPosition, int totalPrizePoints)
         {
-            var positionCell = GetPositionCell(currentPosition);
-            positionCell.Text = "&nbsp;" + currentPosition.GetJobTitle() + ": #" + currentPosition.ChosenCandidate.CandidateRank;
-
-            var positionPrizeCell = GetPositionPrizeCell(currentPosition);
+            var positionPrizeCell = GetPrizePointsCell(currentPosition);
             positionPrizeCell.Text = "&nbsp;" + (110 - currentPosition.ChosenCandidate.CandidateRank * 10).ToString();
+
+            var rankCell = GetRankCell(currentPosition);
+            rankCell.Text = "&nbsp;#" + currentPosition.ChosenCandidate.CandidateRank;
 
             TotalPrizePointsCell.Text = "&nbsp;Total Prize Points: " + totalPrizePoints.ToString();
         }
@@ -35,21 +35,77 @@ namespace RestaurantGame
 
                 currentPosition.ChosenCandidate = null;
 
-                var positionCell = GetPositionCell(currentPosition);
-                var positionPrizeCell = GetPositionPrizeCell(currentPosition);
-                positionCell.Text = "&nbsp;" + currentPosition.GetJobTitle() + ": " ;
-                positionCell.ForeColor = System.Drawing.Color.Black;
-                positionCell.Font.Italic = false;
-                positionCell.Font.Bold = false;
-
-                positionPrizeCell.Text = "";
-                positionPrizeCell.ForeColor = System.Drawing.Color.Black;
-                positionPrizeCell.Font.Italic = false;
-                positionPrizeCell.Font.Bold = false;
-
+                ClearTableRowStyle(positionIndex);
             }
 
             TotalPrizePointsCell.Text = "&nbsp;Total Prize Points: ";
+        }
+
+        private void ClearTableRowStyle(int positionIndex)
+        {
+            var position = GetPosition(positionIndex);
+            ClearCellStyle(position, TableColumnType.Position);
+            ClearCellStyle(position, TableColumnType.Rank);
+            ClearCellStyle(position, TableColumnType.PrizePoints);
+        }
+
+        private void SetSeenTableRowStyle(int positionIndex)
+        {
+            var position = GetPosition(positionIndex);
+            SetSeenCellStyle(position, TableColumnType.Position);
+            SetSeenCellStyle(position, TableColumnType.Rank);
+            SetSeenCellStyle(position, TableColumnType.PrizePoints);
+        }
+
+        private void SetTableRowStyle(int positionIndex)
+        {
+            var position = GetPosition(positionIndex);
+            SetTableRowStyle(position, TableColumnType.Position);
+            SetTableRowStyle(position, TableColumnType.Rank);
+            SetTableRowStyle(position, TableColumnType.PrizePoints);
+        }
+
+        private void ClearCellStyle(Position currentPosition, TableColumnType position)
+        {
+            var tableCell = GetTableCell(currentPosition, position);
+
+            if (position != TableColumnType.Position)
+            {
+                tableCell.Text = "";
+            }
+            tableCell.ForeColor = System.Drawing.Color.Black;
+            tableCell.Font.Italic = false;
+            tableCell.Font.Bold = false;
+        }
+
+        private void SetSeenCellStyle(Position currentPosition, TableColumnType position)
+        {
+            var tableCell = GetTableCell(currentPosition, position);
+            tableCell.ForeColor = System.Drawing.Color.Blue;
+            tableCell.Font.Bold = false;
+            tableCell.Font.Italic = true;
+        }
+
+        private void SetTableRowStyle(Position currentPosition, TableColumnType position)
+        {
+            var tableCell = GetTableCell(currentPosition, position);
+            tableCell.ForeColor = System.Drawing.Color.Green;
+            tableCell.Font.Bold = true;
+        }
+
+        private TableCell GetTableCell(Position currentPosition, TableColumnType position)
+        {
+            switch (position)
+            {
+                case TableColumnType.Position:
+                    return GetPositionCell(currentPosition);
+                case TableColumnType.Rank:
+                    return GetRankCell(currentPosition);
+                case TableColumnType.PrizePoints:
+                    return GetPrizePointsCell(currentPosition);
+            }
+
+            return null;
         }
 
         private Position GetPosition(int indexPosition)
@@ -66,30 +122,6 @@ namespace RestaurantGame
         {
             var currentPosition = GetCurrentPosition();
             return currentPosition.GetJobTitle();
-        }
-
-        private TableCell GetPositionCell(int positionIndex)
-        {
-            var position = GetPosition(positionIndex);
-            return GetPositionCell(position);
-        }
-
-        private TableCell GetPositionPrizeCell(int positionIndex)
-        {
-            var position = GetPosition(positionIndex);
-            return GetPositionPrizeCell(position);
-        }
-
-        private TableCell GetCurrentPositionCell()
-        {
-            var currentPosition = GetCurrentPosition();
-            return GetPositionCell(currentPosition);
-        }
-
-        private TableCell GetCurrentPositionPrizeCell()
-        {
-            var currentPosition = GetCurrentPosition();
-            return GetPositionPrizeCell(currentPosition);
         }
 
         private TableCell GetPositionCell(Position position)
@@ -121,7 +153,7 @@ namespace RestaurantGame
             }
         }
 
-        private TableCell GetPositionPrizeCell(Position position)
+        private TableCell GetPrizePointsCell(Position position)
         {
             switch (position.JobTitle)
             {
@@ -145,6 +177,35 @@ namespace RestaurantGame
                     return BartenderPrizeCell;
                 case RestaurantPosition.Dishwasher:
                     return DishwasherPrizeCell;
+                default:
+                    return null;
+            }
+        }
+
+        private TableCell GetRankCell(Position position)
+        {
+            switch (position.JobTitle)
+            {
+                case RestaurantPosition.Manager:
+                    return ManagerRankCell;
+                case RestaurantPosition.HeadChef:
+                    return HeadChefRankCell;
+                case RestaurantPosition.Cook:
+                    return CookRankCell;
+                case RestaurantPosition.Baker:
+                    return BakerRankCell;
+                case RestaurantPosition.Waiter1:
+                    return Waiter1RankCell;
+                case RestaurantPosition.Waiter2:
+                    return Waiter2RankCell;
+                case RestaurantPosition.Waiter3:
+                    return Waiter3RankCell;
+                case RestaurantPosition.Host:
+                    return HostRankCell;
+                case RestaurantPosition.Bartender:
+                    return BartenderRankCell;
+                case RestaurantPosition.Dishwasher:
+                    return DishwasherRankCell;
                 default:
                     return null;
             }
