@@ -18,6 +18,8 @@ namespace RestaurantGame
 
             if (isFriend)
             {
+                VectorNum = 6;
+                return AskPositionHeuristic.MonteCarlo;
                 Random ran = new Random();
                 int randomAsk = ran.Next(5);
 

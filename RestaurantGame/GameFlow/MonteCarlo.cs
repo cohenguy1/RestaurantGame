@@ -13,6 +13,13 @@ namespace RestaurantGame
 
         public bool ShouldAsk(int[] accepted, int stoppingDecision, Random random)
         {
+            if (AlreadyPerformingMonteCarlo)
+            {
+                return false;
+            }
+
+            AlreadyPerformingMonteCarlo = true;
+
             var positionCandidates = GenerateCandidatesForPosition();
             var candidatesByNow = new List<Candidate>();
 
@@ -67,6 +74,8 @@ namespace RestaurantGame
                     foundBetter = true;
                 }
             }
+
+            AlreadyPerformingMonteCarlo = false;
 
             return !foundBetter;
         }

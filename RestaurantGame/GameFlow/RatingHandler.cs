@@ -63,13 +63,6 @@ namespace RestaurantGame
             
             if (AskPosition == AskPositionHeuristic.MonteCarlo)
             {
-                if (AlreadyPerformingMonteCarlo)
-                {
-                    return false;
-                }
-
-                AlreadyPerformingMonteCarlo = true;
-
                 int[] accepted = new int[10];
                 var stoppingPosition = -1;
 
@@ -95,8 +88,6 @@ namespace RestaurantGame
                 }
 
                 bool shouldAsk = ShouldAsk(accepted, stoppingPosition, new Random());
-
-                AlreadyPerformingMonteCarlo = false;
 
                 return shouldAsk;
             }
