@@ -234,6 +234,9 @@
     <Compile Include="BrowserProblem.aspx.designer.cs">
       <DependentUpon>BrowserProblem.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GameFlow\MonteCarlo.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="InstructionsPage.aspx.cs">
       <DependentUpon>InstructionsPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

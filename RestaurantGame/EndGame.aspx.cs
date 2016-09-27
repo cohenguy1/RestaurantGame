@@ -73,6 +73,9 @@ namespace RestaurantGame
                     nextAskPosition = AskPositionHeuristic.Optimal.ToString();
                     break;
                 case AskPositionHeuristic.Optimal:
+                    nextAskPosition = AskPositionHeuristic.MonteCarlo.ToString();
+                    break;
+                case AskPositionHeuristic.MonteCarlo:
                     nextAskPosition = AskPositionHeuristic.Last.ToString();
                     break;
                 case AskPositionHeuristic.Last:

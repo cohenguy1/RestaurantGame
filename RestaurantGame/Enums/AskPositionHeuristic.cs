@@ -5,6 +5,7 @@
         First,
         Last,
         Random,
-        Optimal
+        Optimal,
+        MonteCarlo
     }
 }

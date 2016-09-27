@@ -55,7 +55,7 @@ namespace RestaurantGame
 
             CleanCurrentPosition();
 
-            GenerateCandidatesForPosition();
+            PositionCandidates = GenerateCandidatesForPosition();
 
             CurrentPositionStatus = PositionStatus.Initial;
 
@@ -155,12 +155,6 @@ namespace RestaurantGame
         private void PositionSummary()
         {
             TimerGame.Enabled = false;
-
-            if (NeedToAskRating())
-            {
-                dbHandler.UpdateTimesTable(GameState.BeforeRate);
-            }
-
             CurrentPositionStatus = PositionStatus.Initial;
             ImageInterview.Visible = false;
             LabelInterviewing.Visible = false;

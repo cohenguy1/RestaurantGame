@@ -31,5 +31,7 @@
         public const string GameStateStopwatchStr = "GameStateStopwatch";
 
         public const string DbHandlerStr = "DbHandlerStr";
+
+        public const string AlreadyPerformingMonteCarloStr = "AlreadyPerformingMonteCarlo";
     }
 }

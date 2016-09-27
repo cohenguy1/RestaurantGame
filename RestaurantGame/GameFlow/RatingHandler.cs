@@ -17,6 +17,11 @@ namespace RestaurantGame
                 return false;
             }
 
+            if (CurrentPositionNumber == 9)
+            {
+                return true;
+            }
+
             if (AskPosition == AskPositionHeuristic.First)
             {
                 return (CurrentPositionNumber + 1 == 1);
@@ -32,31 +37,71 @@ namespace RestaurantGame
                 return (CurrentPositionNumber + 1 == RandomHuristicAskPosition);
             }
 
-            // AskPosition == Optimal
-            /*
-             * 10 Stopping Value: 10
-             * 9 Stopping Value: 3
-             * 8 Stopping Value: 1
-             * 7 Stopping Value: 1
-             * 6 Stopping Value: 1
-             * 5 Stopping Value: 1
-             * 4 Stopping Value: 1
-             * 3 Stopping Value: 1
-             * 2 Stopping Value: 1
-             * 1 Stopping Value: 1
-             */
-            if (CurrentPositionNumber == 9)
+            if (AskPosition == AskPositionHeuristic.Optimal)
             {
-                return true;
+                // AskPosition == Optimal
+                /*
+                 * 10 Stopping Value: 10
+                 * 9 Stopping Value: 3
+                 * 8 Stopping Value: 1
+                 * 7 Stopping Value: 1
+                 * 6 Stopping Value: 1
+                 * 5 Stopping Value: 1
+                 * 4 Stopping Value: 1
+                 * 3 Stopping Value: 1
+                 * 2 Stopping Value: 1
+                 * 1 Stopping Value: 1
+                 */
+                var acceptedCandidateRank = CurrentCandidate.CandidateRank;
+                if (CurrentPositionNumber == 8)
+                {
+                    return (acceptedCandidateRank <= 3);
+                }
+
+                return (acceptedCandidateRank == 1);
+            }
+            
+            if (AskPosition == AskPositionHeuristic.MonteCarlo)
+            {
+                if (AlreadyPerformingMonteCarlo)
+                {
+                    return false;
+                }
+
+                AlreadyPerformingMonteCarlo = true;
+
+                int[] accepted = new int[10];
+                var stoppingPosition = -1;
+
+                for (var index = 0; index < Positions.Count; index++)
+                {
+                    if (Positions[index].ChosenCandidate != null)
+                    {
+                        accepted[index] = Positions[index].ChosenCandidate.CandidateRank;
+                        stoppingPosition++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                if (stoppingPosition == 0)
+                {
+                    return accepted[0] <= 3;
+                } else if (stoppingPosition == 1)
+                {
+                    return (accepted[0] == 4 && accepted[1] <= 2);
+                }
+
+                bool shouldAsk = ShouldAsk(accepted, stoppingPosition, new Random());
+
+                AlreadyPerformingMonteCarlo = false;
+
+                return shouldAsk;
             }
 
-            var acceptedCandidateRank = CurrentCandidate.CandidateRank;
-            if (CurrentPositionNumber == 8)
-            {
-                return (acceptedCandidateRank <= 3);
-            }
-
-            return (acceptedCandidateRank == 1);
+            return false;
         }
 
         protected void RateAdvisor()

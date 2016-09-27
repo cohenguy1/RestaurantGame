@@ -53,25 +53,6 @@ namespace RestaurantGame.Logic
             return (newCandidateIndex + 1 <= StoppingRule[candidatesByNow.Count]);
         }
 
-        public bool Decide2(List<Candidate> candidatesByNow, Candidate newCandidate)
-        {
-            if (candidatesByNow.Count <= (int)Math.Sqrt(NumberOfCandidates))
-            {
-                return false;
-            }
-
-            if (candidatesByNow.Count == NumberOfCandidates - 1)
-            {
-                return true;
-            }
-
-            var firstSqrtCandidates = candidatesByNow.Where(candidate => candidate.CandidateNumber < Math.Sqrt(NumberOfCandidates));
-
-            var minRank = firstSqrtCandidates.Min(candidate => candidate.CandidateRank);
-
-            return (newCandidate.CandidateRank < minRank);
-        }
-
         public int GetCandidateRelativePosition(List<Candidate> candidatesByNow, Candidate newCandidate)
         {
             int newCandidateIndex = 0;
@@ -116,6 +97,32 @@ namespace RestaurantGame.Logic
             }
 
             return acceptedCandidate;
+        }
+
+        private int InsertNewCandidate(List<Candidate> candidatesByNow, Candidate newCandidate)
+        {
+            int newCandidateIndex = 0;
+            foreach (var candidate in candidatesByNow)
+            {
+                if (candidate.CandidateRank > newCandidate.CandidateRank)
+                {
+                    break;
+                }
+
+                newCandidateIndex++;
+            }
+
+            candidatesByNow.Insert(newCandidateIndex, newCandidate);
+            return newCandidateIndex;
+        }
+
+        public void DetermineCandidateRank(List<Candidate> candidatesByNow, Candidate newCandidate)
+        {
+            int newCandidateIndex = InsertNewCandidate(candidatesByNow, newCandidate);
+
+            var accepted = Decide(candidatesByNow, newCandidateIndex);
+
+            newCandidate.CandidateAccepted = accepted;
         }
     }
 }

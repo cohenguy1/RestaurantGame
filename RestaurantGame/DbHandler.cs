@@ -19,7 +19,7 @@ namespace RestaurantGame
             if (isFriend)
             {
                 Random ran = new Random();
-                int randomAsk = ran.Next(4);
+                int randomAsk = ran.Next(5);
 
                 VectorNum = ran.Next(50) + 1;
                 
@@ -35,6 +35,8 @@ namespace RestaurantGame
                         return AskPositionHeuristic.Random;
                     case 3:
                         return AskPositionHeuristic.Optimal;
+                    case 4:
+                        return AskPositionHeuristic.MonteCarlo;
                     default:
                         return AskPositionHeuristic.First;
                 }
@@ -50,6 +52,12 @@ namespace RestaurantGame
             if (VectorNum != null)
             {
                 return AskPositionHeuristic.Optimal;
+            }
+
+            VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.MonteCarlo);
+            if (VectorNum != null)
+            {
+                return AskPositionHeuristic.MonteCarlo;
             }
 
             VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Last);
@@ -84,22 +92,6 @@ namespace RestaurantGame
 
                     cmd.ExecuteNonQuery();
                 }
-            }
-        }
-        public static string GetConfigKeyByAskPositionHeuristic(AskPositionHeuristic heuristic)
-        {
-            switch (heuristic)
-            {
-                case AskPositionHeuristic.First:
-                    return "FirstPlaceAskRequests";
-                case AskPositionHeuristic.Last:
-                    return "LastPlaceAskRequests";
-                case AskPositionHeuristic.Random:
-                    return "RandomPlaceAskRequests";
-                case AskPositionHeuristic.Optimal:
-                    return "OptimalPlaceAskRequests";
-                default:
-                    return "FirstPlaceAskRequests";
             }
         }
 

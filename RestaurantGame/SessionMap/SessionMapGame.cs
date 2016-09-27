@@ -41,6 +41,19 @@ namespace RestaurantGame
             set { Session[SessionMap.AskForRatingStr] = value; }
         }
 
+        public bool AlreadyPerformingMonteCarlo
+        {
+            get {
+                if (Session[SessionMap.AlreadyPerformingMonteCarloStr] == null)
+                {
+                    return false;
+                }
+
+                return (bool)Session[SessionMap.AlreadyPerformingMonteCarloStr];
+            }
+            set { Session[SessionMap.AlreadyPerformingMonteCarloStr] = value; }
+        }
+
         public int CurrentPositionNumber
         {
             get { return (int)Session[SessionMap.CurrentPositionNumberStr]; }
