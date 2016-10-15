@@ -11,6 +11,8 @@ namespace RestaurantGame
     {
         public const int NumOfVectors = 1000000;
 
+        public const double alpha = 0.45;
+
         public bool ShouldAsk(int[] accepted, int stoppingDecision, Random random)
         {
             if (AlreadyPerformingMonteCarlo)
@@ -26,7 +28,6 @@ namespace RestaurantGame
             double[] exponentialSmoothing = new double[10];
             double[] exponentialSmoothingAccumulated = new double[10];
 
-            var alpha = 0.45;
             for (var positionIndex = 0; positionIndex <= stoppingDecision; positionIndex++)
             {
                 if (positionIndex == 0)
