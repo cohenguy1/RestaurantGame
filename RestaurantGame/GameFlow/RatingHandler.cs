@@ -39,7 +39,7 @@ namespace RestaurantGame
 
             if (AskPosition == AskPositionHeuristic.Optimal)
             {
-                return Optimal.ShouldAsk(CurrentPositionNumber, CurrentCandidate.CandidateRank)
+                return Optimal.ShouldAsk(CurrentPositionNumber, CurrentCandidate.CandidateRank);
             }
             
             if (AskPosition == AskPositionHeuristic.MonteCarlo)
