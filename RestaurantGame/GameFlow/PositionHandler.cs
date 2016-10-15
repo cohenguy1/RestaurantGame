@@ -128,26 +128,26 @@ namespace RestaurantGame
         {
             switch (position.JobTitle)
             {
-                case RestaurantPosition.Manager:
-                    return ManagerCell;
-                case RestaurantPosition.HeadChef:
-                    return HeadChefCell;
-                case RestaurantPosition.Cook:
-                    return CookCell;
-                case RestaurantPosition.Baker:
-                    return BakerCell;
                 case RestaurantPosition.Waiter1:
                     return Waiter1Cell;
                 case RestaurantPosition.Waiter2:
                     return Waiter2Cell;
                 case RestaurantPosition.Waiter3:
                     return Waiter3Cell;
-                case RestaurantPosition.Host:
-                    return HostCell;
-                case RestaurantPosition.Bartender:
-                    return BartenderCell;
-                case RestaurantPosition.Dishwasher:
-                    return DishwasherCell;
+                case RestaurantPosition.Waiter4:
+                    return Waiter4Cell;
+                case RestaurantPosition.Waiter5:
+                    return Waiter5Cell;
+                case RestaurantPosition.Waiter6:
+                    return Waiter6Cell;
+                case RestaurantPosition.Waiter7:
+                    return Waiter7Cell;
+                case RestaurantPosition.Waiter8:
+                    return Waiter8Cell;
+                case RestaurantPosition.Waiter9:
+                    return Waiter9Cell;
+                case RestaurantPosition.Waiter10:
+                    return Waiter10Cell;
                 default:
                     return null;
             }
@@ -157,26 +157,26 @@ namespace RestaurantGame
         {
             switch (position.JobTitle)
             {
-                case RestaurantPosition.Manager:
-                    return ManagerPrizeCell;
-                case RestaurantPosition.HeadChef:
-                    return HeadChefPrizeCell;
-                case RestaurantPosition.Cook:
-                    return CookPrizeCell;
-                case RestaurantPosition.Baker:
-                    return BakerPrizeCell;
                 case RestaurantPosition.Waiter1:
                     return Waiter1PrizeCell;
                 case RestaurantPosition.Waiter2:
                     return Waiter2PrizeCell;
                 case RestaurantPosition.Waiter3:
                     return Waiter3PrizeCell;
-                case RestaurantPosition.Host:
-                    return HostPrizeCell;
-                case RestaurantPosition.Bartender:
-                    return BartenderPrizeCell;
-                case RestaurantPosition.Dishwasher:
-                    return DishwasherPrizeCell;
+                case RestaurantPosition.Waiter4:
+                    return Waiter4PrizeCell;
+                case RestaurantPosition.Waiter5:
+                    return Waiter5PrizeCell;
+                case RestaurantPosition.Waiter6:
+                    return Waiter6PrizeCell;
+                case RestaurantPosition.Waiter7:
+                    return Waiter7PrizeCell;
+                case RestaurantPosition.Waiter8:
+                    return Waiter8PrizeCell;
+                case RestaurantPosition.Waiter9:
+                    return Waiter9PrizeCell;
+                case RestaurantPosition.Waiter10:
+                    return Waiter10PrizeCell;
                 default:
                     return null;
             }
@@ -186,26 +186,26 @@ namespace RestaurantGame
         {
             switch (position.JobTitle)
             {
-                case RestaurantPosition.Manager:
-                    return ManagerRankCell;
-                case RestaurantPosition.HeadChef:
-                    return HeadChefRankCell;
-                case RestaurantPosition.Cook:
-                    return CookRankCell;
-                case RestaurantPosition.Baker:
-                    return BakerRankCell;
                 case RestaurantPosition.Waiter1:
                     return Waiter1RankCell;
                 case RestaurantPosition.Waiter2:
                     return Waiter2RankCell;
                 case RestaurantPosition.Waiter3:
                     return Waiter3RankCell;
-                case RestaurantPosition.Host:
-                    return HostRankCell;
-                case RestaurantPosition.Bartender:
-                    return BartenderRankCell;
-                case RestaurantPosition.Dishwasher:
-                    return DishwasherRankCell;
+                case RestaurantPosition.Waiter4:
+                    return Waiter4RankCell;
+                case RestaurantPosition.Waiter5:
+                    return Waiter5RankCell;
+                case RestaurantPosition.Waiter6:
+                    return Waiter6RankCell;
+                case RestaurantPosition.Waiter7:
+                    return Waiter7RankCell;
+                case RestaurantPosition.Waiter8:
+                    return Waiter8RankCell;
+                case RestaurantPosition.Waiter9:
+                    return Waiter9RankCell;
+                case RestaurantPosition.Waiter10:
+                    return Waiter10RankCell;
                 default:
                     return null;
             }

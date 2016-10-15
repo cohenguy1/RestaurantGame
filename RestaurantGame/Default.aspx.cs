@@ -58,16 +58,16 @@ namespace RestaurantGame
         {
             var positions = new List<Position>();
 
-            positions.Add(new Position(RestaurantPosition.Manager));
-            positions.Add(new Position(RestaurantPosition.HeadChef));
-            positions.Add(new Position(RestaurantPosition.Cook));
-            positions.Add(new Position(RestaurantPosition.Baker));
-            positions.Add(new Position(RestaurantPosition.Dishwasher));
             positions.Add(new Position(RestaurantPosition.Waiter1));
             positions.Add(new Position(RestaurantPosition.Waiter2));
             positions.Add(new Position(RestaurantPosition.Waiter3));
-            positions.Add(new Position(RestaurantPosition.Host));
-            positions.Add(new Position(RestaurantPosition.Bartender));
+            positions.Add(new Position(RestaurantPosition.Waiter4));
+            positions.Add(new Position(RestaurantPosition.Waiter5));
+            positions.Add(new Position(RestaurantPosition.Waiter6));
+            positions.Add(new Position(RestaurantPosition.Waiter7));
+            positions.Add(new Position(RestaurantPosition.Waiter8));
+            positions.Add(new Position(RestaurantPosition.Waiter9));
+            positions.Add(new Position(RestaurantPosition.Waiter10));
 
             Positions = positions;
 

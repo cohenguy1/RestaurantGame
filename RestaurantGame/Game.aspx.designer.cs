@@ -391,141 +391,6 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.TableCell cell3;
         
         /// <summary>
-        /// ManagerCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell ManagerCell;
-        
-        /// <summary>
-        /// ManagerRankCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell ManagerRankCell;
-        
-        /// <summary>
-        /// ManagerPrizeCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell ManagerPrizeCell;
-        
-        /// <summary>
-        /// HeadChefCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell HeadChefCell;
-        
-        /// <summary>
-        /// HeadChefRankCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell HeadChefRankCell;
-        
-        /// <summary>
-        /// HeadChefPrizeCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell HeadChefPrizeCell;
-        
-        /// <summary>
-        /// CookCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell CookCell;
-        
-        /// <summary>
-        /// CookRankCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell CookRankCell;
-        
-        /// <summary>
-        /// CookPrizeCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell CookPrizeCell;
-        
-        /// <summary>
-        /// BakerCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell BakerCell;
-        
-        /// <summary>
-        /// BakerRankCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell BakerRankCell;
-        
-        /// <summary>
-        /// BakerPrizeCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell BakerPrizeCell;
-        
-        /// <summary>
-        /// DishwasherCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell DishwasherCell;
-        
-        /// <summary>
-        /// DishwasherRankCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell DishwasherRankCell;
-        
-        /// <summary>
-        /// DishwasherPrizeCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell DishwasherPrizeCell;
-        
-        /// <summary>
         /// Waiter1Cell control.
         /// </summary>
         /// <remarks>
@@ -607,58 +472,193 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.TableCell Waiter3PrizeCell;
         
         /// <summary>
-        /// HostCell control.
+        /// Waiter4Cell control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell HostCell;
+        protected global::System.Web.UI.WebControls.TableCell Waiter4Cell;
         
         /// <summary>
-        /// HostRankCell control.
+        /// Waiter4RankCell control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell HostRankCell;
+        protected global::System.Web.UI.WebControls.TableCell Waiter4RankCell;
         
         /// <summary>
-        /// HostPrizeCell control.
+        /// Waiter4PrizeCell control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell HostPrizeCell;
+        protected global::System.Web.UI.WebControls.TableCell Waiter4PrizeCell;
         
         /// <summary>
-        /// BartenderCell control.
+        /// Waiter5Cell control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell BartenderCell;
+        protected global::System.Web.UI.WebControls.TableCell Waiter5Cell;
         
         /// <summary>
-        /// BartenderRankCell control.
+        /// Waiter5RankCell control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell BartenderRankCell;
+        protected global::System.Web.UI.WebControls.TableCell Waiter5RankCell;
         
         /// <summary>
-        /// BartenderPrizeCell control.
+        /// Waiter5PrizeCell control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell BartenderPrizeCell;
+        protected global::System.Web.UI.WebControls.TableCell Waiter5PrizeCell;
+        
+        /// <summary>
+        /// Waiter6Cell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter6Cell;
+        
+        /// <summary>
+        /// Waiter6RankCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter6RankCell;
+        
+        /// <summary>
+        /// Waiter6PrizeCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter6PrizeCell;
+        
+        /// <summary>
+        /// Waiter7Cell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter7Cell;
+        
+        /// <summary>
+        /// Waiter7RankCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter7RankCell;
+        
+        /// <summary>
+        /// Waiter7PrizeCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter7PrizeCell;
+        
+        /// <summary>
+        /// Waiter8Cell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter8Cell;
+        
+        /// <summary>
+        /// Waiter8RankCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter8RankCell;
+        
+        /// <summary>
+        /// Waiter8PrizeCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter8PrizeCell;
+        
+        /// <summary>
+        /// Waiter9Cell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter9Cell;
+        
+        /// <summary>
+        /// Waiter9RankCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter9RankCell;
+        
+        /// <summary>
+        /// Waiter9PrizeCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter9PrizeCell;
+        
+        /// <summary>
+        /// Waiter10Cell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter10Cell;
+        
+        /// <summary>
+        /// Waiter10RankCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter10RankCell;
+        
+        /// <summary>
+        /// Waiter10PrizeCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Waiter10PrizeCell;
         
         /// <summary>
         /// TotalPrizePointsCell control.

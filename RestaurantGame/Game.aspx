@@ -154,31 +154,6 @@
                 <asp:TableCell ID="cell3" Width="60px" HorizontalAlign="Center" Text="&nbsp;Prize Points" Style="color: blue;" Font-Bold="true"></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="ManagerCell" HorizontalAlign="Left" Text="&nbsp;Manager"></asp:TableCell>
-                <asp:TableCell ID="ManagerRankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-                <asp:TableCell ID="ManagerPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow Height="35px">
-                <asp:TableCell ID="HeadChefCell" HorizontalAlign="Left" Text="&nbsp;Head Chef"></asp:TableCell>
-                <asp:TableCell ID="HeadChefRankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-                <asp:TableCell ID="HeadChefPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow Height="35px">
-                <asp:TableCell ID="CookCell" HorizontalAlign="Left" Text="&nbsp;Cook"></asp:TableCell>
-                <asp:TableCell ID="CookRankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-                <asp:TableCell ID="CookPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow Height="35px">
-                <asp:TableCell ID="BakerCell" HorizontalAlign="Left" Text="&nbsp;Baker"></asp:TableCell>
-                <asp:TableCell ID="BakerRankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-                <asp:TableCell ID="BakerPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow Height="35px">
-                <asp:TableCell ID="DishwasherCell" HorizontalAlign="Left" Text="&nbsp;Dishwasher"></asp:TableCell>
-                <asp:TableCell ID="DishwasherRankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-                <asp:TableCell ID="DishwasherPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow Height="35px">
                 <asp:TableCell ID="Waiter1Cell" HorizontalAlign="Left" Text="&nbsp;Waiter 1"></asp:TableCell>
                 <asp:TableCell ID="Waiter1RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
                 <asp:TableCell ID="Waiter1PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
@@ -194,14 +169,39 @@
                 <asp:TableCell ID="Waiter3PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="HostCell" HorizontalAlign="Left" Text="&nbsp;Host"></asp:TableCell>
-                <asp:TableCell ID="HostRankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-                <asp:TableCell ID="HostPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+                <asp:TableCell ID="Waiter4Cell" HorizontalAlign="Left" Text="&nbsp;Waiter 4"></asp:TableCell>
+                <asp:TableCell ID="Waiter4RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+                <asp:TableCell ID="Waiter4PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="BartenderCell" HorizontalAlign="Left" Text="&nbsp;Bartender"></asp:TableCell>
-                <asp:TableCell ID="BartenderRankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
-                <asp:TableCell ID="BartenderPrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+                <asp:TableCell ID="Waiter5Cell" HorizontalAlign="Left" Text="&nbsp;Waiter 5"></asp:TableCell>
+                <asp:TableCell ID="Waiter5RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+                <asp:TableCell ID="Waiter5PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow Height="35px">
+                <asp:TableCell ID="Waiter6Cell" HorizontalAlign="Left" Text="&nbsp;Waiter 6"></asp:TableCell>
+                <asp:TableCell ID="Waiter6RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+                <asp:TableCell ID="Waiter6PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow Height="35px">
+                <asp:TableCell ID="Waiter7Cell" HorizontalAlign="Left" Text="&nbsp;Waiter 7"></asp:TableCell>
+                <asp:TableCell ID="Waiter7RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+                <asp:TableCell ID="Waiter7PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow Height="35px">
+                <asp:TableCell ID="Waiter8Cell" HorizontalAlign="Left" Text="&nbsp;Waiter 8"></asp:TableCell>
+                <asp:TableCell ID="Waiter8RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+                <asp:TableCell ID="Waiter8PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow Height="35px">
+                <asp:TableCell ID="Waiter9Cell" HorizontalAlign="Left" Text="&nbsp;Waiter 9"></asp:TableCell>
+                <asp:TableCell ID="Waiter9RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+                <asp:TableCell ID="Waiter9PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow Height="35px">
+                <asp:TableCell ID="Waiter10Cell" HorizontalAlign="Left" Text="&nbsp;Waiter 10"></asp:TableCell>
+                <asp:TableCell ID="Waiter10RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
+                <asp:TableCell ID="Waiter10PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
                 <asp:TableCell ID="TotalPrizePointsCell" ColumnSpan="3" Font-Size="Large" Font-Bold="true" ForeColor="Purple" HorizontalAlign="Left" Text="&nbsp;Total Prize Points:"></asp:TableCell>
