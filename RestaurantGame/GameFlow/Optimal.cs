@@ -19,7 +19,7 @@ namespace RestaurantGame
             {4, 1 },
             {3, 1 },
             {2, 1 },
-            {1, 1 }
+            {1, 1 },
         };
 
         public static bool ShouldAsk(int[] accepted, int stoppingDecision)
@@ -30,7 +30,7 @@ namespace RestaurantGame
 
         public static bool ShouldAsk(int stoppingDecision, int candidateRank)
         {
-            return candidateRank <= minimalRankForAsk[stoppingDecision];
+            return candidateRank <= minimalRankForAsk[stoppingDecision + 1];
         }
     }
 }
