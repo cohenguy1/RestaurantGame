@@ -16,7 +16,7 @@
                 <td>You have decided to open up a restaurant.</td>
             </tr>
             <tr>
-                <td>In this game you and your Human Resource (HR) executive are in charge of hiring 10 10 waiters for the restaurant. The HR executive will be doing the interviewing and hiring and you will choose the uniform for each position.</td>
+                <td>In this game you and your Human Resource (HR) executive are in charge of hiring 10 waiters for the restaurant. The HR executive will be doing the interviewing and hiring and you will choose the uniform for each position.</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>

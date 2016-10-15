@@ -2,8 +2,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2>Game Instructions</h2>
-    <div style="text-align: center; width: 700px; margin: 0 auto;">
-        <table style="text-align: left; width: 700px;" border="1">
+    <div style="text-align: center; width: 750px; margin: 0 auto;">
+        <table style="text-align: left; width: 750px;" border="1">
             <tr>
                 <td>
                     <br />
@@ -11,12 +11,19 @@
                             <br />
                     <br />
                     &nbsp;In the game, the Human Resource executive will choose whether to accept or reject each candidate.
-                            <br />
+                    <br />
                     <br />
                     &nbsp;After a candidate is hired, you will choose the uniform for the position.
-                            <br />
                     <br />
                     <br />
+                    &nbsp;The following image presents the interview of the candidates in the game.
+                    <br />
+                    &nbsp;The HR executive interviews the candidates, but you won't see each interview, only the result of the interviews.
+                    <center>
+                        <img src="Images/InstructionsProceedToGame.png" Width="700px"/>
+                    </center>
+                    <br />
+
                     &nbsp;Press 'Next' to continue.
                             <br />
                     <br />
