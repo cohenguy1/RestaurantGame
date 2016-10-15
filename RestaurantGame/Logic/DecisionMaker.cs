@@ -41,16 +41,22 @@ namespace RestaurantGame.Logic
 
             for (var i = 2; i <= NumberOfCandidates; i++)
             {
-                if (StoppingRule[i] == 0)
+                StoppingRule[i] = Math.Min(NumberOfCandidates, StoppingRule[i] + 1);
+
+                if (i >= 4)
                 {
-                    StoppingRule[i] = 1;
+                    StoppingRule[i] = Math.Min(NumberOfCandidates, StoppingRule[i] + 1);
                 }
             }
         }
 
-        public bool Decide(List<Candidate> candidatesByNow, int newCandidateIndex)
+        public void DetermineCandidateRank(List<Candidate> candidatesByNow, Candidate newCandidate)
         {
-            return (newCandidateIndex + 1 <= StoppingRule[candidatesByNow.Count]);
+            int newCandidateIndex = InsertNewCandidate(candidatesByNow, newCandidate);
+
+            var accepted = Decide(candidatesByNow, newCandidateIndex);
+
+            newCandidate.CandidateAccepted = accepted;
         }
 
         public int GetCandidateRelativePosition(List<Candidate> candidatesByNow, Candidate newCandidate)
@@ -116,13 +122,9 @@ namespace RestaurantGame.Logic
             return newCandidateIndex;
         }
 
-        public void DetermineCandidateRank(List<Candidate> candidatesByNow, Candidate newCandidate)
+        public bool Decide(List<Candidate> candidatesByNow, int newCandidateIndex)
         {
-            int newCandidateIndex = InsertNewCandidate(candidatesByNow, newCandidate);
-
-            var accepted = Decide(candidatesByNow, newCandidateIndex);
-
-            newCandidate.CandidateAccepted = accepted;
+            return (newCandidateIndex + 1 <= StoppingRule[candidatesByNow.Count]);
         }
     }
 }

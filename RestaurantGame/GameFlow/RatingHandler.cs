@@ -60,12 +60,24 @@ namespace RestaurantGame
                     }
                 }
 
+                // calculated offline whether to stop for stopping position 0 & 1
                 if (stoppingPosition == 0)
                 {
                     return accepted[0] <= 3;
-                } else if (stoppingPosition == 1)
+                }
+                else if (stoppingPosition == 1)
                 {
-                    return (accepted[0] == 4 && accepted[1] <= 2);
+                    if (accepted[0] == 4)
+                    {
+                        return accepted[1] <= 3;
+                    }
+                    else if (accepted[0] == 5)
+                    {
+                        return accepted[1] <= 2;
+                    }
+
+                    // accepted[0] >= 6
+                    return false;
                 }
 
                 bool shouldAsk = ShouldAsk(accepted, stoppingPosition, new Random());
