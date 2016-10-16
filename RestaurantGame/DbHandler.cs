@@ -164,7 +164,7 @@ namespace RestaurantGame
                                 lastStarted = DateTime.Parse(result.GetString(1), new CultureInfo("fr-FR", false));
                                 diffFromNow = (DateTime.Now - lastStarted).TotalHours;
 
-                                if (diffFromNow < 1)
+                                if (diffFromNow < 0.5)
                                 {
                                     continue;
                                 }

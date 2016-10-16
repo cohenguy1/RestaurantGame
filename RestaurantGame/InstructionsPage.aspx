@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <img id="InstructionImage" src="Images/Instructions0.png" width="750" height="400" />
+    <img id="InstructionImage" src="Images/Instructions0.png" width="750" height="450" />
 
     <br />
     <br />
