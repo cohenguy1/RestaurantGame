@@ -10,7 +10,7 @@
                     &nbsp;We will now proceed to the real game.
                             <br />
                     <br />
-                    &nbsp;In the game, the Human Resource executive will choose whether to accept or reject each candidate.
+                    &nbsp;Remember, you won't see each interview, only the hired candidate's rank.
                     <br />
                     <br />
                     &nbsp;After a candidate is hired, you will choose the uniform for the position.

@@ -32,20 +32,18 @@ namespace RestaurantGame
             var answer1 = rbl1.SelectedIndex;
             var answer2 = rbl2.SelectedIndex;
             var answer3 = rbl3.SelectedIndex;
-            var answer4 = rbl4.SelectedIndex;
 
-            var correct = (rbl1.SelectedIndex == 0) &&
-                          (rbl2.SelectedIndex == 3) &&
-                          (rbl3.SelectedIndex == 2) &&
-                          (rbl4.SelectedIndex == 1);
+            var correct = (rbl1.SelectedIndex == 1) &&
+                          (rbl2.SelectedIndex == 2) &&
+                          (rbl3.SelectedIndex == 1);
 
             try
             {
                 using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand
-                        ("INSERT INTO Quiz (UserId, TryNumber, Answer1, Answer2, Answer3, Answer4, Correct) " +
-                         "VALUES (@UserId, @TryNumber, @Answer1, @Answer2, @Answer3, @Answer4, @Correct)"))
+                        ("INSERT INTO Quiz (UserId, TryNumber, Answer1, Answer2, Answer3, Correct) " +
+                         "VALUES (@UserId, @TryNumber, @Answer1, @Answer2, @Answer3, @Correct)"))
                     {
                         cmd.CommandType = CommandType.Text;
                         cmd.Connection = sqlConnection1;
@@ -54,7 +52,6 @@ namespace RestaurantGame
                         cmd.Parameters.AddWithValue("@Answer1", answer1);
                         cmd.Parameters.AddWithValue("@Answer2", answer2);
                         cmd.Parameters.AddWithValue("@Answer3", answer3);
-                        cmd.Parameters.AddWithValue("@Answer4", answer4);
                         cmd.Parameters.AddWithValue("@Correct", correct.ToString());
                         sqlConnection1.Open();
                         cmd.ExecuteNonQuery();

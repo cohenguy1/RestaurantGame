@@ -76,24 +76,6 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv3;
         
         /// <summary>
-        /// rbl4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbl4;
-        
-        /// <summary>
-        /// rfv4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv4;
-        
-        /// <summary>
         /// btnNextToProceedToGame control.
         /// </summary>
         /// <remarks>
