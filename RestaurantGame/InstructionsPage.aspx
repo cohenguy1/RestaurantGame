@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <img id="InstructionImage" src="Images/Instructions0.png" width="700" height="400" />
+    <img id="InstructionImage" src="Images/Instructions0.png" width="750" height="400" />
 
     <br />
     <br />
@@ -19,14 +19,14 @@
     <asp:Button ID="continueToQuiz" Text="Continue to Quiz" style="display:none" runat="server" OnClick="btnNextInstruction_Click"/>
     <script type="text/javascript">
         var currentInstruction = 0;
-        var totalInstructions = 19;
+        var lastInstruction = 9;
 
         function updateInstruction() {
             document.getElementById("InstructionImage").src = "Images/Instructions" + currentInstruction.toString() + ".png";
         }
 
         function getCurrentProgress() {
-            return Math.round(currentInstruction * 100 / totalInstructions);
+            return Math.round(currentInstruction * 100 / lastInstruction);
         }
 
         function updateProgressBar() {
@@ -37,7 +37,7 @@
         }
 
         function next() {
-            if (currentInstruction <= totalInstructions) {
+            if (currentInstruction <= lastInstruction) {
                 currentInstruction++;
 
                 updateInstruction();
@@ -45,7 +45,7 @@
                 var prevBtn = document.getElementById("prevBtn");
                 prevBtn.disabled = false;
                 
-                if (currentInstruction == totalInstructions) {
+                if (currentInstruction == lastInstruction) {
                     var nextBtn = document.getElementById("nextBtn");
                     nextBtn.disabled = true;
                     nextBtn.hidden = true;

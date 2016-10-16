@@ -16,12 +16,6 @@
                     &nbsp;After a candidate is hired, you will choose the uniform for the position.
                     <br />
                     <br />
-                    &nbsp;The following image presents the interview of the candidates in the game.
-                    <br />
-                    &nbsp;The HR executive interviews the candidates, but you won't see each interview, only the result of the interviews.
-                    <center>
-                        <img src="Images/InstructionsProceedToGame.png" Width="700px"/>
-                    </center>
                     <br />
 
                     &nbsp;Press 'Next' to continue.
