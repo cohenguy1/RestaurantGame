@@ -3,10 +3,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <h2>Quiz</h2>
-    <div style="text-align: center; width: 640px; margin: 0 auto;">
+    <div style="text-align: center; width: 700px; margin: 0 auto;">
         <h3>Think carefully before you answer, you have only 3 chances to pass the quiz.</h3>
 
-        <table style="text-align: left; width: 640px;" border="1">
+        <table style="text-align: left; width: 700px;" border="1">
             <tr>
                 <td>
                     <asp:Label ID="lblQuiz1" Style="color: Red;" runat="server" Text="Please answer the questions"></asp:Label>
@@ -16,9 +16,9 @@
                 <td>Choose the <font color="red"><b>Incorrect</b></font> sentence:
                         <asp:RadioButtonList ID="rbl1" runat="server">
                             <asp:ListItem>The candidates arrive in a random order</asp:ListItem>
-                            <asp:ListItem>You need to interview all the candidates and then must decide which one to hire</asp:ListItem>
+                            <asp:ListItem>The HR executive needs to interview all the candidates and then must decide which one to hire</asp:ListItem>
                             <asp:ListItem>After rejecting a candidate he cannot be recalled</asp:ListItem>
-                            <asp:ListItem>After each interview you must decide whether to hire or reject the candidate</asp:ListItem>
+                            <asp:ListItem>After each interview the HR executive must decide whether to hire or reject the candidate</asp:ListItem>
                         </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="rfv1" Style="color: Red;" ControlToValidate="rbl1" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                 </td>
