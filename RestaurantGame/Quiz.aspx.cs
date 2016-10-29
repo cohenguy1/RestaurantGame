@@ -17,8 +17,6 @@ namespace RestaurantGame
             if (!IsPostBack)
             {
                 dbHandler.UpdateTimesTable(GameState.Quiz);
-
-                NumOfWrongQuizAnswers = 0;
             }
         }
 
@@ -32,6 +30,12 @@ namespace RestaurantGame
             var answer1 = rbl1.SelectedIndex;
             var answer2 = rbl2.SelectedIndex;
             var answer3 = rbl3.SelectedIndex;
+
+            if (rbl1.SelectedItem == null || rbl2.SelectedItem == null || rbl3.SelectedItem == null)
+            {
+                Alert.Show("You have to answer all the questions!");
+                return;
+            }
 
             var correct = (rbl1.SelectedIndex == 1) &&
                           (rbl2.SelectedIndex == 2) &&
@@ -102,6 +106,11 @@ namespace RestaurantGame
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        protected void btnPrevToInstructions_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("InstructionsPage.aspx");
         }
     }
 }

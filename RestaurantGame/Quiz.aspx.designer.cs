@@ -13,15 +13,6 @@ namespace RestaurantGame {
     public partial class Quiz {
         
         /// <summary>
-        /// lblQuiz1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblQuiz1;
-        
-        /// <summary>
         /// rbl1 control.
         /// </summary>
         /// <remarks>
@@ -29,15 +20,6 @@ namespace RestaurantGame {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rbl1;
-        
-        /// <summary>
-        /// rfv1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv1;
         
         /// <summary>
         /// rbl2 control.
@@ -49,15 +31,6 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.RadioButtonList rbl2;
         
         /// <summary>
-        /// rfv2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv2;
-        
-        /// <summary>
         /// rbl3 control.
         /// </summary>
         /// <remarks>
@@ -67,13 +40,13 @@ namespace RestaurantGame {
         protected global::System.Web.UI.WebControls.RadioButtonList rbl3;
         
         /// <summary>
-        /// rfv3 control.
+        /// btnPrevToInstructions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv3;
+        protected global::System.Web.UI.WebControls.Button btnPrevToInstructions;
         
         /// <summary>
         /// btnNextToProceedToGame control.

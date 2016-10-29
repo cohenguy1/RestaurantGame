@@ -35,6 +35,11 @@ namespace RestaurantGame
             set { Session[SessionMap.AlreadyAskedForRatingStr] = value; }
         }
 
+        public int NumOfWrongQuizAnswers
+        {
+            get { return (int)Session[SessionMap.NumOfWrongQuizAnswersStr]; }
+            set { Session[SessionMap.NumOfWrongQuizAnswersStr] = value; }
+        }
 
         public bool AskForRating
         {

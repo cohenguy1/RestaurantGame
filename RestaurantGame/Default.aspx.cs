@@ -42,6 +42,8 @@ namespace RestaurantGame
                         btnNextToInfo.Enabled = true;
                     }
 
+                    NumOfWrongQuizAnswers = 0;
+
                     dbHandler = new DbHandler();
 
                     GameStateStopwatch = new Stopwatch();

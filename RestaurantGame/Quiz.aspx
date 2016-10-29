@@ -5,11 +5,11 @@
     <h2>Quiz</h2>
     <div style="text-align: center; width: 700px; margin: 0 auto;">
         <h3>Think carefully before you answer, you have only 3 chances to pass the quiz.</h3>
-
+        <br />
         <table style="text-align: left; width: 700px;" border="1">
             <tr>
                 <td>
-                    <asp:Label ID="lblQuiz1" Style="color: Red;" runat="server" Text="Please answer the questions"></asp:Label>
+                    Please answer the questions. You can go back to the instructions by clicking the button below.
                 </td>
             </tr>
             <tr>
@@ -20,7 +20,6 @@
                             <asp:ListItem>After rejecting a candidate he cannot be recalled</asp:ListItem>
                             <asp:ListItem>After each interview the HR executive must decide whether to hire or reject the candidate</asp:ListItem>
                         </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator ID="rfv1" Style="color: Red;" ControlToValidate="rbl1" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
@@ -33,7 +32,6 @@
                             <asp:ListItem>90</asp:ListItem>
                             <asp:ListItem>100</asp:ListItem>
                         </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator ID="rfv2" Style="color: Red;" ControlToValidate="rbl2" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
@@ -44,12 +42,12 @@
                             <asp:ListItem>25 cents</asp:ListItem>
                             <asp:ListItem>20 cents</asp:ListItem>
                         </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator ID="rfv3" Style="color: Red;" ControlToValidate="rbl3" runat="server" ErrorMessage="You have to answer"></asp:RequiredFieldValidator>
                 </td>
             </tr>
         </table>
     </div>
     <br />
+    <asp:Button ID="btnPrevToInstructions" runat="server" Text="Back To Instructions" OnClick="btnPrevToInstructions_Click" />
     <asp:Button ID="btnNextToProceedToGame" runat="server" Text="Next" OnClick="btnNextToProceedToGame_Click" />
 
 </asp:Content>
