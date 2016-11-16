@@ -49,7 +49,7 @@ namespace InvestmentAdviser
 
                 for (var index = 0; index < ScenarioTurns.Count; index++)
                 {
-                    
+                    stoppingPosition = CurrentTurnNumber;    
                 }
 
                 // calculated offline whether to stop for stopping position 0 & 1

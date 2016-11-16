@@ -80,8 +80,6 @@ namespace InvestmentAdviser
             int randHim = rand.Next(2);
             if (randHim == 1)
             {
-                backgroundText.Text = backgroundText.Text.Replace("him", "her");
-                backgroundText2.Text = backgroundText2.Text.Replace(", he", ", she");
                 backgroundText3.Text = backgroundText3.Text.Replace(" his ", " her ");
             }
 

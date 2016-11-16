@@ -13,33 +13,26 @@
     <div style="text-align: center; width: 800px; margin: 0 auto;">
         <table style="text-align: center; max-width: 800px; font-size: large">
             <tr>
-                <td>You have decided to open up a restaurant.</td>
+                <td>You have decided to invest in the stock market.</td>
             </tr>
             <tr>
-                <td>In this game you and your Human Resource (HR) executive are in charge of hiring 10 ScenarioTurns for the restaurant. The HR executive will be doing the interviewing and hiring and you will choose the uniform for each position.</td>
+                <td>In this game you an Investment Adviser wish to gain as much money as possible from these investment</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td>For each position you have 10 candidates, ranked from 1 to 10 (where "1" is the best and "10" is the worst). Your (and the HR executive's) interest is to pick highly 
-                            qualified (as possible) workers for the different positions.<br />
+                <td>You have 20 turns, each turn the adviser invests 100$ on stocks.
                     <br />
-                    <asp:Label ID="backgroundText" runat="server"
-                        Text="When a candidate is interviewed, the HR executive must decide whether to hire him or not."></asp:Label>
-                    <br />
-                    <asp:Label ID="backgroundText2" runat="server"
-                        Text="If the candidate is rejected, he leaves forever and cannot be recalled."></asp:Label>
                     <br />
                     <br />
                 </td>
             </tr>
-
             <tr>
                 <td>
                     <b><span style="font-size: 20px;">You will receive an additional bonus after the game. </span></b>
                     <br />
-                    <asp:Label ID="backgroundText3" runat="server" Text="Each worker hired will get you prize points according to his ranking. #1 ranked will get you 100 points, #2 will get you 90 points, and so on (#10 will get you 10 points). At the end, you will get a cent for each 25 prize points."></asp:Label>
+                    <asp:Label ID="backgroundText3" runat="server" Text="Each dollar will win you one prize point. At the end, you will get a cent for each 25 prize points."></asp:Label>
                 </td>
             </tr>
             <tr>

@@ -6,6 +6,8 @@ namespace InvestmentAdviser.Logic
     {
         public ScenarioTurnEnum TurnEnum;
 
+        public double Gain;
+
         public int? Profit;
 
         public ScenarioTurn(ScenarioTurnEnum turnEnum)

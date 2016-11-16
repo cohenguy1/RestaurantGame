@@ -32,7 +32,7 @@
                     <asp:Label ID="MovingToNextPositionLabel" runat="server" Font-Size="Larger" Visible="false"></asp:Label>
                     <asp:Label ID="MovingJobTitleLabel" runat="server" Style="margin-top: 20px;" Font-Bold="true" Font-Size="X-Large" Visible="false" ForeColor="Green"></asp:Label>
                     <br />
-                    <asp:Label ID="TurnSummaryLbl1" runat="server" Font-Size="Large" Visible="false" Text="<br />The worker you hired has an absolute rank of&nbsp;"></asp:Label>
+                    <asp:Label ID="TurnSummaryLbl1" runat="server" Font-Size="Large" Visible="false" Text="<br />The investment adviser gained for you&nbsp;"></asp:Label>
                     <asp:Label ID="TurnSummaryLbl2" runat="server" Font-Size="X-Large" Visible="false" ForeColor="Green" Font-Bold="true"></asp:Label>
                     <asp:Label ID="TurnSummaryLbl3" runat="server" Font-Size="Large" Visible="false" Text="."></asp:Label>
                     <asp:Label ID="PrizePointsLbl1" runat="server" Font-Size="Large" Visible="false" Text="<br /><br />Prize points received:&nbsp;"></asp:Label>
@@ -59,9 +59,9 @@
                             <td>&nbsp;Hi!
                                         <br />
                                 <br />
-                                &nbsp;We stopped for a moment so you can rate the HR executive.
+                                &nbsp;We stopped for a moment so you can rate the Investment Adviser.
                                         <br />
-                                &nbsp;Your rating should be based on how good you think the HR executive is.
+                                &nbsp;Your rating should be based on how good you think the adviser is.
                                         <br />
                                 <br />
 
@@ -70,7 +70,7 @@
                                 </asp:Label>
                                 <br />
                                 <br />
-                                &nbsp;Rate the HR executive from 1 to 10, 10 being the best:
+                                &nbsp;Rate the Investment Adviser from 1 to 10, 10 being the best:
                                 <br />
                                 <br />
 
@@ -92,7 +92,7 @@
                                 <asp:HiddenField ID="ratingHdnValue" Value="0" runat="server" />
 
                                 <br />
-                                &nbsp;Please explain why you rated the HR executive as you did:
+                                &nbsp;Please explain why you rated the adviser as you did:
                             <br />
                                 <br />
                                 <center>
@@ -148,57 +148,57 @@
             GridLines="Both"
             runat="server">
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="cell1" Width="90px" HorizontalAlign="Left" Text="&nbsp;Turns" Style="color: blue;" Font-Bold="true"></asp:TableCell>
-                <asp:TableCell ID="cell2" Width="40px" HorizontalAlign="Center" Text="&nbsp;Rank&nbsp;" Style="color: blue;" Font-Bold="true"></asp:TableCell>
+                <asp:TableCell ID="cell1" Width="50px" HorizontalAlign="Left" Text="&nbsp;Turns" Style="color: blue;" Font-Bold="true"></asp:TableCell>
+                <asp:TableCell ID="cell2" Width="40px" HorizontalAlign="Center" Text="&nbsp;Gain&nbsp;" Style="color: blue;" Font-Bold="true"></asp:TableCell>
                 <asp:TableCell ID="cell3" Width="60px" HorizontalAlign="Center" Text="&nbsp;Prize Points" Style="color: blue;" Font-Bold="true"></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="ScenarioTurn1Cell" HorizontalAlign="Left" Text="&nbsp;ScenarioTurn 1"></asp:TableCell>
+                <asp:TableCell ID="ScenarioTurn1Cell" HorizontalAlign="Left" Text="&nbsp;Turn 1"></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn1RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn1PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="ScenarioTurn2Cell" HorizontalAlign="Left" Text="&nbsp;ScenarioTurn 2"></asp:TableCell>
+                <asp:TableCell ID="ScenarioTurn2Cell" HorizontalAlign="Left" Text="&nbsp;Turn 2"></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn2RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn2PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="ScenarioTurn3Cell" HorizontalAlign="Left" Text="&nbsp;ScenarioTurn 3"></asp:TableCell>
+                <asp:TableCell ID="ScenarioTurn3Cell" HorizontalAlign="Left" Text="&nbsp;Turn 3"></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn3RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn3PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="ScenarioTurn4Cell" HorizontalAlign="Left" Text="&nbsp;ScenarioTurn 4"></asp:TableCell>
+                <asp:TableCell ID="ScenarioTurn4Cell" HorizontalAlign="Left" Text="&nbsp;Turn 4"></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn4RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn4PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="ScenarioTurn5Cell" HorizontalAlign="Left" Text="&nbsp;ScenarioTurn 5"></asp:TableCell>
+                <asp:TableCell ID="ScenarioTurn5Cell" HorizontalAlign="Left" Text="&nbsp;Turn 5"></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn5RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn5PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="ScenarioTurn6Cell" HorizontalAlign="Left" Text="&nbsp;ScenarioTurn 6"></asp:TableCell>
+                <asp:TableCell ID="ScenarioTurn6Cell" HorizontalAlign="Left" Text="&nbsp;Turn 6"></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn6RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn6PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="ScenarioTurn7Cell" HorizontalAlign="Left" Text="&nbsp;ScenarioTurn 7"></asp:TableCell>
+                <asp:TableCell ID="ScenarioTurn7Cell" HorizontalAlign="Left" Text="&nbsp;Turn 7"></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn7RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn7PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="ScenarioTurn8Cell" HorizontalAlign="Left" Text="&nbsp;ScenarioTurn 8"></asp:TableCell>
+                <asp:TableCell ID="ScenarioTurn8Cell" HorizontalAlign="Left" Text="&nbsp;Turn 8"></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn8RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn8PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="ScenarioTurn9Cell" HorizontalAlign="Left" Text="&nbsp;ScenarioTurn 9"></asp:TableCell>
+                <asp:TableCell ID="ScenarioTurn9Cell" HorizontalAlign="Left" Text="&nbsp;Turn 9"></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn9RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn9PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="ScenarioTurn10Cell" HorizontalAlign="Left" Text="&nbsp;ScenarioTurn 10"></asp:TableCell>
+                <asp:TableCell ID="ScenarioTurn10Cell" HorizontalAlign="Left" Text="&nbsp;Turn 10"></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn10RankCell" HorizontalAlign="Center" Text=""></asp:TableCell>
                 <asp:TableCell ID="ScenarioTurn10PrizeCell" HorizontalAlign="Center" Text=""></asp:TableCell>
             </asp:TableRow>
@@ -225,7 +225,7 @@
             }
 
             if (savedRank == 0) {
-                alert("Please rate the HR executive!");
+                alert("Please rate the Investment Adviser!");
                 return false;
             }
 

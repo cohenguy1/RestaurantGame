@@ -59,7 +59,7 @@ namespace InvestmentAdviser
             string turnTitle = GetCurrentJobTitle();
             var currentTurnNumber = CurrentTurnNumber;
 
-            PositionHeader.Text = "Turn: " + turnTitle;
+            PositionHeader.Text = turnTitle;
 
             if (currentTurnNumber >= 0)
             {
@@ -94,8 +94,9 @@ namespace InvestmentAdviser
             {
                 if (CurrentTurnStatus == TurnStatus.Initial)
                 {
-                    UpdateImages(CandidateState.Interview);
                     CurrentTurnStatus = TurnStatus.Processing;
+                    MovingToNextPositionLabel.Visible = false;
+                    MovingJobTitleLabel.Visible = false;
                 }
                 else if (CurrentTurnStatus == TurnStatus.Processing)
                 {
@@ -153,9 +154,9 @@ namespace InvestmentAdviser
             SummaryNextLbl.Visible = true;
             btnNextToUniform.Visible = true;
 
-            TurnSummaryLbl2.Text = GetCurrentTurn().TurnEnum.ToString();
+            TurnSummaryLbl2.Text = GetCurrentTurn().Gain.ToString();
             PrizePointsLbl2.Text = (110 - 1 * 10).ToString();
-            SummaryNextLbl.Text = "<br /><br />Press 'Next' to pick uniform for the " + GetCurrentJobTitle() + ".<br />";
+            SummaryNextLbl.Text = "<br /><br />Press 'Next' to proceed to the next turn.<br />";
         }
 
         private void PickUniform()

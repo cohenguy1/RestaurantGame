@@ -101,18 +101,6 @@
     <Content Include="WrongQuiz.aspx" />
     <None Include="Properties\PublishProfiles\InvestmentAdviser.pubxml" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Images\Cook.Uniform1.jpg" />
-    <Content Include="Images\Cook.Uniform2.jpg" />
-    <Content Include="Images\Cook.Uniform3.jpg" />
-    <Content Include="Images\EmptyStickMan.png" />
-    <Content Include="Images\fbButton.png" />
-    <Content Include="Images\fbButtonDisabled.png" />
-    <Content Include="Images\ffButton.png" />
-    <Content Include="Images\ffButtonDisabled.png" />
-    <Content Include="Images\Head Chef.Uniform1.jpg" />
-    <Content Include="Images\Head Chef.Uniform2.jpg" />
-    <Content Include="Images\Head Chef.Uniform3.jpg" />
-    <Content Include="Images\Hired.jpg" />
     <Content Include="Images\Instructions0.png" />
     <Content Include="Images\Instructions1.png" />
     <Content Include="Images\Instructions10.png" />
@@ -124,59 +112,6 @@
     <Content Include="Images\Instructions7.png" />
     <Content Include="Images\Instructions8.png" />
     <Content Include="Images\Instructions9.png" />
-    <Content Include="Images\Manager.Uniform1.jpg" />
-    <Content Include="Images\Manager.Uniform2.jpg" />
-    <Content Include="Images\Manager.Uniform3.jpg" />
-    <Content Include="Images\ManForward.gif" />
-    <Content Include="Images\pauseButton.png" />
-    <Content Include="Images\playButton.png" />
-    <Content Include="Images\SmallStickMan.png" />
-    <Content Include="Images\StickMan.png" />
-    <Content Include="Images\StickMan1.png" />
-    <Content Include="Images\StickMan10.png" />
-    <Content Include="Images\StickMan10Red.png" />
-    <Content Include="Images\StickMan11.png" />
-    <Content Include="Images\StickMan11Red.png" />
-    <Content Include="Images\StickMan12.png" />
-    <Content Include="Images\StickMan12Red.png" />
-    <Content Include="Images\StickMan13.png" />
-    <Content Include="Images\StickMan13Red.png" />
-    <Content Include="Images\StickMan14.png" />
-    <Content Include="Images\StickMan14Red.png" />
-    <Content Include="Images\StickMan15.png" />
-    <Content Include="Images\StickMan15Red.png" />
-    <Content Include="Images\StickMan16.png" />
-    <Content Include="Images\StickMan16Red.png" />
-    <Content Include="Images\StickMan17.png" />
-    <Content Include="Images\StickMan17Red.png" />
-    <Content Include="Images\StickMan18.png" />
-    <Content Include="Images\StickMan18Red.png" />
-    <Content Include="Images\StickMan19.png" />
-    <Content Include="Images\StickMan19Red.png" />
-    <Content Include="Images\StickMan1Red.png" />
-    <Content Include="Images\StickMan2.png" />
-    <Content Include="Images\StickMan20.png" />
-    <Content Include="Images\StickMan20Red.png" />
-    <Content Include="Images\StickMan2Red.png" />
-    <Content Include="Images\StickMan3.png" />
-    <Content Include="Images\StickMan3Red.png" />
-    <Content Include="Images\StickMan4.png" />
-    <Content Include="Images\StickMan4Red.png" />
-    <Content Include="Images\StickMan5.png" />
-    <Content Include="Images\StickMan5Red.png" />
-    <Content Include="Images\StickMan6.png" />
-    <Content Include="Images\StickMan6Red.png" />
-    <Content Include="Images\StickMan7.png" />
-    <Content Include="Images\StickMan7Red.png" />
-    <Content Include="Images\StickMan8.png" />
-    <Content Include="Images\StickMan8Red.png" />
-    <Content Include="Images\StickMan9.png" />
-    <Content Include="Images\StickMan9Red.png" />
-    <Content Include="Images\thumbsDownButton.jpg" />
-    <Content Include="Images\thumbsUpButton.jpg" />
-    <Content Include="Images\Waiter.Uniform1.jpg" />
-    <Content Include="Images\Waiter.Uniform2.jpg" />
-    <Content Include="Images\Waiter.Uniform3.jpg" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Site.Master" />
@@ -296,8 +231,7 @@
       <DependentUpon>SlotsProblem.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Alert.cs" />
-    <Compile Include="Enums\CandidateCompletedStep.cs" />
-    <Compile Include="Enums\CandidateState.cs" />
+    <Compile Include="Enums\TurnStatus.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -320,7 +254,7 @@
     <Compile Include="GameFlow\RatingHandler.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Enums\RestaurantPosition.cs" />
+    <Compile Include="Enums\ScenarioTurnEnum.cs" />
     <Compile Include="SessionMap\SessionMap.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
