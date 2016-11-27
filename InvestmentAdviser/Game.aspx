@@ -27,7 +27,7 @@
 
                 <br />
                 <asp:Panel ID="PanelSpeed" runat="server" Style="margin-left: 0px; margin-top: 60px; align-content: center;" Width="600px">
-                    <asp:Label ID="LabelInterviewing" runat="server" Font-Size="Medium" Text="Interviewing Candidates...<br /><br /><br />"></asp:Label>
+                    <asp:Label ID="LabelInterviewing" runat="server" Font-Size="Medium" Text="Analyzing stocks and investing money...<br /><br /><br />"></asp:Label>
                     <asp:Image ID="ImageInterview" runat="server" Height="187px" Width="235px" ImageUrl="~/Images/InterviewingCandidates.gif" Visible="False" />
                     <asp:Label ID="MovingToNextPositionLabel" runat="server" Font-Size="Larger" Visible="false"></asp:Label>
                     <asp:Label ID="MovingJobTitleLabel" runat="server" Style="margin-top: 20px;" Font-Bold="true" Font-Size="X-Large" Visible="false" ForeColor="Green"></asp:Label>
@@ -40,7 +40,7 @@
                     <asp:Label ID="PrizePointsLbl3" runat="server" Font-Size="Large" Visible="false" Text="."></asp:Label>
                     <asp:Label ID="SummaryNextLbl" runat="server" Visible="false"></asp:Label>
                     <br />
-                    <asp:Button ID="btnNextToUniform" runat="server" Visible="false" Text="Next" OnClick="btnNextToUniform_Click" />
+                    <asp:Button ID="btnNextTurn" runat="server" Visible="false" Text="Next" OnClick="btnNextTurn_Click" />
                 </asp:Panel>
 
 
@@ -48,7 +48,7 @@
         </asp:View>
         <asp:View ID="ViewRating" runat="server">
 
-            <asp:Label ID="Label2" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;">Advisor Rating</asp:Label>
+            <asp:Label ID="Label2" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;">Adviser Rating</asp:Label>
             <br />
             <asp:Panel ID="Panel3" runat="server" Style="margin-left: 20px; float: right">
                 <br />
@@ -107,38 +107,6 @@
                 <asp:Button ID="btnRate" runat="server" Text="Rate!" OnClientClick="returnString();" OnClick="btnRate_Click" />
             </asp:Panel>
         </asp:View>
-
-        <asp:View ID="ViewUniformPicker" runat="server">
-
-            <asp:Label ID="Label1" runat="server" Font-Size="X-Large" Font-Bold="true" Style="margin-left: 20px; align-content: center;">Pick Uniform</asp:Label>
-            <br />
-            <asp:Panel ID="Panel1" runat="server" Style="margin-left: 20px; float: right">
-                <br />
-
-                <br />
-                <br />
-                <div style="text-align: center; width: 600px; margin: 0 auto;">
-                    <table style="text-align: left; width: 600px;" border="1">
-                        <tr>
-                            <td>
-                                <asp:Label ID="Label8" runat="server" Font-Size="Medium" Text="&nbsp;It's your turn now." Style="margin-left: 20px; align-content: center;"></asp:Label>
-                                <br />
-                                <br />
-                                <asp:Label ID="UniformPickForPosition" runat="server" Font-Size="Medium" Style="margin-left: 20px; align-content: center;"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <br />
-                                <asp:ImageButton ID="Uniform1" runat="server" Visible="true" Width="140px" Style="margin-left: 20px" OnClick="btnPickUniform_Click" />
-                                <asp:ImageButton ID="Uniform2" runat="server" Visible="true" Width="140px" Style="margin-left: 60px" OnClick="btnPickUniform_Click" />
-                                <asp:ImageButton ID="Uniform3" runat="server" Visible="true" Width="140px" Style="margin-left: 60px" OnClick="btnPickUniform_Click" />
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </asp:Panel>
-        </asp:View>
     </asp:MultiView>
 
     <asp:Panel ID="PanelScenarioTurns" runat="server" Style="margin-left: 0px; float: left">
@@ -148,7 +116,7 @@
             GridLines="Both"
             runat="server">
             <asp:TableRow Height="35px">
-                <asp:TableCell ID="cell1" Width="50px" HorizontalAlign="Left" Text="&nbsp;Turns" Style="color: blue;" Font-Bold="true"></asp:TableCell>
+                <asp:TableCell ID="cell1" Width="60px" HorizontalAlign="Left" Text="&nbsp;Turns" Style="color: blue;" Font-Bold="true"></asp:TableCell>
                 <asp:TableCell ID="cell2" Width="40px" HorizontalAlign="Center" Text="&nbsp;Gain&nbsp;" Style="color: blue;" Font-Bold="true"></asp:TableCell>
                 <asp:TableCell ID="cell3" Width="60px" HorizontalAlign="Center" Text="&nbsp;Prize Points" Style="color: blue;" Font-Bold="true"></asp:TableCell>
             </asp:TableRow>

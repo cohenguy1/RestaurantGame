@@ -16,13 +16,13 @@
                 <td>You have decided to invest in the stock market.</td>
             </tr>
             <tr>
-                <td>In this game you an Investment Adviser wish to gain as much money as possible from these investment</td>
+                <td>In this game you an Investment Adviser wish to gain as much money as possible from these investments.</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td>You have 20 turns, each turn the adviser invests 100$ on stocks.
+                <td>You have 20 turns, in each turn the adviser invests 100$ on stocks.
                     <br />
                     <br />
                     <br />

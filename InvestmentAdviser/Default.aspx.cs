@@ -60,16 +60,10 @@ namespace InvestmentAdviser
         {
             var scenarioTurns = new List<ScenarioTurn>();
 
-            scenarioTurns.Add(new ScenarioTurn(ScenarioTurnEnum.ScenarioTurn1));
-            scenarioTurns.Add(new ScenarioTurn(ScenarioTurnEnum.ScenarioTurn2));
-            scenarioTurns.Add(new ScenarioTurn(ScenarioTurnEnum.ScenarioTurn3));
-            scenarioTurns.Add(new ScenarioTurn(ScenarioTurnEnum.ScenarioTurn4));
-            scenarioTurns.Add(new ScenarioTurn(ScenarioTurnEnum.ScenarioTurn5));
-            scenarioTurns.Add(new ScenarioTurn(ScenarioTurnEnum.ScenarioTurn6));
-            scenarioTurns.Add(new ScenarioTurn(ScenarioTurnEnum.ScenarioTurn7));
-            scenarioTurns.Add(new ScenarioTurn(ScenarioTurnEnum.ScenarioTurn8));
-            scenarioTurns.Add(new ScenarioTurn(ScenarioTurnEnum.ScenarioTurn9));
-            scenarioTurns.Add(new ScenarioTurn(ScenarioTurnEnum.ScenarioTurn10));
+            for (int i = 1; i <= Common.NumOfTurns; i++)
+            {
+                scenarioTurns.Add(new ScenarioTurn(i));
+            }
 
             ScenarioTurns = scenarioTurns;
         }
@@ -187,7 +181,7 @@ namespace InvestmentAdviser
                 Response.Redirect("BrowserProblem.aspx");
             }
 
-            Response.Redirect("UserInfoPage.aspx");
+            Response.Redirect("Game.aspx");
         }
 
         private void InsertNewUserToDB(SQLiteConnection sqlConnection1)

@@ -10,11 +10,6 @@
                     &nbsp;We will now proceed to the real game.
                             <br />
                     <br />
-                    &nbsp;Remember, you won't see each interview, only the hired candidate's rank.
-                    <br />
-                    <br />
-                    &nbsp;After a candidate is hired, you will choose the uniform for the position.
-                    <br />
                     <br />
                     <br />
 

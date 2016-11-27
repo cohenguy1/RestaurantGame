@@ -27,7 +27,7 @@ namespace InvestmentAdviser
                 ImageInterview.Visible = true;
                 LabelInterviewing.Visible = true;
 
-                CurrentTurnNumber = 0;
+                CurrentTurnNumber = 1;
 
                 StartInterviewsForPosition(0);
             }
@@ -61,7 +61,7 @@ namespace InvestmentAdviser
 
             PositionHeader.Text = turnTitle;
 
-            if (currentTurnNumber >= 0)
+            if (currentTurnNumber >= 1)
             {
                 MovingToNextPositionLabel.Text = "Moving on to the next turn:" + "<br />" + "<br />";
                 MovingToNextPositionLabel.Visible = true;
@@ -69,14 +69,25 @@ namespace InvestmentAdviser
                 MovingJobTitleLabel.Text = turnTitle + "<br />" + "<br />" + "<br />";
                 MovingJobTitleLabel.Visible = true;
 
-                if (currentTurnNumber > 0)
+                if (currentTurnNumber > 1 && currentTurnNumber <= Common.NumOfTurnsInTable)
                 {
                     SetSeenTableRowStyle(currentTurnNumber - 1);
                 }
             }
 
-            SetTableRowStyle(currentTurnNumber);
+            // next turn
+            if (currentTurnNumber <= Common.NumOfTurnsInTable)
+            {
+                SetTableRowStyle(currentTurnNumber);
+            }
+            else if (currentTurnNumber <= Common.NumOfTurns)
+            {
+                ShiftCells();
+
+                UpdateNewRow(CurrentTurnNumber);
+            }
         }
+
 
         protected void TimerGame_Tick(object sender, EventArgs e)
         {
@@ -89,27 +100,17 @@ namespace InvestmentAdviser
 
                 return;
             }
-
-            if (NewCandidateAwaits())
+            
+            if (CurrentTurnStatus == TurnStatus.Initial)
             {
-                if (CurrentTurnStatus == TurnStatus.Initial)
-                {
-                    CurrentTurnStatus = TurnStatus.Processing;
-                    MovingToNextPositionLabel.Visible = false;
-                    MovingJobTitleLabel.Visible = false;
-                }
-                else if (CurrentTurnStatus == TurnStatus.Processing)
-                {
-                    ProcessCandidate();
-                }
+                CurrentTurnStatus = TurnStatus.Processing;
+                LabelInterviewing.Visible = true;
+                MovingToNextPositionLabel.Visible = false;
+                MovingJobTitleLabel.Visible = false;
             }
-            else
+            else if (CurrentTurnStatus == TurnStatus.Processing)
             {
-                if (CurrentTurnNumber >= 9)
-                {
-                    TimerGame.Enabled = false;
-                    Response.Redirect("EndGame.aspx");
-                }
+                ProcessCandidate();
             }
         }
 
@@ -135,6 +136,9 @@ namespace InvestmentAdviser
                 TimerGame.Enabled = true;
             }
 
+            Random r = new Random();
+            GetCurrentTurn().SetProfit(r.Next(100));
+
             UpdatePositionToAcceptedCandidate();
             TurnSummary();
         }
@@ -152,59 +156,11 @@ namespace InvestmentAdviser
             PrizePointsLbl2.Visible = true;
             PrizePointsLbl3.Visible = true;
             SummaryNextLbl.Visible = true;
-            btnNextToUniform.Visible = true;
+            btnNextTurn.Visible = true;
 
             TurnSummaryLbl2.Text = GetCurrentTurn().Gain.ToString();
             PrizePointsLbl2.Text = (110 - 1 * 10).ToString();
             SummaryNextLbl.Text = "<br /><br />Press 'Next' to proceed to the next turn.<br />";
-        }
-
-        private void PickUniform()
-        {
-            if (NeedToAskRating())
-            {
-                AskForRating = true;
-            }
-
-            MultiView2.ActiveViewIndex = 2;
-            ShowUniforms();
-
-            CurrentTurnStatus = TurnStatus.MoveToNextTurn;
-        }
-
-        private void ShowUniforms()
-        {
-            var jobTitle = GetCurrentJobTitle();
-
-            if (jobTitle.StartsWith("ScenarioTurn"))
-            {
-                jobTitle = jobTitle.Remove(jobTitle.Length - 2);
-            }
-
-            UniformPickForPosition.Text = " Pick the uniform for position " + jobTitle + ":";
-
-            Uniform1.ImageUrl = "~/Images/" + jobTitle + ".Uniform1.jpg";
-            Uniform2.ImageUrl = "~/Images/" + jobTitle + ".Uniform2.jpg";
-            Uniform3.ImageUrl = "~/Images/" + jobTitle + ".Uniform3.jpg";
-        }
-
-        protected void btnPickUniform_Click(object sender, EventArgs e)
-        {
-            MultiView2.ActiveViewIndex = 0;
-
-            if (CurrentTurnNumber < 9)
-            {
-                FillNextPosition();
-            }
-            else
-            {
-                TimerGame.Enabled = true;
-            }
-        }
-
-        private bool NewCandidateAwaits()
-        {
-            return true;
         }
 
         private void UpdatePositionToAcceptedCandidate()
@@ -215,7 +171,7 @@ namespace InvestmentAdviser
             UpdateTurnsTable(currentTurn, totalPrizePoints);
         }
 
-        protected void btnNextToUniform_Click(object sender, EventArgs e)
+        protected void btnNextTurn_Click(object sender, EventArgs e)
         {
             TurnSummaryLbl1.Visible = false;
             TurnSummaryLbl2.Visible = false;
@@ -224,8 +180,24 @@ namespace InvestmentAdviser
             PrizePointsLbl2.Visible = false;
             PrizePointsLbl3.Visible = false;
             SummaryNextLbl.Visible = false;
-            btnNextToUniform.Visible = false;
-            PickUniform();
+            btnNextTurn.Visible = false;
+
+            if (NeedToAskRating())
+            {
+                AskForRating = true;
+            }
+
+            CurrentTurnStatus = TurnStatus.MoveToNextTurn;
+
+            if (CurrentTurnNumber < Common.NumOfTurns)
+            {
+                FillNextPosition();
+            }
+            else
+            {
+                TimerGame.Enabled = false;
+                Response.Redirect("EndGame.aspx");
+            }
         }
     }
 }

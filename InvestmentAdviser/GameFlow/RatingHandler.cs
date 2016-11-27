@@ -17,24 +17,24 @@ namespace InvestmentAdviser
                 return false;
             }
 
-            if (CurrentTurnNumber == 9)
+            if (CurrentTurnNumber == Common.NumOfTurns)
             {
                 return true;
             }
 
             if (AskPosition == AskPositionHeuristic.First)
             {
-                return (CurrentTurnNumber + 1 == 1);
+                return (CurrentTurnNumber == 1);
             }
 
             if (AskPosition == AskPositionHeuristic.Last)
             {
-                return (CurrentTurnNumber + 1 == 10);
+                return (CurrentTurnNumber == Common.NumOfTurns);
             }
 
             if (AskPosition == AskPositionHeuristic.Random)
             {
-                return (CurrentTurnNumber + 1 == RandomHuristicAskPosition);
+                return (CurrentTurnNumber == RandomHuristicAskPosition);
             }
 
             if (AskPosition == AskPositionHeuristic.Optimal)
@@ -157,7 +157,7 @@ namespace InvestmentAdviser
 
         private string GetTurnProfitToInsertToDb(int turnIndex)
         {
-            var turn = GetScenarioTurn(turnIndex - 1);
+            var turn = GetScenarioTurn(turnIndex);
 
             return turn.Profit == null ? null : turn.Profit.ToString();
         }
