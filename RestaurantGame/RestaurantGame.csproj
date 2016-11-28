@@ -101,7 +101,6 @@
     <Content Include="WrongQuiz.aspx" />
     <None Include="Properties\PublishProfiles\RestaurantGame.pubxml" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Images\Choose.png" />
     <Content Include="Images\Cook.Uniform1.jpg" />
     <Content Include="Images\Cook.Uniform2.jpg" />
     <Content Include="Images\Cook.Uniform3.jpg" />
@@ -117,17 +116,7 @@
     <Content Include="Images\Instructions0.png" />
     <Content Include="Images\Instructions1.png" />
     <Content Include="Images\Instructions10.png" />
-    <Content Include="Images\Instructions11.png" />
-    <Content Include="Images\Instructions12.png" />
-    <Content Include="Images\Instructions13.png" />
-    <Content Include="Images\Instructions14.png" />
-    <Content Include="Images\Instructions15.png" />
-    <Content Include="Images\Instructions16.png" />
-    <Content Include="Images\Instructions17.png" />
-    <Content Include="Images\Instructions18.png" />
-    <Content Include="Images\Instructions19.png" />
     <Content Include="Images\Instructions2.png" />
-    <Content Include="Images\Instructions20.png" />
     <Content Include="Images\Instructions3.png" />
     <Content Include="Images\Instructions4.png" />
     <Content Include="Images\Instructions5.png" />
