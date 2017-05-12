@@ -14,9 +14,9 @@ namespace RestaurantGame
             set { Session[SessionMap.UserIdStr] = value; }
         }
         
-        public List<Position> Positions
+        public Position[] Positions
         {
-            get { return (List<Position>)Session[SessionMap.PositionsStr]; }
+            get { return (Position[])Session[SessionMap.PositionsStr]; }
             set { Session[SessionMap.PositionsStr] = value; }
         }
 

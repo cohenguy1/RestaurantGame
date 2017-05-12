@@ -1,4 +1,5 @@
-﻿using RestaurantGame.Enums;
+﻿using RestaurantGame;
+using RestaurantGame.Enums;
 using RestaurantGame.Logic;
 using System;
 using System.Linq;
@@ -8,12 +9,7 @@ namespace RestaurantGame
 {
     public partial class Game : System.Web.UI.Page
     {
-        // TODO modify instructions ---
-        // TODO think about consequences ---
-        // change to 10 candidates & update probabilities
-
         public const int StartTimerInterval = 2500;
-        public const int NumberOfCandidates = DecisionMaker.NumberOfCandidates;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,14 +23,11 @@ namespace RestaurantGame
 
                 MultiView2.ActiveViewIndex = 0;
 
-                ClearPositionsTable();
+                ShowInterviewImages();
 
-                ImageInterview.Visible = true;
-                LabelInterviewing.Visible = true;
+                CurrentPositionNumber = 1;
 
-                CurrentPositionNumber = 0;
-
-                StartInterviewsForPosition(0);
+                StartInterviewsForPosition(1);
             }
         }
 
@@ -43,7 +36,7 @@ namespace RestaurantGame
             Response.Redirect("Quiz.aspx");
         }
 
-        private void StartInterviewsForPosition(int position)
+        private void StartInterviewsForPosition(int positionIndex)
         {
             TimerGame.Enabled = false;
 
@@ -51,11 +44,11 @@ namespace RestaurantGame
 
             StatusLabel.Text = "";
 
-            SetTitle();
+            SetTitle(positionIndex);
 
-            CleanCurrentPosition();
+            ClearInterviewImages();
 
-            PositionCandidates = GenerateCandidatesForPosition();
+            PositionCandidates = GenerateCandidatesForPosition(positionIndex);
 
             CurrentPositionStatus = PositionStatus.Initial;
 
@@ -63,28 +56,27 @@ namespace RestaurantGame
         }
 
 
-        private void SetTitle()
+        private void SetTitle(int positionNumber)
         {
-            string jobTitle = GetCurrentJobTitle();
-            var currentPositionNumber = CurrentPositionNumber;
+            string jobTitle = Position.GetJobTitle(positionNumber);        
 
             PositionHeader.Text = "Position: " + jobTitle;
 
-            if (currentPositionNumber >= 0)
+            if (positionNumber >= 1)
             {
-                MovingToNextPositionLabel.Text = "Moving on to fill the next position:" + "<br />" + "<br />";
+                MovingToNextPositionLabel.Text = Common.MovingToNextString;
                 MovingToNextPositionLabel.Visible = true;
 
-                MovingJobTitleLabel.Text = jobTitle + "<br />" + "<br />" + "<br />";
+                MovingJobTitleLabel.Text = jobTitle + "<br /><br /><br />";
                 MovingJobTitleLabel.Visible = true;
 
-                if (currentPositionNumber > 0)
+                if (positionNumber > 1)
                 {
-                    SetSeenTableRowStyle(currentPositionNumber - 1);
+                    SetSeenTableRowStyle(positionNumber - 1);
                 }
             }
 
-            SetTableRowStyle(currentPositionNumber);
+            SetTableRowStyle(positionNumber);
         }
 
         protected void TimerGame_Tick(object sender, EventArgs e)
@@ -92,47 +84,28 @@ namespace RestaurantGame
             if (AskForRating)
             {
                 RateAdvisor();
-
-                AskForRating = false;
-                AlreadyAskedForRating = true;
-
                 return;
             }
 
-            if (NewCandidateAwaits())
+            if (CurrentPositionNumber > Common.NumOfPositions)
             {
-                if (CurrentPositionStatus == PositionStatus.Initial)
-                {
-                    UpdateImages(CandidateState.Interview);
-                    CurrentPositionStatus = PositionStatus.Interviewing;
-                }
-                else if (CurrentPositionStatus == PositionStatus.Interviewing)
-                {
-                    ProcessCandidate();
-                }
+                TimerGame.Enabled = false;
+                Response.Redirect("EndGame.aspx");
             }
-            else
+            else if (CurrentPositionStatus == PositionStatus.Initial)
             {
-                if (CurrentPositionNumber >= 9)
-                {
-                    TimerGame.Enabled = false;
-                    Response.Redirect("EndGame.aspx");
-                }
+                UpdateImages(CandidateState.Interview);
+                CurrentPositionStatus = PositionStatus.Interviewing;
+            }
+            else if (CurrentPositionStatus == PositionStatus.Interviewing)
+            {
+                ProcessCandidate();
             }
         }
 
         private void FillNextPosition()
         {
-            IncreaseCurrentPosition();
-
             StartInterviewsForPosition(CurrentPositionNumber);
-        }
-
-        private void CleanCurrentPosition()
-        {
-            TimerGame.Enabled = false;
-
-            ClearInterviewImages();
         }
 
         private void ProcessCandidate()
@@ -170,7 +143,7 @@ namespace RestaurantGame
 
             PositionSummaryLbl2.Text = CurrentCandidate.CandidateRank.ToString();
             PrizePointsLbl2.Text = (110 - CurrentCandidate.CandidateRank * 10).ToString();
-            SummaryNextLbl.Text = "<br /><br />Press 'Next' to pick uniform for the " + GetCurrentJobTitle() + ".<br />";
+            SummaryNextLbl.Text = "<br /><br />Press 'Next' to pick uniform for this " + Position.WaiterStr + ".<br />";
         }
 
         private void PickUniform()
@@ -178,6 +151,7 @@ namespace RestaurantGame
             if (NeedToAskRating())
             {
                 AskForRating = true;
+                AlreadyAskedForRating = true;
             }
 
             MultiView2.ActiveViewIndex = 2;
@@ -188,48 +162,34 @@ namespace RestaurantGame
 
         private void ShowUniforms()
         {
-            var jobTitle = GetCurrentJobTitle();
+            UniformPickForPosition.Text = " Pick the uniform for this " + Position.WaiterStr + ":";
 
-            if (jobTitle.StartsWith("Waiter"))
-            {
-                jobTitle = jobTitle.Remove(jobTitle.Length - 2);
-            }
-
-            UniformPickForPosition.Text = " Pick the uniform for position " + jobTitle + ":";
-
-            Uniform1.ImageUrl = "~/Images/" + jobTitle + ".Uniform1.jpg";
-            Uniform2.ImageUrl = "~/Images/" + jobTitle + ".Uniform2.jpg";
-            Uniform3.ImageUrl = "~/Images/" + jobTitle + ".Uniform3.jpg";
+            Uniform1.ImageUrl = "~/Images/" + Position.WaiterStr + ".Uniform1.jpg";
+            Uniform2.ImageUrl = "~/Images/" + Position.WaiterStr + ".Uniform2.jpg";
+            Uniform3.ImageUrl = "~/Images/" + Position.WaiterStr + ".Uniform3.jpg";
         }
 
         protected void btnPickUniform_Click(object sender, EventArgs e)
         {
             MultiView2.ActiveViewIndex = 0;
 
-            if (CurrentPositionNumber < 9)
+            IncreaseCurrentPosition();
+
+            if (CurrentPositionNumber <= Common.NumOfPositions)
             {
                 FillNextPosition();
             }
             else
             {
-                TimerGame.Enabled = true;
+                if (AskForRating)
+                {
+                    RateAdvisor();
+                }
+                else
+                {
+                    Response.Redirect("EndGame.aspx");
+                }
             }
-        }
-
-        private bool NewCandidateAwaits()
-        {
-            if (CurrentCandidate == null)
-            {
-                return true;
-            }
-
-            if (CurrentCandidate.CandidateAccepted)
-            {
-                // finished candidate
-                return false;
-            }
-
-            return true;
         }
 
         private void UpdatePositionToAcceptedCandidate(Candidate candidate)
@@ -238,7 +198,7 @@ namespace RestaurantGame
 
             currentPosition.ChosenCandidate = candidate;
 
-            AcceptedCandidates[CurrentPositionNumber] = currentPosition.ChosenCandidate.CandidateRank;
+            AcceptedCandidates[currentPosition.PositionNumber - 1] = currentPosition.ChosenCandidate.CandidateRank;
 
             int totalPrizePoints = Common.GetTotalPrizePoints(Positions);
             UpdatePositionsTable(currentPosition, totalPrizePoints);

@@ -7,15 +7,13 @@ namespace RestaurantGame
 {
     public partial class Game : System.Web.UI.Page
     {
-        private List<Candidate> GenerateCandidatesForPosition()
+        private List<Candidate> GenerateCandidatesForPosition(int positionNumber)
         {
-            var positionNumber = CurrentPositionNumber;
-
             var positionCandidates = new List<Candidate>();
 
-            int[] candidateRanks = dbHandler.GetCandidateRanksForPosition(positionNumber);
+            int[] candidateRanks = dbHandler.GetCandidateRanksForPosition(positionNumber - 1);
 
-            for (var candidateIndex = 0; candidateIndex < NumberOfCandidates; candidateIndex++)
+            for (var candidateIndex = 0; candidateIndex < Common.NumOfCandidates; candidateIndex++)
             {
                 var newCandidate = new Candidate()
                 {
@@ -34,15 +32,15 @@ namespace RestaurantGame
         public void InitCandidatesForPosition(List<Candidate> positionCandidates, Random randomGenerator)
         {
             List<int> ranks = new List<int>();
-            for (var index = 1; index <= DecisionMaker.NumberOfCandidates; index++)
+            for (var index = 1; index <= Common.NumOfCandidates; index++)
             {
                 ranks.Add(index);
             }
 
-            var ranksRemaining = DecisionMaker.NumberOfCandidates;
+            var ranksRemaining = Common.NumOfCandidates;
             int position;
 
-            for (var index = 0; index < DecisionMaker.NumberOfCandidates; index++)
+            for (var index = 0; index < Common.NumOfCandidates; index++)
             {
                 if (ranksRemaining > 1)
                 {

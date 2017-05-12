@@ -22,5 +22,11 @@ namespace RestaurantGame
             ImageInterview.Visible = false;
             LabelInterviewing.Visible = false;
         }
+
+        private void ShowInterviewImages()
+        {
+            ImageInterview.Visible = true;
+            LabelInterviewing.Visible = true;
+        }
     }
 }

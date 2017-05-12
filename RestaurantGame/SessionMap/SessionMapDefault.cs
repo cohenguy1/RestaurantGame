@@ -29,27 +29,15 @@ namespace RestaurantGame
             set { Session[SessionMap.UserIdStr] = value; }
         }
 
-        public bool AlreadyAskedForRating
-        {
-            get { return (bool)Session[SessionMap.AlreadyAskedForRatingStr]; }
-            set { Session[SessionMap.AlreadyAskedForRatingStr] = value; }
-        }
-
         public int NumOfWrongQuizAnswers
         {
             get { return (int)Session[SessionMap.NumOfWrongQuizAnswersStr]; }
             set { Session[SessionMap.NumOfWrongQuizAnswersStr] = value; }
         }
 
-        public bool AskForRating
+        public Position[] Positions
         {
-            get { return (bool)Session[SessionMap.AskForRatingStr]; }
-            set { Session[SessionMap.AskForRatingStr] = value; }
-        }
-
-        public List<Position> Positions
-        {
-            get { return (List<Position>)Session[SessionMap.PositionsStr]; }
+            get { return (Position[])Session[SessionMap.PositionsStr]; }
             set { Session[SessionMap.PositionsStr] = value; }
         }
 

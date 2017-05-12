@@ -20,7 +20,6 @@ namespace RestaurantGame
             {
                 Random ran = new Random();
                 int randomAsk = ran.Next(5);
-
                 VectorNum = ran.Next(50) + 1;
                 
                 switch (randomAsk)
@@ -30,8 +29,7 @@ namespace RestaurantGame
                     case 1:
                         return AskPositionHeuristic.Last;
                     case 2:
-                        Random rand = new Random();
-                        RandomHuristicAskPosition = rand.Next(10) + 1;
+                        RandomHuristicAskPosition = GetRandomAskPosition();
                         return AskPositionHeuristic.Random;
                     case 3:
                         return AskPositionHeuristic.Optimal;
@@ -69,12 +67,17 @@ namespace RestaurantGame
             VectorNum = GetFirstVectorSatisfying(AskPositionHeuristic.Random);
             if (VectorNum != null)
             {
-                Random ran = new Random();
-                RandomHuristicAskPosition = ran.Next(10) + 1;
+                RandomHuristicAskPosition = GetRandomAskPosition();
                 return AskPositionHeuristic.Random;
             }
 
             throw new Exception("No Hit Slots available");
+        }
+
+        private int GetRandomAskPosition()
+        {
+            Random ran = new Random();
+            return ran.Next(Common.NumOfPositions) + 1;
         }
 
         public void SetVectorAssignmentNull()
@@ -99,7 +102,7 @@ namespace RestaurantGame
         {
             var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
 
-            int[] ranks = new int[DecisionMaker.NumberOfCandidates];
+            int[] ranks = new int[Common.NumOfCandidates];
 
             using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
             {
@@ -112,11 +115,11 @@ namespace RestaurantGame
                     cmd.Connection = sqlConnection1;
                     sqlConnection1.Open();
 
-                    using (SQLiteDataReader result = (SQLiteDataReader)cmd.ExecuteReader())
+                    using (SQLiteDataReader result = cmd.ExecuteReader())
                     {
                         while (result.Read())
                         {
-                            for (int i = 0; i < DecisionMaker.NumberOfCandidates; i++)
+                            for (int i = 0; i < Common.NumOfCandidates; i++)
                             {
                                 ranks[i] = result.GetInt32(i);
                             }
@@ -258,23 +261,6 @@ namespace RestaurantGame
             }
 
             return intValue;
-        }
-
-        public static void SetIntToConfig(string key, int value)
-        {
-            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
-
-            using (SQLiteConnection sqlConnection1 = new SQLiteConnection(connectionString))
-            {
-                using (SQLiteCommand cmd = new SQLiteCommand("update Configuration set Value='" + value.ToString() + "' Where Key='" + key + "'"))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Connection = sqlConnection1;
-                    sqlConnection1.Open();
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
         }
 
         public void SetVectorNextAskPosition(string nextAskPosition)

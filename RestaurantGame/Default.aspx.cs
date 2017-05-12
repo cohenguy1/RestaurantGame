@@ -58,23 +58,14 @@ namespace RestaurantGame
 
         private void GeneratePositions()
         {
-            var positions = new List<Position>();
+            Positions = new Position[Common.NumOfPositions];
 
-            positions.Add(new Position(RestaurantPosition.Waiter1));
-            positions.Add(new Position(RestaurantPosition.Waiter2));
-            positions.Add(new Position(RestaurantPosition.Waiter3));
-            positions.Add(new Position(RestaurantPosition.Waiter4));
-            positions.Add(new Position(RestaurantPosition.Waiter5));
-            positions.Add(new Position(RestaurantPosition.Waiter6));
-            positions.Add(new Position(RestaurantPosition.Waiter7));
-            positions.Add(new Position(RestaurantPosition.Waiter8));
-            positions.Add(new Position(RestaurantPosition.Waiter9));
-            positions.Add(new Position(RestaurantPosition.Waiter10));
+            for (int positionIndex = 0; positionIndex < Common.NumOfPositions; positionIndex++)
+            {
+                Positions[positionIndex] = new Position(positionIndex + 1);
+            }
 
-            Positions = positions;
-
-            var acceptedCandidates = new int[positions.Count];
-            AcceptedCandidates = acceptedCandidates;
+            AcceptedCandidates = new int[Common.NumOfPositions];
         }
 
         private void DecideRandomStuff()
@@ -92,7 +83,7 @@ namespace RestaurantGame
             {
                 AskPosition = dbHandler.GetAskPosition(UserId == "friend");
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 NoHitSlotsAvailable();
             }

@@ -227,6 +227,7 @@
 
             if (savedRank == 0) {
                 alert("Please rate the HR executive!");
+				document.getElementById('<%=ratingHdnValue.ClientID %>').value = savedRank.toString();
                 return false;
             }
 

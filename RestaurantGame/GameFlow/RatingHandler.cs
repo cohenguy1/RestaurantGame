@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace RestaurantGame
@@ -12,29 +13,29 @@ namespace RestaurantGame
     {
         private bool NeedToAskRating()
         {
-            if (AlreadyAskedForRating || GameMode != GameMode.Advisor)
+            if (AlreadyAskedForRating)
             {
                 return false;
             }
 
-            if (CurrentPositionNumber == 9)
+            if (CurrentPositionNumber == Common.NumOfPositions)
             {
                 return true;
             }
 
             if (AskPosition == AskPositionHeuristic.First)
             {
-                return (CurrentPositionNumber + 1 == 1);
+                return (CurrentPositionNumber == 1);
             }
 
             if (AskPosition == AskPositionHeuristic.Last)
             {
-                return (CurrentPositionNumber + 1 == 10);
+                return (CurrentPositionNumber == Common.NumOfPositions);
             }
 
             if (AskPosition == AskPositionHeuristic.Random)
             {
-                return (CurrentPositionNumber + 1 == RandomHuristicAskPosition);
+                return (CurrentPositionNumber == RandomHuristicAskPosition);
             }
 
             if (AskPosition == AskPositionHeuristic.Optimal)
@@ -47,7 +48,7 @@ namespace RestaurantGame
                 int[] accepted = new int[10];
                 var stoppingPosition = -1;
 
-                for (var index = 0; index < Positions.Count; index++)
+                for (var index = 0; index < Common.NumOfPositions; index++)
                 {
                     if (Positions[index].ChosenCandidate != null)
                     {
@@ -121,7 +122,15 @@ namespace RestaurantGame
 
             dbHandler.UpdateTimesTable(GameState.AfterRate);
 
+            AskForRating = false;
+            AlreadyAskedForRating = true;
+
             TimerGame.Enabled = true;
+
+            if (CurrentPositionNumber > Common.NumOfPositions)
+            {
+                Response.Redirect("EndGame.aspx");
+            }
         }
 
         private void SaveRatingToDB(int adviserRating)
@@ -132,29 +141,37 @@ namespace RestaurantGame
             {
                 sqlConnection1.Open();
 
-                using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO UserRatings (UserId, AdviserRating, Position1Rank, Position2Rank, " +
-                    "Position3Rank, Position4Rank, Position5Rank, Position6Rank, Position7Rank, Position8Rank, Position9Rank, Position10Rank, TotalPrizePoints, " +
-                    " InstructionsTime, AskPosition, VectorNum, Reason) " +
-                    " VALUES (@UserId, @AdviserRating, @Position1Rank, @Position2Rank, @Position3Rank, @Position4Rank, " +
-                    "@Position5Rank, @Position6Rank, @Position7Rank, @Position8Rank, @Position9Rank, @Position10Rank, @TotalPrizePoints, " +
-                    "@InstructionsTime, @AskPosition, @VectorNum, @Reason)"))
+                StringBuilder command = new StringBuilder();
+                command.Append("INSERT INTO UserRatings (UserId, AdviserRating, ");
+
+                for (int i = 1; i <= Common.NumOfPositions; i++)
+                {
+                    command.Append("Position" + i + "Rank, ");
+                }
+
+                command.Append("RatingPosition, AskPosition, VectorNum, Reason) ");
+                command.Append("VALUES (@UserId, @AdviserRating,");
+
+                for (int i = 1; i <= Common.NumOfPositions; i++)
+                {
+                    command.Append("@Position" + i + "Rank, ");
+                }
+
+                command.Append("@RatingPosition, @AskPosition, @VectorNum, @Reason) ");
+
+                using (SQLiteCommand cmd = new SQLiteCommand(command.ToString()))
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = sqlConnection1;
                     cmd.Parameters.AddWithValue("@UserId", UserId);
                     cmd.Parameters.AddWithValue("@AdviserRating", adviserRating.ToString());
-                    cmd.Parameters.AddWithValue("@Position1Rank", GetChosenPositionToInsertToDb(1));
-                    cmd.Parameters.AddWithValue("@Position2Rank", GetChosenPositionToInsertToDb(2));
-                    cmd.Parameters.AddWithValue("@Position3Rank", GetChosenPositionToInsertToDb(3));
-                    cmd.Parameters.AddWithValue("@Position4Rank", GetChosenPositionToInsertToDb(4));
-                    cmd.Parameters.AddWithValue("@Position5Rank", GetChosenPositionToInsertToDb(5));
-                    cmd.Parameters.AddWithValue("@Position6Rank", GetChosenPositionToInsertToDb(6));
-                    cmd.Parameters.AddWithValue("@Position7Rank", GetChosenPositionToInsertToDb(7));
-                    cmd.Parameters.AddWithValue("@Position8Rank", GetChosenPositionToInsertToDb(8));
-                    cmd.Parameters.AddWithValue("@Position9Rank", GetChosenPositionToInsertToDb(9));
-                    cmd.Parameters.AddWithValue("@Position10Rank", GetChosenPositionToInsertToDb(10));
-                    cmd.Parameters.AddWithValue("@TotalPrizePoints", Common.GetTotalPrizePoints(Positions));
-                    cmd.Parameters.AddWithValue("@InstructionsTime", Math.Round(InstructionsStopwatch.Elapsed.TotalMinutes, 2));
+
+                    for (int i = 1; i <= Common.NumOfPositions; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@Position" + i + "Rank", GetChosenCandidateRankToInsertToDb(i));
+                    }
+
+                    cmd.Parameters.AddWithValue("@RatingPosition", CurrentPositionNumber - 1);
                     cmd.Parameters.AddWithValue("@AskPosition", AskPosition.ToString());
                     cmd.Parameters.AddWithValue("@VectorNum", VectorNum);
                     cmd.Parameters.AddWithValue("@Reason", reasonTxtBox.Text);
@@ -163,11 +180,16 @@ namespace RestaurantGame
             }
         }
 
-        private string GetChosenPositionToInsertToDb(int positionIndex)
+        private string GetChosenCandidateRankToInsertToDb(int positionIndex)
         {
-            var position = GetPosition(positionIndex - 1);
+            var position = Positions[positionIndex - 1];
 
-            return position.ChosenCandidate == null ? null : position.ChosenCandidate.CandidateRank.ToString();
+            if (position.ChosenCandidate == null)
+            {
+                return string.Empty;
+            }
+
+            return position.ChosenCandidate.CandidateRank.ToString();
         }
     }
 }
