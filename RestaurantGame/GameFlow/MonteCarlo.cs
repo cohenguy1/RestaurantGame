@@ -1,38 +1,37 @@
 ﻿using RestaurantGame.Logic;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestaurantGame
 {
-    public partial class Game : System.Web.UI.Page
+    public class MonteCarlo
     {
-        public const int NumOfVectors = 1000000;
+        public const double Alpha = 0.347;
 
-        public const double alpha = 0.45;
-
-        public bool ShouldAsk(int[] accepted, int stoppingDecision, Random random)
+        private static Dictionary<int, double> minimalRankForAsk = new Dictionary<int, double>()
         {
-            return true;
-        }
+            {10, 10 },
+            {9, 3.7040364 },
+            {8, 3.4505329875 },
+            {7, 3.29737467578125 },
+            {6, 3.15378875854492 },
+            {5, 3.05282991048813 },
+            {4, 2.956603508434 },
+            {3, 2.89545964879543 },
+            {2, 2.83622653477058 },
+            {1, 2.778844455559 }
+        };
 
-        private int SelectCandidate(List<Candidate> positionCandidates, List<Candidate> candidatesByNow, int positionIndex)
+        public static bool ShouldAsk(int[] accepted, int stoppingDecision)
         {
-            candidatesByNow.Clear();
-            for (int candidateIndex = 0; candidateIndex < Common.NumOfCandidates; candidateIndex++)
+            double exponentialSmoothing = accepted[0];
+            for (int i = 1; i <= stoppingDecision; i++)
             {
-                var currentCandidate = positionCandidates[candidateIndex];
-                DecisionMaker.GetInstance().DetermineCandidateRank(candidatesByNow, currentCandidate);
-
-                if (currentCandidate.CandidateAccepted)
-                {
-                    return currentCandidate.CandidateRank;
-                }
+                exponentialSmoothing = Alpha * accepted[i] + (1 - Alpha) * exponentialSmoothing;
             }
 
-            return 0;
+            var ask = exponentialSmoothing <= minimalRankForAsk[stoppingDecision + 1];
+            return ask;
         }
     }
 }

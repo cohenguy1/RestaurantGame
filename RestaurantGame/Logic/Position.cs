@@ -8,7 +8,7 @@ namespace RestaurantGame.Logic
 
         public Candidate ChosenCandidate;
 
-        public const string WaiterStr = "Waiter";
+        public const string WaiterStr = "waiter";
 
         public const string WaiterTitleStr = "Waiter ";
 

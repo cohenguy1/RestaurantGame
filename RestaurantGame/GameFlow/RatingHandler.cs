@@ -46,44 +46,19 @@ namespace RestaurantGame
             if (AskPosition == AskPositionHeuristic.MonteCarlo)
             {
                 int[] accepted = new int[10];
-                var stoppingPosition = -1;
 
-                for (var index = 0; index < Common.NumOfPositions; index++)
+                for (var index = 0; index < CurrentPositionNumber; index++)
                 {
                     if (Positions[index].ChosenCandidate != null)
                     {
                         accepted[index] = Positions[index].ChosenCandidate.CandidateRank;
-                        stoppingPosition++;
-                    }
-                    else
+                    } else
                     {
-                        break;
+                        Alert.Show("Problem occured");
                     }
                 }
 
-                // calculated offline whether to stop for stopping position 0 & 1
-                if (stoppingPosition == 0)
-                {
-                    return accepted[0] <= 3;
-                }
-                else if (stoppingPosition == 1)
-                {
-                    if (accepted[0] == 4)
-                    {
-                        return accepted[1] <= 3;
-                    }
-                    else if (accepted[0] == 5)
-                    {
-                        return accepted[1] <= 2;
-                    }
-
-                    // accepted[0] >= 6
-                    return false;
-                }
-
-                bool shouldAsk = ShouldAsk(accepted, stoppingPosition, new Random());
-
-                return shouldAsk;
+                return MonteCarlo.ShouldAsk(accepted, CurrentPositionNumber - 1);
             }
 
             return false;
